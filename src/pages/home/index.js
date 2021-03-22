@@ -10,27 +10,46 @@ import imgTeste6 from '../../img/imgTeste6.webp'
 
 function Home() {
 
+
+    // vai vir da api
     const data = [
 
         {
-            ImageSrc: '',
+            imageSrc: imgTeste4,
             title: 'Titulo',
             desc: "descricao"
 
         },
         {
-            ImageSrc: '',
+            imageSrc: imgTeste2,
             title: 'Titulo',
             desc: "descricao"
 
         },
         {
-            ImageSrc: '',
+            imageSrc: imgTeste6,
             title: 'Titulo',
             desc: "descricao"
 
         },
+        {
+            imageSrc: imgTeste5,
+            title: 'Titulo',
+            desc: "descricao"
 
+        },
+        {
+            imageSrc: imgTeste6,
+            title: 'Titulo',
+            desc: "descricao"
+
+        },
+        {
+            imageSrc: imgTeste4,
+            title: 'Titulo',
+            desc: "descricao"
+
+        }
 
     ]
 
@@ -53,8 +72,9 @@ function Home() {
             {
                 data.map(item => (
 
-                    <div>
+                    <div className='boxHome'>
 
+                        <img src={item.imageSrc} alt='teste' />
                         <h3>{item.title}</h3>
                         <p>{item.desc}</p>
 
@@ -62,86 +82,6 @@ function Home() {
 
                 ))
             }
-
-            {/* <div>
-
-                <img src={imgTeste4} alt='teste' />
-
-                <h3>Frutinha hummm</h3>
-                <p>Frutas sem nenhum agrotóxico, coisa fina mesmo. Pegamos direto ali do pé do seu zé.</p>
-
-            </div>
-
-            <div>
-
-                <img src={imgTeste6} alt='teste' />
-
-                <h3>Coisa boa é uma fruta né</h3>
-                <p>Teste teste teste</p>
-
-            </div>
-
-            <div>
-
-                <img src={imgTeste5} alt='teste' />
-
-                <p>Teste teste teste</p>
-
-            </div>
-
-            <div>
-
-                <img src={imgTeste2} alt='teste' />
-
-                <h3>Hummm saudável</h3>
-                <p>Tudo quanto é cor de maçã tem aqui em</p>
-
-            </div>
-
-            <div>
-
-                <img src={imgTeste5} alt='teste' />
-
-                <p>Teste teste teste</p>
-                <p>Teste teste teste</p>
-                <p>Teste teste teste</p>
-                <p>Teste teste teste</p>
-
-            </div>
-
-            <div>
-
-                <img src={imgTeste4} alt='teste' />
-
-                <p>Teste teste teste</p>
-
-            </div>
-
-            <div>
-
-                <img src={imgTeste6} alt='teste' />
-
-                <h3>Criatividade acabou</h3>
-                <p>Teste teste teste</p>
-
-            </div>
-
-            <div>
-
-                <img src={imgTeste2} alt='teste' />
-
-                <p>Teste teste teste</p>
-                <p>Teste teste teste</p>
-
-            </div>
-
-            <div>
-
-                <img src={imgTeste} alt='teste' />
-
-                <p>Teste teste teste</p>
-
-            </div> */}
 
         </section>
 
