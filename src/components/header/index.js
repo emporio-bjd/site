@@ -44,7 +44,7 @@ export default function Header (props) {
                         <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
                         <li> <a href='/#services'> Produtos </a> </li>
                         <li> <Link to='/Carrinho'> Carrinho </Link> </li>
-                        <li> <Link to='/Login'> Login </Link> </li>
+                        <li> <Link to='/entrar'> Login </Link> </li>
 
                     </ul>
                     
@@ -77,9 +77,9 @@ export default function Header (props) {
 
                     <li> <Link to='/' > Início </Link> </li>
                     <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
-                    <li> <Link to='/#services'> Serviços </Link> </li>
-                    <li> <Link to='/Contato'> Contato </Link> </li>
-                    <li> <Link to='/Blog'> Blog </Link> </li>
+                    <li> <a href='/#services'> Produtos </a> </li>
+                    <li> <Link to='/Carrinho'> Carrinho </Link> </li>
+                    <li> <Link to='/entrar'> Login </Link> </li>
 
                 </ul>
 

@@ -21,17 +21,14 @@ function Home() {
 
         firebase.initializeApp(firebaseConfig);
 
-        firebase.auth().createUserWithEmailAndPassword('test@gmail.com', '12345678')
-        .then((user) => {
-            console.log('logado')
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage)
-        });   
 
     },[])
+
+    useEffect(() => {
+
+        window.scrollTo(0, 0)
+
+    }, []);
     
     
     // vai vir da api
