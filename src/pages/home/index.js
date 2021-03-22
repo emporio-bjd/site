@@ -1,16 +1,39 @@
+import { useEffect } from 'react'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import './style.css'
+
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import firebaseConfig from '../../FIREBASECONFIG.js'
+
 
 import imgTeste from '../../img/imgTeste1.jpeg'
 import imgTeste2 from '../../img/imgTeste2.jpeg'
 import imgTeste4 from '../../img/imgTeste4.png'
 import imgTeste5 from '../../img/imgTeste5.png'
 import imgTeste6 from '../../img/imgTeste6.webp'
+import React from 'react'
 
 function Home() {
 
+    useEffect(()=>{
 
+        firebase.initializeApp(firebaseConfig);
+
+        firebase.auth().createUserWithEmailAndPassword('test@gmail.com', '12345678')
+        .then((user) => {
+            console.log('logado')
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(errorMessage)
+        });   
+
+    },[])
+    
+    
     // vai vir da api
     const data = [
 
