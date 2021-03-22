@@ -53,7 +53,7 @@ section {
 
 }
 
-section > div {
+.boxHome {
 
     display: flex;
     align-items: center;
@@ -69,7 +69,7 @@ section > div {
 
 }
 
-section > div img {
+.boxHome img {
 
     display: block;
     max-width: 100%;
