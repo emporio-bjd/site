@@ -28,7 +28,6 @@ form input {
     padding: 15px;
     border: none;
     color: #FFF;
-    border-radius: 5px;
     background-color: black;
     margin-top: 20px;
 }
@@ -88,13 +87,12 @@ fieldset .field {
 
 fieldset input {
     width: 100%;
-    border-radius: 5px;
-    background-color: black;
+    background-color: gray;
     border: none;
     margin: 3px 0px 50px 0px;
     padding: 16px 24px;
     font-size: 14px;
-    color: #DBB826;
+    color: white;
 }
 
 fieldset .selects {
@@ -106,18 +104,17 @@ fieldset .selects {
 fieldset .selects select {
 
     width: 110%;
-    border-radius: 5px;
-    background-color: black;
+    background-color: gray;
     border: none;
     margin: 3px 0px 50px 0px;
     padding: 16px 24px;
     font-size: 14px;
-    color: #DBB826;
+    color: white;
 
 }
 
 fieldset .selects select option {
-    color: #DBB826;
+    color: white;
 }
 
 fieldset .messageInput {
@@ -128,8 +125,7 @@ fieldset .messageInput {
 fieldset #message {
     height: 150px;
     width: 103%;
-    background-color: #000;
-    border-radius: 5px;
+    background-color: gray;
     color: #DBB826;
     padding: 15px;
 }
@@ -153,17 +149,16 @@ fieldset #message {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000;
-    border-radius: 10px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    background-color: gray;
+    margin-top: 50px;
+    margin-bottom: 50px;
     width: 130px;
     height: 40px;
 }
 
 .sendButton a {
     font-size: 13pt;
-    color: #DBB826;
+    color: white;
     text-decoration: none;
 }
 
