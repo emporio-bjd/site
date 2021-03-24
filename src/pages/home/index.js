@@ -91,7 +91,7 @@ function Home() {
 
                 </div>
 
-                <section>
+                <section id='sectionHome'>
 
                 {
                     data.map(item => (
