@@ -59,7 +59,7 @@ function Home() {
 
         },
         {
-            imageSrc: imgTeste6,
+            imageSrc: imgTeste4,
             title: 'Titulo',
             desc: "descricao"
 
@@ -79,31 +79,48 @@ function Home() {
 
         <Header />
 
-        <div className='search' >
+        <div className='containerHome' >
 
-            <h1>Empório Bom Jardim</h1>
+            <div className='productsHome'>
 
-            <input type="text" placeholder="Procurar.." />
+                <div className='search' >
 
+                    <h1>Empório Bom Jardim</h1>
+
+                    <input type="text" placeholder="Procurar.." />
+
+                </div>
+
+                <section>
+
+                {
+                    data.map(item => (
+
+                        <div className='boxHome'>
+
+                            <img src={item.imageSrc} alt='teste' />
+                            <h3>{item.title}</h3>
+                            <p>{item.desc}</p>
+
+                        </div>
+
+                    ))
+                }
+
+                </section>
+
+            </div>
+        
+            <div className='menuProductsHome' >
+                <ul>
+                    <li>nada</li>
+                    <li>nada</li>
+                    <li>nada</li>
+                    <li>nada</li>
+                    <li>nada</li>
+                </ul>
+            </div>
         </div>
-
-        <section>
-
-            {
-                data.map(item => (
-
-                    <div className='boxHome'>
-
-                        <img src={item.imageSrc} alt='teste' />
-                        <h3>{item.title}</h3>
-                        <p>{item.desc}</p>
-
-                    </div>
-
-                ))
-            }
-
-        </section>
 
         <Footer />
 

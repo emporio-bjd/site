@@ -16,6 +16,31 @@
 
 }
 
+.containerHome {
+
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.productsHome {
+
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 5vh;
+    /* padding-right: 5vh; */
+
+}
+
+.search {
+
+    width: 100%;
+
+}
 
 .search h1 {
 
@@ -25,7 +50,7 @@
 
 .search input {
 
-    width: 40%;
+    width: 35%;
     height: 5vh;
     background-color: rgba(221, 221, 221, 0.383);
     padding: 3px;
@@ -38,7 +63,7 @@
 
 section {
 
-    max-width: 85vw;
+    max-width: 80vw;
     margin: 0 auto;
     column-count: 3;
     padding-top: 5vh;
@@ -59,7 +84,7 @@ section {
     margin: 10px 0px;
     color: rgb(0, 0, 0);
     cursor: pointer;
-    box-shadow: 0px 0px 8px #92929296;
+    box-shadow: -2px 5px 8px #92929255;
 
 }
 
@@ -69,6 +94,15 @@ section {
     max-width: 100%;
     /* max-height: 250px; */
     border-radius: 10px;
+
+}
+
+.menuProductsHome {
+
+    width: 20vw;
+    /* margin-top: 5vh; */
+    box-shadow: 0px 0px 8px #92929255;
+    border-radius: 5px;
 
 }
 

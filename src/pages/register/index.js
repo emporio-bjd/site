@@ -10,11 +10,6 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 
 function Register() {
 
-    useEffect(()=>{
-
-        firebase.initializeApp(firebaseConfig);  
-
-    },[])
 
     const [loginData,setLoginData] = useState({
 
@@ -23,9 +18,11 @@ function Register() {
 
     })
 
+    const [userIsLogged, setUserIsLogged] = useState();
+
     function makeRegister () {
 
-        firebase.auth().createUserWithEmailAndPassword('test@gmail.com', '12345678')
+        firebase.auth().createUserWithEmailAndPassword(loginData.email, loginData.password)
         .then((user) => {
             console.log('logado')
         })
@@ -52,15 +49,31 @@ function Register() {
             ...loginData, [name]: value
 
         })
-        console.log(loginData)
         
     }
 
-    useEffect(() => {
+    // function onAuthStateChanged(user) {
 
-        window.scrollTo(0, 0)
+    //     setUserIsLogged(user);
+    //     console.log(userIsLogged)
+        
+    // }
+
+    // useEffect(()=>{
+
+        
+    // },[])
+    
+    useEffect(() => {
+        
+        window.scrollTo(0, 0);
+        
+        firebase.initializeApp(firebaseConfig);  
+        setUserIsLogged(firebase.auth().onAuthStateChanged());
 
     }, []);
+
+
     
 
   return (
@@ -75,7 +88,7 @@ function Register() {
 
                 <input name='email' onChange={handleInputLoginChange}/>
                 <input name='password' onChange={handleInputLoginChange}/>
-                <input type='submit'></input>
+                <input type='submit' onClick={makeRegister}></input>
 
             </div>
 
