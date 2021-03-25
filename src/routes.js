@@ -6,6 +6,7 @@ import Contact from './pages/contact'
 import Register from './pages/register'
 import About from './pages/about'
 import Products from './pages/products'
+import Cart from './pages/cart'
 
 const Routes = () => {
 
@@ -18,6 +19,7 @@ const Routes = () => {
             <Route component={Register} path='/entrar'/>
             <Route component={About} path='/Quem-somos-nos' />
             <Route component={Products} path='/produtos' />
+            <Route component={Cart} path='/Carrinho' />
         
         </BrowserRouter>
 

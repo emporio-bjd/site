@@ -14,6 +14,7 @@ import imgTeste4 from '../../img/imgTeste4.png'
 import imgTeste5 from '../../img/imgTeste5.png'
 import imgTeste6 from '../../img/imgTeste6.webp'
 import React from 'react'
+import Button from '../../components/button'
 
 const Products = () => {
 
@@ -130,6 +131,7 @@ const Products = () => {
                                         <img src={item.imageSrc} alt='teste' />
                                         <h3>{item.title}</h3>
                                         <p>{item.desc}</p>
+                                        <Button/>
 
                                     </div>
 

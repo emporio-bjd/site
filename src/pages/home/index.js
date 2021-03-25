@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
+import Button from '../../components/button'
 import './style.css'
 
 import firebase from 'firebase/app'
@@ -101,6 +102,7 @@ function Home() {
                             <img src={item.imageSrc} alt='teste' />
                             <h3>{item.title}</h3>
                             <p>{item.desc}</p>
+                            <Button />
 
                         </div>
 
