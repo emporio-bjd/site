@@ -9,7 +9,7 @@ import 'firebase/auth'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
 
-import imgTeste from '../../img/imgTeste1.jpeg'
+import shoppingCart from '../../img/shoppingCart.png'
 import imgTeste2 from '../../img/imgTeste2.jpeg'
 import imgTeste4 from '../../img/imgTeste4.png'
 import imgTeste5 from '../../img/imgTeste5.png'
@@ -37,38 +37,44 @@ function Home() {
 
         {
             imageSrc: imgTeste4,
-            title: 'Titulo',
-            desc: "descricao"
+            title: 'Cesta de frutas',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+            price: 43.35
 
         },
         {
             imageSrc: imgTeste2,
-            title: 'Titulo',
-            desc: "descricao"
-
-        },
-        {
-            imageSrc: imgTeste6,
-            title: 'Titulo',
-            desc: "descricao"
+            title: 'Maçãs',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.",
+            price: 32.50
 
         },
         {
             imageSrc: imgTeste5,
-            title: 'Titulo',
-            desc: "descricao"
+            title: 'Abacate',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem.",
+            price: 215.50
 
         },
         {
-            imageSrc: imgTeste4,
-            title: 'Titulo',
-            desc: "descricao"
+            imageSrc: imgTeste5,
+            title: 'Abacate',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+            price: 235.50
 
         },
         {
-            imageSrc: imgTeste4,
-            title: 'Titulo',
-            desc: "descricao"
+            imageSrc: imgTeste2,
+            title: 'Maçãs',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+            price: 10.00
+
+        },
+        {
+            imageSrc: imgTeste6,
+            title: 'Uva',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
+            price: 5.42
 
         }
 
@@ -80,17 +86,17 @@ function Home() {
 
         <Header />
 
+        <div className='search' >
+
+            <h1>Empório Bom Jardim</h1>
+
+            <input type="text" placeholder="Procurar.." />
+
+        </div>
+
         <div className='containerHome' >
 
             <div className='productsHome'>
-
-                <div className='search' >
-
-                    <h1>Empório Bom Jardim</h1>
-
-                    <input type="text" placeholder="Procurar.." />
-
-                </div>
 
                 <section id='sectionHome'>
 
@@ -101,8 +107,17 @@ function Home() {
 
                             <img src={item.imageSrc} alt='teste' />
                             <h3>{item.title}</h3>
+
+                            <div className='lineBoxProduct'>
+
+                                <h4>R$ {item.price}</h4>
+                                <img src={shoppingCart}/>
+
+                            </div>
+
                             <p>{item.desc}</p>
-                            <Button />
+
+                            {/* <Button /> */}
 
                         </div>
 
@@ -114,13 +129,27 @@ function Home() {
             </div>
         
             <div className='menuProductsHome' >
-                <ul>
+
+                <div className='filterProducts' >
+
+                    <h4>Preço</h4>
+
+                    <div className='filtersInputs'>
+                        <input placeholder='min' />
+                            -    
+                        <input placeholder='max' />
+                    </div>
+
+                </div>
+
+                {/* <ul>
                     <li>nada</li>
                     <li>nada</li>
                     <li>nada</li>
                     <li>nada</li>
                     <li>nada</li>
-                </ul>
+                </ul> */}
+
             </div>
         </div>
 
