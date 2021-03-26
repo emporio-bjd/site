@@ -43,7 +43,7 @@ export default function Header (props) {
                         <li> <Link to='/' > Início </Link> </li>
                         <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
                         <li> <Link to='/produtos'> Produtos </Link> </li>
-                        <li> <Link to='/Carrinho'> Carrinho </Link> </li>
+                        <li> <Link to='/Carrinho'> Carrinho <span>0</span> </Link> </li>
                         <li> <Link to='/entrar'> Login </Link> </li>
 
                     </ul>
