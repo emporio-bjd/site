@@ -127,29 +127,68 @@ function Home() {
                 </section>
 
             </div>
+
+            <div className="areaLateral">
         
-            <div className='menuProductsHome' >
+                <div className='menuProductsHome' >
 
-                <div className='filterProducts' >
+                    <div className='filterProducts' >
 
-                    <h4>Preço</h4>
+                        <h4>Preço</h4>
 
-                    <div className='filtersInputs'>
-                        <input placeholder='min' />
-                            -    
-                        <input placeholder='max' />
+                        <div className='filtersInputs'>
+                            <input placeholder='min' />
+                                -    
+                            <input placeholder='max' />
+                        </div>
+
                     </div>
+
+                    {/* <ul>
+                        <li>nada</li>
+                        <li>nada</li>
+                        <li>nada</li>
+                        <li>nada</li>
+                        <li>nada</li>
+                    </ul> */}
 
                 </div>
 
-                {/* <ul>
-                    <li>nada</li>
-                    <li>nada</li>
-                    <li>nada</li>
-                    <li>nada</li>
-                    <li>nada</li>
-                </ul> */}
+                <div className="BarraLateral">
 
+                    <nav>
+                        <ul class="SubProduto">
+                                    <li><a href="#">SubProdutos</a>
+                                        <ul>
+                                            <li><a href="#">Produto 1</a></li>
+                                            <li><a href="#">Produto 2</a></li>
+                                            <li><a href="#">Produto 3</a></li>
+                                        </ul>
+                                    </li>
+                        </ul>
+
+                        <ul class="SubProduto">
+                                    <li><a href="#">SubProdutos</a>
+                                        <ul>
+                                            <li><a href="#">Produto 1</a></li>
+                                            <li><a href="#">Produto 2</a></li>
+                                            <li><a href="#">Produto 3</a></li>
+                                        </ul>
+                                    </li>
+                        </ul>
+
+                        <ul class="SubProduto">
+                                    <li><a href="#">SubProdutos</a>
+                                        <ul>
+                                            <li><a href="#">Produto 1</a></li>
+                                            <li><a href="#">Produto 2</a></li>
+                                            <li><a href="#">Produto 3</a></li>
+                                        </ul>
+                                    </li>
+                        </ul>
+                    </nav>
+
+                </div>
             </div>
         </div>
 
