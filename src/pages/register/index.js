@@ -8,8 +8,9 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
-function Register() {
+import { Link } from "react-router-dom";
 
+function Register() {
 
     const [loginData,setLoginData] = useState({
 
@@ -18,25 +19,19 @@ function Register() {
 
     })
 
-    const [userIsLogged, setUserIsLogged] = useState();
+    const [userIsLogged, setUserIsLogged] = useState(false);
 
-    function makeRegister () {
+    function makeLogin () {
 
-        firebase.auth().createUserWithEmailAndPassword(loginData.email, loginData.password)
-        .then((user) => {
-            console.log('logado')
+        firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
+        .then((userCredential) => {
+            var user = userCredential.user;
         })
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log(errorMessage)
         }); 
-        
-    }
-
-    function handleInputRegisterChange(event) {
-
-        const {name, value} = event.target
         
     }
 
@@ -52,53 +47,74 @@ function Register() {
         
     }
 
-    // function onAuthStateChanged(user) {
+    function onAuthStateChanged(user) {
 
-    //     setUserIsLogged(user);
-    //     console.log(userIsLogged)
-        
-    // }
-
-    // useEffect(()=>{
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) 
+              setUserIsLogged(true)
+          });
 
         
-    // },[])
+    }
     
     useEffect(() => {
         
         window.scrollTo(0, 0);
-        
-        firebase.initializeApp(firebaseConfig);  
-        setUserIsLogged(firebase.auth().onAuthStateChanged());
+
+        if(!firebase.apps.length)
+            firebase.initializeApp(firebaseConfig)
+        onAuthStateChanged();
 
     }, []);
 
+    if (userIsLogged) {
 
-    
+        return (
 
-  return (
+            <div>
+                Perfil da pessoa
+                <button onClick={firebase.auth().signOut()} />
+            </div>
 
-    <div className="Register">
+        )
+        
+    }
+    else {
 
-        <Header />
+        return (
 
-        <main id='mainRegister'> 
+            <div className="Register">
 
-            <div className='formsRegister'>
+                <Header />
 
-                <input name='email' onChange={handleInputLoginChange}/>
-                <input name='password' onChange={handleInputLoginChange}/>
-                <input type='submit' onClick={makeRegister}></input>
+                <main id='mainRegister'> 
+
+                    <div className='formsRegister'>
+
+                        Login
+
+                        <input name='email' onChange={handleInputLoginChange}/>
+                        <input name='password' type='password' onChange={handleInputLoginChange}/>
+                        {/* <input type='submit' onClick={makeLogin}></input> */}
+
+                        <div className='buttonsFormRegister' >
+
+                            <Link to='/Cadrastro'>Cadastre-se</Link>
+                            <Link onClick={makeLogin}>Entrar</Link>
+
+                        </div>
+
+                    </div>
+
+                </main>
+
+                <Footer />
 
             </div>
 
-        </main>
+        );
 
-        <Footer />
-
-    </div>
-
-  );
+    }
 }
 
 export default Register;

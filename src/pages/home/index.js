@@ -20,8 +20,8 @@ function Home() {
 
     useEffect(()=>{
 
-        firebase.initializeApp(firebaseConfig);
-
+        if(!firebase.apps.length)
+            firebase.initializeApp(firebaseConfig);
 
     },[])
 

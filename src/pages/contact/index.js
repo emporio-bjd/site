@@ -43,7 +43,6 @@ const Contact = () => {
     }
 
     function setCities() {
-        console.log(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
 
         fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
         .then( async (res)=> await res.json())

@@ -5,8 +5,11 @@ import Home from './pages/home'
 import Contact from './pages/contact'
 import Register from './pages/register'
 import About from './pages/about'
-import Products from './pages/products'
 import Cart from './pages/cart'
+import SignIn from './pages/signIn'
+
+
+import Aurea from './pages/Aurea'
 
 const Routes = () => {
 
@@ -17,9 +20,12 @@ const Routes = () => {
             <Route component={Home} path='/' exact />
             <Route component={Contact} path='/contato'/>
             <Route component={Register} path='/entrar'/>
+            <Route component={SignIn} path='/Cadrastro'/>
             <Route component={About} path='/Quem-somos-nos' />
-            <Route component={Products} path='/produtos' />
             <Route component={Cart} path='/Carrinho' />
+
+
+            <Route component={Aurea} path='/Aurea' />
         
         </BrowserRouter>
 
