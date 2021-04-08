@@ -144,51 +144,57 @@ function Home() {
 
                     </div>
 
-                    {/* <ul>
-                        <li>nada</li>
-                        <li>nada</li>
-                        <li>nada</li>
-                        <li>nada</li>
-                        <li>nada</li>
-                    </ul> */}
+                    <div className='filterProducts' >
+
+                        <h4>Tipo</h4>
+
+                        <ul>
+                            <li>Frutas</li>
+                            <li>Verduras</li>
+                            <li>Legume</li>
+                            <li>Grãos</li>
+                            <li>Kits</li>
+                        </ul>
+
+                    </div>
 
                 </div>
 
-                <div className="BarraLateral">
+                {/* <div className="BarraLateral">
 
                     <nav>
                         <ul class="SubProduto">
-                                    <li><a href="#">SubProdutos</a>
-                                        <ul>
-                                            <li><a href="#">Produto 1</a></li>
-                                            <li><a href="#">Produto 2</a></li>
-                                            <li><a href="#">Produto 3</a></li>
-                                        </ul>
-                                    </li>
+                            <li><a href="#">SubProdutos</a>
+                                <ul>
+                                    <li><a href="#">Produto 1</a></li>
+                                    <li><a href="#">Produto 2</a></li>
+                                    <li><a href="#">Produto 3</a></li>
+                                </ul>
+                            </li>
                         </ul>
 
                         <ul class="SubProduto">
-                                    <li><a href="#">SubProdutos</a>
-                                        <ul>
-                                            <li><a href="#">Produto 1</a></li>
-                                            <li><a href="#">Produto 2</a></li>
-                                            <li><a href="#">Produto 3</a></li>
-                                        </ul>
-                                    </li>
+                            <li><a href="#">SubProdutos</a>
+                                <ul>
+                                    <li><a href="#">Produto 1</a></li>
+                                    <li><a href="#">Produto 2</a></li>
+                                    <li><a href="#">Produto 3</a></li>
+                                </ul>
+                            </li>
                         </ul>
 
                         <ul class="SubProduto">
-                                    <li><a href="#">SubProdutos</a>
-                                        <ul>
-                                            <li><a href="#">Produto 1</a></li>
-                                            <li><a href="#">Produto 2</a></li>
-                                            <li><a href="#">Produto 3</a></li>
-                                        </ul>
-                                    </li>
+                            <li><a href="#">SubProdutos</a>
+                                <ul>
+                                    <li><a href="#">Produto 1</a></li>
+                                    <li><a href="#">Produto 2</a></li>
+                                    <li><a href="#">Produto 3</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </nav>
 
-                </div>
+                </div> */}
             </div>
         </div>
 

@@ -185,6 +185,24 @@
 
 }
 
+.filterProducts ul {
+
+    padding: 0;
+    padding-left: 15px;
+    border-radius: 10px;
+    list-style-type: '-';
+
+}
+
+.filterProducts li {
+
+    font-size: 10pt;
+    margin: 7px 0px;
+    cursor: pointer;
+    list-style-type: '⇢';
+
+}
+
 .filtersInputs {
 
     width: 60%;
@@ -194,7 +212,6 @@
     justify-content: space-between;
 
 }
-
 
 .ProductsPage {
     display: flex;

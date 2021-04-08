@@ -65,7 +65,13 @@ function Register() {
 
                 <div className='formsSignIn'>
 
-                    <h1>Cadrastar-se no Empório Bom Jardim</h1>
+                    <div className='titleSignIn' >
+                        <h1>Cadrastar-se no Empório Bom Jardim</h1>
+                    </div>
+
+                    <div className='haveAccount' >
+                        <h5>Já tem uma conta? <Link to='/entrar' >entrar</Link></h5>
+                    </div>
 
                     <fieldset>
 
