@@ -7,6 +7,7 @@ import Register from './pages/register'
 import About from './pages/about'
 import Cart from './pages/cart'
 import SignIn from './pages/signIn'
+import Admin from './pages/admin'
 
 const Routes = () => {
 
@@ -20,6 +21,7 @@ const Routes = () => {
             <Route component={SignIn} path='/Cadrastro'/>
             <Route component={About} path='/Quem-somos-nos' />
             <Route component={Cart} path='/Carrinho' />
+            <Route component={Admin} path='/Admin' />
         
         </BrowserRouter>
 

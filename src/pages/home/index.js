@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import React from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import Button from '../../components/button'
@@ -6,22 +7,29 @@ import './style.css'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/database'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
-
 import shoppingCart from '../../img/shoppingCart.png'
-import imgTeste2 from '../../img/imgTeste2.jpeg'
-import imgTeste4 from '../../img/imgTeste4.png'
-import imgTeste5 from '../../img/imgTeste5.png'
-import imgTeste6 from '../../img/imgTeste6.webp'
-import React from 'react'
 
 function Home() {
+
+    const [data, setData] = useState([])
 
     useEffect(()=>{
 
         if(!firebase.apps.length)
             firebase.initializeApp(firebaseConfig);
+
+            firebase.database().ref('items').get('/items')
+            .then(function(snapshot) {
+
+                if (snapshot.exists()) 
+                    setData(snapshot.val());
+                else {
+                    console.log("No data available");
+                }
+            })
 
     },[])
 
@@ -30,55 +38,6 @@ function Home() {
         window.scrollTo(0, 0)
 
     }, []);
-    
-    
-    // vai vir da api
-    const data = [
-
-        {
-            imageSrc: imgTeste4,
-            title: 'Cesta de frutas',
-            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-            price: 43.35
-
-        },
-        {
-            imageSrc: imgTeste2,
-            title: 'Maçãs',
-            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.",
-            price: 32.50
-
-        },
-        {
-            imageSrc: imgTeste5,
-            title: 'Abacate',
-            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem.",
-            price: 215.50
-
-        },
-        {
-            imageSrc: imgTeste5,
-            title: 'Abacate',
-            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-            price: 235.50
-
-        },
-        {
-            imageSrc: imgTeste2,
-            title: 'Maçãs',
-            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-            price: 10.00
-
-        },
-        {
-            imageSrc: imgTeste6,
-            title: 'Uva',
-            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
-            price: 5.42
-
-        }
-
-    ]
 
   return (
 
