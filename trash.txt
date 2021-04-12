@@ -1,0 +1,11 @@
+{/* <h3>Login</h3>
+
+                        <input name='email' placeholder='email' onChange={handleInputLoginChange}/>
+                        <input name='password' type='password' placeholder='senha' onChange={handleInputLoginChange}/>
+
+                        <div className='buttonsFormRegister' >
+
+                            <Link to='/Cadrastro'>Cadastre-se</Link>
+                            <Link id='enterButtonSignIn' onClick={makeLogin}>Entrar</Link>
+
+                        </div> */}

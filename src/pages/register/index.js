@@ -91,16 +91,29 @@ function Register() {
 
                     <div className='formsRegister'>
 
-                        Login
+                        <div className='titleSignIn' >
+                            <h1>Faça login no Empório Bom Jardim</h1>
+                        </div>
 
-                        <input name='email' onChange={handleInputLoginChange}/>
-                        <input name='password' type='password' onChange={handleInputLoginChange}/>
-                        {/* <input type='submit' onClick={makeLogin}></input> */}
+                        <div className='haveAccount' >
+                            <h5>Ainda não tem uma conta? <Link to='/Cadrastro' >cadrastar-se</Link></h5>
+                        </div>
+
+                        <fieldset>
+
+                            <legend>
+                                <h2>Entrar</h2>
+                            </legend>
+
+                            <input name='email' onChange={handleInputLoginChange} placeholder='E-mail' />
+
+                            <input name='password' onChange={handleInputLoginChange} placeholder='Senha' />
+
+                        </fieldset>
 
                         <div className='buttonsFormRegister' >
 
-                            <Link to='/Cadrastro'>Cadastre-se</Link>
-                            <Link onClick={makeLogin}>Entrar</Link>
+                            <Link id='enterButtonSignIn' onClick={makeLogin}>Entrar</Link>
 
                         </div>
 

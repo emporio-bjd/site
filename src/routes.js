@@ -8,9 +8,6 @@ import About from './pages/about'
 import Cart from './pages/cart'
 import SignIn from './pages/signIn'
 
-
-import Aurea from './pages/Aurea'
-
 const Routes = () => {
 
     return (
@@ -23,9 +20,6 @@ const Routes = () => {
             <Route component={SignIn} path='/Cadrastro'/>
             <Route component={About} path='/Quem-somos-nos' />
             <Route component={Cart} path='/Carrinho' />
-
-
-            <Route component={Aurea} path='/Aurea' />
         
         </BrowserRouter>
 
