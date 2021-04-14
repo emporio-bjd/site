@@ -21,7 +21,7 @@ function Cart() {
             desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
             price: 43.35
 
-        },
+        }, /*
         {
             imageSrc: imgTeste2,
             title: 'Maçãs',
@@ -56,21 +56,27 @@ function Cart() {
             desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
             price: 5.42
 
-        }
+        } */
 
     ]
 
-    const [num, setNum] = useState(0);
+    const [num, setNum] = useState(1);
 
     const incNum = () => {
         setNum(num + 1);
     };
 
     const decNum = () => {
-        if(num > 0) {
+        if (num > 0) {
             setNum(num - 1);
         }
-        else{
+        else {
+            setNum(0);
+        }
+    };
+
+    const clearCart = () => {
+        if (num > 0) {
             setNum(0);
         }
     };
@@ -105,13 +111,27 @@ function Cart() {
 
                                     <div className="counter">
                                         <div className="btn-qntd">
-                                            <button type="button" className="btn-minus" onClick={decNum}>-</button>
+
+                                            <button
+                                                type="button"
+                                                className="btn-minus"
+                                                onClick={decNum}>
+                                                -
+                                                </button>
+                                        
                                         </div>
 
                                         <span>{num}</span>
 
                                         <div className="btn-qntd">
-                                            <button type="button" className="btn-plus" onClick={incNum}>+</button>
+
+                                            <button
+                                                type="button"
+                                                className="btn-plus"
+                                                onClick={incNum}>
+                                                +
+                                                </button>
+
                                         </div>
                                     </div>
 
@@ -124,18 +144,35 @@ function Cart() {
 
                 </div>
 
-                <div className="cart-right">
-                    <h2>Resumo do pedido</h2>
-                    <div className="valor">
-                        <span>Quantidade de produtos:</span>
-                        <span>Preço:</span>
-                        <span>Desconto:</span>
-                        <span>Entrega:</span>
-                        <strong><span>Total:</span></strong>
-                        <button type="button" className="btn-clean">Limpar carrinho</button>
-                    </div>
-                    <button type="button" className="btn-pay">Continuar pagamento</button>
-                </div>
+                <section id="sectionPayment">
+                    {
+                        <div className="cart-right">
+                            <h2>Resumo do pedido</h2>
+
+                            <div className="valor">
+                                <span>Quantidade de produtos: {num} </span>
+                                <span>Preço: </span>
+                                <span>Desconto:</span>
+                                <span>Entrega:</span>
+                                <strong><span>Total:</span></strong>
+                                
+                                <button
+                                    type="button"
+                                    className="btn-clean"
+                                    onClick={clearCart}>
+
+                                    Limpar carrinho
+                                </button>
+
+                            </div>
+                            <button
+                                type="button"
+                                className="btn-pay">
+                                Continuar pagamento
+                        </button>
+                        </div>
+                    }
+                </section>
             </div>
 
             <Footer />
