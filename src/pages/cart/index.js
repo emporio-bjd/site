@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.css'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 
-import imgTeste4 from '../../img/imgTeste4.png'
 import imgTeste2 from '../../img/imgTeste2.jpeg'
+import imgTeste4 from '../../img/imgTeste4.png'
+import imgTeste5 from '../../img/imgTeste5.png'
 import imgTeste6 from '../../img/imgTeste6.webp'
 
 
@@ -16,23 +17,63 @@ function Cart() {
 
         {
             imageSrc: imgTeste4,
-            title: 'Titulo',
-            desc: "descricao"
+            title: 'Cesta de frutas',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+            price: 43.35
 
         },
         {
             imageSrc: imgTeste2,
-            title: 'Titulo',
-            desc: "descricao"
+            title: 'Maçãs',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.",
+            price: 32.50
+
+        },
+        {
+            imageSrc: imgTeste5,
+            title: 'Abacate',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem.",
+            price: 215.50
+
+        },
+        {
+            imageSrc: imgTeste5,
+            title: 'Abacate',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+            price: 235.50
+
+        },
+        {
+            imageSrc: imgTeste2,
+            title: 'Maçãs',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+            price: 10.00
 
         },
         {
             imageSrc: imgTeste6,
-            title: 'Titulo',
-            desc: "descricao"
+            title: 'Uva',
+            desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
+            price: 5.42
 
-        },
+        }
+
     ]
+
+    const [num, setNum] = useState(0);
+
+    const incNum = () => {
+        setNum(num + 1);
+    };
+
+    const decNum = () => {
+        if(num > 0) {
+            setNum(num - 1);
+        }
+        else{
+            setNum(0);
+        }
+    };
 
     return (
         <div className="App">
@@ -44,31 +85,56 @@ function Cart() {
                 <div className="cart-left">
                     <h2>Seu carrinho de compras: </h2>
 
-                    <section>
+                    <section id='sectionHome'>
 
-                            {
-                                data.map(item => (
+                        {
+                            data.map(item => (
 
-                                    <div className='boxHome'>
+                                <div className='boxHome'>
 
-                                        <img src={item.imageSrc} alt='teste' />
-                                        <h3>{item.title}</h3>
-                                        <p>{item.desc}</p>
+                                    <img src={item.imageSrc} alt='teste' />
+                                    <h3>{item.title}</h3>
+
+                                    <div className='lineBoxProduct'>
+
+                                        <h4>R$ {item.price}</h4>
 
                                     </div>
 
-                                ))
-                            }
+                                    <p>{item.desc}</p>
 
-                        </section>
+                                    <div className="counter">
+                                        <div className="btn-qntd">
+                                            <button type="button" className="btn-minus" onClick={decNum}>-</button>
+                                        </div>
+
+                                        <span>{num}</span>
+
+                                        <div className="btn-qntd">
+                                            <button type="button" className="btn-plus" onClick={incNum}>+</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            ))
+                        }
+
+                    </section>
 
                 </div>
 
                 <div className="cart-right">
-                    <div className="total">
-                        <h2>Total (0 itens): </h2>
-                        <button>Continuar pagamento</button>
+                    <h2>Resumo do pedido</h2>
+                    <div className="valor">
+                        <span>Quantidade de produtos:</span>
+                        <span>Preço:</span>
+                        <span>Desconto:</span>
+                        <span>Entrega:</span>
+                        <strong><span>Total:</span></strong>
+                        <button type="button" className="btn-clean">Limpar carrinho</button>
                     </div>
+                    <button type="button" className="btn-pay">Continuar pagamento</button>
                 </div>
             </div>
 

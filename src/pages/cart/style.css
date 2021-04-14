@@ -2,6 +2,7 @@
 
 .cartPage {
     display: flex;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .cart-left{
@@ -13,37 +14,103 @@
     padding: 10px;
 }
 
-.cart-right {
-    width: 40%;
+.counter {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
 }
 
-.total {
+.counter span {
+    padding: 0rem 3rem;
+}
+
+.btn-plus .btn-minus {
+    border: none;
+    outline: none;
+    background: rgb(206, 206, 206);
+}
+
+.cart-right {
+    display: flex;
+    width: 40vw;
+    text-transform: uppercase;
     display: flex;
     flex-direction: column;
-    width: 300px;
-    height: 100px;
-    padding: 20px;
+    margin-right: 1rem;
+    padding: 0rem 2rem;
     background-color: #f3f3f3;
     border: 1px solid #dddddd;
     border-radius: 3px;
-    align-items: center;
 }
 
-button {
-    font-family: 'Montserrat', sans-serif;
+.valor {
+    border-top: solid 1px #979797;
+    border-bottom: solid 1px #979797;
+    display: flex;
+    flex-direction: column;
+    padding: .8rem 0rem;
+}
+
+.valor span, strong {
+    margin-top: .6rem;
+}
+
+.btn-clean {
     cursor: pointer;
-    width: 80%;
     text-align: center;
+    outline: none;
     text-transform: uppercase;
     color: #fff;
-    background: rgb(0, 110, 42);
+    background: #d13a3a;
     font-weight: 600;
     letter-spacing: 2px;
-    padding: 6px;
+    padding: .5rem 0rem;
     border: none;
+    margin-top: 1rem;
+    justify-content: center;
 }
 
-button:hover {
-    background: rgb(0, 92, 35);
+.btn-clean:hover {
+    background: #be3232;
 }
 
+.btn-pay {
+    cursor: pointer;
+    text-align: center;
+    outline: none;
+    text-transform: uppercase;
+    color: #fff;
+    background: #3c884a;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: .5rem 0rem;
+    border: none;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.btn-pay:hover {
+    background: #286634;
+}
+
+@media screen and (max-width: 768px) {
+    .cartPage{
+        flex-direction: column;
+        width: 100vw;
+    }
+
+    .cart-left{
+        width: 100vw;
+    }
+
+    .cart-right {
+        width: 90vw;
+        padding: 1rem;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .btn-pay {
+        width: 80%;
+    }
+}
