@@ -4,9 +4,13 @@ import './index.css';
 import Routes from './routes';
 import reportWebVitals from './reportWebVitals';
 
+import { AuthProvider } from './provider';
+
 ReactDOM.render(
   <React.StrictMode>
-    <Routes />
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

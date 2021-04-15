@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 
 import Header from '../../components/header'
@@ -10,8 +10,17 @@ import imgTeste5 from '../../img/imgTeste5.png'
 import imgTeste6 from '../../img/imgTeste6.webp'
 
 
+import { useAuth } from '../../provider'
 
 function Cart() {
+
+    const { products, setProducts } = useAuth();
+
+    useEffect(()=> {
+
+        console.log(products)
+
+    })
 
     const data = [
 

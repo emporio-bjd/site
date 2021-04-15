@@ -11,9 +11,12 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 
 import shoppingCart from '../../img/shoppingCart.png'
 
+import { useAuth } from '../../provider'
+
 function Home() {
 
     const [data, setData] = useState([])
+    const { products, setProducts } = useAuth();
 
     useEffect(()=>{
 
@@ -34,9 +37,22 @@ function Home() {
 
     useEffect(() => {
 
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
 
     }, []);
+
+    function ttt() {
+
+        const teste = [...products]
+
+        teste.push({id: 1, amount: 2})
+
+        setProducts (teste)
+        
+        console.log(products)
+        
+    }
+        
 
   return (
 
@@ -46,7 +62,7 @@ function Home() {
 
         <div className='search' >
 
-            <h1>Empório Bom Jardim</h1>
+            <h1 onClick={()=>{ttt()}} >Empório Bom Jardim</h1>
 
             <input type="text" placeholder="Procurar.." />
 
