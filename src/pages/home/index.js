@@ -45,10 +45,10 @@ function Home() {
 
         const teste = [...products]
 
-        teste.push({id: 1, amount: 2})
+        teste.push({id: 2, amount: 3})
 
         setProducts (teste)
-        
+
         console.log(products)
         
     }
