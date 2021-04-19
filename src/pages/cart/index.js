@@ -16,7 +16,7 @@ function Cart() {
 
     const { products, setProducts } = useAuth();
 
-    useEffect(()=> {
+    useEffect(() => {
 
         console.log(products)
 
@@ -30,7 +30,7 @@ function Cart() {
             desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
             price: 43.35
 
-        }, /*
+        },
         {
             imageSrc: imgTeste2,
             title: 'Maçãs',
@@ -65,7 +65,7 @@ function Cart() {
             desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
             price: 5.42
 
-        } */
+        }
 
     ]
 
@@ -84,11 +84,18 @@ function Cart() {
         }
     };
 
-    const clearCart = () => {
+    const cleanCart = () => {
         if (num > 0) {
             setNum(0);
         }
     };
+
+    let sumValue = data.reduce(function (previousValue, currentValue) {
+        return {
+            price: previousValue.price + currentValue.price,
+            total: num * (previousValue.price + currentValue.price)
+        }
+    });
 
     return (
         <div className="App">
@@ -126,8 +133,8 @@ function Cart() {
                                                 className="btn-minus"
                                                 onClick={decNum}>
                                                 -
-                                                </button>
-                                        
+                                            </button>
+
                                         </div>
 
                                         <span>{num}</span>
@@ -139,7 +146,7 @@ function Cart() {
                                                 className="btn-plus"
                                                 onClick={incNum}>
                                                 +
-                                                </button>
+                                            </button>
 
                                         </div>
                                     </div>
@@ -160,16 +167,15 @@ function Cart() {
 
                             <div className="valor">
                                 <span>Quantidade de produtos: {num} </span>
-                                <span>Preço: </span>
-                                <span>Desconto:</span>
-                                <span>Entrega:</span>
-                                <strong><span>Total:</span></strong>
-                                
+                                <span>Preço: R$ {sumValue.total} </span>
+                                <span>Desconto: R$ 0.00</span>
+                                <span>Entrega: R$ 0.00</span>
+                                <strong><span>Total: R$ {sumValue.total}</span></strong>
+
                                 <button
                                     type="button"
                                     className="btn-clean"
-                                    onClick={clearCart}>
-
+                                    onClick={cleanCart}>
                                     Limpar carrinho
                                 </button>
 
@@ -178,8 +184,10 @@ function Cart() {
                                 type="button"
                                 className="btn-pay">
                                 Continuar pagamento
-                        </button>
+                            </button>
+
                         </div>
+
                     }
                 </section>
             </div>
