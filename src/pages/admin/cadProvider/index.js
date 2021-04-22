@@ -26,7 +26,7 @@ function Provider() {
             qntd: 0,
             imageSrc: '',
             buyPrice: 0,
-            sellPrice: 0
+            sellPrice: 0,
             
         })
 
