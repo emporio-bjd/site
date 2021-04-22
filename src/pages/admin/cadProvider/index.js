@@ -3,103 +3,162 @@ import Header from '../../../components/header'
 import Footer from '../../../components/footer'
 import './style.css'
 
-/*
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/database'
-import firebaseConfig from '../../../FIREBASECONFIG.js'
-
 
 function Provider() {
 
-    function handleInputAdminChange(event) {
+    /*
+    import firebase from 'firebase/app'
+    import 'firebase/auth'
+    import 'firebase/database'
+    import firebaseConfig from '../../../FIREBASECONFIG.js'
 
-        const {name, value} = event.target
 
-        setNewDataAdmin ({
+    function Provider() {
 
-            ...newDataAdmin, [name]: value
+        const [wasChanged, setWasChanged] = useState(false)
+        const [dataAlterProvider, setDataAlterProvider] = useState({
+            
+            company: '',
+            name: '',
+            email: '',
+            phone: 0,
+            product: '',
+            qntd: 0,
+            imageSrc: '',
+            buyPrice: 0,
+            sellPrice: 0
+            
+        })
+
+        const [selectProvider, setSelectProvider] = useState('')
+        const [selectProviderToDelete, setSelectProviderToDelete] = useState('')
+
+        const [dataAdmin, setDataAdmin] = useState([])
+        const [newDataAdmin, setNewDataAdmin] = useState({
+
+            company: '',
+            name: '',
+            email: '',
+            phone: 0,
+            product: '',
+            qntd: 0,
+            imageSrc: '',
+            buyPrice: 0,
+            sellPrice: 0
 
         })
-        
-    }
 
-    function handleInputAdminChangeAlter(event) {
+        function handleInputAdminChange(event) {
 
-        const {name, value} = event.target
+            const {name, value} = event.target
 
-        setDataAlterItem ({
+            setNewDataAdmin ({
 
-            ...dataAlterItem, [name]: value
+                ...newDataAdmin, [name]: value
 
-        })
-        
-    }
-
-    useEffect(()=>{
-
-        if(!firebase.apps.length)
-            firebase.initializeApp(firebaseConfig);
-
-            firebase.database().ref('items').get('/items')
-            .then(function(snapshot) {
-
-                if (snapshot.exists()) 
-                    setDataAdmin(snapshot.val());
-                else {
-                    console.log("No data available");
-                }
             })
+            
+        }
 
-    },[])
+        function handleInputAdminChangeAlter(event) {
 
-    function insertNewItem() {
+            const {name, value} = event.target
 
-        if (newDataAdmin.imageSrc != '' && newDataAdmin.title != '') {
+            setDataAlterProvider({
 
-            if ( newDataAdmin.desc != '' && newDataAdmin.price != 0 ) {
+                ...dataAlterProvider, [name]: value
 
-                firebase.database().ref('items/' + 8).set({
+            })
+            
+        }
 
-                    imageSrc: newDataAdmin.imageSrc,
-                    title: newDataAdmin.title,
-                    desc: newDataAdmin.desc,
-                    price: newDataAdmin.price
+        useEffect(()=>{
+
+            if(!firebase.apps.length)
+                firebase.initializeApp(firebaseConfig);
+
+                firebase.database().ref('providers').get('/providers')
+                .then(function(snapshot) {
+
+                    if (snapshot.exists()) 
+                        setDataAdmin(snapshot.val());
+                    else {
+                        console.log("No data available");
+                    }
                 })
+
+        },[])
+
+        function handleSelectProvider (event) {
+
+            setSelectProvider(event.target.value)
+
+        }
+
+        function handleSelectProviderToDelete (event) {
+
+            setSelectProviderToDelete(event.target.value)
+
+        }
+
+        function insertNewProvider() {
+
+            if (newDataAdmin.imageSrc != '' && newDataAdmin.title != '') {
+
+                if ( newDataAdmin.desc != '' && newDataAdmin.price != 0 ) {
+
+                    firebase.database().ref('providers/' + 8).set({
+
+                        company: newDataAdmin.company,
+                        name: newDataAdmin.name,
+                        email: newDataAdmin.email,
+                        phone: newDataAdmin.phone,
+                        product: newDataAdmin.product,
+                        qntd: newDataAdmin.qntd,
+                        imageSrc: newDataAdmin.imageSrc,
+                        buyPrice: newDataAdmin.buyPrice,
+                        sellPrice: newDataAdmin.sellPrice
+                        
+                    })
+                    
+                } 
                 
             } 
             
-        } 
-        
-    }
-
-    function updateItem() {
-
-        if (wasChanged) {
-
-            console.log(selectItem)
-            
-            firebase.database().ref('items/' + selectItem).update({
-
-                imageSrc: dataAlterItem.imageSrc != '' ? dataAlterItem.imageSrc : null,
-                title: dataAlterItem.title != '' ? dataAlterItem.title : null,
-                desc: dataAlterItem.desc != '' ? dataAlterItem.desc : null,
-                price: dataAlterItem.price != 0 ? dataAlterItem.price : null
-            })
-
         }
+
+        function updateProvider() {
+
+            if (wasChanged) {
+
+                console.log(selectProvider)
+                
+                firebase.database().ref('providers/' + selectProvider).update({
+                    
+                    company: dataAlterProvider.company != '' ? dataAlterProvider.company : null,
+                    name: dataAlterProvider.name != '' ? dataAlterProvider.name : null,
+                    email: dataAlterProvider.name != '' ? dataAlterProvider.name : null,
+                    phone: dataAlterProvider.phone != '' ? dataAlterProvider.phone : null,
+                    product: dataAlteProvider.product != '' ? dataAlterProvider.product : null,
+                    qntd: dataAlterProvider.qntd != '' ? dataAlterProvider.qntd : null,
+                    imageSrc: dataAlterProvider.imageSrc != '' ? dataAlterProvider.imageSrc : null,
+                    buyPrice: dataAlterProvider.buyPrice != '' ? dataAlterProvider.buyPrice : null,
+                    sellPrice: dataAlterProvider.sellPrice != '' ? dataAlterProvider.sellPrice : null,
         
-    }
+                })
 
-    function deleteItem() {
+            }
+            
+        }
 
-        firebase.database().ref('items/' + selectItemToDelete).remove()
-        
-    }
+        function deleteProvider() {
 
-    */
+            firebase.database().ref('providers/' + selectProviderToDelete).remove()
+            
+        }
 
-    function Provider() {
+        */
+
 
         const [selectedOption, setSelectedOption] = useState('')
 
@@ -133,25 +192,24 @@ function Provider() {
 
                         <legend>
                             <h2>Inserir novo fornecedor</h2>
+                            <h5>Preencha os dados do fornecedor e do produto abaixo</h5>
                         </legend>
 
-                        <input name='companyName' onChange placeholder='Nome da empresa' />
+                        <input name='company' /*onChange={handleInputAdminChange}*/ placeholder='Nome da empresa' />
 
-                        <input name='contactName' onChange placeholder='Nome de contato' />
+                        <input name='name' /*onChange={handleInputAdminChange}*/ placeholder='Nome de contato' />
 
-                        <input name='email' onChange placeholder='E-mail' />
+                        <input name='email' /*onChange={handleInputAdminChange}*/ placeholder='E-mail' />
                         
-                        <input name='phoneNumber' onChange placeholder='Telefone de contato com DDD' />
+                        <input name='phone' /*onChange={handleInputAdminChange}*/ placeholder='Telefone de contato com DDD' />
 
                         <legend>
-                            <h2>Listagem de pedidos</h2>
+                            <h3>Dados do pedido</h3>
                         </legend>
 
-                        <h6>Preencha os dados abaixo</h6>
+                        <input name='product' /*onChange={handleInputAdminChange}*/ placeholder='Produto' />
 
-                        <input name='productName' onChange placeholder='Produto' />
-
-                        <input name='qntd' onChange placeholder='Quantidade' />
+                        <input name='qntd' /*onChange={handleInputAdminChange}*/ placeholder='Quantidade' />
 
                         <select onChange={handleSelect} >
                             <option value='0' >Unidade de medida</option>
@@ -159,31 +217,78 @@ function Provider() {
                             <option value='2' >Unidade</option>
                         </select>
 
-                        <input name='imageSrc' onChange placeholder='URL da imagem' />
+                        <input name='imageSrc' /*onChange={handleInputAdminChange}*/ placeholder='URL da imagem' />
 
-                        <input name='buyPrice' onChange placeholder='Preço de compra' />
+                        <input name='buyPrice' /*onChange={handleInputAdminChange}*/ placeholder='Preço de compra' />
 
-                        <input name='sellPrice' onChange placeholder='Preço de venda' />
+                        <input name='sellPrice' /*onChange={handleInputAdminChange}*/ placeholder='Preço de venda' />
 
-                        <a onClick >Inserir</a>
+                        <a /*onClick={()=>{insertNewProvider()}}*/ >Inserir</a>
+
+                    </fieldset>
+                    
+                    <fieldset>
+
+                        <legend>
+                            <h2>Alterar dados</h2>
+                        </legend>
+
+                        {/*
+                        <select onChange={handleSelectProvider} >
+
+                            <option>Selecione o fornecedor</option>
+        
+                                {dataAdmin.map((providers, index) => {
+
+                                    return (
+
+                                        <option value={index} key={index}>{provider.title}</option>
+
+                                    )
+
+                                })}
+
+                        </select>
+                            */}
+
+                        <h6>Preencha o que deseja alterar</h6>
+
+                        <input name='title' /*onChange={handleInputAdminChangeAlter}*/ placeholder='Nome' />
+
+                        <input name='desc' /*onChange={handleInputAdminChangeAlter}*/ placeholder='Descrição' />
+
+                        <input name='price' /*onChange={handleInputAdminChangeAlter}*/ placeholder='Preço' />
+                        
+                        <input name='imageSrc' /*onChange={handleInputAdminChangeAlter}*/ placeholder='URL da imagem' />
+
+                        <a /*onClick={()=>{setWasChanged(true);updateProvider();}}*/ >Alterar</a>
 
                     </fieldset>
 
                     <fieldset>
 
                         <legend>
-                            <h2>Apagar item</h2>
+                            <h2>Apagar fornecedor</h2>
                         </legend>
+                        {/*
+                        <select onChange={handleSelectProviderToDelete} >
 
-                        <select onChange >
+                            <option>Selecione o </option>
 
-                            <option>Selecione o item</option>
+                            {dataAdmin.map((providers,index) => {
 
-                           
+                                return (
+
+                                    <option key={index} value={index} >{providers.title}</option>
+
+                                )
+
+                            })}
 
                         </select>
+                        */}
 
-                        <a onClick >Apagar</a>
+                        <a /*onClick={()=>{deleteProvider()}}*/ >Apagar</a>
 
                     </fieldset>
 
@@ -192,6 +297,7 @@ function Provider() {
             </main>
 
             <Footer />
+
         </div>
 
     )
