@@ -1,7 +1,8 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
+import Modal from '../../components/modal'
 import './style.css'
 
 import firebase from 'firebase/app'
@@ -17,6 +18,10 @@ function Home() {
 
     const [data, setData] = useState([])
     const { products, setProducts } = useAuth();
+
+    const [ displayModal, setDisplayModal ] = useState("none");
+    const [ modalData, setModalData ] = useState({});
+
 
     useEffect(()=>{
 
@@ -53,12 +58,30 @@ function Home() {
         
     }
         
+    function handleModalInfos(item) {
+
+        setModalData(item)
+        console.log(modalData)
+
+        displayModal == "none" ? setDisplayModal("flex") : setDisplayModal("none")
+        
+    }
+
+    function closeModal() {
+
+        setDisplayModal("none")
+        
+    }
 
   return (
 
     <div className="App">
 
         <Header />
+
+        <button onClick={handleModalInfos} >Abrir/fechar Modal - teste</button>
+
+        <Modal displayProperty={displayModal} modalData={modalData} />
 
         <div className='search' >
 
@@ -77,7 +100,8 @@ function Home() {
                 {
                     data.map(item => (
 
-                        <div className='boxHome'>
+                        <div className='boxHome' 
+                            onClick={()=>{handleModalInfos(item)}}>
 
                             <img src={item.imageSrc} alt='teste' />
                             <h3>{item.title}</h3>
