@@ -59,7 +59,7 @@ function Register() {
             district: registerData.district,
             cepNumber: registerData.cepNumber,
             email: registerData.email,
-            email: registerData.email
+            id: id
 
         })
         
