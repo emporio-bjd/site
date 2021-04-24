@@ -102,7 +102,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
                 if ( newDataAdmin.name != '' && newDataAdmin.phone != '' ) {
 
-                    firebase.database().ref('providers/' + 1).set({
+                    firebase.database().ref('providers/' + 1).set({ //alterar
 
                         company: newDataAdmin.company,
                         name: newDataAdmin.name,
@@ -255,7 +255,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
                         <input name='qntd' onChange={handleInputAdminChangeAlter} placeholder='Quantidade' />
 
-                        <select onChange={handleInputAdminChangeAlter} >
+                        <select onChange={handleInputAdminChangeAlter} > {/* n funcionou */}
                             <option value='0' >Unidade de medida</option>
                             <option value='1' >Quilograma</option>
                             <option value='2' >Unidade</option>
