@@ -66,3 +66,130 @@ firebase.database().ref('items/' + 4).set({
         }
 
     ])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div className='search' >
+
+            <h1 onClick={()=>{ttt()}} >Empório Bom Jardim</h1>
+
+            <input type="text" placeholder="Procurar.." />
+
+        </div>
+
+        <div className='containerHome' >
+
+            <div className='productsHome'>
+
+                <section id='sectionHome'>
+
+                {
+                    data.map(item => (
+
+                        <div className='boxHome'>
+
+                            <img src={item.imageSrc} alt='teste' />
+                            <h3>{item.title}</h3>
+
+                            <div className='lineBoxProduct'>
+
+                                <h4>R$ {item.price}</h4>
+                                <img src={shoppingCart}/>
+
+                            </div>
+
+                            <p>{item.desc}</p>
+
+                            {/* <Button /> */}
+
+                        </div>
+
+                    ))
+                }
+
+                </section>
+
+            </div>
+
+            <div className="areaLateral">
+        
+                <div className='menuProductsHome' >
+
+                    <div className='filterProducts' >
+
+                        <h4>Preço</h4>
+
+                        <div className='filtersInputs'>
+                            <input placeholder='min' />
+                                -    
+                            <input placeholder='max' />
+                        </div>
+
+                    </div>
+
+                    <div className='filterProducts' >
+
+                        <h4>Tipo</h4>
+
+                        <ul>
+                            <li>Frutas</li>
+                            <li>Verduras</li>
+                            <li>Legume</li>
+                            <li>Grãos</li>
+                            <li>Kits</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                {/* <div className="BarraLateral">
+
+                    <nav>
+                        <ul class="SubProduto">
+                            <li><a href="#">SubProdutos</a>
+                                <ul>
+                                    <li><a href="#">Produto 1</a></li>
+                                    <li><a href="#">Produto 2</a></li>
+                                    <li><a href="#">Produto 3</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="SubProduto">
+                            <li><a href="#">SubProdutos</a>
+                                <ul>
+                                    <li><a href="#">Produto 1</a></li>
+                                    <li><a href="#">Produto 2</a></li>
+                                    <li><a href="#">Produto 3</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="SubProduto">
+                            <li><a href="#">SubProdutos</a>
+                                <ul>
+                                    <li><a href="#">Produto 1</a></li>
+                                    <li><a href="#">Produto 2</a></li>
+                                    <li><a href="#">Produto 3</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div> */}
+            </div>
+        </div>
+
+        <Footer />
