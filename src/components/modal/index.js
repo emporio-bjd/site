@@ -1,13 +1,64 @@
-import React, {useState} from "react";
+import React, { useState} from "react";
+import { useAuth } from '../../provider'
 import "./style.css";
 
-import shoppingCart from '../../img/shoppingCart.png'
 import addIcon from '../../img/addIcon.png'
 import removeIcon from '../../img/removeIcon.png'
 
 function Modal (props) {
 
     const { displayProperty, modalData } = props;
+    const { products, setProducts } = useAuth();
+    const [amount, setAmount] = useState(1);
+
+    function add() {
+
+        amount >= 0 ? setAmount( amount + 1) : setAmount(0)
+        
+    }
+
+    function remove() {
+
+        amount > 0 ? setAmount( amount - 1) : setAmount(0)
+        
+    }
+
+    function addToCart() {
+
+        const listOfItems = JSON.parse(localStorage.getItem('products'))
+
+        if (listOfItems != null) {
+        
+            if(listOfItems == [{}]){
+                
+                localStorage.removeItem('products')
+                const newItem = []
+                newItem.push({data: modalData, amount: amount})
+                localStorage.setItem('products', JSON.stringify(newItem))
+
+            }else {
+
+                const newItem = JSON.parse(localStorage.getItem('products'))
+                newItem.push({data: modalData, amount: amount})
+                localStorage.setItem('products', JSON.stringify(newItem))
+
+            }
+
+            console.log(listOfItems)
+
+        }else {
+
+            const newItem = [{data: modalData, amount: amount}]
+            localStorage.setItem('products', JSON.stringify(newItem))
+
+        }
+        
+        // const newItem = [...products]
+        // newItem.push({id: modalData.id, amount: amount})
+        // setProducts(newItem)
+        // Tentativa de fazer com providers
+        
+    }
 
     return(
 
@@ -22,23 +73,25 @@ function Modal (props) {
 
                 <div className='lineBoxProductModal'>
 
-                    <h3>R$ {modalData.price}</h3>
+                    <h3>R$ {(modalData.price * amount).toFixed(2)}</h3>
 
                     <div className="quantityOfProduct" >
-                        <img src={removeIcon}/>
+
+                        <img src={removeIcon} onClick={()=>{remove()}} />
+
                         <p>Quantidade</p>
-                        <img src={addIcon}/>
+
+                        <img src={addIcon} onClick={()=>{add()}} />
+
                     </div>
 
                 </div>
 
-                    <a>ADICIONAR AO CARRINHO</a>
-                {/* <div className='lineBoxProductModal'>
+                    <div>
+                        Quantidade selecionada: {amount}
+                    </div>
 
-                    <h3>Quantidade</h3>
-                    <img src={shoppingCart}/>
-
-                </div> */}
+                    <a onClick={()=>{addToCart()}} >ADICIONAR AO CARRINHO</a>
 
                 <p>{modalData.desc}</p>
 
