@@ -98,11 +98,14 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
         function insertNewProvider() {
 
+            
             if (newDataAdmin.imageSrc != '' && newDataAdmin.company != '') {
-
+                
                 if ( newDataAdmin.name != '' && newDataAdmin.phone != '' ) {
-
-                    firebase.database().ref('providers/' + 1).set({ //alterar
+                    
+                    const id = firebase.database().ref().child('posts').push().key
+                    
+                    firebase.database().ref('providers/' + id).set({
 
                         company: newDataAdmin.company,
                         name: newDataAdmin.name,
@@ -112,7 +115,8 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
                         qntd: newDataAdmin.qntd,
                         imageSrc: newDataAdmin.imageSrc,
                         buyPrice: newDataAdmin.buyPrice,
-                        sellPrice: newDataAdmin.sellPrice
+                        sellPrice: newDataAdmin.sellPrice,
+                        id: id
                         
                     })
                     
