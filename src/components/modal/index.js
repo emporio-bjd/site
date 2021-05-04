@@ -35,21 +35,25 @@ function Modal (props) {
                 const newItem = []
                 newItem.push({data: modalData, amount: amount})
                 localStorage.setItem('products', JSON.stringify(newItem))
+                alert("Adicionado com sucesso!")
 
             }else {
 
                 const newItem = JSON.parse(localStorage.getItem('products'))
                 newItem.push({data: modalData, amount: amount})
                 localStorage.setItem('products', JSON.stringify(newItem))
+                alert("Adicionado com sucesso!")
 
             }
 
-            console.log(listOfItems)
+            setAmount(1)
 
         }else {
 
             const newItem = [{data: modalData, amount: amount}]
             localStorage.setItem('products', JSON.stringify(newItem))
+            alert("Adicionado com sucesso!")
+            setAmount(1)
 
         }
         

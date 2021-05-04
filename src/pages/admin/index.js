@@ -182,7 +182,7 @@ function Admin() {
 
                             <option>Selecione o item</option>
 
-                                {dataAdmin.map((item, index) => {
+                                {/* {dataAdmin.map((item, index) => {
 
                                     return (
 
@@ -190,7 +190,7 @@ function Admin() {
 
                                     )
 
-                                })}
+                                })} */}
 
                         </select>
 
@@ -218,7 +218,7 @@ function Admin() {
 
                             <option>Selecione o item</option>
 
-                            {dataAdmin.map((item,index) => {
+                            {/* {dataAdmin.map((item,index) => {
 
                                 return (
 
@@ -226,7 +226,7 @@ function Admin() {
 
                                 )
 
-                            })}
+                            })} */}
 
                         </select>
 

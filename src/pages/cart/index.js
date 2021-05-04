@@ -4,54 +4,127 @@ import './style.css'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import { useAuth } from '../../provider'
+import VendorRegister from '../vendorregister'
 
 function Cart() {
 
     // const { products, setProducts } = useAuth();
     const [ data, setData ] = useState([]);
+    const [ dataExists, setDataExists ] = useState(false);
+    const [ totalValue, setTotalValue ] = useState(0);
 
     useEffect(async () => {
 
-        setData( await JSON.parse(localStorage.getItem('products')))
+        const verify = await JSON.parse(localStorage.getItem('products'))
+    
+        if (verify != null && verify.length > 1){
+            setData(verify)
+            setDataExists(true)
+
+            var total = 0
+
+            verify.map((item)=>{
+
+                if(item.data != undefined){
+
+                    var value = ( Number(item.data.price) * Number(item.amount) )
+                    total = value + total
+                        
+                }
+
+                setTotalValue(total)
+            })
+
+        }
+        else
+            setDataExists(false)
 
     },[])
 
+    function sendOrder () {
 
-    return (
-        <div className="CartPage">
+        // Ver como vamos fazer o envio. E-mail, whatsapp... ou só deixar numa dashboard de pedidos
+        return 0;
 
-            <Header />
+    }
 
-            <h2>Seu carrinho de compras: </h2>
+    if (dataExists) {
 
-            <section id='sectionHome'>
+        return (
+            <div className="CartPage">
 
-                {
-                    data.map(item => (
+                <Header />
 
-                        <div className='boxHome'>
+                <div className='textIntroCart' >
+                    <h2>Seus itens no carrinho de compras: </h2>
+                    <p>Após revisar os itens, clique no botão para finalizar o pedido </p>
+                </div>
 
-                            <img src={item.data.imageSrc} alt='teste' />
-                            <h3>{item.data.title}</h3>
+                <section id='sectionCart flexDisplay'>
 
-                            <div className='lineBoxProduct'>
+                    {
+                        data.map((item,index) => {
 
-                                <h4>R$ {((item.data.price) * item.amount).toFixed(2)}</h4>
-                                <h5>qnt.:{item.amount}</h5>
+                            if (index != 0) {
 
-                            </div>
+                                return (
 
-                        </div>
+                                    <div className='boxCart flexDisplay'>
 
-                    ))
-                }
+                                        <div className='lineBoxCardProduct' >
 
-            </section>
+                                            <img src={item.data.imageSrc} alt='teste' />
+                                            <h3>{item.data.title}</h3>
 
-            <Footer />
+                                        </div>
 
-        </div>
-    )
+                                        <div className='lineBoxCardProduct flexDisplay'>
+
+                                            <h4>R$ {((item.data.price) * item.amount).toFixed(2)}</h4>
+                                            <h5>qnt.:{item.amount}</h5>
+
+                                        </div>
+
+                                    </div>
+                                )
+                            }
+
+                        })
+                    }
+
+                    <h3>Valor total: {totalValue}</h3>
+
+
+                </section>
+
+                <div className='checkOut' >
+                    <a>Finalizar pedido</a>
+                </div>
+
+                <Footer />
+
+            </div>
+        )
+
+    }else {
+
+        return (
+
+            <div className="CartPage">
+
+                <Header />
+
+                <div style={{height: "60vh", display: "flex", alignItems: "center", justifyContent: "center"}} >
+                    <h2>Seu carrinho de compras está vazio :( </h2>
+                </div>
+
+                <Footer />
+
+            </div>
+
+        )
+
+    }
 }
 
 export default Cart
