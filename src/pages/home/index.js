@@ -21,7 +21,7 @@ function Home() {
 
     const [ displayModal, setDisplayModal ] = useState("none");
     const [ modalData, setModalData ] = useState({});
-
+    const [ pageHeight, setPageHeight ] = useState(0);
 
     useEffect(()=>{
 
@@ -47,6 +47,7 @@ function Home() {
     useEffect(() => {
 
         window.scrollTo(0, 0);
+        setPageHeight(window.screen.height)
 
     }, []);
 
@@ -64,10 +65,15 @@ function Home() {
     function handleModalInfos(item) {
 
         setModalData(item)
-        console.log(modalData)
 
         displayModal == "none" ? setDisplayModal("flex") : setDisplayModal("none")
         
+    }
+
+    function closeModal () {
+
+        displayModal == "none" ? setDisplayModal("flex") : setDisplayModal("none")
+
     }
 
   return (
@@ -76,9 +82,12 @@ function Home() {
 
         <Header />
 
-        <button onClick={handleModalInfos} >Abrir/fechar Modal - teste</button>
+        <div style={{display:displayModal }} tabindex="-1" role="dialog" className='divModal' >
 
-        <Modal displayProperty={displayModal} modalData={modalData} />
+            <span onClick={closeModal}>X</span>
+            <Modal displayProperty={displayModal} modalData={modalData} />
+
+        </div>
 
         <div className='search' >
 
@@ -88,7 +97,7 @@ function Home() {
 
         </div>
 
-        <div className='containerHome' >
+        <div className='containerHome' style={{opacity: 1}} >
 
             <div className='productsHome'>
 

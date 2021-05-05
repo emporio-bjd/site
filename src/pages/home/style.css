@@ -18,6 +18,35 @@
 
 }
 
+.divModal {
+
+    width: 100vw;
+    position: relative;
+    /* margin-top: 30px; */
+    /* top: 60%; */
+    /* left: 13%; */
+    /* display: flex;
+    flex-direction: column; */
+
+}
+
+.divModal span{
+
+    width: 20px;
+    height: 20px;
+    padding: 8px;
+    color: white;
+    position: absolute;
+    top: 25px;
+    left: 13%;
+    z-index: 400;
+    cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
+    background-color: black;
+
+}
+
 .containerHome {
 
     width: 100vw;
