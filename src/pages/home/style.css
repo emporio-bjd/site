@@ -53,6 +53,7 @@
     text-align: center;
     margin-top: 7vh;
     margin-bottom: 5vh;
+    color: #662210;
 
 }
 
@@ -190,15 +191,23 @@
 
 }
 
+.menuProductsHome .search ::placeholder {
+
+    color: white;
+
+}
+
 .menuProductsHome .search input {
 
-    height: 30px;
     width: 80%;
+    height: 30px;
     padding: 3px;
-    padding-left: 10px;
     border: none;
+    color: white;
+    padding-left: 10px;
     border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(102, 34, 16, .8);
+    /* background-color: rgba(0, 0, 0, 0.1); */
 
 }
 
@@ -215,6 +224,7 @@
 
     font-weight: normal;
     font-size: 14pt;
+    color: #662210;
 
 }
 
@@ -252,16 +262,23 @@
 
 }
 
+.filtersInputs ::placeholder{
+
+    color: white;
+
+}
 .filtersInputs input {
 
-    height: 20px;
     width: 40%;
-    margin: 5px 0;
+    height: 20px;
     padding: 3px;
-    padding-left: 7px;
     border: none;
+    color: white;
+    margin: 5px 0;
+    padding-left: 7px;
     border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(102, 34, 16, .8);
+    /* background-color: rgba(0, 0, 0, 0.1); */
 
 }
 
