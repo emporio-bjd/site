@@ -18,6 +18,8 @@ function Home() {
     const [dataBackup, setDataBackup] = useState([])
     const [searchInput, setSearchInput] = useState([])
     const [displaySearchResult, setDisplaySearchResult] = useState('none')
+    const [minProductPrice, setMinProductPrice] = useState(0)
+    const [maxProductPrice, setMaxProductPrice] = useState(0)
 
     const [ displayModal, setDisplayModal ] = useState("none");
     const [ modalData, setModalData ] = useState({});
@@ -90,6 +92,24 @@ function Home() {
         
     }
 
+    function handleMinProductPrice(event) {
+
+        if (event.key == 'Enter') 
+            filterItemByPrice()
+
+        setMinProductPrice(event.target.value)
+        
+    }
+
+    function handleMaxProductPrice(event) {
+
+        if (event.key == 'Enter')
+            filterItemByPrice()
+
+        setMaxProductPrice(Number(event.target.value))
+        
+    }
+
     function searchItem() {
 
         var itens = []
@@ -97,6 +117,22 @@ function Home() {
         data.map((item)=>{
 
             if( item.title.includes(searchInput) || item.desc.includes(searchInput))
+                itens.push(item)
+
+        })
+
+        setData(itens)
+        setDisplaySearchResult('flex')
+        
+    }
+
+    function filterItemByPrice() {
+
+        var itens = []
+
+        data.map((item)=>{
+
+            if( Number(item.price) >= minProductPrice && Number(item.price) <= maxProductPrice)
                 itens.push(item)
 
         })
@@ -200,9 +236,9 @@ function Home() {
                         <h4>Preço</h4>
 
                         <div className='filtersInputs'>
-                            <input placeholder='min' />
+                            <input placeholder='min' type='number' onKeyDown={handleMinProductPrice} />
                                 -    
-                            <input placeholder='max' />
+                            <input placeholder='max' type='number' onKeyDown={handleMaxProductPrice}/>
                         </div>
 
                     </div>
