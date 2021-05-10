@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Header from '../../../components/header'
 import Footer from '../../../components/footer'
+import History from '../../../components/history'
 import './style.css'
 
 import firebase from 'firebase/app'
@@ -17,45 +18,61 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
             name: '',
             email: '',
             phone: 0,
-            product: '',
-            qntd: 0,
-            imageSrc: '',
-            buyPrice: 0,
-            sellPrice: 0,
+            products: {}
             
         })
 
         const [selectProvider, setSelectProvider] = useState('')
         const [selectProviderToDelete, setSelectProviderToDelete] = useState('')
+        
+        const [dataAlterProduct, setDataAlterProduct] = useState({
 
-        const [dataAdmin, setDataAdmin] = useState([])
-        const [newDataAdmin, setNewDataAdmin] = useState({
+        product: '',
+        qntd: 0,
+        imageSrc: '',
+        buyPrice: 0,
+        sellPrice: 0,
+
+        })
+
+        const [selectProduct, setSelectProduct] = useState('')
+        const [selectProductToDelete, setSelectProductToDelete] = useState('')
+
+        const [dataProvider, setDataProvider] = useState([])
+        const [newDataProvider, setNewDataProvider] = useState({
 
             company: '',
             name: '',
             email: '',
             phone: 0,
+
+        })
+
+        const [dataProduct, setDataProduct] = useState([])
+        const [newDataProduct, setNewDataProduct] = useState({
+
             product: '',
-            qntd: 0,
+            qntd: '',
+            unity: '',
             imageSrc: '',
             buyPrice: 0,
             sellPrice: 0
 
         })
 
-        function handleInputAdminChange(event) {
+        function handleInputProviderChange(event) {
 
             const {name, value} = event.target
 
-            setNewDataAdmin ({
+            setNewDataProvider ({
 
-                ...newDataAdmin, [name]: value
+                ...newDataProvider, [name]: value
 
             })
             
         }
 
-        function handleInputAdminChangeAlter(event) {
+        function handleInputProviderChangeAlter(event) {
 
             const {name, value} = event.target
 
@@ -79,7 +96,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
                         var data = snapshot.val()
                         var temp = Object.keys(data).map((key) => data[key])
-                        setDataAdmin(temp)
+                        setDataProvider(temp)
                         
                     }else {
                         console.log("No data available");
@@ -102,27 +119,22 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
         function insertNewProvider() {
 
-            
-            if (newDataAdmin.imageSrc != '' && newDataAdmin.company != '') {
+            if (newDataProvider.company != '' && newDataProvider.name != '') {
                 
-                if ( newDataAdmin.name != '' && newDataAdmin.phone != '' ) {
+                if ( newDataProvider.email != '' && newDataProvider.phone != '' ) {
                     
                     const id = firebase.database().ref().child('posts').push().key
                     
                     firebase.database().ref('providers/' + id).set({
 
-                        company: newDataAdmin.company,
-                        name: newDataAdmin.name,
-                        email: newDataAdmin.email,
-                        phone: newDataAdmin.phone,
-                        product: newDataAdmin.product,
-                        qntd: newDataAdmin.qntd,
-                        imageSrc: newDataAdmin.imageSrc,
-                        buyPrice: newDataAdmin.buyPrice,
-                        sellPrice: newDataAdmin.sellPrice,
-                        id: id
+                        company: newDataProvider.company,
+                        name: newDataProvider.name,
+                        email: newDataProvider.email,
+                        phone: newDataProvider.phone,
                         
                     })
+
+                    alert("Fornecedor cadastrado com sucesso!.");
                     
                 } 
                 
@@ -140,13 +152,8 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
                     
                     company: dataAlterProvider.company != '' ? dataAlterProvider.company : null,
                     name: dataAlterProvider.name != '' ? dataAlterProvider.name : null,
-                    email: dataAlterProvider.name != '' ? dataAlterProvider.name : null,
+                    email: dataAlterProvider.email != '' ? dataAlterProvider.name : null,
                     phone: dataAlterProvider.phone != '' ? dataAlterProvider.phone : null,
-                    product: dataAlterProvider.product != '' ? dataAlterProvider.product : null,
-                    qntd: dataAlterProvider.qntd != '' ? dataAlterProvider.qntd : null,
-                    imageSrc: dataAlterProvider.imageSrc != '' ? dataAlterProvider.imageSrc : null,
-                    buyPrice: dataAlterProvider.buyPrice != '' ? dataAlterProvider.buyPrice : null,
-                    sellPrice: dataAlterProvider.sellPrice != '' ? dataAlterProvider.sellPrice : null,
         
                 })
 
@@ -170,11 +177,41 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
             
         }
 
+        const [ displayHistory, setDisplayHistory ] = useState("none");
+        const [ HistoryData, setHistoryData ] = useState({});
+        const [ pageHeight, setPageHeight ] = useState(0);
+
+        useEffect(() => {
+
+            window.scrollTo(0, 0);
+            setPageHeight(window.screen.height)
+    
+        }, []);
+
+        function handleHistoryInfos() {
+
+            setHistoryData();
+    
+            displayHistory == "none" ? setDisplayHistory("flex") : setDisplayHistory("none")
+            
+        }
+    
+        function closeHistory() {
+    
+            displayHistory == "none" ? setDisplayHistory("flex") : setDisplayHistory("none")
+    
+        }
+
     return (
 
         <div className='Provider'>
 
             <Header />
+
+            <div style={{display:displayHistory }} tabindex="-1" role="dialog" className='divHistory' >
+                <span onClick={closeHistory}>X</span>
+                <History displayProperty={displayHistory} HistoryData={HistoryData} />
+            </div>
 
             <main id='mainProvider' >
 
@@ -184,6 +221,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
                 <div className='titleProvider' >
                     <h3>O que deseja fazer?</h3>
+                    <a onClick={()=>{handleHistoryInfos()}}>Histórico de pedidos</a>
                 </div>
 
                 <div className='providerOptions' >
@@ -195,33 +233,56 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
                             <h5>Preencha os dados do fornecedor e do produto abaixo</h5>
                         </legend>
 
-                        <input name='company' onChange={handleInputAdminChange} placeholder='Nome da empresa' />
+                        <input name='company' onChange={handleInputProviderChange} placeholder='Nome da empresa' />
 
-                        <input name='name' onChange={handleInputAdminChange} placeholder='Nome de contato' />
+                        <input name='name' onChange={handleInputProviderChange} placeholder='Nome de contato' />
 
-                        <input name='email' onChange={handleInputAdminChange} placeholder='E-mail' />
+                        <input name='email' onChange={handleInputProviderChange} placeholder='E-mail' />
                         
-                        <input name='phone' onChange={handleInputAdminChange} placeholder='Telefone de contato com DDD' />
+                        <input name='phone' onChange={handleInputProviderChange} placeholder='Telefone de contato com DDD' />
+                        
+                        <a onClick={()=>{insertNewProvider()}} >Cadastrar</a>
 
                         <legend>
-                            <h3>Dados do pedido</h3>
+                            <h2>Inserir novo pedido</h2>
+                            <h5>Selecione o fornecedor e preencha os dados do produto abaixo</h5>
                         </legend>
 
-                        <input name='product' onChange={handleInputAdminChange} placeholder='Produto' />
+                        <select onChange={handleSelectProvider} >
 
-                        <input name='qntd' onChange={handleInputAdminChange} placeholder='Quantidade' />
+                            <option>Selecione o fornecedor</option>
+        
+                                {dataProvider.map((providers, index) => {
 
-                        <select onChange={handleSelect} >
+                                    return (
+
+                                        <option value={index} key={index}>{providers.company}</option>
+
+                                    )
+
+                                })}
+
+                        </select>
+
+                        <legend>
+                            <h3>Insira os dados do pedido</h3>
+                        </legend>
+
+                        <input name='product' onChange={handleInputProviderChange} placeholder='Produto' />
+
+                        <input name='qntd' onChange={handleInputProviderChange} placeholder='Quantidade' />
+
+                        <select name='unity' onChange={handleSelect} >
                             <option value='0' >Unidade de medida</option>
                             <option value='1' >Quilograma</option>
                             <option value='2' >Unidade</option>
                         </select>
 
-                        <input name='imageSrc' onChange={handleInputAdminChange} placeholder='URL da imagem' />
+                        <input name='imageSrc' onChange={handleInputProviderChange} placeholder='URL da imagem' />
 
-                        <input name='buyPrice' onChange={handleInputAdminChange} placeholder='Preço de compra' />
+                        <input name='buyPrice' onChange={handleInputProviderChange} placeholder='Preço de compra' />
 
-                        <input name='sellPrice' onChange={handleInputAdminChange} placeholder='Preço de venda' />
+                        <input name='sellPrice' onChange={handleInputProviderChange} placeholder='Preço de venda' />
 
                         <a onClick={()=>{insertNewProvider()}} >Inserir</a>
 
@@ -237,7 +298,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
                             <option>Selecione o fornecedor</option>
         
-                                {dataAdmin.map((providers, index) => {
+                                {dataProvider.map((providers, index) => {
 
                                     return (
 
@@ -251,27 +312,27 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
                         <h6>Preencha o que deseja alterar</h6>
 
-                        <input name='company' onChange={handleInputAdminChangeAlter} placeholder='Fornecedor' />
+                        <input name='company' onChange={handleInputProviderChangeAlter} placeholder='Fornecedor' />
 
-                        <input name='name' onChange={handleInputAdminChangeAlter} placeholder='Nome de contato' />
+                        <input name='name' onChange={handleInputProviderChangeAlter} placeholder='Nome de contato' />
 
-                        <input name='email' onChange={handleInputAdminChangeAlter} placeholder='E-mail' />
+                        <input name='email' onChange={handleInputProviderChangeAlter} placeholder='E-mail' />
                         
-                        <input name='phone' onChange={handleInputAdminChangeAlter} placeholder='Telefone' />
+                        <input name='phone' onChange={handleInputProviderChangeAlter} placeholder='Telefone' />
 
-                        <input name='product' onChange={handleInputAdminChangeAlter} placeholder='Produto' />
+                        <input name='product' onChange={handleInputProviderChangeAlter} placeholder='Produto' />
 
-                        <input name='qntd' onChange={handleInputAdminChangeAlter} placeholder='Quantidade' />
+                        <input name='qntd' onChange={handleInputProviderChangeAlter} placeholder='Quantidade' />
 
-                        <select onChange={handleInputAdminChangeAlter} > {/* n funcionou */}
+                        <select onChange={handleInputProviderChangeAlter} > {/* n funcionou */}
                             <option value='0' >Unidade de medida</option>
                             <option value='1' >Quilograma</option>
                             <option value='2' >Unidade</option>
                         </select>
 
-                        <input name='buyPrice' onChange={handleInputAdminChangeAlter} placeholder='Preço de compra' />
+                        <input name='buyPrice' onChange={handleInputProviderChangeAlter} placeholder='Preço de compra' />
 
-                        <input name='sellPrice' onChange={handleInputAdminChangeAlter} placeholder='Preço de venda' />
+                        <input name='sellPrice' onChange={handleInputProviderChangeAlter} placeholder='Preço de venda' />
 
                         <a onClick={()=>{setWasChanged(true);updateProvider();}} >Alterar</a>
 
@@ -287,7 +348,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
                             <option>Selecione o fornecedor</option>
 
-                            {dataAdmin.map((providers,index) => {
+                            {dataProvider.map((providers,index) => {
 
                                 return (
 
