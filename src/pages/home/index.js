@@ -12,12 +12,12 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 
 import shoppingCart from '../../img/shoppingCart.png'
 
-import { useAuth } from '../../provider'
-
 function Home() {
 
     const [data, setData] = useState([])
-    const { products, setProducts } = useAuth();
+    const [dataBackup, setDataBackup] = useState([])
+    const [searchInput, setSearchInput] = useState([])
+    const [displaySearchResult, setDisplaySearchResult] = useState('none')
 
     const [ displayModal, setDisplayModal ] = useState("none");
     const [ modalData, setModalData ] = useState({});
@@ -36,6 +36,7 @@ function Home() {
                     var data = snapshot.val()
                     var temp = Object.keys(data).map((key) => data[key])
                     setData(temp)
+                    setDataBackup(temp)
                 }
                 else {
                     console.log("No data available");
@@ -74,6 +75,42 @@ function Home() {
 
         displayModal == "none" ? setDisplayModal("flex") : setDisplayModal("none")
 
+    
+    }
+
+    function handleSearchInput(event) {
+
+        if (event.key == 'Enter') {
+
+            clearSearchItem()
+            searchItem()
+            
+        }
+        setSearchInput(event.target.value)
+        
+    }
+
+    function searchItem() {
+
+        var itens = []
+
+        data.map((item)=>{
+
+            if( item.title.includes(searchInput) || item.desc.includes(searchInput))
+                itens.push(item)
+
+        })
+
+        setData(itens)
+        setDisplaySearchResult('flex')
+        
+    }
+
+    function clearSearchItem () {
+
+        setDisplaySearchResult('none')
+        setData(dataBackup)
+
     }
 
   return (
@@ -89,13 +126,22 @@ function Home() {
 
         </div>
 
-        <div className='search' >
+        <div className='introHome' >
 
             <h1>Empório Bom Jardim</h1>
 
-            <input type="text" placeholder="Procurar.." />
-
         </div>
+
+        <section style={{display: displaySearchResult}} className='sectionSearchResult' >
+
+            <div className='divSearchResult'>
+
+                <h3>Resultado da busca:</h3>
+                <a onClick={()=>{clearSearchItem()}}>Limpar pesquisa</a>
+
+            </div>
+
+        </section>
 
         <div className='containerHome' style={{opacity: 1}} >
 
@@ -135,6 +181,19 @@ function Home() {
             <div className="areaLateral">
         
                 <div className='menuProductsHome' >
+
+                    <div className='filterProducts' >
+
+                        <h4>Pesquisar produto</h4>
+
+                        <div className='search'>
+
+                            <input type="text" placeholder="Procurar.." onKeyDown={handleSearchInput} />
+                            {/* <a onClick={()=>{searchItem()}}>Pesquisar</a> */}
+
+                        </div>
+
+                    </div>
 
                     <div className='filterProducts' >
 
