@@ -6,9 +6,23 @@
 
 }
 
+#mainAdmin {
+
+    width: 100vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
 .titleAdmin {
 
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     margin-top: 6vh;
 
@@ -26,6 +40,8 @@
 
 .optionAdminPage ul{
 
+    margin: 0;
+    padding: 0;
     list-style: none;
     text-align: left;
 
@@ -44,5 +60,29 @@
 
     color: black;
     text-decoration: none;
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .titleAdmin {
+
+        width: 80%;
+
+    }
+
+    .titleAdmin h1{
+
+        width: 80%;
+        font-size: 15pt;
+
+    }
+
+    .titleAdmin h3{
+
+        width: 80%;
+        font-size: 11pt;
+
+    }
 
 }
