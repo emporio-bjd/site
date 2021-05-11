@@ -14,13 +14,13 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-bottom: 5vh;
+    padding-bottom: 2vh;
 
 }
 
 .titleProvider {
 
-    width: 100%;
+    width: 95%;
     text-align: center;
     margin-top: 6vh;
 
@@ -102,3 +102,26 @@
     padding: 10px;
 
 }
+
+
+@media only screen and (max-width: 940px) {
+
+    .titleProvider {
+        font-size: 75%;
+        width: 90%;
+        margin-top: 3vh;
+    }
+
+    .providerOptions {
+        width: 80%;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+     
+    .providerOptions fieldset select {
+        width: 65%;
+    }
+
+  }

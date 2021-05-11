@@ -10,7 +10,7 @@ import SignIn from './pages/signIn'
 import Admin from './pages/admin'
 import Items from './pages/admin/items'
 import Provider from './pages/admin/cadProvider'
-import VendorRegister from './pages/vendorregister'
+import VendorRegister from './pages/admin/vendorregister'
 
 const Routes = () => {
 

@@ -1,12 +1,12 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import Header from '../../components/header'
-import Footer from '../../components/footer'
+import Header from '../../../components/header'
+import Footer from '../../../components/footer'
 import './style.css'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import firebaseConfig from '../../FIREBASECONFIG.js'
+import firebaseConfig from '../../../FIREBASECONFIG.js'
 
 import { Link } from "react-router-dom";
 

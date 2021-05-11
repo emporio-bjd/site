@@ -29,6 +29,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
         product: '',
         qntd: 0,
+        unity: '',
         imageSrc: '',
         buyPrice: 0,
         sellPrice: 0,
@@ -45,6 +46,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
             name: '',
             email: '',
             phone: 0,
+            products: {}
 
         })
 
@@ -52,7 +54,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
         const [newDataProduct, setNewDataProduct] = useState({
 
             product: '',
-            qntd: '',
+            qntd: 0,
             unity: '',
             imageSrc: '',
             buyPrice: 0,
@@ -67,6 +69,18 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
             setNewDataProvider ({
 
                 ...newDataProvider, [name]: value
+
+            })
+            
+        }
+
+        function handleInputProductChange(event) {
+
+            const {name, value} = event.target
+
+            setNewDataProduct ({
+
+                ...newDataProduct, [name]: value
 
             })
             
@@ -90,6 +104,27 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
                 firebase.initializeApp(firebaseConfig);
 
                 firebase.database().ref('providers').get('/providers')
+                .then(function(snapshot) {
+
+                    if (snapshot.exists()){
+
+                        var data = snapshot.val()
+                        var temp = Object.keys(data).map((key) => data[key])
+                        setDataProvider(temp)
+                        
+                    }else {
+                        console.log("No data available");
+                    }
+                })
+
+        },[])
+
+        useEffect(()=>{
+
+            if(!firebase.apps.length)
+                firebase.initializeApp(firebaseConfig);
+
+                firebase.database().ref('providers').get('/providers/products')
                 .then(function(snapshot) {
 
                     if (snapshot.exists()){
@@ -131,10 +166,40 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
                         name: newDataProvider.name,
                         email: newDataProvider.email,
                         phone: newDataProvider.phone,
+                        id: id,
+                        products: {}
                         
                     })
 
-                    alert("Fornecedor cadastrado com sucesso!.");
+                    alert("Fornecedor cadastrado com sucesso!");
+                    
+                } 
+                
+            } 
+            
+        }
+
+        function insertNewProduct() {
+
+            if (newDataProduct.product != '' && newDataProvider.qntd != '') {
+                
+                if ( newDataProvider.unity != '' && newDataProvider.imageSrc != '' ) {
+                    
+                    const id = firebase.database().ref().child('posts').push().key
+                    
+                    firebase.database().ref('providers/products' + id).set({
+
+                        product: newDataProvider.product,
+                        qntd: newDataProvider.qntd,
+                        unity: newDataProvider.unity,
+                        imageSrc: newDataProvider.imageSrc,
+                        buyPrice: newDataProvider.buyPrice,
+                        sellPrice: newDataProvider.sellPrice,
+                        id: id,
+                        
+                    })
+
+                    alert("Produto cadastrado com sucesso!");
                     
                 } 
                 
@@ -239,7 +304,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
                         <input name='email' onChange={handleInputProviderChange} placeholder='E-mail' />
                         
-                        <input name='phone' onChange={handleInputProviderChange} placeholder='Telefone de contato com DDD' />
+                        <input name='phone' onChange={handleInputProviderChange} placeholder='Telefone com DDD' />
                         
                         <a onClick={()=>{insertNewProvider()}} >Cadastrar</a>
 
@@ -268,9 +333,9 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
                             <h3>Insira os dados do pedido</h3>
                         </legend>
 
-                        <input name='product' onChange={handleInputProviderChange} placeholder='Produto' />
+                        <input name='product' onChange={handleInputProductChange} placeholder='Produto' />
 
-                        <input name='qntd' onChange={handleInputProviderChange} placeholder='Quantidade' />
+                        <input name='qntd' onChange={handleInputProductChange} placeholder='Quantidade' />
 
                         <select name='unity' onChange={handleSelect} >
                             <option value='0' >Unidade de medida</option>
@@ -278,13 +343,13 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
                             <option value='2' >Unidade</option>
                         </select>
 
-                        <input name='imageSrc' onChange={handleInputProviderChange} placeholder='URL da imagem' />
+                        <input name='imageSrc' onChange={handleInputProductChange} placeholder='URL da imagem' />
 
-                        <input name='buyPrice' onChange={handleInputProviderChange} placeholder='Preço de compra' />
+                        <input name='buyPrice' onChange={handleInputProductChange} placeholder='Preço de compra' />
 
-                        <input name='sellPrice' onChange={handleInputProviderChange} placeholder='Preço de venda' />
+                        <input name='sellPrice' onChange={handleInputProductChange} placeholder='Preço de venda' />
 
-                        <a onClick={()=>{insertNewProvider()}} >Inserir</a>
+                        <a onClick={()=>{insertNewProduct()}} >Inserir</a>
 
                     </fieldset>
                     

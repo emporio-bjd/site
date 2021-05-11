@@ -46,3 +46,18 @@
     text-decoration: none;
 
 }
+
+@media only screen and (max-width: 940px) {
+
+}
+
+  @media screen and (max-width: 768px) {
+     
+    .titleAdmin h1 {
+
+        font-size: 25px;
+        padding: 0 2rem;
+
+    }
+
+  }

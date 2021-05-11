@@ -96,12 +96,31 @@
 }
 
 
+@media only screen and (max-width: 940px) {
+
+    .formsSignIn select {
+
+        width: 110%;
+
+    }
+
+}
+
 @media screen and (max-width: 768px) {
 
+    #mainSignIn {
+
+        width: 90%;
+        margin-top: 6vh;
+
+    }
 
     .formsSignIn h1 {
 
         font-size: 16pt;
+        margin: 0 auto;
+        align-items: center;
+        padding: 0 2.5rem;
 
     }
 
@@ -111,9 +130,16 @@
 
     }
 
+    .formsSignIn select {
+
+        width: 91%;
+
+    }
+
     .formsSignIn fieldset h2 {
 
         font-size: 12pt;
+        margin-left: 2rem;
 
     }
     

@@ -61,12 +61,14 @@ header {
 
     text-decoration: none;
     color: #662210;
+    padding-bottom: 21px;
 
 }
 
 .menu a:hover {
 
     opacity: 0.6;
+    border-bottom: 5px solid #662210;
 
 }
 
@@ -199,12 +201,14 @@ header {
 
         text-decoration: none;
         color: #ffc05c;
+        padding-bottom: 18px;
 
     }
 
     .menu-mobile a:hover {
 
-        color: #DBB826;
+        opacity: 0.6;
+        border-bottom: 5px solid #ffc05c;
     
     }
 
