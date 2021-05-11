@@ -97,8 +97,6 @@ function Home() {
         if (event.key == 'Enter') 
             filterItemByPrice()
 
-        setMinProductPrice(event.target.value)
-        
     }
 
     function handleMaxProductPrice(event) {
@@ -106,8 +104,6 @@ function Home() {
         if (event.key == 'Enter')
             filterItemByPrice()
 
-        setMaxProductPrice(Number(event.target.value))
-        
     }
 
     function searchItem() {
@@ -236,9 +232,17 @@ function Home() {
                         <h4>Preço</h4>
 
                         <div className='filtersInputs'>
-                            <input placeholder='min' type='number' onKeyDown={handleMinProductPrice} />
+                            <input 
+                                placeholder='min'
+                                type='number'
+                                onChange={(event)=>setMinProductPrice(Number(event.target.value))}
+                                onKeyDown={handleMinProductPrice} />
                                 -    
-                            <input placeholder='max' type='number' onKeyDown={handleMaxProductPrice}/>
+                            <input 
+                                placeholder='max'
+                                type='number'
+                                onChange={(event)=>setMaxProductPrice(Number(event.target.value))}
+                                onKeyDown={handleMaxProductPrice}/>
                         </div>
 
                     </div>

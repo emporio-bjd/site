@@ -92,7 +92,7 @@ function Cart() {
                         })
                     }
 
-                    <h3>Valor total: {totalValue}</h3>
+                    <h3>Valor total: {totalValue.toFixed(2)}</h3>
 
 
                 </section>

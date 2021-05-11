@@ -8,6 +8,7 @@ import About from './pages/about'
 import Cart from './pages/cart'
 import SignIn from './pages/signIn'
 import Admin from './pages/admin'
+import Items from './pages/admin/items'
 import Provider from './pages/admin/cadProvider'
 import VendorRegister from './pages/vendorregister'
 
@@ -24,8 +25,9 @@ const Routes = () => {
             <Route component={About} path='/Quem-somos-nos' />
             <Route component={Cart} path='/Carrinho' />
             <Route component={Admin} path='/Admin' />
-            <Route component={Provider} path='/Fornecedor' />
-            <Route component={VendorRegister} path='/vendorregister' />
+            <Route component={Items} path='/AdminItems' />
+            <Route component={Provider} path='/AdminFornecedor' />
+            <Route component={VendorRegister} path='/AdminVendor' />
         
         </BrowserRouter>
 
