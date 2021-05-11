@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import './style.css'
+import './profileClient.css'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -26,11 +27,12 @@ function Register() {
         firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
         .then((userCredential) => {
             var user = userCredential.user;
+
         })
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
-            console.log(errorMessage)
+            alert(errorMessage)
         }); 
         
     }
@@ -71,9 +73,35 @@ function Register() {
 
         return (
 
-            <div>
-                Perfil da pessoa
-                <button onClick={firebase.auth().signOut()} />
+            <div className="clientProfile">
+
+                <Header />
+
+                <div className='dataClient'>
+
+                    <h4>Meus dados</h4>
+
+                    <ul>
+                        <h5>Dados da conta</h5>
+                        <li>
+                            <p>E-mail:</p>
+                            <p>E-mail:</p>
+                        </li>
+                        <li>
+                            <p>Telefone:</p>
+                            <p>Telefone:</p>
+                        </li>
+                        <li>
+                            <p>Endereço:</p>
+                            <p>Endereço:</p>
+                        </li>
+                    </ul>
+
+                    <a onClick={firebase.auth().signOut()} >SAIR</a>
+                    
+                </div>
+
+                <Footer />
             </div>
 
         )
