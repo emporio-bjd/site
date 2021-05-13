@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import './style.css'
-import './profileClient.css'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 function Register() {
 
@@ -27,6 +26,7 @@ function Register() {
         firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
         .then((userCredential) => {
             var user = userCredential.user;
+            localStorage.setItem('userEmail',loginData.email)
 
         })
         .catch((error) => {
@@ -73,36 +73,7 @@ function Register() {
 
         return (
 
-            <div className="clientProfile">
-
-                <Header />
-
-                <div className='dataClient'>
-
-                    <h4>Meus dados</h4>
-
-                    <ul>
-                        <h5>Dados da conta</h5>
-                        <li>
-                            <p>E-mail:</p>
-                            <p>E-mail:</p>
-                        </li>
-                        <li>
-                            <p>Telefone:</p>
-                            <p>Telefone:</p>
-                        </li>
-                        <li>
-                            <p>Endereço:</p>
-                            <p>Endereço:</p>
-                        </li>
-                    </ul>
-
-                    <a onClick={firebase.auth().signOut()} >SAIR</a>
-                    
-                </div>
-
-                <Footer />
-            </div>
+            <Redirect to='/Perfil' />
 
         )
         
@@ -135,7 +106,7 @@ function Register() {
 
                             <input name='email' onChange={handleInputLoginChange} placeholder='E-mail' />
 
-                            <input name='password' onChange={handleInputLoginChange} placeholder='Senha' />
+                            <input name='password' type='password' onChange={handleInputLoginChange} placeholder='Senha' />
 
                         </fieldset>
 

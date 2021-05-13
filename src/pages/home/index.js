@@ -32,19 +32,19 @@ function Home() {
             firebase.initializeApp(firebaseConfig);
 
         firebase.database().ref('items').get('/items')
-            .then(function (snapshot) {
+        .then(function (snapshot) {
 
-                if (snapshot.exists()) {
+            if (snapshot.exists()) {
 
-                    var data = snapshot.val()
-                    var temp = Object.keys(data).map((key) => data[key])
-                    setData(temp)
-                    setDataBackup(temp)
-                }
-                else {
-                    console.log("No data available");
-                }
-            })
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+                setData(temp)
+                setDataBackup(temp)
+            }
+            else {
+                console.log("No data available");
+            }
+        })
 
     }, [])
 

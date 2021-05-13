@@ -34,36 +34,39 @@ function Register() {
 
     function makeRegister () {
 
-        // SO PODE FAZER O REGISTRO SE OS DOIS DEREM OK (AINDA TEM QUE FAZER ). fé kkkkkkkkk
-
-        firebase.auth().createUserWithEmailAndPassword(registerData.email, registerData.password)
+        firebase.auth()
+        .createUserWithEmailAndPassword(registerData.email, registerData.password)
         .then((user) => {
-            console.log('logado')
+            
+            alert('Cadastro realizado com sucesso!')
+
+            const id = firebase.database().ref().child('posts').push().key
+
+            firebase.database().ref('users/' + id).set({
+    
+                name: registerData.name,
+                phoneNumber: registerData.phoneNumber,
+                birthDate: registerData.birthDate,
+                personWhoIndicated: registerData.personWhoIndicated,
+                whoIndicated: selectedOption,
+                street: registerData.street,
+                houseNumber: registerData.houseNumber,
+                complement: registerData.complement,
+                district: registerData.district,
+                cepNumber: registerData.cepNumber,
+                email: registerData.email,
+                id: id
+    
+            })
+
+            localStorage.setItem('id',id)
+
         })
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log(errorMessage)
         }); 
-
-        const id = firebase.database().ref().child('posts').push().key
-
-        firebase.database().ref('users/' + id).set({
-
-            name: registerData.name,
-            phoneNumber: registerData.phoneNumber,
-            birthDate: registerData.birthDate,
-            personWhoIndicated: registerData.personWhoIndicated,
-            whoIndicated: selectedOption,
-            street: registerData.street,
-            houseNumber: registerData.houseNumber,
-            complement: registerData.complement,
-            district: registerData.district,
-            cepNumber: registerData.cepNumber,
-            email: registerData.email,
-            id: id
-
-        })
         
     }
 
@@ -78,6 +81,7 @@ function Register() {
         })
         
     }
+
     function handleSelect(event) {
 
         const {name, value} = event.target
@@ -88,7 +92,7 @@ function Register() {
     
     useEffect(() => {
         
-        // window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         if(!firebase.apps.length)
             firebase.initializeApp(firebaseConfig)
 
@@ -110,7 +114,7 @@ function Register() {
                     <img src={logoEmporio2} alt="Logo Emporio" />
 
                     <div className='titleSignIn' >
-                        <h1>Cadastrar-se no Empório Bom Jardim</h1>
+                        <h1>Cadastrar-se</h1>
                     </div>
 
                     <div className='haveAccount' >
@@ -125,7 +129,7 @@ function Register() {
 
                         <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo' />
 
-                        <input name='phoneNumber' type='number' onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
+                        <input name='phoneNumber' type='tel' onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
 
                         <input name='birthDate' type='date' onChange={handleInputRegisterChange} placeholder='Data de nascimento (n obgt)' />
 
@@ -169,7 +173,7 @@ function Register() {
 
                         <input name='email' onChange={handleInputRegisterChange} placeholder='E-mail' />
 
-                        <input name='password' onChange={handleInputRegisterChange} placeholder='Senha' />
+                        <input name='password' type="password" onChange={handleInputRegisterChange} placeholder='Senha' />
 
                     </fieldset>
 
