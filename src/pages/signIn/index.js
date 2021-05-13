@@ -10,6 +10,8 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 
 import { Link } from "react-router-dom";
 
+import logoEmporio2 from '../../img/logoEmporio2.png'
+
 function Register() {
 
     const [registerData,setRegisterData] = useState({
@@ -105,8 +107,10 @@ function Register() {
 
                 <div className='formsSignIn'>
 
+                    <img src={logoEmporio2} alt="Logo Emporio" />
+
                     <div className='titleSignIn' >
-                        <h1>Cadrastar-se no Empório Bom Jardim</h1>
+                        <h1>Cadastrar-se no Empório Bom Jardim</h1>
                     </div>
 
                     <div className='haveAccount' >
