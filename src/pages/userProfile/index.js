@@ -124,8 +124,6 @@ function UserProfile() {
 
             <div className='dataClient'>
 
-                <h4>Meus dados</h4>
-
                 <ul>
                     <h5>Dados da conta</h5>
                     <li>

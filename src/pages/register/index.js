@@ -10,42 +10,83 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 
 import { Link, Redirect } from "react-router-dom";
 
+import logoEmporio2 from '../../img/logoEmporio2.png'
+
 function Register() {
 
-    const [loginData,setLoginData] = useState({
+    const [registerData,setRegisterData] = useState({
 
+        name: '',
+        phoneNumber: '',
+        birthDate: '',
+        personWhoIndicated: '',
+        street: '',
+        houseNumber: '',
+        complement: '',
+        district: '',
+        cepNumber: '',
         email: '',
-        password: ''
+        password: '',
 
     })
-
+    const [selectedOption, setSelectedOption] = useState('')
     const [userIsLogged, setUserIsLogged] = useState(false);
 
-    function makeLogin () {
+    function makeRegister () {
 
-        firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
-        .then((userCredential) => {
-            var user = userCredential.user;
-            localStorage.setItem('userEmail',loginData.email)
+        firebase.auth()
+        .createUserWithEmailAndPassword(registerData.email, registerData.password)
+        .then((user) => {
+            
+            alert('Cadastro realizado com sucesso!')
+
+            const id = firebase.database().ref().child('posts').push().key
+
+            firebase.database().ref('users/' + id).set({
+    
+                name: registerData.name,
+                phoneNumber: registerData.phoneNumber,
+                birthDate: registerData.birthDate,
+                personWhoIndicated: registerData.personWhoIndicated,
+                whoIndicated: selectedOption,
+                street: registerData.street,
+                houseNumber: registerData.houseNumber,
+                complement: registerData.complement,
+                district: registerData.district,
+                cepNumber: registerData.cepNumber,
+                email: registerData.email,
+                id: id
+    
+            })
+
+            localStorage.setItem('id',id)
 
         })
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert(errorMessage)
+            console.log(errorMessage)
         }); 
         
     }
 
-    function handleInputLoginChange(event) {
+    function handleInputRegisterChange(event) {
 
         const {name, value} = event.target
 
-        setLoginData ({
+        setRegisterData ({
 
-            ...loginData, [name]: value
+            ...registerData, [name]: value
 
         })
+        
+    }
+
+    function handleSelect(event) {
+
+        const {name, value} = event.target
+
+        setSelectedOption(value)
         
     }
 
@@ -62,12 +103,14 @@ function Register() {
     useEffect(() => {
         
         window.scrollTo(0, 0);
-
         if(!firebase.apps.length)
             firebase.initializeApp(firebaseConfig)
         onAuthStateChanged();
 
     }, []);
+
+
+    // FALTA FAZER A VALIDAÇÃO. TIPO: VERIFICAR SE OS CAMPOS OBRIGATÓRIOS FORAM PREENCHIDOS E ETC
 
     if (userIsLogged) {
 
@@ -77,42 +120,87 @@ function Register() {
 
         )
         
-    }
-    else {
+    }else {
 
         return (
 
-            <div className="Register">
+            <div className="SigIn">
 
                 <Header />
 
-                <main id='mainRegister'> 
+                <main id='mainSignIn'> 
 
-                    <div className='formsRegister'>
+                    <div className='formsSignIn'>
+
+                        <img src={logoEmporio2} alt="Logo Emporio" />
 
                         <div className='titleSignIn' >
-                            <h1>Faça login no Empório Bom Jardim</h1>
+                            <h1>Cadastrar-se</h1>
                         </div>
 
                         <div className='haveAccount' >
-                            <h5>Ainda não tem uma conta? <Link to='/Cadrastro' >cadrastar-se</Link></h5>
+                            <h5>Já tem uma conta? <Link to='/entrar' >entrar</Link></h5>
                         </div>
 
                         <fieldset>
 
                             <legend>
-                                <h2>Entrar</h2>
+                                <h2>Informações pessoais</h2>
                             </legend>
 
-                            <input name='email' onChange={handleInputLoginChange} placeholder='E-mail' />
+                            <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo' />
 
-                            <input name='password' type='password' onChange={handleInputLoginChange} placeholder='Senha' />
+                            <input name='phoneNumber' type='tel' onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
+
+                            <input name='birthDate' type='date' onChange={handleInputRegisterChange} placeholder='Data de nascimento (n obgt)' />
+
+                            <select onChange={handleSelect} >
+                                <option value='0' >Como ficou sabendo de nós?</option>
+                                <option value='1' >indicação (digite o nome abaixo)</option>
+                                <option value='2' >recebi contato da empresa: abrir campo lista com nome dos vendedores</option>
+                                <option value='3' >Facebook</option>
+                                <option value='4' >Instagram</option>
+                                <option value='5' >Pesquisa no Google</option>
+                            </select>
+
+                            {/* fazer depois esse campo só aparecer se a pessoa selecionar o item 2 do select */}
+                            <input name='personWhoIndicated' onChange={handleInputRegisterChange} placeholder='Quem indicou?' />
 
                         </fieldset>
 
-                        <div className='buttonsFormRegister' >
+                        <fieldset>
 
-                            <Link id='enterButtonSignIn' onClick={makeLogin}>Entrar</Link>
+                            <legend>
+                                <h2>Endereço</h2>
+                            </legend>
+
+                            <input name='street' onChange={handleInputRegisterChange} placeholder='Nome da rua' />
+
+                            <input name='houseNumber' type='number' onChange={handleInputRegisterChange} placeholder='N° da casa/apto' />
+
+                            <input name='complement' onChange={handleInputRegisterChange} placeholder='Complemento' />
+
+                            <input name='district' onChange={handleInputRegisterChange} placeholder='Bairro' />
+
+                            <input name='cepNumber' onChange={handleInputRegisterChange} placeholder='CEP' />
+
+                        </fieldset>
+
+                        <fieldset>
+
+                            <legend>
+                                <h2>E-mail e senha</h2>
+                            </legend>
+
+                            <input name='email' onChange={handleInputRegisterChange} placeholder='E-mail' />
+
+                            <input name='password' type="password" onChange={handleInputRegisterChange} placeholder='Senha' />
+
+                        </fieldset>
+
+                        <div className='buttonsFormSignIn' >
+
+                            <Link onClick={()=> {makeRegister()}}>Cadastrar</Link>
 
                         </div>
 
