@@ -73,6 +73,12 @@
 
 }
 
+#heroSection {
+
+    max-width: 100vw;
+
+}
+
 .heroText {
 
     color: #662210;
@@ -109,8 +115,21 @@
 
 .borderImg {
 
-    width: 100vw;
+    /* width: 100vw; */
     border: 5px solid #ffc05c;
+
+}
+
+.textIntroHome {
+
+    color: #662210;
+
+}
+
+.tipHome {
+
+    font-size: 10pt;
+    color: rgb(65, 65, 65, .5);
 
 }
 
@@ -194,6 +213,12 @@
 
 }
 
+.boxHome h3 {
+
+    color: #662210;
+
+}
+
 .boxHome p {
 
     color: rgba(0, 0, 0, 0.5);
@@ -210,7 +235,7 @@
     height: 30px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin: 0;
     padding: 0;
 
@@ -224,7 +249,8 @@
 
 .lineBoxProduct h4 {
 
-    font-size: 17pt;
+    color: #434f38;
+    font-size: 18pt;
     font-weight: normal;
     font-family: 'Roboto', sans-serif;
 

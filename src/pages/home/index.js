@@ -78,7 +78,6 @@ function Home() {
 
         displayModal == "none" ? setDisplayModal("flex") : setDisplayModal("none")
 
-
     }
 
     function handleSearchInput(event) {
@@ -180,7 +179,9 @@ function Home() {
 
             </section>
             
-            <h1>Confira nossos produtos</h1>
+            <h1 className="textIntroHome" >Confira nossos produtos</h1>
+
+            <p className="tipHome" >Clique no item para selecionar a quantidade</p>
 
             <section style={{ display: displaySearchResult }} className='sectionSearchResult' >
 
@@ -212,7 +213,7 @@ function Home() {
                                     <div className='lineBoxProduct'>
 
                                         <h4>R$ {item.price}</h4>
-                                        <img src={shoppingCart} />
+                                        {/* <img src={shoppingCart} /> */}
 
                                     </div>
 
