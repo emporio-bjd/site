@@ -22,8 +22,8 @@ const Routes = () => {
 
             <Route component={Home} path='/' exact />
             <Route component={Contact} path='/contato'/>
-            <Route component={Register} path='/entrar'/>
-            <Route component={SignIn} path='/Cadrastro'/>
+            <Route component={Register} path='/Cadastro'/>
+            <Route component={SignIn} path='/Entrar'/>
             <Route component={About} path='/Quem-somos-nos' />
             <Route component={Cart} path='/Carrinho' />
             <Route component={Admin} path='/Admin' />

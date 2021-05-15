@@ -19,8 +19,9 @@ function Home() {
     const [dataBackup, setDataBackup] = useState([])
     const [searchInput, setSearchInput] = useState([])
     const [displaySearchResult, setDisplaySearchResult] = useState('none')
+    const [displayMobileSearch, setDisplayMobileSearch] = useState('none')
     const [minProductPrice, setMinProductPrice] = useState(0)
-    const [maxProductPrice, setMaxProductPrice] = useState(0)
+    const [maxProductPrice, setMaxProductPrice] = useState(999)
 
     const [displayModal, setDisplayModal] = useState("none");
     const [modalData, setModalData] = useState({});
@@ -106,6 +107,15 @@ function Home() {
 
     }
 
+    function handleDisplaySearchMobile() {
+
+        if( displayMobileSearch == 'none')
+            setDisplayMobileSearch('block')
+        else
+            setDisplayMobileSearch('none')
+        
+    }
+
     function searchItem() {
 
         var itens = []
@@ -178,10 +188,67 @@ function Home() {
                 <div className="borderImg" />
 
             </section>
-            
-            <h1 className="textIntroHome" >Confira nossos produtos</h1>
+
+            <div className="filterProductsOptions" onClick={()=>handleDisplaySearchMobile()} >
+                <h3>Filtrar produtos</h3>
+            </div>
 
             <p className="tipHome" >Clique no item para selecionar a quantidade</p>
+
+            <section style={{display: displayMobileSearch}} >
+
+                <div className='menuProductsHomeMobile' >
+
+                    <div className='filterProductsMobile' >
+
+                        <h4>Pesquisar produto</h4>
+
+                        <div className='searchMobile'>
+
+                            <input type="text" placeholder="Procurar.." onKeyDown={handleSearchInput} />
+                            {/* <a onClick={()=>{searchItem()}}>Pesquisar</a> */}
+
+                        </div>
+
+                    </div>
+
+                    <div className='filterProductsMobile' >
+
+                        <h4>Preço</h4>
+
+                        <div className='filtersInputsMobile'>
+                            <input
+                                placeholder='min'
+                                type='number'
+                                onChange={(event) => setMinProductPrice(Number(event.target.value))}
+                                onKeyDown={handleMinProductPrice} />
+                            <p> - </p>
+                            <input
+                                placeholder='max'
+                                type='number'
+                                onChange={(event) => setMaxProductPrice(Number(event.target.value))}
+                                onKeyDown={handleMaxProductPrice} />
+                        </div>
+
+                    </div>
+
+                    {/* <div className='filterProducts' >
+
+                        <h4>Tipo</h4>
+
+                        <ul>
+                            <li>Frutas</li>
+                            <li>Verduras</li>
+                            <li>Legume</li>
+                            <li>Grãos</li>
+                            <li>Kits</li>
+                        </ul>
+
+                    </div> */}
+
+                </div>
+
+            </section>
 
             <section style={{ display: displaySearchResult }} className='sectionSearchResult' >
 
@@ -194,7 +261,7 @@ function Home() {
 
             </section>
 
-            <div className='containerHome' style={{ opacity: 1 }} >
+            <div className='containerHome' >
 
                 <div className='productsHome'>
 

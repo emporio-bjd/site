@@ -172,7 +172,7 @@ function Cart() {
                 <Header />
 
                 <div className="emptyCart" style={{height: "60vh", display: "flex", alignItems: "center", justifyContent: "center"}} >
-                    <h2>Seu carrinho de compras está vazio :( </h2>
+                    <h2>Seu carrinho de compras está vazio 😧 </h2>
                 </div>
 
                 <Footer />

@@ -191,6 +191,7 @@
     }
 
     .emptyCart {
+        color: #662210;
         width: 90%;
         text-align: center;
     }
