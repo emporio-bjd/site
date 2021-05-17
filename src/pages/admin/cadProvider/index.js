@@ -72,7 +72,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
             setNewDataProvider ({
 
-                ...newDataProvider, [name]: value
+                ...newDataProvider, [name]: value,
 
             })
             
@@ -145,7 +145,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
             if(!firebase.apps.length)
                 firebase.initializeApp(firebaseConfig);
 
-                firebase.database().ref('providers').child('products').get('/products')
+                firebase.database().ref('providers/').child('products/').get('/products')
                 .then(function(snapshot) {
 
                     if (snapshot.exists()){
@@ -224,25 +224,26 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
         function updateProvider() {
 
             if (wasChanged) {
-
-                console.log(selectProvider)
                 
-                firebase.database().ref('providers/' + selectProvider).update({
+                firebase.database().ref('providers/' + dataKeysAdm[selectProvider]).update({
                     
-                    company: dataAlterProvider.company != '' ? dataAlterProvider.company : null,
-                    name: dataAlterProvider.name != '' ? dataAlterProvider.name : null,
-                    email: dataAlterProvider.email != '' ? dataAlterProvider.name : null,
-                    phone: dataAlterProvider.phone != '' ? dataAlterProvider.phone : null,
+                    company: dataAlterProvider.company != '' ? dataAlterProvider.company : dataProvider[selectProvider].company,
+                    name: dataAlterProvider.name != '' ? dataAlterProvider.name : dataProvider[selectProvider].name,
+                    email: dataAlterProvider.email != '' ? dataAlterProvider.name : dataProvider[selectProvider].email,
+                    phone: dataAlterProvider.phone != '' ? dataAlterProvider.phone : dataProvider[selectProvider].phone,
         
                 })
-
+                .then(()=>alert("Item atualizado com sucesso!"))
             }
             
         }
 
         function deleteProvider() {
 
-            firebase.database().ref('providers/' + selectProviderToDelete).remove()
+            firebase.database()
+            .ref('providers/' + dataKeysAdm[selectProviderToDelete])
+            .remove()
+            .then(()=>alert("Item removido com sucesso!"))
             
         }
 
@@ -301,9 +302,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
                 <div className='titleProvider' >
 
                     <h3>O que deseja fazer?</h3>
-                    
-
-
+                
                     <div className="btn-style">
 
                         <span onClick={()=>{handleHistoryInfos()}}>Informação dos fornecedores</span>
@@ -408,20 +407,6 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
                         <input name='email' onChange={handleInputProviderChangeAlter} placeholder='E-mail' />
                         
                         <input name='phone' onChange={handleInputProviderChangeAlter} placeholder='Telefone' />
-
-                        <input name='product' onChange={handleInputProviderChangeAlter} placeholder='Produto' />
-
-                        <input name='qntd' onChange={handleInputProviderChangeAlter} placeholder='Quantidade' />
-
-                        <select onChange={handleInputProviderChangeAlter} > {/* n funcionou */}
-                            <option value='0' >Unidade de medida</option>
-                            <option value='1' >Quilograma</option>
-                            <option value='2' >Unidade</option>
-                        </select>
-
-                        <input name='buyPrice' onChange={handleInputProviderChangeAlter} placeholder='Preço de compra' />
-
-                        <input name='sellPrice' onChange={handleInputProviderChangeAlter} placeholder='Preço de venda' />
 
                         <a onClick={()=>{setWasChanged(true);updateProvider();}} >Alterar</a>
 
