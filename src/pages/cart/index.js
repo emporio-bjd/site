@@ -117,7 +117,7 @@ function Cart() {
                     <p>Após revisar os itens, clique no botão para finalizar o pedido </p>
                 </div>
 
-                <section id='sectionCart flexDisplay'>
+                <section className='sectionCart flexDisplay'>
 
                     {
                         data.map((item,index) => {
