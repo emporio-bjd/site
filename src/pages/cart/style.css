@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-.flexDisplay {
+.flexDisplayCart {
 
     display: flex;
     align-items: center;
@@ -69,6 +69,18 @@
 
     color: rgb(175, 175, 175);
     font-size: 8pt;
+
+}
+
+.paymentSelect {
+
+    width: 52vw;
+    border: none;
+    padding: 25px;
+    margin: 15px 0px;
+    border-radius: 10px;
+    box-shadow: -2px 5px 8px #92929255;
+    justify-content: space-between;
 
 }
 

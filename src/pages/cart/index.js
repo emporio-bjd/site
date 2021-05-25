@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Redirect, useHistory } from 'react-router-dom'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
@@ -11,10 +12,24 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 
 function Cart() {
 
-    const [dataAccount, setDataAccount] = useState([]);
     const [ data, setData ] = useState([]);
-    const [ dataExists, setDataExists ] = useState(false);
+    const [dataAccount, setDataAccount] = useState([]);
     const [ totalValue, setTotalValue ] = useState(0);
+    const [ dataExists, setDataExists ] = useState(false);
+    const [userIsLogged, setUserIsLogged] = useState(false);
+    
+    const [selectedPayment, setSelectedPayment] = useState('');
+
+    const [redirect, setRedirect] = useState(useHistory());
+
+    function onAuthStateChanged(user) {
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) 
+              setUserIsLogged(true)
+          });
+        
+    }
 
     useEffect(async () => {
 
@@ -47,8 +62,11 @@ function Cart() {
 
     useEffect(()=>{
 
+        window.scrollTo(0, 0);
+        
         if(!firebase.apps.length)
             firebase.initializeApp(firebaseConfig);
+        onAuthStateChanged()
 
     },[])
 
@@ -81,27 +99,44 @@ function Cart() {
 
     function sendOrder () {
 
-        const id = firebase.database().ref().child('posts').push().key
+        if(userIsLogged){
 
-        firebase.database().ref('requests/' + id).set({
+            const id = firebase.database().ref().child('posts').push().key
 
-            id: id,
-            listItem: data,
-            totalValue: totalValue.toFixed(2),
-            userName: dataAccount.name,
-            phoneNumber: dataAccount.phoneNumber,
-            street: dataAccount.street,
-            houseNumber: dataAccount.houseNumber,
-            district: dataAccount.district,
-            cepNumber: dataAccount.cepNumber,
-            complement: dataAccount.complement
+            firebase.database().ref('requests/' + id).set({
+
+                id: id,
+                listItem: data,
+                totalValue: totalValue.toFixed(2),
+                userName: dataAccount.name,
+                phoneNumber: dataAccount.phoneNumber,
+                street: dataAccount.street,
+                houseNumber: dataAccount.houseNumber,
+                district: dataAccount.district,
+                cepNumber: dataAccount.cepNumber,
+                complement: dataAccount.complement,
+                paymentType: selectedPayment
 
 
-        })
+            }).then(()=>alert("Pedido finalizado com sucesso!."))
 
-        alert("Pedido finalizado com sucesso!.")
+        }
+        else {
+            
+            var confirm = window.confirm("Você precisa ter uma conta para finalizar um pedido!.")
+
+            if(confirm)
+                redirect.push("/Cadastro")
+
+        }
 
         return 0;
+
+    }
+
+    function handleSelectPayment (event) {
+
+        setSelectedPayment(event.target.value)
 
     }
 
@@ -126,7 +161,7 @@ function Cart() {
 
                                 return (
 
-                                    <div className='boxCart flexDisplay'>
+                                    <div className='boxCart flexDisplayCart'>
 
                                         <div className='lineBoxCardProduct' >
 
@@ -135,7 +170,7 @@ function Cart() {
 
                                         </div>
 
-                                        <div className='lineBoxCardProduct flexDisplay'>
+                                        <div className='lineBoxCardProduct flexDisplayCart'>
 
                                             <h4>R$ {((item.data.price) * item.amount).toFixed(2)}</h4>
                                             <h5>qnt.:{item.amount}</h5>
@@ -150,6 +185,16 @@ function Cart() {
                     }
 
                     <h3>Valor total: {totalValue.toFixed(2)}</h3>
+
+
+                    <select className="paymentSelect" onChange={handleSelectPayment} >
+
+                        <option>Selecione o tipo de pagamento</option>
+                        <option value="Cartão" >Cartão de crédito ou débito</option>
+                        <option value="Dinheiro" >Dinheiro</option>
+                        <option value="Pix" >Pix</option>
+
+                    </select>
 
 
                 </section>

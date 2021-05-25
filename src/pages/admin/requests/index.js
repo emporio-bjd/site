@@ -96,6 +96,8 @@ function Request() {
 
                             </ul>
 
+                            <p>Tipo de pagamento: <b>{item.paymentType}</b></p>
+
                             <p>ID do pedido: <b>{item.id}</b></p>
                             <p>Valor Total do pedido: <b>{item.totalValue}</b></p>
 
