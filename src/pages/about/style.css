@@ -193,8 +193,9 @@ video {
      background-color: #727f26;
      height: 10rem;
      margin-bottom: 2rem;
-     box-shadow: 14px 11px 16px 0px rgba(0,0,0,0.40);
+     box-shadow: 7px 5px 8px 0px rgba(0,0,0,0.40);
      color: #fff;
+     border-radius: 25px;
  }
 
   @media only screen and (max-width: 940px) {
@@ -257,6 +258,12 @@ video {
 
       .about-container h1 {
         font-size: 4rem;
+    }
+
+    .process-text h1 {
+
+        text-align: center;
+
     }
   }
 

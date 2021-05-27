@@ -296,12 +296,8 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
             <main id='mainProvider' >
 
                 <div className='titleProvider' >
-                    <h1>Bem-vindo ao cadastro de fornecedores da Empório Bom Jardim 💛</h1>
-                </div>
 
-                <div className='titleProvider' >
-
-                    <h3>O que deseja fazer?</h3>
+                    <h1>O que deseja fazer?</h1>
                 
                     <div className="btn-style">
 

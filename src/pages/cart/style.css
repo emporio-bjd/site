@@ -138,6 +138,13 @@
     
     }
 
+    .textIntroCart {
+
+        margin-top: 3vh;
+        margin-bottom: 2vh;
+
+    }
+
     .lineBoxCardProduct h4, h5, h3{
 
         padding: 8px;
@@ -170,4 +177,17 @@
         font-size: 12pt;
 
     }
+
+    .paymentSelect {
+
+        width: 90vw;
+
+    }
+
+    .checkOut {
+
+        margin-top: 12vw;
+
+    }
+
 }

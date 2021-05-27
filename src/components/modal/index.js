@@ -68,7 +68,7 @@ function Modal (props) {
 
             <main>
 
-                <p>Selecione a quantidade e depois adicione o item ao carrinho</p>
+                <p id="textIntro" >Selecione a quantidade e depois adicione o item ao carrinho</p>
 
                 <img src={modalData.imageSrc} alt='imagem do produto' className='productImageModal' />
                 <h1>{modalData.title}</h1>
