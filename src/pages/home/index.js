@@ -61,6 +61,8 @@ function Home() {
 
         const products = JSON.parse(localStorage.getItem('products'))
 
+        console.log(products)
+
         // if (products != null) {
         //     if (!(products.id))
         //         localStorage.setItem('products', '[{}]')
@@ -273,7 +275,6 @@ function Home() {
                                     <div className='lineBoxProduct'>
 
                                         <h4>R$ {item.price}</h4>
-                                        {/* <img src={shoppingCart} /> */}
 
                                     </div>
 
