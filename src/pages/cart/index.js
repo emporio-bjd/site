@@ -156,7 +156,6 @@ function Cart() {
 
             data.splice(index, 1);
             localStorage.setItem('products', JSON.stringify(data))
-            alert('removido com sucesso')
             window.location.reload()
 
         }

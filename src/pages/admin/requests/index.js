@@ -8,6 +8,8 @@ import 'firebase/auth'
 import 'firebase/database'
 import firebaseConfig from '../../../FIREBASECONFIG.js'
 
+import closeIcon from '../../../img/removeIconWhite.png'
+
 
 function Request() {
 
@@ -46,6 +48,12 @@ function Request() {
         .ref('requests/' + selectItem)
         .remove()
         .then(()=>alert("Pedido finalizado com sucesso!"))
+        
+    }
+
+    function removeItemOfClient(params) {
+
+        alert('ainda nao implementado')
         
     }
 
@@ -89,9 +97,17 @@ function Request() {
 
                             <ul>
 
-                                {/* {item.listItem.map((item)=>(console.log(item.)))} */}
-                                {item.listItem.map((item)=>(
-                                    <li><b>{item.data.title}</b> ({item.amount})</li>
+                                {item.listItem.map((item, index)=>(
+                                    <div className='flexDisplayRequestPage' >
+                                        <li><b>{item.data.title}</b> ({item.amount})</li>
+                                        <img src={closeIcon}
+                                            className="imgRemoveIconCart"
+                                            alt='opção de remover item'
+                                            onClick={()=>{
+                                                removeItemOfClient(index)
+                                            }}
+                                        />
+                                    </div>
                                 ))}
 
                             </ul>

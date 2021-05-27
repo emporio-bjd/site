@@ -300,7 +300,6 @@ function Home() {
                             <div className='search'>
 
                                 <input type="text" placeholder="Procurar.." onKeyDown={handleSearchInput} />
-                                {/* <a onClick={()=>{searchItem()}}>Pesquisar</a> */}
 
                             </div>
 
@@ -326,23 +325,22 @@ function Home() {
 
                         </div>
 
-                        <p>sugerir adicionar algumas instruções nesse espaço e fazer uma autopromoção sobre a empresa, do tipo: nossos produtos são 100% organicos, ajudamos a agricultura local e etc</p>
+                        <div className='balloonHome' >
 
-                        <p>colocar num esquema de "balões"</p>
+                            <div className='insideOfBalloonHome'>
 
-                        {/* <div className='filterProducts' >
+                                <p>Para comprar, clique em um produto e escolha a quantidade que deseja. Assim que selecionar todos os produtos, vá ao carrinho</p>
 
-                            <h4>Tipo</h4>
+                            </div>
 
-                            <ul>
-                                <li>Frutas</li>
-                                <li>Verduras</li>
-                                <li>Legume</li>
-                                <li>Grãos</li>
-                                <li>Kits</li>
-                            </ul>
+                        </div>
 
-                        </div> */}
+                        <div className='balloonHome' >
+
+                            <p>colocar num esquema de "balões"</p>
+
+                        </div>
+
 
                     </div>
 

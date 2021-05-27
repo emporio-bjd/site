@@ -33,16 +33,10 @@
     src: url('../../fonts/Gilroy-ExtraBold.otf');
   }
 
-
 .divModal {
 
     width: 100vw;
     position: relative;
-    /* margin-top: 30px; */
-    /* top: 60%; */
-    /* left: 13%; */
-    /* display: flex;
-    flex-direction: column; */
 
 }
 
@@ -265,7 +259,6 @@
 
 }
 
-
 .menuProductsHome {
 
     width: 20vw;
@@ -384,6 +377,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.balloonHome {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+
+    width: 80%;
+    padding: 8px;
+    color: white;
+    margin-top: 25px;
+    border-radius: 10px;
+    background-color: rgba(102, 34, 16, .8);
+
+}
+
+.insideOfBalloonHome {
+
+    width: 90%;
+
+}
+
+.insideOfBalloonHome p{
+
+    font-size: 10pt;
+
 }
 
 .buttonFinishOrder {
