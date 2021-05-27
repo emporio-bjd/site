@@ -132,16 +132,16 @@
 
     }
 
-    .boxCart img {
-
-        width: 40px;
-    
-    }
-
     .textIntroCart {
 
         margin-top: 3vh;
         margin-bottom: 2vh;
+
+    }
+
+    .infoProductInCart {
+
+        width: auto;
 
     }
 
@@ -160,7 +160,7 @@
     .lineBoxCardProduct h4{
 
         font-size: 10pt;
-        padding-right: 15px;
+        padding: 0px 15px 0px 0px;
     
     }
 
@@ -168,6 +168,23 @@
 
         font-size: 7pt;
     
+    }
+
+    .lineBoxCardProduct {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .imgProductCart {
+
+        width: 40px;
+
+    }
+
+    .imgRemoveIconCart {
+
+        width: 25px;
+
     }
 
     .emptyCart {

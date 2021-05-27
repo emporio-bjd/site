@@ -92,6 +92,18 @@
 }
 
 @media screen and (max-width: 768px) {
+
+    .modal {
+
+        width: 90%;
+
+    }
+
+    .modal main {
+
+        width: 90%;
+
+    }
     
     .modal main p {
     

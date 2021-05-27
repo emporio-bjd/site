@@ -150,11 +150,16 @@ function Cart() {
 
     function removeItemInCart(index) {
 
-        data.splice(index, 1);
-        console.log("data:")
-        console.log((data))
-        localStorage.setItem('products', JSON.stringify(data))
-        alert('removido com sucesso')
+        var confirm = window.confirm('Tem certeza que deseja remover este item ?')
+
+        if(confirm) {
+
+            data.splice(index, 1);
+            localStorage.setItem('products', JSON.stringify(data))
+            alert('removido com sucesso')
+            window.location.reload()
+
+        }
         
     }
 
