@@ -36,13 +36,33 @@
 
 .lineBoxCardProduct h4, h5, h3{
 
-    padding: 0px 30px;
+    padding: 0px 0px;
+    text-align: left;
 
 }
 
-.boxCart img {
+.nameProductInCart {
+
+    width: 23vw;
+
+}
+
+.infoProductInCart {
+
+    width: 10vw;
+
+}
+
+.imgProductCart {
 
     width: 50px;
+
+}
+
+.imgRemoveIconCart {
+
+    width: 20px;
+    cursor: pointer;
 
 }
 

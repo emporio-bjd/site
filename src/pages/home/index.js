@@ -169,7 +169,7 @@ function Home() {
 
             <Header />
 
-            <div style={{ display: displayModal }} tabindex="-1" role="dialog" className='divModal' >
+            <div style={{ display: displayModal }} role="dialog" className='divModal' >
 
                 <span onClick={closeModal}>X</span>
                 <Modal displayProperty={displayModal} modalData={modalData} />
@@ -326,7 +326,11 @@ function Home() {
 
                         </div>
 
-                        <div className='filterProducts' >
+                        <p>sugerir adicionar algumas instruções nesse espaço e fazer uma autopromoção sobre a empresa, do tipo: nossos produtos são 100% organicos, ajudamos a agricultura local e etc</p>
+
+                        <p>colocar num esquema de "balões"</p>
+
+                        {/* <div className='filterProducts' >
 
                             <h4>Tipo</h4>
 
@@ -338,7 +342,7 @@ function Home() {
                                 <li>Kits</li>
                             </ul>
 
-                        </div>
+                        </div> */}
 
                     </div>
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
@@ -9,6 +9,8 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 import firebaseConfig from '../../FIREBASECONFIG.js'
+
+import closeIcon from '../../img/removeIcon.png'
 
 function Cart() {
 
@@ -36,7 +38,10 @@ function Cart() {
         const verify = await JSON.parse(localStorage.getItem('products'))
     
         if (verify != null && verify.length > 1){
-            console.log(localStorage.getItem('userEmail'))
+
+            console.log("verify:")
+            console.log(verify)
+            
             setData(verify)
             setDataExists(true)
 
@@ -118,7 +123,10 @@ function Cart() {
                 paymentType: selectedPayment
 
 
-            }).then(()=>alert("Pedido finalizado com sucesso!."))
+            }).then(()=>{
+                localStorage.setItem('products', '[{}]')
+                alert("Pedido finalizado com sucesso!.")
+            })
 
         }
         else {
@@ -138,6 +146,16 @@ function Cart() {
 
         setSelectedPayment(event.target.value)
 
+    }
+
+    function removeItemInCart(index) {
+
+        data.splice(index, 1);
+        console.log("data:")
+        console.log((data))
+        localStorage.setItem('products', JSON.stringify(data))
+        alert('removido com sucesso')
+        
     }
 
     if (dataExists) {
@@ -163,19 +181,27 @@ function Cart() {
 
                                     <div className='boxCart flexDisplayCart'>
 
-                                        <div className='lineBoxCardProduct' >
+                                        <div className='lineBoxCardProduct nameProductInCart' >
 
-                                            <img src={item.data.imageSrc} alt='teste' />
+                                            <img src={item.data.imageSrc} alt='imagem do produto' className="imgProductCart" />
                                             <h3>{item.data.title}</h3>
 
                                         </div>
 
-                                        <div className='lineBoxCardProduct flexDisplayCart'>
+                                        <div className='lineBoxCardProduct flexDisplayCart infoProductInCart'>
 
                                             <h4>R$ {((item.data.price) * item.amount).toFixed(2)}</h4>
                                             <h5>qnt.:{item.amount}</h5>
 
                                         </div>
+
+                                        <img src={closeIcon}
+                                            className="imgRemoveIconCart"
+                                            alt='opção de remover item'
+                                            onClick={()=>{
+                                                removeItemInCart(index)
+                                            }}
+                                        />
 
                                     </div>
                                 )
