@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import Header from '../../../components/header'
 import Footer from '../../../components/footer'
-import History from '../../../components/history'
+import ProviderInfo from '../../../components/providerInfo'
 import './style.css'
 
 import firebase from 'firebase/app'
@@ -290,7 +290,7 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
             <div style={{display:displayHistory }} tabindex="-1" role="dialog" className='divHistory' >
                 <span onClick={closeHistory}>X</span>
-                <History displayProperty={displayHistory} HistoryData={HistoryData} />
+                <ProviderInfo displayProperty={displayHistory} HistoryData={HistoryData} />
             </div>
 
             <main id='mainProvider' >
