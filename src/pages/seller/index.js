@@ -17,6 +17,7 @@ function UserProfile() {
 
     const [SelectOptions, setSelectOptions] = useState([]);
     const [selectedPayment, setSelectedPayment] = useState('');
+    const [dataAccount, setDataAccount] = useState([]);
     const [amount, setAmount] = useState(1);
 
     const [ totalValue, setTotalValue ] = useState(0);
@@ -44,6 +45,14 @@ function UserProfile() {
                 var data = snapshot.val()
                 var temp = Object.keys(data).map((key) => data[key])
                 setDataUsers(temp)
+
+                temp.map((item)=>{ 
+
+                    if(item.email == userEmail){
+                        setDataAccount(item)
+                    }
+
+                })
 
             }else {
                 console.log("No data available");
@@ -110,14 +119,14 @@ function UserProfile() {
             district: dataUsers[selectedClient].district,
             cepNumber: dataUsers[selectedClient].cepNumber,
             complement: dataUsers[selectedClient].complement,
-            paymentType: selectedPayment
+            paymentType: selectedPayment,
+            seller: dataAccount.name
 
 
         }).then(()=>{
             localStorage.setItem('products', '[{}]')
             alert("Pedido finalizado com sucesso!.")
         })
-
 
     }
 
@@ -184,11 +193,11 @@ function UserProfile() {
 
                     <div className="quantityOfProduct" >
 
-                        <img src={removeIcon} onClick={()=>{remove()}} alt="Item de remover" />
+                        <img src={removeIcon} onClick={()=>{remove()}} alt="Icone de remover" />
 
                         <p>Quantidade</p>
 
-                        <img src={addIcon} onClick={()=>{add()}} alt="Item de adicionar" />
+                        <img src={addIcon} onClick={()=>{add()}} alt="Icone de adicionar" />
 
                     </div>
 

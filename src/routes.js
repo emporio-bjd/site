@@ -31,7 +31,7 @@ const Routes = () => {
             <Route component={Admin} path='/Admin' />
             <Route component={Items} path='/AdminItems' />
             <Route component={Provider} path='/AdminFornecedor' />
-            <Route component={VendorRegister} path='/AdminVendor' />
+            <Route component={VendorRegister} path='/AdminVendedor' />
             <Route component={userProfile} path='/Perfil' />
             <Route component={Request} path='/Pedidos' />
             <Route component={OrderHistory} path='/AdminHistorico' />

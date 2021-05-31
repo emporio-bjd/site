@@ -15,10 +15,14 @@ import closeIcon from '../../img/removeIcon.png'
 function Cart() {
 
     const [ data, setData ] = useState([]);
+    const [dataUsers, setDataUsers] = useState([]);
     const [dataAccount, setDataAccount] = useState([]);
+    const [seller, setSeller] = useState([]);
     const [ totalValue, setTotalValue ] = useState(0);
     const [ dataExists, setDataExists ] = useState(false);
     const [userIsLogged, setUserIsLogged] = useState(false);
+    const [isSeller, setIsSeller] = useState(false);
+    const [selectedClient, setSelectedClient] = useState('')
     
     const [selectedPayment, setSelectedPayment] = useState('');
 
@@ -87,10 +91,34 @@ function Cart() {
                 var data = snapshot.val()
                 var temp = Object.keys(data).map((key) => data[key])
 
+                setDataUsers(temp)
+
                 temp.map((item)=>{ 
 
                     if(item.email == userEmail){
                         setDataAccount(item)
+                    }
+
+                })
+
+            }else 
+                console.log("No data available");
+
+        })
+
+        firebase.database().ref('sellers/').get('/sellers')
+        .then(function (snapshot) {
+
+            if (snapshot.exists()){
+
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+
+                temp.map((item)=>{ 
+
+                    if(item.email == userEmail){
+                        setSeller(item)
+                        setIsSeller(true)
                     }
 
                 })
@@ -142,9 +170,41 @@ function Cart() {
 
     }
 
+    function sendOrderSeller () {
+
+        const id = firebase.database().ref().child('posts').push().key
+
+        firebase.database().ref('requests/' + id).set({
+
+            id: id,
+            listItem: data,
+            totalValue: totalValue.toFixed(2),
+            userName: dataUsers[selectedClient].name,
+            phoneNumber: dataUsers[selectedClient].phoneNumber,
+            street: dataUsers[selectedClient].street,
+            houseNumber: dataUsers[selectedClient].houseNumber,
+            district: dataUsers[selectedClient].district,
+            cepNumber: dataUsers[selectedClient].cepNumber,
+            complement: dataUsers[selectedClient].complement,
+            paymentType: selectedPayment,
+            seller: seller.name
+
+        }).then(()=>{
+            localStorage.setItem('products', '[{}]')
+            alert("Pedido finalizado com sucesso!.")
+        })
+
+    }
+
     function handleSelectPayment (event) {
 
         setSelectedPayment(event.target.value)
+
+    }
+
+    function handleSelectedClient (event) {
+
+        setSelectedClient(event.target.value)
 
     }
 
@@ -229,10 +289,41 @@ function Cart() {
 
                 </section>
 
-                <div className='checkOut' >
-                    <a onClick={()=>sendOrder()} >Finalizar pedido</a>
-                </div>
+                {isSeller ? 
 
+                    <section>
+
+                        <h2>Selecione o cliente</h2>
+
+                        <select
+                        onChange={handleSelectedClient}
+                        className="selectOrder" >
+
+                            <option className="optionSelectOrder" >Selecionar</option>
+
+                            {dataUsers.map((item, index)=> (
+                                <option className="optionSelectOrder" value={index} key={item.id}>{item.name}: {item.id}</option>
+                            ))}
+
+                        </select>
+
+                    </section>
+
+                    : <p></p>
+
+                }
+
+                {isSeller ? 
+                    <div className='checkOut' >
+                        <a onClick={()=>sendOrderSeller()} >Finalizar pedido</a>
+                    </div>
+                :
+                    <div className='checkOut' >
+                        <a onClick={()=>sendOrder()} >Finalizar pedido</a>
+                    </div>
+    
+                }
+                
                 <Footer />
 
             </div>

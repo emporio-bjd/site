@@ -93,6 +93,8 @@ function Request() {
 
                         <div className="rightSizeBoxOrder" >
 
+                            {item.seller != undefined ? <p>Vendedor: {item.seller}</p> : '' }
+
                             <p>Itens:</p>
 
                             <ul>
