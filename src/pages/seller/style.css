@@ -68,3 +68,13 @@
     background-color: rebeccapurple;
 
 }
+
+@media screen and (max-width: 768px) {
+
+    .selectOrder {
+
+        width: 80%;
+
+    }
+
+}
