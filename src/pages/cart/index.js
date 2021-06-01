@@ -274,7 +274,7 @@ function Cart() {
                         })
                     }
 
-                    <h3>Valor total: {totalValue.toFixed(2)}</h3>
+                    <h3>Valor total: R$ {totalValue.toFixed(2)}</h3>
 
 
                     <select className="paymentSelect" onChange={handleSelectPayment} >
