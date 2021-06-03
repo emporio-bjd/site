@@ -15,14 +15,15 @@ import closeIcon from '../../img/removeIcon.png'
 function Cart() {
 
     const [ data, setData ] = useState([]);
-    const [dataUsers, setDataUsers] = useState([]);
-    const [dataAccount, setDataAccount] = useState([]);
     const [seller, setSeller] = useState([]);
+    const [dataUsers, setDataUsers] = useState([]);
+    const [isSeller, setIsSeller] = useState(false);
     const [ totalValue, setTotalValue ] = useState(0);
+    const [dataAccount, setDataAccount] = useState([]);
     const [ dataExists, setDataExists ] = useState(false);
     const [userIsLogged, setUserIsLogged] = useState(false);
-    const [isSeller, setIsSeller] = useState(false);
     const [selectedClient, setSelectedClient] = useState('')
+    const [clientNote, setClientNote] = useState('')
     
     const [selectedPayment, setSelectedPayment] = useState('');
 
@@ -42,9 +43,6 @@ function Cart() {
         const verify = await JSON.parse(localStorage.getItem('products'))
     
         if (verify != null && verify.length > 1){
-
-            console.log("verify:")
-            console.log(verify)
             
             setData(verify)
             setDataExists(true)
@@ -148,7 +146,8 @@ function Cart() {
                 district: dataAccount.district,
                 cepNumber: dataAccount.cepNumber,
                 complement: dataAccount.complement,
-                paymentType: selectedPayment
+                paymentType: selectedPayment,
+                clientNote: clientNote
 
 
             }).then(()=>{
@@ -208,6 +207,12 @@ function Cart() {
 
     }
 
+    function handleClientNote (event) {
+
+        setClientNote(event.target.value)
+
+    }
+
     function removeItemInCart(index) {
 
         var confirm = window.confirm('Tem certeza que deseja remover este item ?')
@@ -230,7 +235,6 @@ function Cart() {
                 <Header />
 
                 <div className='textIntroCart' >
-                    <h2>Seus itens no carrinho de compras: </h2>
                     <p>Após revisar os itens, clique no botão para finalizar o pedido </p>
                 </div>
 
@@ -276,6 +280,7 @@ function Cart() {
 
                     <h3>Valor total: {totalValue.toFixed(2)}</h3>
 
+                    <input className="clientNoteInput" onChange={handleClientNote} placeholder='Escreva aqui alguma observação sobre seu pedido' />
 
                     <select className="paymentSelect" onChange={handleSelectPayment} >
 
@@ -285,7 +290,6 @@ function Cart() {
                         <option value="Pix" >Pix</option>
 
                     </select>
-
 
                 </section>
 

@@ -15,6 +15,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    /* filter: blur(15px); */
+    
 
 }
 
@@ -165,7 +167,6 @@
 
     width: 100vw;
     display: flex;
-
     justify-content: space-between;
 
 }
@@ -205,7 +206,6 @@
     color: rgb(0, 0, 0);
     cursor: pointer;
     box-shadow: -2px 5px 8px #92929255;
-
 }
 
 .boxHome img {

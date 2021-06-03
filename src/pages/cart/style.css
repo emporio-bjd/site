@@ -104,6 +104,18 @@
 
 }
 
+.clientNoteInput {
+
+    width: 50vw;
+    border: none;
+    padding: 25px 15px;
+    margin: 15px 0px;
+    border-radius: 10px;
+    box-shadow: -2px 5px 8px #92929255;
+    justify-content: space-between;
+
+}
+
 .checkOut {
 
     width: 100%;
@@ -136,6 +148,12 @@
 
         margin-top: 3vh;
         margin-bottom: 2vh;
+
+    }
+
+    .textIntroCart p{
+
+        font-size: 11pt;
 
     }
 
@@ -197,8 +215,20 @@
 
     .paymentSelect {
 
-        width: 90vw;
+        width: 88vw;
 
+    }
+
+    .clientNoteInput {
+
+        width: 80%;
+        border: none;
+        padding: 25px 15px;
+        margin: 15px 0px;
+        border-radius: 10px;
+        box-shadow: -2px 5px 8px #92929255;
+        justify-content: space-between;
+    
     }
 
     .checkOut {

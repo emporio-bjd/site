@@ -18,15 +18,15 @@ function Home() {
     const [data, setData] = useState([])
     const [dataBackup, setDataBackup] = useState([])
     const [searchInput, setSearchInput] = useState([])
-    const [displaySearchResult, setDisplaySearchResult] = useState('none')
-    const [displayMobileSearch, setDisplayMobileSearch] = useState('none')
     const [minProductPrice, setMinProductPrice] = useState(0)
     const [maxProductPrice, setMaxProductPrice] = useState(999)
+    const [displaySearchResult, setDisplaySearchResult] = useState('none')
+    const [displayMobileSearch, setDisplayMobileSearch] = useState('none')
+    const [heightPageWhenOpenModal, setHeightPageWhenOpenModal] = useState(0)
     const [displayButtonFinishOrder, setDisplayButtonFinishOrder] = useState('none')
 
     const [displayModal, setDisplayModal] = useState("none");
     const [modalData, setModalData] = useState({});
-    const [pageHeight, setPageHeight] = useState(0);
 
     useEffect(() => {
 
@@ -53,7 +53,6 @@ function Home() {
     useEffect(() => {
 
         window.scrollTo(0, 0);
-        setPageHeight(window.screen.height)
 
     }, []);
 
@@ -61,26 +60,25 @@ function Home() {
 
         const products = JSON.parse(localStorage.getItem('products'))
 
-        console.log(products)
-
-        // if (products != null) {
-        //     if (!(products.id))
-        //         localStorage.setItem('products', '[{}]')
-        // }
-
     }, []);
 
     function handleModalInfos(item) {
 
         setModalData(item)
-
+        setHeightPageWhenOpenModal(document.body.getBoundingClientRect().top)
+        window.scrollTo(0, 0);
         displayModal == "none" ? setDisplayModal("flex") : setDisplayModal("none")
 
     }
 
     function closeModal() {
 
-        displayModal == "none" ? setDisplayModal("flex") : setDisplayModal("none")
+        if (displayModal == "none")
+            setDisplayModal("flex")
+        else {
+            window.scrollTo( -heightPageWhenOpenModal, - heightPageWhenOpenModal)
+            setDisplayModal("none");
+        }
 
         const products = JSON.parse(localStorage.getItem('products'))
 
@@ -167,7 +165,7 @@ function Home() {
 
     return (
 
-        <div className="App">
+        <div className="App" >
 
             <Header />
 
@@ -290,7 +288,7 @@ function Home() {
 
                 </div>
 
-                <div className="areaLateral">
+                <div className="areaLateral" >
 
                     <div className='menuProductsHome' >
 
@@ -306,7 +304,7 @@ function Home() {
 
                         </div>
 
-                        <div className='filterProducts' >
+                        <div className='filterProducts' style={{borderBottom: '10px solid #ffc05c', paddingBottom: '15px'}}>
 
                             <h4>Preço</h4>
 
