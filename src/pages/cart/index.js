@@ -278,7 +278,7 @@ function Cart() {
                         })
                     }
 
-                    <h3>Valor total: {totalValue.toFixed(2)}</h3>
+                    <h3>Valor total: R$ {totalValue.toFixed(2)}</h3>
 
                     <input className="clientNoteInput" onChange={handleClientNote} placeholder='Escreva aqui alguma observação sobre seu pedido' />
 

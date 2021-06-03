@@ -183,8 +183,7 @@ function Home() {
                     <img src={heroImg} alt="Imagem inicial" />
 
                     <div className="heroText">
-                        {/* <h1 className='first-name'>Empório</h1>
-                            <h1 className='second-name'>Bom Jardim</h1> */}
+
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
@@ -268,6 +267,9 @@ function Home() {
                                     onClick={() => { handleModalInfos(item) }}>
 
                                     <img src={item.imageSrc} alt='teste' />
+
+                                    <div className="itemInfo">
+
                                     <h3>{item.title}</h3>
 
                                     <div className='lineBoxProduct'>
@@ -277,6 +279,8 @@ function Home() {
                                     </div>
 
                                     <p>{item.desc}</p>
+
+                                    </div>
 
                                 </div>
 

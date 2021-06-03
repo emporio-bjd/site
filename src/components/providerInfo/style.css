@@ -51,3 +51,24 @@
     padding: 2rem;
 
 }
+
+@media screen and (max-width: 768px) {
+
+    .historyModal main {
+
+        width: 100%;
+        display: grid;
+        align-items: center;
+        grid-template-rows: auto;
+        grid-template-columns: 150px
+    
+    }
+
+    .providerCard {
+
+        width: 50vw;
+        margin-top: 2rem;
+
+    }
+
+}
