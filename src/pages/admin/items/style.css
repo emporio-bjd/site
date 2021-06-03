@@ -86,4 +86,16 @@
 
     }
 
+    .adminOptions input {
+
+        width: 80%;
+
+    }
+
+    .adminOptions fieldset select {
+
+        width: 88%;
+    
+    }
+
 }

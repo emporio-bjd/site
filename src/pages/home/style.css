@@ -476,11 +476,23 @@
 
     }
 
+    .sectionMobileSearch {
+
+        width: 100vw;
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 5vh;
+        border-bottom: 10px solid rgb(255, 192, 92);
+
+    }
+
     .menuProductsHomeMobile {
         
-        width: 85vw;
+        width: 85%;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
         flex-direction: column;
 

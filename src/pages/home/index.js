@@ -118,7 +118,7 @@ function Home() {
     function handleDisplaySearchMobile() {
 
         if( displayMobileSearch == 'none')
-            setDisplayMobileSearch('block')
+            setDisplayMobileSearch('flex')
         else
             setDisplayMobileSearch('none')
         
@@ -200,7 +200,7 @@ function Home() {
                 <h3>Filtrar produtos</h3>
             </div>
 
-            <section style={{display: displayMobileSearch}} >
+            <section className='sectionMobileSearch' style={{display: displayMobileSearch}} >
 
                 <div className='menuProductsHomeMobile' >
 
@@ -260,32 +260,40 @@ function Home() {
                     <section id='sectionHome'>
 
                         {
-                            data.map((item, index) => (
+                            data.map((item, index) => {
 
-                                <div className='boxHome'
+                                if (item.itemAvailability == 'true') {
 
-                                    onClick={() => { handleModalInfos(item) }}>
+                                    return (
 
-                                    <img src={item.imageSrc} alt='teste' />
-
-                                    <div className="itemInfo">
-
-                                    <h3>{item.title}</h3>
-
-                                    <div className='lineBoxProduct'>
-
-                                        <h4>R$ {item.price}</h4>
-
-                                    </div>
-
-                                    <p>{item.desc}</p>
-
-                                    </div>
-
-                                </div>
-
-
-                            ))
+                                        <div className='boxHome'
+        
+                                            onClick={() => { handleModalInfos(item) }}>
+        
+                                            <img src={item.imageSrc} alt='teste' />
+        
+                                            <div className="itemInfo">
+        
+                                            <h3>{item.title}</h3>
+        
+                                            <div className='lineBoxProduct'>
+        
+                                                <h4>R$ {item.price}</h4>
+        
+                                            </div>
+        
+                                            <p>{item.desc}</p>
+        
+                                            </div>
+        
+                                        </div>
+        
+        
+                                    )
+                                    
+                                }
+                            
+                            })
                         }
 
                     </section>
