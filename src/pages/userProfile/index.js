@@ -14,6 +14,7 @@ function UserProfile() {
 
     const [dataAccount, setDataAccount] = useState([]);
     const [displayDivAlterInfos, setDisplayDivAlterInfos] = useState("none");
+    const [displayDivAlterInfosA, setDisplayDivAlterInfosA] = useState("none");
     const [registerData,setRegisterData] = useState({
 
         name: '',
@@ -73,6 +74,15 @@ function UserProfile() {
             setDisplayDivAlterInfos("flex")
         else
             setDisplayDivAlterInfos("none")
+        
+    }
+
+    function handleDisplayDivAlterInfosA() {
+
+        if(displayDivAlterInfosA == "none")
+            setDisplayDivAlterInfosA("flex")
+        else
+            setDisplayDivAlterInfosA("none")
         
     }
 
@@ -148,46 +158,63 @@ function UserProfile() {
                 
             </div>
 
-            <h4 className="textAlterInfosProfile" onClick={()=>handleDisplayDivAlterInfos()} >Deseja alterar alguma informação? <span>clique aqui</span></h4>
+            <div>
+                <h4 className="textAlterInfosProfile" onClick={()=>handleDisplayDivAlterInfos()} >Deseja alterar alguma informação? <span>clique aqui</span></h4>
+
+                <div style={{display: displayDivAlterInfos}} className="divAlterInfos" >
+                    
+                    <h2 className="arrowToDownUserProfile"> ⇣ </h2>
+
+                    <p>Preencha apenas o que deseja atualizar</p>
+
+                    <fieldset>
+
+                        <legend>
+                            <h2>Informações pessoais</h2>
+                        </legend>
+
+                        <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo' />
+
+                        <input name='phoneNumber' type='tel' onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
+
+                    </fieldset>
+
+                    <fieldset>
+
+                        <legend>
+                            <h2>Endereço</h2>
+                        </legend>
+
+                        <input name='street' onChange={handleInputRegisterChange} placeholder='Nome da rua' />
+
+                        <input name='houseNumber' type='number' onChange={handleInputRegisterChange} placeholder='N° da casa/apto' />
+
+                        <input name='complement' onChange={handleInputRegisterChange} placeholder='Complemento' />
+
+                        <input name='district' onChange={handleInputRegisterChange} placeholder='Bairro' />
+
+                        <input name='cepNumber' onChange={handleInputRegisterChange} placeholder='CEP' />
+
+                    </fieldset>
+
+                    <a className="defaultButtonUserProfile" style={{marginBottom: "5vh"}} onClick={()=>updateRegister()}>Atualizar Informações</a>
+
+                </div>
+
+            </div>
+
+            <div>
+                <h4 className="textAlterInfosProfile" onClick={()=>handleDisplayDivAlterInfosA()} >Quer acompanhar seus pedidos? <span>clique aqui</span></h4>
+
+                <div style={{display: displayDivAlterInfosA}} className="divAlterInfos" >
+                    
+                    <h2 className="arrowToDownUserProfile"> ⇣ </h2>
 
 
-            <div style={{display: displayDivAlterInfos}} className="divAlterInfos" >
-                
-                <h2 className="arrowToDownUserProfile"> ⇣ </h2>
 
-                <p>Preencha apenas o que deseja atualizar</p>
+                    <a className="defaultButtonUserProfile" style={{marginBottom: "5vh"}} onClick={()=>updateRegister()}>Atualizar Informações</a>
 
-                <fieldset>
-
-                    <legend>
-                        <h2>Informações pessoais</h2>
-                    </legend>
-
-                    <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo' />
-
-                    <input name='phoneNumber' type='tel' onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
-
-                </fieldset>
-
-                <fieldset>
-
-                    <legend>
-                        <h2>Endereço</h2>
-                    </legend>
-
-                    <input name='street' onChange={handleInputRegisterChange} placeholder='Nome da rua' />
-
-                    <input name='houseNumber' type='number' onChange={handleInputRegisterChange} placeholder='N° da casa/apto' />
-
-                    <input name='complement' onChange={handleInputRegisterChange} placeholder='Complemento' />
-
-                    <input name='district' onChange={handleInputRegisterChange} placeholder='Bairro' />
-
-                    <input name='cepNumber' onChange={handleInputRegisterChange} placeholder='CEP' />
-
-                </fieldset>
-
-                <a className="defaultButtonUserProfile" style={{marginBottom: "5vh"}} onClick={()=>updateRegister()}>Atualizar Informações</a>
+                </div>
 
             </div>
 
