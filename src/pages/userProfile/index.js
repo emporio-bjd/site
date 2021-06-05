@@ -14,7 +14,8 @@ function UserProfile() {
 
     const [dataAccount, setDataAccount] = useState([]);
     const [displayDivAlterInfos, setDisplayDivAlterInfos] = useState("none");
-    const [displayDivAlterInfosA, setDisplayDivAlterInfosA] = useState("none");
+    const [displayDivPedidos, setDisplayDivPedidos] = useState("none");
+    const [requestData, setRequestData] = useState([{}]);
     const [registerData,setRegisterData] = useState({
 
         name: '',
@@ -77,12 +78,12 @@ function UserProfile() {
         
     }
 
-    function handleDisplayDivAlterInfosA() {
+    function handleDisplayDivPedidos() {
 
-        if(displayDivAlterInfosA == "none")
-            setDisplayDivAlterInfosA("flex")
+        if(displayDivPedidos == "none")
+            setDisplayDivPedidos("flex")
         else
-            setDisplayDivAlterInfosA("none")
+            setDisplayDivPedidos("none")
         
     }
 
@@ -123,6 +124,35 @@ function UserProfile() {
         }); 
         
     }
+
+    useEffect(() => {
+        
+        firebase.database().ref('requests').get('/requests')
+        .then(function (snapshot) {
+
+            if (snapshot.exists()) {
+
+                // var phoneNumber = localStorage.getItem('userPhoneNumber')
+
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+
+                var requestDataTemp = []
+
+                temp.map((item) => {
+
+                    if(item.phoneNumber == '12345678')
+                        requestDataTemp.push(item)
+
+                })
+                setRequestData(requestDataTemp)
+            }
+            else {
+                console.log("No data available");
+            }
+        })
+
+    }, []);
 
     return (
 
@@ -204,15 +234,34 @@ function UserProfile() {
             </div>
 
             <div>
-                <h4 className="textAlterInfosProfile" onClick={()=>handleDisplayDivAlterInfosA()} >Quer acompanhar seus pedidos? <span>clique aqui</span></h4>
+                <h4 className="textAlterInfosProfile" onClick={()=>handleDisplayDivPedidos()} >Quer acompanhar seus pedidos? <span>clique aqui</span></h4>
 
-                <div style={{display: displayDivAlterInfosA}} className="divAlterInfos" >
+                <div style={{display: displayDivPedidos}} className="divPedidos" >
                     
-                    <h2 className="arrowToDownUserProfile"> ⇣ </h2>
 
-
-
-                    <a className="defaultButtonUserProfile" style={{marginBottom: "5vh"}} onClick={()=>updateRegister()}>Atualizar Informações</a>
+                        <div className='dataPedidos'>
+                            <ul>
+                                <h2>Pedidos</h2>
+                                <div className='backgroundPedidos'>
+                                    <li>
+                                        <p>Produto:</p>
+                                        <p>TESTE</p>
+                                    </li>
+                                    <li>
+                                        <p>Tipo de pagamento:</p>
+                                        <p>TESTE</p>
+                                    </li>
+                                    <li>
+                                        <p>Preço:</p>
+                                        <p>TESTE</p>
+                                    </li>
+                                    <li>
+                                        <p>Endereço:</p>
+                                        <p>TESTE</p>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
 
                 </div>
 
