@@ -5,7 +5,7 @@ import './style.css'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import 'firebase/database'
+// import 'firebase/database'
 import 'firebase/storage'
 import firebaseConfig from '../../../FIREBASECONFIG.js'
 
@@ -127,17 +127,10 @@ function Admin() {
 
         }
 
-        if (newDataAdmin.imageSrc != '' && newDataAdmin.title != '') {
-
-            if ( newDataAdmin.desc != '' && newDataAdmin.price != 0 ) {
-
-                firebase.database().ref('items/' + id).set(data).then(err => console.log(err))
-
-                alert("Item inserido com sucesso!.")
-                
-            } 
-            
-        } 
+        firebase.database().ref('items/' + id)
+        .set(data)
+        .then(err => console.log(err))
+        alert("Item inserido com sucesso!.")
         
     }
 
@@ -180,29 +173,6 @@ function Admin() {
             snapshot.ref.getDownloadURL()
             .then(url => setImageUrl(url))
         });
-
-        // uploadTask.on('state_changed', function(snapshot){
-
-        //   var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
-        //   console.log('Upload is ' + progress + '% done');
-          
-        //   switch (snapshot.state) {
-        //     case firebase.storage.TaskState.PAUSED:
-        //       console.log('Upload is paused');
-        //       break;
-        //     case firebase.storage.TaskState.RUNNING:
-        //       console.log('Upload is running');
-        //       break;
-        //   }
-        // }, function(error) {
-          
-        // }, function() {
-          
-        //   uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-        //     setImageUrl(downloadURL);
-        //   });
-        // });
 
     }
 
