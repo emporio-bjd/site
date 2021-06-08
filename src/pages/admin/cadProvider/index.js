@@ -29,6 +29,7 @@ function Provider() {
     const [selectProvider, setSelectProvider] = useState('')
     const [selectProviderToDelete, setSelectProviderToDelete] = useState('')
 
+    const [imageUrl, setImageUrl] = useState('')
     const [dataAlterProduct, setDataAlterProduct] = useState({
 
         product: '',
@@ -45,6 +46,7 @@ function Provider() {
 
     const [dataKeysAdm, setDataKeysAdm] = useState([])
     const [dataProvider, setDataProvider] = useState([])
+    
     const [newDataProvider, setNewDataProvider] = useState({
 
         company: '',
@@ -206,46 +208,41 @@ function Provider() {
 
     function insertNewProvider() {
 
-        if (newDataProvider.company != '' && newDataProvider.name != '') {
+        const id = firebase.database().ref().child('posts').push().key
 
-            if (newDataProvider.email != '' && newDataProvider.phone != '') {
+            firebase.database().ref('providers/' + id).set({
 
-                const id = firebase.database().ref().child('posts').push().key
+                company: newDataProvider.company,
+                name: newDataProvider.name,
+                email: newDataProvider.email,
+                phone: newDataProvider.phone,
+                id: id,
+                products: [{}]
 
-                firebase.database().ref('providers/' + id).set({
+            })
 
-                    company: newDataProvider.company,
-                    name: newDataProvider.name,
-                    email: newDataProvider.email,
-                    phone: newDataProvider.phone,
-                    id: id,
-                    products: [{}]
-
-                })
-
-                alert("Fornecedor cadastrado com sucesso!");
-
-            }
-
-        }
+        alert("Fornecedor cadastrado com sucesso!");
 
     }
 
     function insertNewProduct() {
 
         const id = firebase.database().ref().child('posts').push().key
-
-        firebase.database().ref('providers/' + dataKeysAdm[selectProvider]).child('products/' + id).set({
-
+        
+        const data = {
+            
             id: id,
             product: newDataProduct.product,
-            imageSrc: newDataProduct.imageSrc,
+            imageSrc: imageUrl,
             unity: selectedUnity,
             sellPrice: newDataProduct.sellPrice,
             buyPrice: newDataProduct.buyPrice
+        }
 
-        })
-
+        firebase.database().ref('providers/' + dataKeysAdm[selectProvider])
+        .child('products/' + id)
+        .set(data)
+        .then(err => console.log(err))
         alert("Produto cadastrado com sucesso!")
 
     }
@@ -354,6 +351,21 @@ function Provider() {
 
     }
 
+    function uploadImage(event) {
+
+        const file = event.target.files[0]
+
+        var storageRef = firebase.storage().ref();
+
+        storageRef.child('images/' + file.name.trim())
+        .put(file)
+        .then(snapshot => {
+            snapshot.ref.getDownloadURL()
+            .then(url => setImageUrl(url))
+        });
+
+    }
+
 
 
     return (
@@ -438,7 +450,7 @@ function Provider() {
                             <option value='Unidade' >Unidade</option>
                         </select> 
 
-                        <input name='imageSrc' onChange={handleInputProductChange} placeholder='URL da imagem' />
+                        <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem'/>
 
                         <input name='buyPrice' onChange={handleInputProductChange} placeholder='Preço de compra' />
 
