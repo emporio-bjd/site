@@ -147,7 +147,8 @@ function Cart() {
                 cepNumber: dataAccount.cepNumber,
                 complement: dataAccount.complement,
                 paymentType: selectedPayment,
-                clientNote: clientNote
+                clientNote: clientNote,
+                userEmail: dataAccount.email
 
 
             }).then(()=>{
