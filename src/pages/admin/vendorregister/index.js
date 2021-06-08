@@ -53,7 +53,7 @@ function VendorRegister() {
             email: registerData.email,
             id: id
 
-        })
+        }).then(()=>alert('Cadastro realizado com sucesso'))
         
     }
 

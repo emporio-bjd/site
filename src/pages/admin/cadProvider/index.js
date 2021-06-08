@@ -166,14 +166,24 @@ function Provider() {
         if (!firebase.apps.length)
             firebase.initializeApp(firebaseConfig);
 
-        firebase.database().ref('providers/').child('products/').get('/products')
+        firebase.database().ref('providers').get('/products')
             .then(function (snapshot) {
 
                 if (snapshot.exists()) {
 
                     var data = snapshot.val()
                     var temp = Object.keys(data).map((key) => data[key])
-                    setDataProduct(temp)
+
+                    var dataProductTemp = []
+
+                    temp.map(item => {
+
+                        if (item.products != undefined) 
+                            dataProductTemp.push(item.products)
+                            
+                    })
+                    console.log(dataProductTemp)
+                    setDataProduct(dataProductTemp)
 
                 } else {
                     console.log("No data available");
