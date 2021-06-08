@@ -15,6 +15,7 @@ import { Link, useHistory } from "react-router-dom";
 function UserProfile() {
 
     const [dataAccount, setDataAccount] = useState([]);
+    // const [dataAccount, setDataAccount] = useState([]);
     const [displayDivAlterInfos, setDisplayDivAlterInfos] = useState("none");
     const [displayDivPedidos, setDisplayDivPedidos] = useState("none");
     const [requestData, setRequestData] = useState([{}]);
@@ -36,7 +37,6 @@ function UserProfile() {
         
         window.scrollTo(0, 0);
 
-        const id = localStorage.getItem('id')
         const userEmail = localStorage.getItem('userEmail')
 
         if(!firebase.apps.length)
@@ -56,6 +56,39 @@ function UserProfile() {
                         setDataAccount(item)
 
                 })
+
+            }else {
+                console.log("No data available");
+            }
+        })
+
+    }, []);
+    
+    useEffect(() => {
+        
+        window.scrollTo(0, 0);
+
+        const userEmail = localStorage.getItem('userEmail')
+
+        if(!firebase.apps.length)
+            firebase.initializeApp(firebaseConfig)
+
+        firebase.database().ref('requests/').get('/requests')
+        .then(function (snapshot) {
+
+            if (snapshot.exists()){
+
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+                var requestDataTemp = []
+
+                temp.map((item)=>{ 
+
+                    if(item.userEmail == userEmail)
+                        requestDataTemp.push(item)
+                        
+                    })
+                    setRequestData(requestDataTemp)
 
             }else {
                 console.log("No data available");
@@ -127,34 +160,34 @@ function UserProfile() {
         
     }
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        firebase.database().ref('requests').get('/requests')
-        .then(function (snapshot) {
+    //     firebase.database().ref('requests').get('/requests')
+    //     .then(function (snapshot) {
 
-            if (snapshot.exists()) {
+    //         if (snapshot.exists()) {
 
-                // var phoneNumber = localStorage.getItem('userPhoneNumber')
+    //             // var phoneNumber = localStorage.getItem('userPhoneNumber')
 
-                var data = snapshot.val()
-                var temp = Object.keys(data).map((key) => data[key])
+    //             var data = snapshot.val()
+    //             var temp = Object.keys(data).map((key) => data[key])
 
-                var requestDataTemp = []
+    //             var requestDataTemp = []
 
-                temp.map((item) => {
+    //             temp.map((item) => {
 
-                    if(item.phoneNumber == '12345678')
-                        requestDataTemp.push(item)
+    //                 if(item.phoneNumber == '12345678')
+    //                     requestDataTemp.push(item)
 
-                })
-                setRequestData(requestDataTemp)
-            }
-            else {
-                console.log("No data available");
-            }
-        })
+    //             })
+    //             setRequestData(requestDataTemp)
+    //         }
+    //         else {
+    //             console.log("No data available");
+    //         }
+    //     })
 
-    }, []);
+    // }, []);
 
     return (
 
@@ -188,6 +221,37 @@ function UserProfile() {
                     <a onClick={()=>signOut()} className="defaultButtonUserProfile" >SAIR</a>
                 </div>
                 
+            </div>
+
+            <div>
+                <h4 className="textAlterInfosProfile" onClick={()=>handleDisplayDivPedidos()} >Quer acompanhar seus pedidos? <span>clique aqui</span></h4>
+
+                <div style={{display: displayDivPedidos}} className="divPedidos" >
+                    
+                    <div className='dataPedidos'>
+                        <ul>
+                            <h2>Pedidos</h2>
+                            <div className='backgroundPedidos'>
+
+                                {requestData.map((item)=> {
+
+                                    if(item.listItem != undefined){
+
+                                        item.listItem.map(item=>{
+                                            
+                                            console.log(item.data.title)
+
+                                        })
+                                    }
+
+                                })}
+
+                            </div>
+                        </ul>
+                    </div>
+
+                </div>
+
             </div>
 
             <div>
@@ -235,39 +299,6 @@ function UserProfile() {
 
             </div>
 
-            <div>
-                <h4 className="textAlterInfosProfile" onClick={()=>handleDisplayDivPedidos()} >Quer acompanhar seus pedidos? <span>clique aqui</span></h4>
-
-                <div style={{display: displayDivPedidos}} className="divPedidos" >
-                    
-
-                        <div className='dataPedidos'>
-                            <ul>
-                                <h2>Pedidos</h2>
-                                <div className='backgroundPedidos'>
-                                    <li>
-                                        <p>Produto:</p>
-                                        <p>TESTE</p>
-                                    </li>
-                                    <li>
-                                        <p>Tipo de pagamento:</p>
-                                        <p>TESTE</p>
-                                    </li>
-                                    <li>
-                                        <p>Preço:</p>
-                                        <p>TESTE</p>
-                                    </li>
-                                    <li>
-                                        <p>Endereço:</p>
-                                        <p>TESTE</p>
-                                    </li>
-                                </div>
-                            </ul>
-                        </div>
-
-                </div>
-
-            </div>
 
             <ReactCircleModal
                 backgroundColor="#434f38"
