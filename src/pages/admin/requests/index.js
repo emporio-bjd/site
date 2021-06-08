@@ -8,9 +8,6 @@ import 'firebase/auth'
 import 'firebase/database'
 import firebaseConfig from '../../../FIREBASECONFIG.js'
 
-import React from 'react'
-import ReactCircleModal from 'react-circle-modal'
-
 import closeIcon from '../../../img/removeIconWhite.png'
 
 
@@ -151,44 +148,6 @@ function Request() {
                 <a className="finishButton" onClick={()=>finishOrder()} >Finalizar</a>
 
             </main>
-
-            <ReactCircleModal
-                backgroundColor="#434f38"
-                toogleComponent={onClick => (<button className="finishButton" onClick={onClick}> Gostou do seu pedido? Responda esta pesquisa de satisfação! </button>
-                )}
-                // Optional fields and their default values
-                offsetX={0}
-                offsetY={0}
-                >
-                {(onClick) => (
-                    <div className="popUpSatisf" style={{ backgroundColor: '#fff', padding: '1em' }}>
-                        <p>
-                            <div className='pesquisaSatisf'>
-
-                                <div className='titlePesquisa' >
-                                    <h1>Gostou do seu pedido?</h1>
-                                </div>
-
-                                <fieldset>
-
-                                    <input placeholder='Escreva sua avaliação!' />
-
-                                </fieldset>
-
-                                <div className='buttonsFormSignIn' >
-
-                                    <button className="finishButton" >Cadastrar</button>
-
-                                </div>
-
-                            </div>
-                        </p>
-                        <button className="finishButton" onClick={onClick}>
-                            Click here to close modal
-                        </button>
-                    </div>
-                )}
-            </ReactCircleModal>
 
             <Footer />
         </div>

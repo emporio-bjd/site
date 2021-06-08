@@ -8,6 +8,8 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
+import ReactCircleModal from 'react-circle-modal'
+
 import { Link, useHistory } from "react-router-dom";
 
 function UserProfile() {
@@ -266,6 +268,44 @@ function UserProfile() {
                 </div>
 
             </div>
+
+            <ReactCircleModal
+                backgroundColor="#434f38"
+                toogleComponent={onClick => (<button className="finishButton" onClick={onClick}> Gostou do seu pedido? Responda esta pesquisa de satisfação! </button>
+                )}
+                // Optional fields and their default values
+                offsetX={0}
+                offsetY={0}
+                >
+                {(onClick) => (
+                    <div className="popUpSatisf" style={{ backgroundColor: '#fff', padding: '1em' }}>
+                        <p>
+                            <div className='pesquisaSatisf'>
+
+                                <div className='titlePesquisa' >
+                                    <h1>Gostou do seu pedido?</h1>
+                                </div>
+
+                                <fieldset>
+
+                                    <input placeholder='Escreva sua avaliação!' />
+
+                                </fieldset>
+
+                                <div className='buttonsFormSignIn' >
+
+                                    <button className="finishButton" >Enviar</button>
+
+                                </div>
+
+                            </div>
+                        </p>
+                        <button className="finishButton" onClick={onClick}>
+                            Fechar pesquisa
+                        </button>
+                    </div>
+                )}
+            </ReactCircleModal>
 
             <Footer />
         </div>
