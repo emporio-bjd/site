@@ -327,6 +327,7 @@ function Provider() {
     function handleSelectProviderProducts(event) {
 
         var position = event.target.value
+        console.log(position)
 
         setSelectProvider(position)
 
@@ -365,8 +366,6 @@ function Provider() {
         });
 
     }
-
-
 
     return (
 

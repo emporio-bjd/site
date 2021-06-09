@@ -57,22 +57,6 @@
 
 }
 
-.haveAccount {
-
-    display: 100%;
-    text-align: center;
-    color: rgb(175, 175, 175);
-
-}
-
-.haveAccount a {
-
-    font-size: 12pt;
-    color: rgb(65, 65, 65);
-    text-decoration: none;
-    margin-left: 5px;
-
-}
 
 .formsSignIn ::placeholder {
 
@@ -82,6 +66,12 @@
 
 @media screen and (max-width: 768px) {
 
+
+    .formsSignIn select {
+
+        width: 92%;
+
+    }
 
     .formsSignIn h1 {
 
