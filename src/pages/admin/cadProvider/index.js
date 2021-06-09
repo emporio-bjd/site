@@ -200,6 +200,12 @@ function Provider() {
 
     }
 
+    function handleSelectProduct(event) {
+
+        setSelectProduct(event.target.value)
+
+    }
+
     function handleSelectProviderToDelete(event) {
 
         setSelectProviderToDelete(event.target.value)
@@ -366,8 +372,6 @@ function Provider() {
 
     }
 
-
-
     return (
 
         <div className='Provider'>
@@ -422,7 +426,7 @@ function Provider() {
                             <h5>Selecione o fornecedor e preencha os dados do produto abaixo.</h5>
                         </legend>
 
-                        <select onChange={handleSelectProviderProducts} >
+                        <select onChange={handleSelectProvider} >
 
                             <option>Selecione o fornecedor</option>
 
@@ -479,12 +483,13 @@ function Provider() {
                                     <option value={index} key={index}>{providers.company}</option>
 
                                 )
+                                
 
                             })}
 
                         </select>
 
-                        <select onChange={handleSelectProviderProducts} >
+                        <select onChange={handleSelectProduct} >
 
                             <option>Selecione o produto</option>
 
