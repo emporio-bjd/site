@@ -29,6 +29,8 @@ function Provider() {
     const [selectProvider, setSelectProvider] = useState('')
     const [selectProviderToDelete, setSelectProviderToDelete] = useState('')
 
+    const [selectedUnity, setSelectedUnity] = useState('')
+
     const [imageUrl, setImageUrl] = useState('')
     const [dataAlterProduct, setDataAlterProduct] = useState({
 
@@ -200,6 +202,12 @@ function Provider() {
 
     }
 
+    function handleSelectedUnity(event) {
+
+        setSelectedUnity(event.target.value)
+
+    }
+
     function handleSelectProduct(event) {
 
         setSelectProduct(event.target.value)
@@ -253,21 +261,6 @@ function Provider() {
 
     }
 
-    function insertNewRequest() {
-
-        const id = firebase.database().ref().child('posts').push().key
-
-        firebase.database().ref('providers-requests/' + id).set({
-
-            id: id,
-            qntd: newDataRequest.qntd,
-
-        })
-
-        alert("Produto cadastrado com sucesso!")
-    
-    }
-
     function updateProvider() {
 
         if (wasChanged) {
@@ -294,14 +287,6 @@ function Provider() {
 
     }
 
-    const [selectedUnity, setSelectedUnity] = useState('')
-
-    function handleSelectedUnity(event) {
-
-        setSelectedUnity(event.target.value)
-        
-    }
-
     const [displayHistory, setDisplayHistory] = useState("none");
     const [HistoryData, setHistoryData] = useState({});
     const [pageHeight, setPageHeight] = useState(0);
@@ -324,37 +309,6 @@ function Provider() {
     function closeHistory() {
 
         displayHistory == "none" ? setDisplayHistory("flex") : setDisplayHistory("none")
-
-    }
-
-
-    const [itemsOfProvider, setItemsOfProvider] = useState([])
-
-    function handleSelectProviderProducts(event) {
-
-        var position = event.target.value
-        console.log(position)
-
-        setSelectProvider(position)
-
-        var data = dataProvider[position].products
-
-        if (data != undefined && data != null) {
-
-            var items = Object.keys(data).map((key) => data[key])
-            var temp = []
-
-            items.map((products) => {
-
-                console.log(products)
-                temp.push(products)
-
-            })
-
-            setItemsOfProvider(temp)
-
-        } else
-            setItemsOfProvider([])
 
     }
 
@@ -394,6 +348,7 @@ function Provider() {
 
                         <span onClick={() => { handleHistoryInfos() }}>Informação dos fornecedores</span>
                         <Link to='/AdminHistorico' >Histórico de pedidos</Link>
+                        <Link to='/PedidoFornecedor' >Realizar pedido do fornecedor</Link>
 
                     </div>
 
@@ -462,53 +417,6 @@ function Provider() {
                         <input name='sellPrice' onChange={handleInputProductChange} placeholder='Preço de venda' />
 
                         <a onClick={() => { insertNewProduct() }} >Inserir</a>
-
-                    </fieldset>
-
-
-                    <fieldset className='orderRegister' >
-
-                        <legend>
-                            <h2>Realizar pedido</h2>
-                            <h5>Selecione o fornecedor e o item que deseja inserir no pedido. Em seguida, insira a quantidade desejada.</h5>
-                        </legend>
-
-                        <select onChange={handleSelectProviderProducts} >
-
-                            <option>Selecione o fornecedor</option>
-
-                            {dataProvider.map((providers, index) => {
-
-                                return (
-
-                                    <option value={index} key={index}>{providers.company}</option>
-
-                                )
-                                
-
-                            })}
-
-                        </select>
-
-                        <select onChange={handleSelectProduct} >
-
-                            <option>Selecione o produto</option>
-
-                            {itemsOfProvider.map((products, index) => (
-
-                                <option value={index} key={index}>{products.product} - R${products.buyPrice}</option>
-
-                            ))}
-
-                        </select>
-
-                        <legend>
-                            <h3>Insira a quantidade desejada</h3>
-                        </legend>
-
-                        <input name='qntd' onChange={handleInputRequestChange} placeholder='Quantidade' /> 
-
-                        <a onClick={() => { insertNewRequest() }} >Adicionar</a>
 
                     </fieldset>
 
