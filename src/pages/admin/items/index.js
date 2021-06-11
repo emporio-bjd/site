@@ -21,15 +21,10 @@ function Admin() {
         desc: '',
         price: 0,
         itemAvailability: 0,
-<<<<<<< HEAD
         unityPrice: 0,
         category: '',
         unity: ''
         
-=======
-        itemUnity: ''
-
->>>>>>> babe474288283e3518b799f6d84c1f9c97fa9d0d
     })
 
     const [selectItem, setSelectItem] = useState('')
@@ -215,17 +210,11 @@ function Admin() {
 
                         <input name='desc' onChange={handleInputAdminChange} placeholder='Descrição' />
 
-<<<<<<< HEAD
                         <input name='price' onChange={handleInputAdminChange} placeholder='Preço por Kg' type='number' />
 
                         <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' />
                         
                         <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem'/>
-=======
-                        <input name='price' onChange={handleInputAdminChange} placeholder='Preço' type='number' />
-
-                        <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem' />
->>>>>>> babe474288283e3518b799f6d84c1f9c97fa9d0d
 
                         <select onChange={handleInputAdminChange} name='itemUnity' >
 
@@ -242,7 +231,6 @@ function Admin() {
 
                         </select>
 
-<<<<<<< HEAD
                         <select onChange={handleInputAdminChange} name='category' >
 
                             <option value={0} >Categoria</option>
@@ -267,17 +255,6 @@ function Admin() {
                         </select>
 
                         <a onClick={()=>{insertNewItem()}} >Inserir</a>
-=======
-                        <select onChange={handleInputAdminChange} name='itemUnity' >
-
-                            <option value='' >Tipo de unidade</option>
-                            <option value='Quilograma' >Quilograma</option>
-                            <option value='Unidade' >Unidade</option>
-
-                        </select>
-
-                        <a onClick={() => { insertNewItem() }} >Inserir</a>
->>>>>>> babe474288283e3518b799f6d84c1f9c97fa9d0d
 
                     </fieldset>
 
