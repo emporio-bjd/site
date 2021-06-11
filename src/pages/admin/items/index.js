@@ -20,7 +20,10 @@ function Admin() {
         title: '',
         desc: '',
         price: 0,
-        itemAvailability: 0
+        itemAvailability: 0,
+        unityPrice: 0,
+        category: '',
+        unity: ''
         
     })
     
@@ -34,7 +37,11 @@ function Admin() {
         imageSrc: '',
         title: '',
         desc: '',
-        price: 0
+        price: 0,
+        itemAvailability: 0,
+        unityPrice: 0,
+        category: '',
+        unity: ''
 
     })
 
@@ -123,14 +130,19 @@ function Admin() {
             desc: newDataAdmin.desc,
             price: newDataAdmin.price,
             id: id,
-            itemAvailability: newDataAdmin.itemAvailability
+            itemAvailability: newDataAdmin.itemAvailability,
+            unityPrice: newDataAdmin.unityPrice,
+            category: newDataAdmin.category,
+            unity: newDataAdmin.itemUnity
 
         }
 
-        firebase.database().ref('items/' + id)
-        .set(data)
-        .then(err => console.log(err))
-        alert("Item inserido com sucesso!.")
+        console.log(data)
+
+        // firebase.database().ref('items/' + id)
+        // .set(data)
+        // .then(err => console.log(err))
+        // alert("Item inserido com sucesso!.")
         
     }
 
@@ -196,15 +208,47 @@ function Admin() {
 
                         <input name='desc' onChange={handleInputAdminChange} placeholder='Descrição' />
 
-                        <input name='price' onChange={handleInputAdminChange} placeholder='Preço' type='number' />
+                        <input name='price' onChange={handleInputAdminChange} placeholder='Preço por Kg' type='number' />
+
+                        <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' />
                         
                         <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem'/>
+
+                        <select onChange={handleInputAdminChange} name='itemUnity' >
+
+                            <option value='unity' >Unidade</option>
+                            <option value='kg' >Kg</option>
+
+                        </select>
 
                         <select onChange={handleInputAdminChange} name='itemAvailability' >
 
                             <option value={0} >Disponibilidade</option>
                             <option value={true} >Disponível</option>
                             <option value={false} >Indisponível</option>
+
+                        </select>
+
+                        <select onChange={handleInputAdminChange} name='category' >
+
+                            <option value={0} >Categoria</option>
+                            <option value="Diversos" >Diversos</option>
+                            <option value="Panificação" >Panificação</option>
+                            <option value="Processados" >Processados orgânicos</option>
+                            <option value="Hortaliças orgânicas" >Hortaliças orgânicas</option>
+                            <option value="Palmito pupunha congelado" >Palmito pupunha congelado</option>
+                            <option value="Laticínios e tofu" >Laticínios e tofu</option>
+                            <option value="Brotos e germinados" >Brotos e germinados</option>
+                            <option value="Geleias sem edição de açúcar" >Geleias sem edição de açúcar</option>
+                            <option value="Kombucha" >Kombucha</option>
+                            <option value="Cogumelos orgânicos" >Cogumelos orgânicos</option>
+                            <option value="Frutas congeladas" >Frutas congeladas</option>
+                            <option value="Frutas orgânicas" >Frutas orgânicas</option>
+                            <option value="Temperos desidratados orgânicos" >Temperos desidratados orgânicos</option>
+                            <option value="Temperos orgânicos in natura" >Temperos orgânicos in natura</option>
+                            <option value="Farinhas e cereais orgânicos" >Farinhas e cereais orgânicos</option>
+                            <option value="Alimentos prontos congelados" >Alimentos prontos congelados</option>
+                            <option value="Artesanato" >Artesanato</option>
 
                         </select>
 
