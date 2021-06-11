@@ -16,6 +16,7 @@ import userProfile from './pages/userProfile'
 import OrderHistory from './pages/admin/orderHistory'
 import ClientsList from './pages/admin/clientsList'
 import Seller from './pages/seller'
+import ProviderRequests from './pages/admin/providerRequests'
 
 const Routes = () => {
 
@@ -38,6 +39,7 @@ const Routes = () => {
             <Route component={OrderHistory} path='/AdminHistorico' />
             <Route component={ClientsList} path='/ListaDeClientes' />
             <Route component={Seller} path='/Vendedor' />
+            <Route component={ProviderRequests} path='/PedidoFornecedor' />
         
         </BrowserRouter>
 

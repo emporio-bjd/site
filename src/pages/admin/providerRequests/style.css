@@ -1,4 +1,4 @@
-.Provider {
+.providerRequests {
 
     display: flex;
     flex-direction: column;
@@ -6,7 +6,7 @@
 
 }
 
-#mainAdmin {
+#mainProviderRequest {
 
     width: 100vw;
     display: flex;
@@ -18,33 +18,14 @@
 
 }
 
-.divHistory span{
 
-    width: 20px;
-    height: 20px;
-    padding: 8px;
-    color: white;
-    position: absolute;
-    top: 160px;
-    right: 12%;
-    z-index: 400;
-    cursor: pointer;
-    border-radius: 50%;
-    text-align: center;
-    background-color: #662210;
+.titleProviderRequest  h1 {
 
-}
-
-.titleProvider {
-
+    margin-bottom: 45px;
     width: 95%;
     text-align: center;
     margin-top: 6vh;
 
-}
-
-.titleProvider  h1 {
-    margin-bottom: 45px;
 }
 
 .btn-style {
@@ -84,7 +65,7 @@
 
 }
 
-.providerOptions {
+.requestOption {
 
     width: 80%;
     display: flex;
@@ -92,14 +73,14 @@
 
 }
 
-.providerOptions h2 {
+.requestOption h2 {
 
     margin: 0 auto;
     padding: none;
 
 }
 
-.providerOptions fieldset  {
+.requestOption fieldset  {
 
     width: 100%;
     padding: 3vh 0;
@@ -107,7 +88,7 @@
     
 }
 
-.providerOptions fieldset legend {
+.requestOption fieldset legend {
 /* 
     width: 100%;
     text-align: center; */
@@ -115,7 +96,7 @@
     
 }
 
-.providerOptions fieldset a { 
+.requestOption fieldset a { 
 
     color: white;
     padding: 15px;
@@ -128,7 +109,7 @@
 
  }
 
-.providerOptions input {
+.requestOption input {
 
     width: 60%;
     border: none;
@@ -140,7 +121,7 @@
 
 }
 
-.providerOptions fieldset select {
+.requestOption fieldset select {
 
     width: 63%;
     border: none;
@@ -152,17 +133,18 @@
 
 }
 
-.providerOptions fieldset option {
+.requestOption fieldset option {
 
     padding: 10px;
 
 }
 
-.providerOptions ::placeholder {
+.requestOption ::placeholder {
 
     color: white;
 
 }
+
 
 @media only screen and (max-width: 940px) {
 
