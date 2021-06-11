@@ -500,9 +500,11 @@ function Provider() {
                         <input name='product' onChange={handleInputProductChange} placeholder='Produto' />
 
                         <select name='unity' onChange={handleSelectedUnity} >
-                            <option value='Não especificado' >Unidade de medida</option>
+
+                            <option value='' >Selecione a unidade</option>
                             <option value='Quilograma' >Quilograma</option>
                             <option value='Unidade' >Unidade</option>
+
                         </select>
 
                         <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem' />
