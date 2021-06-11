@@ -136,7 +136,6 @@ function Admin() {
             price: newDataAdmin.price,
             id: id,
             itemAvailability: newDataAdmin.itemAvailability,
-<<<<<<< HEAD
             unityPrice: newDataAdmin.unityPrice,
             category: newDataAdmin.category,
             unity: newDataAdmin.itemUnity
@@ -150,17 +149,6 @@ function Admin() {
         // .then(err => console.log(err))
         // alert("Item inserido com sucesso!.")
         
-=======
-            itemUnity: newDataAdmin.itemUnity
-
-        }
-
-        firebase.database().ref('items/' + id)
-            .set(data)
-            .then(err => console.log(err))
-        alert("Item inserido com sucesso!.")
-
->>>>>>> babe474288283e3518b799f6d84c1f9c97fa9d0d
     }
 
     function updateItem() {
