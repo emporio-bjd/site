@@ -6,18 +6,6 @@
 
 }
 
-.brownBackGround {
-
-    /* background-color: #662210; */
-
-}
-
-.greenBackGround {
-
-    /* background-color: #434f38; */
-
-}
-
 #mainAdmin {
 
     width: 100vw;
@@ -175,7 +163,6 @@
     color: white;
 
 }
-
 
 @media only screen and (max-width: 940px) {
 
