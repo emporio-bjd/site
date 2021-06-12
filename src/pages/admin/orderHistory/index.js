@@ -83,7 +83,7 @@ function OrderHistory() {
                     </div>
 
                     {
-                        dataAdmin.map((requests) => {
+                        dataAdmin.map((item) => {
 
                             return (
 
@@ -91,7 +91,7 @@ function OrderHistory() {
 
                                     <div className='lineBoxCardHistory' >
 
-                                        <h3>{requests.id}</h3>
+                                        <h3>{item.id}</h3>
 
                                         <p>Data do pedido: </p>
 

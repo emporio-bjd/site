@@ -47,40 +47,55 @@
     margin-bottom: 45px;
 }
 
-.btn-style {
+.optionProvider {
 
-    color: white;
-    align-items: center;
+    width: 100%;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
 
 }
 
-.btn-style span{
+.optionProvider ul{
 
-    color: white;
-    padding: 15px;
-    margin: 0 auto;
-    cursor: pointer;
-    background-color: #662210;
-    border-radius: 10px;
-    box-shadow: 0px 0px 8px rgba(160, 160, 160, 0.35);
-    font-weight: 700;
-    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
 }
 
-.btn-style a {
+.optionProvider span {
 
-    text-decoration: none;
     color: white;
     padding: 15px;
-    margin: 1rem auto;
+    margin-top: 15px;
     cursor: pointer;
     background-color: #662210;
+    text-decoration: none;
     border-radius: 10px;
     box-shadow: 0px 0px 8px rgba(160, 160, 160, 0.35);
     font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+
+}
+
+.optionProvider a {
+
+    color: white;
+    padding: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: #662210;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px rgba(160, 160, 160, 0.35);
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
 
 }
 

@@ -31,7 +31,6 @@ function Provider() {
     const [selectProviderToDelete, setSelectProviderToDelete] = useState('')
 
     const [selectedUnity, setSelectedUnity] = useState('')
-    const [selectedItem, setSelectedItem] = useState('');
 
     const [imageUrl, setImageUrl] = useState('')
     const [dataAlterProduct, setDataAlterProduct] = useState({
@@ -70,15 +69,6 @@ function Provider() {
         imageSrc: '',
         sellPrice: 0,
         buyPrice: 0
-
-    })
-
-    const [dataRequest, setDataRequest] = useState([])
-    const [newDataRequest, setNewDataRequest] = useState({
-
-        company: '',
-        product: '',
-        qntd: 0,
 
     })
 
@@ -244,12 +234,6 @@ function Provider() {
     function handleSelectProviderToDelete(event) {
 
         setSelectProviderToDelete(event.target.value)
-
-    }
-
-    function handleSelectedItem(event) {
-
-        setSelectedItem(event.target.value)
 
     }
 
@@ -439,13 +423,17 @@ function Provider() {
 
                     <h1>O que deseja fazer?</h1>
 
-                    <div className="btn-style">
+                        <div className="optionProvider">
 
-                        <span onClick={() => { handleHistoryInfos() }}>Informação dos fornecedores</span>
-                        <Link to='/AdminHistorico' >Histórico de pedidos</Link>
-                        <Link to='/PedidoFornecedor' >Realizar pedido do fornecedor</Link>
+                            <ul>
 
-                    </div>
+                                <span onClick={() => { handleHistoryInfos() }}>Informação dos fornecedores</span>
+                                <Link to='/AdminHistorico' >Histórico de pedidos</Link>
+                                <Link to='/PedidoFornecedor' >Realizar pedido do fornecedor</Link>
+
+                            </ul>
+
+                        </div>
 
                 </div>
 
@@ -594,11 +582,13 @@ function Provider() {
 
                         <input name='imageSrc' onChange={handleInputProductChangeAlter} placeholder='Imagem' />
 
-                        {/* <select name='unity' onChange={handleSelectedUnityChangeAlter} >
-                            <option value='Não especificado' >Unidade de medida</option>
+                        <select name='unity' onChange={handleInputProductChangeAlter} >
+
+                            <option value='' >Unidade de medida</option>
                             <option value='Quilograma' >Quilograma</option>
                             <option value='Unidade' >Unidade</option>
-                        </select> */}
+
+                        </select> 
 
                         <input name='sellPrice' onChange={handleInputProductChangeAlter} placeholder='Valor de venda' />
 

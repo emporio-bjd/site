@@ -10,26 +10,26 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 function BuyInfo() {
 
     const [dataAdmin, setDataAdmin] = useState([])
+  
+    useEffect(()=>{
 
-    useEffect(() => {
-
-        if (!firebase.apps.length)
+        if(!firebase.apps.length)
             firebase.initializeApp(firebaseConfig);
 
         firebase.database().ref('providers-requests').get('/providers-requests')
-            .then(function (snapshot) {
+        .then(function(snapshot) {
 
-                if (snapshot.exists()) {
+            if (snapshot.exists()){
 
-                    var data = snapshot.val()
-                    var temp = Object.keys(data).map((key) => data[key])
-                    setDataAdmin(temp)
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+                setDataAdmin(temp)
 
-                }
+            }
+            
+        })
 
-            })
-
-    }, [])
+    },[])
 
     return (
 
@@ -42,11 +42,11 @@ function BuyInfo() {
                     <h5>08/06/2021</h5>
                 </div>
 
-                {dataAdmin.map((products) => (
+                {dataAdmin.map((item) => (
 
                         <div className="buyInfo" >
 
-                            <h4>Fornecedor</h4>
+                            <h4>{item.product}</h4>
                             <p>Nome do produto - (qntd) - <b>R$ 00,00 </b> </p>
                             <p>Nome do produto - (qntd) - <b>R$ 00,00 </b> </p>
                             <h4>Total: R$ 00,00</h4>
