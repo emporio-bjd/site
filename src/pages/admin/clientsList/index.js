@@ -113,6 +113,7 @@ function Admin() {
             <main id='mainAdmin' >
 
                 <h1>Informações dos usuários</h1>
+                <h4>Clique em um cartão para alterar os dados dos usuários</h4>
 
                 <div className='filterName' >
 
@@ -143,11 +144,11 @@ function Admin() {
 
                         <h3>{item.name}</h3>
 
-                        <p>{item.phoneNumber}</p>
-                        <p>{item.email}</p>
-                        <p>{item.district}</p>
-                        <p>{item.street}</p>
-                        <p>N°: {item.houseNumber}</p>
+                        <p><b>Telefone</b>: {item.phoneNumber}</p>
+                        <p><b>E-mail</b>: {item.email}</p>
+                        <p><b>Rua</b>: {item.street}</p>
+                        <p><b>Bairro</b>: {item.district}</p>
+                        <p><b>N°</b>: {item.houseNumber}</p>
 
                     </div>
 

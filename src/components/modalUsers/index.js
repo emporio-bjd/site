@@ -9,15 +9,13 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 function ModalUser(props) {
 
     const { displayProperty, modalDataUsers } = props;
-
-    const [dataAccount, setDataAccount] = useState([]);
     const [wasChanged, setWasChanged] = useState(false)
-
 
     const [customerRegisterData, setCustomerRegisterData] = useState({
 
         name: '',
         phoneNumber: '',
+        email: '',
         street: '',
         houseNumber: '',
         district: '',
@@ -36,7 +34,6 @@ function ModalUser(props) {
 
                     var data = snapshot.val()
                     var temp = Object.keys(data).map((key) => data[key])
-                    setDataAccount(temp)
                 }
                 else {
                     console.log("No data available");
@@ -59,16 +56,17 @@ function ModalUser(props) {
 
     function updateCustomerRegister() {
 
-        console.log(modalDataUsers.name)
-
             firebase.database().ref('users/' + modalDataUsers.id).update({
 
-                name: modalDataUsers.name != '' ? modalDataUsers.name : 'teste'
+                name: customerRegisterData.name != '' ? customerRegisterData.name : modalDataUsers.name,
+                phoneNumber: customerRegisterData.phoneNumber != '' ? customerRegisterData.phoneNumber : modalDataUsers.phoneNumber,
+                email: customerRegisterData.email != '' ? customerRegisterData.email : modalDataUsers.email,
+                street: customerRegisterData.street != '' ? customerRegisterData.street : modalDataUsers.street,
+                houseNumber: customerRegisterData.houseNumber != '' ? customerRegisterData.houseNumber : modalDataUsers.houseNumber,
+                district: customerRegisterData.district != '' ? customerRegisterData.district : modalDataUsers.district,
 
             })
             .then(() => alert("Cadastro atualizado com sucesso!"))
-
-            console.log(modalDataUsers.name)
 
     }
 
@@ -86,7 +84,7 @@ function ModalUser(props) {
 
                         <h4>Preencha apenas as informações que deseja alterar</h4>
 
-                        <fieldset>
+                        <fieldset className="userInfo">
 
                             <legend>
                                 <h2>Informações pessoais</h2>
@@ -100,7 +98,7 @@ function ModalUser(props) {
 
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset className="userAddress">
 
                             <legend>
                                 <h2>Endereço</h2>
@@ -108,7 +106,7 @@ function ModalUser(props) {
 
                             <input name='street' onChange={handleInputCustomerRegisterChange} placeholder='Nome da rua' />
 
-                            <input name='houseNumber' onChange={handleInputCustomerRegisterChange} type='number' placeholder='N° da casa/apto' />
+                            <input name='houseNumber' onChange={handleInputCustomerRegisterChange} type='number' placeholder='Número' />
 
                             <input name='district' onChange={handleInputCustomerRegisterChange} placeholder='Bairro' />
 
