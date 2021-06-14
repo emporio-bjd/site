@@ -1,3 +1,4 @@
+import React from 'react'
 import { useEffect, useState } from 'react'
 import './style.css'
 
@@ -7,53 +8,24 @@ import 'firebase/database'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
 
-function BuyInfo() {
+function BuyInfo(props) {
+
+    const { displayProperty, modalData } = props;
 
     const [dataAdmin, setDataAdmin] = useState([])
-  
-    useEffect(()=>{
-
-        if(!firebase.apps.length)
-            firebase.initializeApp(firebaseConfig);
-
-        firebase.database().ref('providers-requests').get('/providers-requests')
-        .then(function(snapshot) {
-
-            if (snapshot.exists()){
-
-                var data = snapshot.val()
-                var temp = Object.keys(data).map((key) => data[key])
-                setDataAdmin(temp)
-
-            }
-            
-        })
-
-    },[])
 
     return (
 
-        <div className='buyModal'>
+        <div style={{ display: displayProperty }} className='modalBuyInfo'>
 
             <main id='mainBuyInfo' >
 
                 <div className="buyInfoTitle">
                     <h2>Sua lista de produtos adquiridos</h2>
-                    <h5>08/06/2021</h5>
+                    <h4>{modalData.orderDate}</h4>
                 </div>
 
-                {dataAdmin.map((item) => (
-
-                        <div className="buyInfo" >
-
-                            <h4>{item.product}</h4>
-                            <p>Nome do produto - (qntd) - <b>R$ 00,00 </b> </p>
-                            <p>Nome do produto - (qntd) - <b>R$ 00,00 </b> </p>
-                            <h4>Total: R$ 00,00</h4>
-
-                        </div>
-
-                ))}
+                <p>{}</p>
 
                 <h2>Total da compra: R$ 00,00</h2>
 

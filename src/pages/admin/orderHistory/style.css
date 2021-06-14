@@ -2,11 +2,11 @@
 
 #sectionHistory {
     
-    width: 100vw;
-    flex-direction: column;
+    flex-flow: row wrap;
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 0 5rem;
+    justify-content: space-between;
 
 }
 
@@ -19,49 +19,50 @@
 
 }
 
-.textHistory p{
+.textHistory h4{
 
-    color: rgba(0, 0, 0, 0.7)
-
-}
-
-.boxHistory {
-
-    width: 40vw;
-    flex-direction: column;
-    border-radius: 10px;
-    box-shadow: 8px 5px 4px #92929255;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    border: 1px solid #000;
-    cursor: pointer;
+    color: rgba(70,70,70, 0.7)
 
 }
 
-.lineBoxCardHistory {
+.cardHistory {
 
-    margin: auto;
+    width: 350px;
+    height: 200px;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    padding: .5rem 0;
+    color: white;
+    margin: 15px 0;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: #434f38;
+    cursor:pointer
 
 }
 
-.lineBoxCardHistory b {
+.historyInfos h2 {
 
-    margin-left: .4rem;
+    text-align: center;
+    width: 95%;
+    overflow-wrap: break-word;
+    font-weight: 600;
 
 }
 
+.historyInfos {
 
-.divBuyInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    width: 100vw;
-    position: relative;
+}
+
+.listSchedule h3, h4 {
+
+    line-height: 0;
+    align-items: center;
+    text-align: center;
+    font-weight: 400;
 
 }
 
@@ -72,13 +73,26 @@
     padding: 8px;
     color: white;
     position: absolute;
-    top: 25px;
-    right: 27%;
+    top: 155px;
+    right: 26%;
     z-index: 400;
     cursor: pointer;
     border-radius: 50%;
     text-align: center;
     background-color: #662210;
+
+}
+
+@media screen and (max-width: 935px) {
+
+    #sectionHistory {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+
+    }
 
 }
 
@@ -96,11 +110,11 @@
 
     }
 
-    .boxHistory {
+    .cardHistory {
 
-        width: 80%;
+        width: 280px;
+        height: 200px;
 
     }
-
 
 }

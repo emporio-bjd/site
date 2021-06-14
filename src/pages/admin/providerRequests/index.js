@@ -60,7 +60,7 @@ function ProviderRequests() {
                 setTotalValue(total)
 
             })
-            
+
         }
 
     }, [])
@@ -71,6 +71,12 @@ function ProviderRequests() {
 
         if (confirm) {
 
+            var title = window.prompt('Insira um título para a lista')
+
+            var today = new Date();
+            var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+            var hour = today.getHours()+':'+today.getMinutes();
+
             const selectedProducts = JSON.parse(localStorage.getItem('provider-products'))
 
             const id = firebase.database().ref().child('posts').push().key
@@ -79,7 +85,10 @@ function ProviderRequests() {
 
                 id: id,
                 listItem: selectedProducts,
-                totalValue: totalValue.toFixed(2)
+                totalValue: totalValue.toFixed(2),
+                orderDate: date,
+                orderTime: hour,
+                listTitle: title
 
             }).then(() => {
                 localStorage.setItem('provider-products', '[{}]')
@@ -94,35 +103,35 @@ function ProviderRequests() {
 
         var productAmount = window.prompt('Insira a quantidade desejada')
 
-        if(productAmount) {
+        if (productAmount) {
 
             const listOfItems = JSON.parse(localStorage.getItem('provider-products'))
-    
+
             if (listOfItems != null) {
-    
+
                 if (listOfItems === [{}]) {
-    
+
                     localStorage.removeItem('provider-products')
                     const newItem = []
                     newItem.push({ data: products, amount: productAmount })
                     localStorage.setItem('provider-products', JSON.stringify(newItem))
                     alert("Produto adicionado à lista de pedidos!")
-    
+
                 } else {
-    
+
                     const newItem = JSON.parse(localStorage.getItem('provider-products'))
                     newItem.push({ data: products, amount: productAmount })
                     localStorage.setItem('provider-products', JSON.stringify(newItem))
                     alert("Produto adicionado à lista de pedidos!")
-    
+
                 }
-    
+
             } else {
-    
+
                 const newItem = [{ data: products, amount: productAmount }]
                 localStorage.setItem('provider-products', JSON.stringify(newItem))
                 alert("Produto adicionado à lista de pedidos!")
-    
+
             }
 
         }
@@ -182,16 +191,16 @@ function ProviderRequests() {
 
                                 return (
 
-                                    <option value={index} key={index}>{item.company}</option>
+                                    <option value={index} key={index}>{item.tradeName}</option>
 
                                 )
 
                             })}
 
                         </select>
-                        
 
-                            <a onClick={() => { insertNewRequest() }}>Finalizar pedido</a>
+
+                        <a onClick={() => { insertNewRequest() }}>Finalizar pedido</a>
 
 
                         <div className="containerProviderRequest">
