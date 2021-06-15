@@ -202,7 +202,6 @@ function ProviderRequests() {
 
                         <a onClick={() => { insertNewRequest() }}>Finalizar pedido</a>
 
-
                         <div className="containerProviderRequest">
 
                             <section id="sectionProvider">
