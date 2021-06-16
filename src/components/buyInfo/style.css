@@ -28,12 +28,6 @@
 
 }
 
-.modalBuyInfo {
-
-    line-height: 0;
-
-}
-
 .buyInfoTitle {
 
     text-align: center;
@@ -51,6 +45,16 @@
 .buyInfoTitle h2 {
 
     margin-top: 4rem;
+
+}
+
+.productList {
+
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
 }
 

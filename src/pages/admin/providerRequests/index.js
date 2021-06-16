@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import Header from '../../../components/header'
 import Footer from '../../../components/footer'
@@ -101,6 +100,7 @@ function ProviderRequests() {
 
     function addToCart(products) {
 
+
         var productAmount = window.prompt('Insira a quantidade desejada')
 
         if (productAmount) {
@@ -113,14 +113,14 @@ function ProviderRequests() {
 
                     localStorage.removeItem('provider-products')
                     const newItem = []
-                    newItem.push({ data: products, amount: productAmount })
+                    newItem.push({ data: products, amount: productAmount})
                     localStorage.setItem('provider-products', JSON.stringify(newItem))
                     alert("Produto adicionado à lista de pedidos!")
 
                 } else {
 
                     const newItem = JSON.parse(localStorage.getItem('provider-products'))
-                    newItem.push({ data: products, amount: productAmount })
+                    newItem.push({ data: products, amount: productAmount})
                     localStorage.setItem('provider-products', JSON.stringify(newItem))
                     alert("Produto adicionado à lista de pedidos!")
 
@@ -128,7 +128,7 @@ function ProviderRequests() {
 
             } else {
 
-                const newItem = [{ data: products, amount: productAmount }]
+                const newItem = [{ data: products, amount: productAmount}]
                 localStorage.setItem('provider-products', JSON.stringify(newItem))
                 alert("Produto adicionado à lista de pedidos!")
 
@@ -141,10 +141,11 @@ function ProviderRequests() {
     const [itemsOfProvider, setItemsOfProvider] = useState([])
 
     function handleSelectProviderProducts(event) {
-
+        
         var position = event.target.value
-
         var data = dataProvider[position].products
+        var selectedProvider = dataProvider[position].tradeName
+        console.log(selectedProvider)
 
         if (data != undefined && data != null) {
 

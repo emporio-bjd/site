@@ -226,7 +226,7 @@ function Cart() {
             localStorage.setItem('products', JSON.stringify(data))
             window.location.reload()
 
-            localStorage.setItem('totalValue', totalValue.toFixed(2))
+            // localStorage.setItem('totalValue', totalValue.toFixed(2))
             
         }
 
