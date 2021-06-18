@@ -14,7 +14,6 @@ function OrderHistory() {
     const [dataProduct, setDataProduct] = useState([])
     const [dataExists, setDataExists] = useState(false);
     const [displayModal, setDisplayModal] = useState("none");
-    const [modalDataOrder, setModalDataOrder] = useState({});
     const [heightPageWhenOpenModal, setHeightPageWhenOpenModal] = useState(0)
     const [modalData, setModalData] = useState({});
 
@@ -38,16 +37,6 @@ function OrderHistory() {
             })
 
     }, [])
-
-    function closeModal() {
-
-        if (displayModal == "none")
-            setDisplayModal("flex")
-        else {
-            setDisplayModal("none");
-        }
-
-    }
 
     function handleModalInfos(item) {
 

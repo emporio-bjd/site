@@ -1,72 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-#sectionHistory {
-    
-    flex-flow: row wrap;
-    display: flex;
-    align-items: center;
-    padding: 0 5rem;
-    justify-content: space-between;
 
-}
 
-.textHistory {
-
-    width: 100vw;
-    justify-content: center;
-    text-align: center;
-    margin-top: 2rem;
-
-}
-
-.textHistory h4{
-
-    color: rgba(70,70,70, 0.7)
-
-}
-
-.cardHistory {
-
-    width: 350px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    margin: 15px 0;
-    padding: 10px 15px;
-    border-radius: 10px;
-    background-color: #434f38;
-    cursor:pointer
-
-}
-
-.historyInfos h2 {
-
-    text-align: center;
-    width: 95%;
-    overflow-wrap: break-word;
-    font-weight: 600;
-
-}
-
-.historyInfos {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-}
-
-.listSchedule h3, h4 {
-
-    line-height: 0;
-    align-items: center;
-    text-align: center;
-    font-weight: 400;
-
-}
-
-.divBuyInfo span{
+.divModalDelivery span{
 
     width: 20px;
     height: 20px;
@@ -85,36 +21,12 @@
 
 @media screen and (max-width: 935px) {
 
-    #sectionHistory {
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-
-    }
 
 }
 
 @media screen and (max-width: 768px) {
 
-    .textHistory {
 
-        width: 85vw;
-
-    }
-
-    .textHistory h2 {
-
-        font-size: 22px;
-
-    }
-
-    .cardHistory {
-
-        width: 280px;
-        height: 200px;
-
-    }
 
 }
