@@ -29,10 +29,12 @@ function Home() {
     const [displayMobileSearch, setDisplayMobileSearch] = useState('none')
     const [heightPageWhenOpenModal, setHeightPageWhenOpenModal] = useState(0)
     const [displayButtonFinishOrder, setDisplayButtonFinishOrder] = useState('none')
+    const [totalValue, setTotalValue] = useState(0)
 
     const [displayModal, setDisplayModal] = useState("none");
     const [modalData, setModalData] = useState({});
     let [amount, setAmount] = useState([]);
+
 
     useEffect(() => {
 
@@ -67,12 +69,6 @@ function Home() {
 
     }, []);
 
-    useEffect(() => {
-
-        const products = JSON.parse(localStorage.getItem('products'))
-
-    }, []);
-
     function handleModalInfos(item) {
 
         setModalData(item)
@@ -92,10 +88,12 @@ function Home() {
         }
 
         const products = JSON.parse(localStorage.getItem('products'))
+        const total = JSON.parse(localStorage.getItem('totalValue'))
 
         if (products != null) {
             if (!(products.id))
                 setDisplayButtonFinishOrder('block')
+                setTotalValue(total)
         }
 
     }
@@ -423,7 +421,6 @@ function Home() {
 
                         </div>
 
-
                     </div>
 
                 </div>
@@ -431,7 +428,7 @@ function Home() {
             </div>
 
             <div className="buttonFinishOrder" style={{display: displayButtonFinishOrder }}>
-                <Link to='Carrinho'>FINALIZAR PEDIDO</Link>
+                <Link to='Carrinho'>FINALIZAR PEDIDO - R$ {totalValue}</Link>
             </div>
 
             <Footer />
