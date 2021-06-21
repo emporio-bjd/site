@@ -41,23 +41,22 @@ function Cart() {
     useEffect(async () => {
 
         const verify = await JSON.parse(localStorage.getItem('products'))
+
+        console.log(verify)
     
         if (verify != null ){
-        // if (verify != null && verify.length >= 1){
+
+            var temp = Object.keys(verify).map((key) => verify[key])
             
-            setData(verify)
+            setData(temp)
             setDataExists(true)
 
             var total = 0
 
-            verify.map((item)=>{
+            temp.map((item)=>{
 
-                if(item.data != undefined){
-
-                    var value = ( Number(item.data.price) * Number(item.amount) )
-                    total = value + total
-                        
-                }
+                var value = ( Number(item.price) * Number(item.amount) )
+                total = value + total
 
                 setTotalValue(total)
             })
@@ -250,21 +249,20 @@ function Cart() {
                             
                             if (item.amount) {
                                 
-                                // console.log(item)
                                 return (
 
                                     <div className='boxCart flexDisplayCart'>
 
                                         <div className='lineBoxCardProduct nameProductInCart' >
 
-                                            <img src={item.data.imageSrc} alt='imagem do produto' className="imgProductCart" />
-                                            <h3>{item.data.title}</h3>
+                                            <img src={item.imageSrc} alt='imagem do produto' className="imgProductCart" />
+                                            <h3>{item.title}</h3>
 
                                         </div>
 
                                         <div className='lineBoxCardProduct flexDisplayCart infoProductInCart'>
 
-                                            <h4>R$ {((item.data.price) * item.amount).toFixed(2)}</h4>
+                                            <h4>R$ {((item.price) * item.amount).toFixed(2)}</h4>
                                             <h5>qnt.:{item.amount}</h5>
 
                                         </div>

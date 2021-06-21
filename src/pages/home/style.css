@@ -204,7 +204,7 @@
     border-radius: 10px;
     margin: 10px 0px;
     color: rgb(0, 0, 0);
-    cursor: pointer;
+    /* cursor: pointer; */
     box-shadow: -2px 5px 8px #92929255;
 }
 
@@ -260,6 +260,22 @@
 .amountDiv img {
 
     width: 20px;
+
+}
+
+.amountDiv > div {
+
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+}
+
+.amountDiv > div img {
+
+    cursor: pointer;
 
 }
 

@@ -33,7 +33,10 @@ function Home() {
 
     const [displayModal, setDisplayModal] = useState("none");
     const [modalData, setModalData] = useState({});
-    let [amount, setAmount] = useState([]);
+    // const [amount, setAmount] = useState([]);
+
+
+    const [selectedItens, setSelectedItens] = useState([]);
 
 
     useEffect(() => {
@@ -51,10 +54,12 @@ function Home() {
 
                 var totalamount = []
                 temp.map(item => totalamount.push(0) )
-                setAmount(totalamount)
+                // setAmount(totalamount)
 
                 setData(temp)
                 setDataBackup(temp)
+                setSelectedItens(temp)
+
             }
             else {
                 console.log("No data available");
@@ -176,42 +181,54 @@ function Home() {
 
     function add(index) {
 
-        amount[index] = Number(amount[index] + 1)
-        console.log(amount[index])
+        var dataTemp = data
+        dataTemp[index].amount = dataTemp[index].amount + 1
+
+        setData(dataTemp)
+        setDisplayButtonFinishOrder('block')
         
     }
 
     function remove(index) {
 
-        amount[index] = (amount[index] - 1)
+        // amount[index] = (amount[index] - 1)
         
     }
 
-    function addToCart(item, index) {
-
-        console.log(item)
+    function addToCart() {
 
         const listOfItems = JSON.parse(localStorage.getItem('products'))
 
-        if(listOfItems === null){
-            
-            // localStorage.removeItem('products')
-            const newItem = [{data: item, amount: amount[index]}]
-            localStorage.setItem('products', JSON.stringify(newItem))
-            alert("Adicionado com sucesso!")
-            setAmount(1)
+        const newItems = []
 
-        }else {
+        var newListOfItems = {}
 
-            const newItem = JSON.parse(localStorage.getItem('products'))
-            newItem.push({data: item, amount: amount[index]})
-            localStorage.setItem('products', JSON.stringify(newItem))
-            alert("Adicionado com sucesso!")
-                
-            setAmount(1)
+        data.map((item)=> {
+
+            if(item.amount > 0)
+                newItems.push(item)
+
+        })
+
+        if (listOfItems != null) {
+
+            newListOfItems = {
+                ...listOfItems,
+                ...newItems
+            }
+
+            localStorage.setItem('products', JSON.stringify({...newListOfItems}))
 
         }
+        else {
 
+            newListOfItems = {
+                ...newItems
+            }
+
+            localStorage.setItem('products', JSON.stringify({...newListOfItems}))
+
+        }
         
     }
 
@@ -344,19 +361,15 @@ function Home() {
 
                                                 <div>
 
-                                                    <img src={addIcon} onClick={()=>{add(index)}} />
-                                                        quantidade: {amount[index]}
                                                     <img src={removeIcon} onClick={()=>{remove(index)}} />
+                                                        quantidade: {item.amount}
+                                                    <img src={addIcon} onClick={()=>{add(index)}} />
 
                                                 </div>
-
-                                                <a onClick={()=>addToCart(item, index)} >Adicionar</a>
-
         
                                             </div>
         
                                         </div>
-        
         
                                     )
                                     
@@ -428,7 +441,9 @@ function Home() {
             </div>
 
             <div className="buttonFinishOrder" style={{display: displayButtonFinishOrder }}>
-                <Link to='Carrinho'>FINALIZAR PEDIDO - R$ {totalValue}</Link>
+
+                {/* <Link onClick={()=>addToCart()} to='Carrinho'>FINALIZAR PEDIDO - R$ {totalValue}</Link> */}
+                <a onClick={()=>addToCart()}>FINALIZAR PEDIDO - R$ {totalValue}</a>
             </div>
 
             <Footer />
