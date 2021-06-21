@@ -44,7 +44,6 @@ function Cart() {
     
         if (verify != null ){
         // if (verify != null && verify.length >= 1){
-            console.log(verify)
             
             setData(verify)
             setDataExists(true)
@@ -245,35 +244,39 @@ function Cart() {
 
                     {
                         data.map((item,index) => {
+                            
+                            if (item.amount) {
+                                
+                                // console.log(item)
+                                return (
 
-                            return (
+                                    <div className='boxCart flexDisplayCart'>
 
-                                <div className='boxCart flexDisplayCart'>
+                                        <div className='lineBoxCardProduct nameProductInCart' >
 
-                                    <div className='lineBoxCardProduct nameProductInCart' >
+                                            <img src={item.data.imageSrc} alt='imagem do produto' className="imgProductCart" />
+                                            <h3>{item.data.title}</h3>
 
-                                        <img src={item.data.imageSrc} alt='imagem do produto' className="imgProductCart" />
-                                        <h3>{item.data.title}</h3>
+                                        </div>
+
+                                        <div className='lineBoxCardProduct flexDisplayCart infoProductInCart'>
+
+                                            <h4>R$ {((item.data.price) * item.amount).toFixed(2)}</h4>
+                                            <h5>qnt.:{item.amount}</h5>
+
+                                        </div>
+
+                                        <img src={closeIcon}
+                                            className="imgRemoveIconCart"
+                                            alt='opção de remover item'
+                                            onClick={()=>{
+                                                removeItemInCart(index)
+                                            }}
+                                        />
 
                                     </div>
-
-                                    <div className='lineBoxCardProduct flexDisplayCart infoProductInCart'>
-
-                                        <h4>R$ {((item.data.price) * item.amount).toFixed(2)}</h4>
-                                        <h5>qnt.:{item.amount}</h5>
-
-                                    </div>
-
-                                    <img src={closeIcon}
-                                        className="imgRemoveIconCart"
-                                        alt='opção de remover item'
-                                        onClick={()=>{
-                                            removeItemInCart(index)
-                                        }}
-                                    />
-
-                                </div>
-                            )
+                                )
+                            }
 
                         })
                     }

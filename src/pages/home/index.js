@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import Modal from '../../components/modal'
+// import Modall from '../../components/modal2'
 import './style.css'
 
 import firebase from 'firebase/app'
@@ -12,6 +13,10 @@ import 'firebase/database'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
 import heroImg from '../../img/heroImg3.jpg'
+import addIcon from '../../img/addIcon.png'
+import removeIcon from '../../img/removeIcon2.png'
+
+import ReactCircleModal from 'react-circle-modal'
 
 function Home() {
 
@@ -27,6 +32,7 @@ function Home() {
 
     const [displayModal, setDisplayModal] = useState("none");
     const [modalData, setModalData] = useState({});
+    let [amount, setAmount] = useState([]);
 
     useEffect(() => {
 
@@ -40,6 +46,11 @@ function Home() {
 
                 var data = snapshot.val()
                 var temp = Object.keys(data).map((key) => data[key])
+
+                var totalamount = []
+                temp.map(item => totalamount.push(0) )
+                setAmount(totalamount)
+
                 setData(temp)
                 setDataBackup(temp)
             }
@@ -52,7 +63,7 @@ function Home() {
 
     useEffect(() => {
 
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
 
     }, []);
 
@@ -163,6 +174,49 @@ function Home() {
 
     }
 
+
+
+    function add(index) {
+
+        amount[index] = Number(amount[index] + 1)
+        console.log(amount[index])
+        
+    }
+
+    function remove(index) {
+
+        amount[index] = (amount[index] - 1)
+        
+    }
+
+    function addToCart(item, index) {
+
+        console.log(item)
+
+        const listOfItems = JSON.parse(localStorage.getItem('products'))
+
+        if(listOfItems === null){
+            
+            // localStorage.removeItem('products')
+            const newItem = [{data: item, amount: amount[index]}]
+            localStorage.setItem('products', JSON.stringify(newItem))
+            alert("Adicionado com sucesso!")
+            setAmount(1)
+
+        }else {
+
+            const newItem = JSON.parse(localStorage.getItem('products'))
+            newItem.push({data: item, amount: amount[index]})
+            localStorage.setItem('products', JSON.stringify(newItem))
+            alert("Adicionado com sucesso!")
+                
+            setAmount(1)
+
+        }
+
+        
+    }
+
     return (
 
         <div className="App" >
@@ -172,7 +226,8 @@ function Home() {
             <div style={{ display: displayModal }} role="dialog" className='divModal' >
 
                 <span onClick={closeModal}>X</span>
-                <Modal displayProperty={displayModal} modalData={modalData} />
+                {/* <Modal displayProperty={displayModal} modalData={modalData} /> */}
+                {/* <Modall displayProperty={displayModal} modalData={modalData} /> */}
 
             </div>
 
@@ -251,7 +306,7 @@ function Home() {
 
             </section>
 
-            <p className="tipHome" >Clique no item para selecionar a quantidade</p>
+            <p className="tipHome" >Selecione a quantidade e depois adicione o item ao carrinho</p>
             
             <div className='containerHome' >
 
@@ -268,21 +323,37 @@ function Home() {
 
                                         <div className='boxHome'
         
-                                            onClick={() => { handleModalInfos(item) }}>
+                                            // onClick={() => { handleModalInfos(item) }}
+                                        >
+
+                                            <div className='infoDivHome' >
         
-                                            <img src={item.imageSrc} alt='teste' />
-        
-                                            <div className="itemInfo">
-        
-                                            <h3>{item.title}</h3>
-        
-                                            <div className='lineBoxProduct'>
-        
-                                                <h4>R$ {item.price}</h4>
-        
+                                                <img src={item.imageSrc} alt='imagem do produto' />
+            
+                                                <div className="itemInfo">
+            
+                                                    <h3>{item.title}</h3>
+                                
+                                                        <h4>R$ {item.price}</h4>
+
+                                                    <p>{item.desc}</p>
+
+                                                </div>
+                                        
                                             </div>
-        
-                                            <p>{item.desc}</p>
+
+                                            <div className='amountDiv' >
+
+                                                <div>
+
+                                                    <img src={addIcon} onClick={()=>{add(index)}} />
+                                                        quantidade: {amount[index]}
+                                                    <img src={removeIcon} onClick={()=>{remove(index)}} />
+
+                                                </div>
+
+                                                <a onClick={()=>addToCart(item, index)} >Adicionar</a>
+
         
                                             </div>
         
