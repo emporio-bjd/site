@@ -88,6 +88,8 @@
     top: 2rem;
     font-family: 'Gilroy-Light', sans-serif;
     padding: 0 2rem;
+    cursor: default;
+    user-select: none;
 
 }
 
