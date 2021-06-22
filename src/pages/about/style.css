@@ -38,6 +38,7 @@ video {
     left: 50%;
     transform: translate(-50%, -50%);
     cursor: default;
+    width: 100%;
 }
 
 .bar {
@@ -57,6 +58,8 @@ video {
 .about-text p {
     font-size: 1.2rem;
     padding: 0rem 5rem;
+    text-align: justify;
+    line-height: 140%;
 }
 
 .logo-2 {
@@ -87,11 +90,11 @@ video {
     justify-content: center;
     padding: 2rem 6rem;
  }
- 
 
  .card-item {
      position: relative;
      width: 290px;
+     height: 200px;
      background: rgb(175, 175, 175);
      padding: 100px 40px 60px;
      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
@@ -175,12 +178,14 @@ video {
  .process-text {
     justify-content: center;
     margin-left: 3rem; 
-    width: 30%;
+    width: 29%;
+    text-align: justify;
  }
 
  .process-text p{
      margin-top: 1rem;
      font-size: 1.2rem;
+     line-height: 140%;
  }
 
  .card-process {
@@ -194,6 +199,12 @@ video {
      color: #fff;
      border-radius: 0px;
      padding: 10px;
+ }
+
+ .card-process h2 {
+
+    font-weight: 500;
+
  }
 
   @media only screen and (max-width: 940px) {
@@ -213,6 +224,7 @@ video {
     }
 
     .about-container h1 {
+        font-size: 3rem;
         margin-top: 8rem;
         font-size: 5rem;
     }
@@ -236,13 +248,14 @@ video {
     }
 
     .process-text {
-        width: 90vw;
-        margin-left: 1rem;
+        width: 80vw;
+        margin-left: 2.2rem;
     }
 
     .process-text p{
         max-width: 90vw;
         margin-bottom: 4rem;
+        font-size: 1.2rem;
     }
 
     .process-section {
@@ -265,12 +278,19 @@ video {
       }
 
       .about-container h1 {
-        font-size: 4rem;
+        font-size: 3rem;
     }
 
     .process-text h1 {
 
         text-align: center;
+
+    }
+
+    .card-process {
+
+        height: 250px;
+        padding: 0 1rem;
 
     }
   }
