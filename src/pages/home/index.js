@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
-import Modal from '../../components/modal'
+// import Modal from '../../components/modal'
 // import Modall from '../../components/modal2'
 import './style.css'
 
@@ -15,8 +15,6 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 import heroImg from '../../img/heroImg3.jpg'
 import addIcon from '../../img/addIcon.png'
 import removeIcon from '../../img/removeIcon2.png'
-
-import ReactCircleModal from 'react-circle-modal'
 
 function Home() {
 
@@ -191,7 +189,10 @@ function Home() {
 
     function remove(index) {
 
-        // amount[index] = (amount[index] - 1)
+        var dataTemp = data
+        dataTemp[index].amount = dataTemp[index].amount - 1
+
+        setData(dataTemp)
         
     }
 
@@ -321,7 +322,7 @@ function Home() {
 
             </section>
 
-            <p className="tipHome" >Selecione a quantidade e depois adicione o item ao carrinho</p>
+            <p className="tipHome" >Selecione a quantidade e depois clique para finalizar o pedido</p>
             
             <div className='containerHome' >
 

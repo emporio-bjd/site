@@ -130,6 +130,8 @@
 
 .tipHome {
 
+    width: 80vw;
+    text-align: center;
     font-size: 10pt;
     margin-top: 3vh;
     color: rgb(65, 65, 65, .5);
@@ -616,8 +618,6 @@
 
     .boxHome {
 
-        display: flex;
-        flex-direction: row;
         width: 75%;
         max-width: 90%;
         margin: 15px 0px;
