@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState, memo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect, useHistory } from 'react-router-dom'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import './style.css'
@@ -13,110 +13,6 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 import heroImg from '../../img/heroImg3.jpg'
 import addIcon from '../../img/addIcon.png'
 import removeIcon from '../../img/removeIcon2.png'
-import { render } from '@testing-library/react'
-
-
-
-// import BoxsHome from '../../components/boxHomes'
-
-const BoxsHome = (data) => {
-    
-    // const {item, index, data} = props;
-    
-    // const [dataBox, setDataBox] = useState(data)
-
-    // useState(
-    //     ()=>{console.log('rerere')}
-    //     ,[dataBox])
-
-    function add(index) {
-
-        // var dataTemp = data
-        data[index].amount = data[index].amount + 1
-    
-        // setDataBox(dataTemp)
-        // setDisplayButtonFinishOrder('block')
-    
-    }
-    
-    function remove(index) {
-    
-        // var dataTemp = data
-        // dataTemp[index].amount = dataTemp[index].amount - 1
-    
-        // setDataBox(dataTemp)
-        
-    }
-    
-    if (data.length == 0) {
-
-        return (<div>a</div>)
-        
-    }
-    else {
-
-        return (
-
-            <div>
-                <p></p>
-
-                {
-                    data.map((item, index) => {
-
-                        if (item.itemAvailability == 'true') {
-
-                            return(
-
-                                <div className='boxHome'
-
-                                // onClick={() => { handleModalInfos(item) }}
-                                key={index}
-                                >
-
-                                    <div className='infoDivHome' >
-
-                                        <img src={item.imageSrc} alt='imagem do produto' />
-
-                                        <div className="itemInfo">
-
-                                            <h3>{item.title}</h3>
-
-                                            <h4>R$ {item.price}</h4>
-
-                                            <p>{item.desc}</p>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div className='amountDiv' >
-
-                                        <div>
-
-                                            <img src={removeIcon} onClick={() => { remove(index) }} />
-                                            quantidade: <b>{item.amount}</b>
-                                            <img src={addIcon} onClick={() => { add(index) }} />
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            )
-
-                        }
-
-                    })
-                }
-
-            </div>
-
-        )
-
-    }
-}
-
 
 function Home() {
 
@@ -133,10 +29,6 @@ function Home() {
 
     const [displayModal, setDisplayModal] = useState("none");
     const [modalData, setModalData] = useState({});
-    // const [amount, setAmount] = useState([]);
-
-
-    const [selectedItens, setSelectedItens] = useState([]);
 
 
     useEffect(() => {
@@ -158,7 +50,6 @@ function Home() {
 
                     setData(temp)
                     setDataBackup(temp)
-                    setSelectedItens(temp)
 
                 }
                 else {
@@ -171,9 +62,8 @@ function Home() {
     useEffect(() => {
 
         // window.scrollTo(0, 0);
-        console.log('te')
 
-    }, [data]);
+    }, []);
 
     function handleModalInfos(item) {
 
@@ -280,7 +170,6 @@ function Home() {
 
 
 
-    const [, forceUpdate] = useState(0);
 
 
     function add(index) {
@@ -288,8 +177,10 @@ function Home() {
         var dataTemp = data
         dataTemp[index].amount = dataTemp[index].amount + 1
 
+        var totalValueTemp = Number(dataTemp[index].price) + totalValue
+
         setData(dataTemp)
-        forceUpdate(1)
+        setTotalValue(totalValueTemp)
         setDisplayButtonFinishOrder('block')
 
     }
@@ -299,9 +190,14 @@ function Home() {
         var dataTemp = data
         dataTemp[index].amount = dataTemp[index].amount - 1
 
+        var totalValueTemp = totalValue - Number(dataTemp[index].price)
+
         setData(dataTemp)
+        setTotalValue(totalValueTemp)
         
     }
+
+    let history = useHistory();
 
     function addToCart() {
 
@@ -337,6 +233,8 @@ function Home() {
             localStorage.setItem('products', JSON.stringify({ ...newListOfItems }))
 
         }
+
+        history.push('/Carrinho')
 
     }
 
@@ -555,10 +453,11 @@ function Home() {
 
             </div>
 
-            <div className="buttonFinishOrder" style={{ display: displayButtonFinishOrder }}>
+            <div className="buttonFinishOrder" style={{ display: 'flex' }}>
+            {/* <div className="buttonFinishOrder" style={{ display: displayButtonFinishOrder }}> */}
 
                 {/* <Link onClick={()=>addToCart()} to='Carrinho'>FINALIZAR PEDIDO - R$ {totalValue}</Link> */}
-                <a onClick={() => addToCart()}>FINALIZAR PEDIDO - R$ {totalValue}</a>
+                <a onClick={() => addToCart()}>FINALIZAR PEDIDO - R$ {totalValue.toFixed(2)}</a>
             </div>
 
             <Footer />

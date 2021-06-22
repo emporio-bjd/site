@@ -461,7 +461,7 @@
     position: fixed;
     z-index: 9;
     bottom: 20px;
-    left: 25px;
+    /* left: 25px; */
 
 }
 
