@@ -1,10 +1,8 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
-// import Modal from '../../components/modal'
-// import Modall from '../../components/modal2'
 import './style.css'
 
 import firebase from 'firebase/app'
@@ -15,6 +13,110 @@ import firebaseConfig from '../../FIREBASECONFIG.js'
 import heroImg from '../../img/heroImg3.jpg'
 import addIcon from '../../img/addIcon.png'
 import removeIcon from '../../img/removeIcon2.png'
+import { render } from '@testing-library/react'
+
+
+
+// import BoxsHome from '../../components/boxHomes'
+
+const BoxsHome = (data) => {
+    
+    // const {item, index, data} = props;
+    
+    // const [dataBox, setDataBox] = useState(data)
+
+    // useState(
+    //     ()=>{console.log('rerere')}
+    //     ,[dataBox])
+
+    function add(index) {
+
+        // var dataTemp = data
+        data[index].amount = data[index].amount + 1
+    
+        // setDataBox(dataTemp)
+        // setDisplayButtonFinishOrder('block')
+    
+    }
+    
+    function remove(index) {
+    
+        // var dataTemp = data
+        // dataTemp[index].amount = dataTemp[index].amount - 1
+    
+        // setDataBox(dataTemp)
+        
+    }
+    
+    if (data.length == 0) {
+
+        return (<div>a</div>)
+        
+    }
+    else {
+
+        return (
+
+            <div>
+                <p></p>
+
+                {
+                    data.map((item, index) => {
+
+                        if (item.itemAvailability == 'true') {
+
+                            return(
+
+                                <div className='boxHome'
+
+                                // onClick={() => { handleModalInfos(item) }}
+                                key={index}
+                                >
+
+                                    <div className='infoDivHome' >
+
+                                        <img src={item.imageSrc} alt='imagem do produto' />
+
+                                        <div className="itemInfo">
+
+                                            <h3>{item.title}</h3>
+
+                                            <h4>R$ {item.price}</h4>
+
+                                            <p>{item.desc}</p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div className='amountDiv' >
+
+                                        <div>
+
+                                            <img src={removeIcon} onClick={() => { remove(index) }} />
+                                            quantidade: <b>{item.amount}</b>
+                                            <img src={addIcon} onClick={() => { add(index) }} />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            )
+
+                        }
+
+                    })
+                }
+
+            </div>
+
+        )
+
+    }
+}
+
 
 function Home() {
 
@@ -69,8 +171,9 @@ function Home() {
     useEffect(() => {
 
         // window.scrollTo(0, 0);
+        console.log('te')
 
-    }, []);
+    }, [data]);
 
     function handleModalInfos(item) {
 
@@ -177,12 +280,16 @@ function Home() {
 
 
 
+    const [, forceUpdate] = useState(0);
+
+
     function add(index) {
 
         var dataTemp = data
         dataTemp[index].amount = dataTemp[index].amount + 1
 
         setData(dataTemp)
+        forceUpdate(1)
         setDisplayButtonFinishOrder('block')
 
     }
@@ -331,16 +438,22 @@ function Home() {
 
                     <section id='sectionHome'>
 
+                        {/* {data.length != 0 ? BoxsHome(data) : <div></div>} */}
+
+                        {/* <p>sdasdas</p> */}
+
                         {
                             data.map((item, index) => {
 
                                 if (item.itemAvailability == 'true') {
 
-                                    return (
+                                    return(
+
 
                                         <div className='boxHome'
 
                                         // onClick={() => { handleModalInfos(item) }}
+                                        key={index}
                                         >
 
                                             <div className='infoDivHome' >
@@ -364,7 +477,7 @@ function Home() {
                                                 <div>
 
                                                     <img src={removeIcon} onClick={() => { remove(index) }} />
-                                                    quantidade: {item.amount}
+                                                    quantidade: <b>{item.amount}</b>
                                                     <img src={addIcon} onClick={() => { add(index) }} />
 
                                                 </div>
@@ -454,5 +567,6 @@ function Home() {
 
     );
 }
+
 
 export default Home;

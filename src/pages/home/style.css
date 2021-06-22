@@ -210,6 +210,12 @@
     box-shadow: -2px 5px 8px #92929255;
 }
 
+.boxHome:nth-child(1) {
+
+    margin-top: 0;
+
+}
+
 .boxHome img {
 
     max-width: 40%;
