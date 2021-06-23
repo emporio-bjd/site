@@ -336,17 +336,12 @@ function Home() {
 
                     <section id='sectionHome'>
 
-                        {/* {data.length != 0 ? BoxsHome(data) : <div></div>} */}
-
-                        {/* <p>sdasdas</p> */}
-
                         {
                             data.map((item, index) => {
 
                                 if (item.itemAvailability == 'true') {
 
                                     return(
-
 
                                         <div className='boxHome'
 
@@ -374,9 +369,11 @@ function Home() {
 
                                                 <div>
 
-                                                    <img src={removeIcon} onClick={() => { remove(index) }} />
+                                                    {/* <img src={removeIcon} onClick={() => { remove(index) }} /> */}
+                                                    <span onClick={() => { remove(index) }}>-</span>
                                                     quantidade: <b>{item.amount}</b>
-                                                    <img src={addIcon} onClick={() => { add(index) }} />
+                                                    <span onClick={() => { add(index) }}>+</span>
+                                                    {/* <img src={addIcon} onClick={() => { add(index) }} /> */}
 
                                                 </div>
 

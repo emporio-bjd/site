@@ -289,6 +289,23 @@
 
 }
 
+.amountDiv > div span {
+
+    /* padding: 15px; */
+    width: 25px;
+    height: 25px;
+    display: flex;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: #662210;
+    /* box-shadow: 0px 0px 1px #662210; */
+
+}
+
 .itemInfo {
 
     display: flex;
