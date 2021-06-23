@@ -37,11 +37,7 @@ function Home() {
 
                 var data = snapshot.val()
                 var temp = Object.keys(data).map((key) => data[key])
-
-                var totalamount = []
-                temp.map(item => totalamount.push(0))
-                // setAmount(totalamount)
-
+                console.log(temp)
                 setData(temp)
                 setDataBackup(temp)
 
@@ -315,9 +311,26 @@ function Home() {
 
                                                     <h3>{item.title}</h3>
 
-                                                    <h4>R$ {item.price}</h4>
+                                                    <h4>
+                                                        R$ {item.price}
+                                                        <p>({item.unity})</p>
+                                                    </h4>
 
                                                     <p>{item.desc}</p>
+
+                                                    <div>
+
+                                                        <p><b>Categoria: </b>{item.category}</p>
+                                                        
+                                                        {
+                                                            (item.unityPrice) != undefined ?
+                                                            (<p>
+                                                                <b>Unidade R$:  </b>
+                                                                {Number(item.unityPrice).toFixed(2)}
+                                                            </p>)
+                                                            : (<p></p>)
+                                                        }
+                                                    </div>
 
                                                 </div>
 
@@ -327,11 +340,9 @@ function Home() {
 
                                                 <div>
 
-                                                    {/* <img src={removeIcon} onClick={() => { remove(index) }} /> */}
                                                     <span onClick={() => { remove(index) }}>-</span>
                                                     quantidade: <b>{item.amount}</b>
                                                     <span onClick={() => { add(index) }}>+</span>
-                                                    {/* <img src={addIcon} onClick={() => { add(index) }} /> */}
 
                                                 </div>
 
