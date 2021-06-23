@@ -152,7 +152,8 @@ function Cart() {
                     complement: dataAccount.complement,
                     paymentType: selectedPayment,
                     clientNote: clientNote,
-                    userEmail: dataAccount.email
+                    userEmail: dataAccount.email,
+                    adminNote: ''
 
 
                 }).then(()=>{
