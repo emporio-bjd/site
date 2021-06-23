@@ -164,7 +164,7 @@ function Request() {
 
                             {
 
-                                item.clientNote != undefined ?
+                                item.clientNote != '' ?
                                     <p>Observações: <b>{item.clientNote}</b></p>
                                     : ''
 
