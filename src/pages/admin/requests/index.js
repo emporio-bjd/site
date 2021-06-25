@@ -62,35 +62,44 @@ function Request() {
     function removeItemOfClient(indexItem,indexListItem) {
 
         var dataTemp = dataAdmin
+        var item = dataTemp[indexItem]
 
         var confirm = window.confirm("Tem certeza que deseja remover este item?")
 
-        if(confirm){
+        if(confirm) {
 
-            dataTemp[indexItem].listItem.splice(indexListItem,1)
+            
+            const totalValue = Number(item.totalValue)
+            const productPrice = Number(item.listItem[indexListItem].price)
+            const productAmount = Number(item.listItem[indexListItem].amount)
+            const newTotalValue = ( totalValue - (productPrice * productAmount))
+            
+            // console.log(newTotalValue)
+            item.listItem.splice(indexListItem,1)
 
             firebase.database()
             .ref('requests/' + dataTemp[indexItem].id)
             .update({
 
-                id: dataTemp[indexItem].id,
-                listItem: dataTemp[indexItem].listItem,
-                totalValue: dataTemp[indexItem].totalValue,
-                userName: dataTemp[indexItem].userName,
-                phoneNumber: dataTemp[indexItem].phoneNumber,
-                street: dataTemp[indexItem].street,
-                houseNumber: dataTemp[indexItem].houseNumber,
-                district: dataTemp[indexItem].district,
-                cepNumber: dataTemp[indexItem].cepNumber,
-                complement: dataTemp[indexItem].complement,
-                paymentType: dataTemp[indexItem].paymentType,
-                clientNote: dataTemp[indexItem].clientNote,
-                userEmail: dataTemp[indexItem].userEmail,
-                adminNote: dataTemp[indexItem].adminNote
+                id: item.id,
+                listItem:  item.listItem,
+                totalValue: newTotalValue,
+                userName:  item.userName,
+                phoneNumber: item.phoneNumber,
+                street: item.street,
+                houseNumber: item.houseNumber,
+                district:  item.district,
+                cepNumber:  item.cepNumber,
+                complement: item.complement,
+                paymentType: item.paymentType,
+                clientNote: item.clientNote,
+                userEmail: item.userEmail,
+                adminNote: item.adminNote
 
             }).then(()=>{
                 alert('Item removido com sucesso')
             })
+            
         }
 
     }
@@ -231,7 +240,7 @@ function Request() {
                             }
 
                             <p>ID do pedido: <b>{item.id}</b></p>
-                            <p>Valor Total do pedido: <b>R$ {item.totalValue}</b></p>
+                            <p>Valor Total do pedido: <b>R$ {Number(item.totalValue).toFixed(2)}</b></p>
                             
                             {
                                 item.deliveryman != undefined ?
