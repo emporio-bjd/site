@@ -21,16 +21,12 @@ function CartProvider() {
 
         const verify = await JSON.parse(localStorage.getItem('provider-products'))
 
-        console.log(verify)
-
         if (verify != null) {
 
             var temp = Object.keys(verify).map((key) => verify[key])
 
             setData(temp)
             setDataExists(true)
-
-            console.log(verify)
 
             var total = 0
 
@@ -60,6 +56,8 @@ function CartProvider() {
 
         var title = window.prompt('Insira um título para a lista')
 
+        const productProvider = localStorage.getItem('provider')
+
         var today = new Date();
         var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
         var hour = today.getHours() + ':' + today.getMinutes();
@@ -73,11 +71,13 @@ function CartProvider() {
             totalValue: totalValue.toFixed(2),
             orderDate: date,
             orderTime: hour,
-            listTitle: title
+            listTitle: title,
+            provider: productProvider
 
         }).then(() => {
             localStorage.setItem('provider-products', '{}')
-            alert("Pedido finalizado com sucesso!.")
+            localStorage.setItem('provider', '')
+            alert("Pedido finalizado com sucesso!")
         })
 
         return 0;

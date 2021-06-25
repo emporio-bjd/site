@@ -15,6 +15,7 @@ function ProviderRequests() {
     const [dataProvider, setDataProvider] = useState([]);
     const [data, setData] = useState([]);
     const [totalValue, setTotalValue] = useState(0);
+    const [selectProvider, setSelectProvider] = useState('');
     const [displayButtonFinishOrder, setDisplayButtonFinishOrder] = useState('none')
 
     useEffect(() => {
@@ -54,6 +55,8 @@ function ProviderRequests() {
 
                 var items = Object.keys(data).map((key) => data[key])
                 var temp = []
+
+                setSelectProvider(dataProvider[position].tradeName)
 
                 items.map((products) => {
 
@@ -106,6 +109,7 @@ function ProviderRequests() {
     function addToCart() {
 
         const listOfItems = JSON.parse(localStorage.getItem('providers-products'))
+        const provider = selectProvider
 
         const newItems = []
 
@@ -126,10 +130,10 @@ function ProviderRequests() {
             }
 
             localStorage.setItem('provider-products', JSON.stringify({ ...newListOfItems }))
-
-            console.log({ ...newListOfItems })
+            localStorage.setItem('provider', provider)
 
         }
+
         else {
 
             newListOfItems = {
@@ -137,7 +141,7 @@ function ProviderRequests() {
             }
 
             localStorage.setItem('provider-products', JSON.stringify({ ...newListOfItems }))
-            console.log({ ...newListOfItems })
+            localStorage.setItem('provider', provider)
 
         }
 

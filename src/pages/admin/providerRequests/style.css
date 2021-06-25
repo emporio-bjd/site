@@ -95,6 +95,12 @@
 
 }
 
+.boxProducts:nth-child(1) {
+
+    margin-top: 0;
+
+}
+
 .productTitle {
 
     margin: 0 auto;
