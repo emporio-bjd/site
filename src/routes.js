@@ -20,6 +20,7 @@ import ProviderRequests from './pages/admin/providerRequests'
 import ProviderProducts from './pages/admin/cadProviderProduct'
 import DeliveryList from './pages/admin/deliveryList'
 import CartProvider from './pages/admin/cartProvider'
+import Reports from './pages/admin/reports'
 
 const Routes = () => {
 
@@ -46,6 +47,7 @@ const Routes = () => {
             <Route component={ProviderProducts} path='/AdminProdutoFornecedor' />
             <Route component={DeliveryList} path='/Entregas' />
             <Route component={CartProvider} path='/CarrinhoFornecedor' />
+            <Route component={Reports} path='/Relatorios' />
         
         </BrowserRouter>
 

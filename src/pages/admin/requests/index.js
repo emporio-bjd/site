@@ -207,24 +207,41 @@ function Request() {
 
                             <ul>
 
-                                {
-                                    item.listItem.map((item, indexListItem) => (
+                                { 
+                                    item.listItem.length > 1 ?
 
+                                        item.listItem.map((item, indexListItem) => (
+
+                                            <div className='flexDisplayRequestPage' >
+
+                                                <li><b>{item.title}</b> ({item.amount})</li>
+
+                                                <img src={closeIcon}
+                                                    className="imgRemoveIconCart"
+                                                    alt='opção de remover item'
+                                                    onClick={() => {
+                                                        removeItemOfClient(indexItem,indexListItem)
+                                                    }}
+                                                />
+
+                                            </div>
+
+                                        ))
+                                    :
                                         <div className='flexDisplayRequestPage' >
 
-                                            <li><b>{item.title}</b> ({item.amount})</li>
+                                            <li><b>{item.listItem[0].title}</b> ({item.listItem[0].amount})</li>
 
                                             <img src={closeIcon}
                                                 className="imgRemoveIconCart"
                                                 alt='opção de remover item'
                                                 onClick={() => {
-                                                    removeItemOfClient(indexItem,indexListItem)
+                                                    removeItemOfClient(indexItem,0)
                                                 }}
                                             />
 
                                         </div>
-
-                                    ))
+                                            
                                 }
 
                             </ul>
