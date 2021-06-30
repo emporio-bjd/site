@@ -28,7 +28,6 @@ function Request() {
 
     const [allMonthsIsSelected, setAllMonthsIsSelected] = useState(false)
 
-
     useEffect(() => {
 
         if (!firebase.apps.length)
@@ -72,6 +71,12 @@ function Request() {
         });
 
     }, [])
+
+    useEffect(() => {
+        
+        window.scrollTo(0, 0);
+
+    }, []);
 
     function salesThisMonth() {
 
