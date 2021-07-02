@@ -199,10 +199,20 @@ function ProviderProducts() {
 
         }
 
-        firebase.database().ref('providers/' + dataKeysAdm[selectProvider])
+            firebase.database().ref('providers/' + dataKeysAdm[selectProvider])
             .child('products/' + id)
             .set(data)
-            // .then(err => console.log(err))
+            .then(err => console.log(err))
+            setNewDataProduct({
+
+                product: '',
+                unity: '',
+                imageSrc: '',
+                sellPrice: '',
+                buyPrice: ''
+
+        })
+
         alert("Produto cadastrado com sucesso!")
 
     }
@@ -241,7 +251,7 @@ function ProviderProducts() {
 
         var position = event.target.value
 
-        setSelectProduct( itemsOfProvider[position])
+        setSelectProduct(itemsOfProvider[position])
 
     }
 
@@ -271,7 +281,7 @@ function ProviderProducts() {
             .remove()
             .then(() => alert("Item removido com sucesso!"))
 
-            console.log(selectProductToDelete + 'aaaa')
+        console.log(selectProductToDelete + 'aaaa')
 
     }
 
@@ -345,9 +355,9 @@ function ProviderProducts() {
                             <h3>Insira os dados do produto</h3>
                         </legend>
 
-                        <input name='product' onChange={handleInputProductChange} placeholder='Produto' />
+                        <input name='product' onChange={handleInputProductChange} placeholder='Produto' value={newDataProduct.product}/>
 
-                        <select name='unity' onChange={handleSelectedUnity} >
+                        <select name='unity' onChange={handleSelectedUnity} value={newDataProduct.unity}>
 
                             <option value='' >Selecione a unidade</option>
                             <option value='Quilograma' >Quilograma</option>
@@ -357,9 +367,9 @@ function ProviderProducts() {
 
                         <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem' />
 
-                        <input name='buyPrice' onChange={handleInputProductChange} placeholder='Preço de compra' />
+                        <input name='buyPrice' onChange={handleInputProductChange} placeholder='Preço de compra' value={newDataProduct.buyPrice}/>
 
-                        <input name='sellPrice' onChange={handleInputProductChange} placeholder='Preço de venda' />
+                        <input name='sellPrice' onChange={handleInputProductChange} placeholder='Preço de venda' value={newDataProduct.sellPrice}/>
 
                         <a onClick={() => { insertNewProduct() }} >Inserir</a>
 
@@ -401,7 +411,7 @@ function ProviderProducts() {
 
                         <h6>Preencha o que deseja alterar</h6>
 
-                        <input name='product' onChange={handleInputProductChangeAlter} placeholder='Produto' />
+                        <input name='product' onChange={handleInputProductChangeAlter} placeholder='Produto'/>
 
                         <input name='imageSrc' onChange={handleInputProductChangeAlter} placeholder='Imagem' />
 
