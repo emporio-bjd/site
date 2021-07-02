@@ -42,7 +42,8 @@ function Admin() {
         itemAvailability: 0,
         unityPrice: '',
         category: '',
-        unity: ''
+        unity: '',
+        amountInStock: ''
 
     })
 
@@ -227,6 +228,8 @@ function Admin() {
                         <input name='price' onChange={handleInputAdminChange} placeholder='Preço por Kg' type='number' value={newDataAdmin.price} />
 
                         <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' value={newDataAdmin.unityPrice} />
+
+                        <input name='amountInStock' onChange={handleInputAdminChange} placeholder='Quantidade em estoque' type='number' value={newDataAdmin.amountInStock} />
                         
                         <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem'/>
 
@@ -303,6 +306,8 @@ function Admin() {
                         <input name='price' onChange={handleInputAdminChangeAlter} placeholder='Preço' type='number' />
 
                         <input name='imageSrc' onChange={handleInputAdminChangeAlter} placeholder='URL da imagem' />
+
+                        <input name='amountInStock' onChange={handleInputAdminChangeAlter} placeholder='Quantidade em estoque' />
 
                         <select onChange={handleInputAdminChangeAlter} name='itemAvailability' >
 
