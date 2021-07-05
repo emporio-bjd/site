@@ -14,17 +14,18 @@ function Admin() {
 
     const [wasChanged, setWasChanged] = useState(false)
     const [imageUrl, setImageUrl] = useState('')
+    const [alteredImageUrl, setAlteredImageUrl] = useState('')
     const [dataAlterItem, setDataAlterItem] = useState({
 
         imageSrc: '',
         title: '',
         desc: '',
-        price: 0,
+        price: '',
         itemAvailability: 0,
-        unityPrice: 0,
+        unityPrice: '',
         category: '',
         unity: '',
-        amount: 0
+        amountInStock: ''
         
     })
 
@@ -167,12 +168,13 @@ function Admin() {
             .ref('items/' + dataKeysAdm[selectItem])
             .update({
 
-                imageSrc: dataAlterItem.imageSrc != '' ? dataAlterItem.imageSrc : dataAdmin[selectItem].imageSrc,
+                imageSrc: alteredImageUrl != '' ? alteredImageUrl : dataAdmin[selectItem].imageSrc,
                 title: dataAlterItem.title != '' ? dataAlterItem.title : dataAdmin[selectItem].title,
                 desc: dataAlterItem.desc != '' ? dataAlterItem.desc : dataAdmin[selectItem].desc,
                 price: dataAlterItem.price != 0 ? dataAlterItem.price : dataAdmin[selectItem].price,
                 itemAvailability: dataAlterItem.itemAvailability != 0 ? dataAlterItem.itemAvailability : dataAdmin[selectItem].itemAvailability,
                 unity: dataAlterItem.unity != 0 ? dataAlterItem.unity : dataAdmin[selectItem].unity,
+                amountInStock: dataAlterItem.amountInStock != 0 ? dataAlterItem.amountInStock : dataAdmin[selectItem].amountInStock,
 
             })
             .then(() => alert("Item atualizado com sucesso!"))
@@ -201,6 +203,21 @@ function Admin() {
             .then(snapshot => {
                 snapshot.ref.getDownloadURL()
                     .then(url => setImageUrl(url))
+            });
+
+    }
+
+    function uploadImageAltered(event) {
+
+        const file = event.target.files[0]
+
+        var storageRef = firebase.storage().ref();
+
+        storageRef.child('images/' + file.name.trim())
+            .put(file)
+            .then(snapshot => {
+                snapshot.ref.getDownloadURL()
+                    .then(url => setAlteredImageUrl(url))
             });
 
     }
@@ -235,7 +252,7 @@ function Admin() {
 
                         <select onChange={handleInputAdminChange} name='itemUnity' >
 
-                            <option value='unity' >Unidade</option>
+                            <option value='unidade' >Unidade</option>
                             <option value='kg' >Kg</option>
 
                         </select>
@@ -305,7 +322,7 @@ function Admin() {
 
                         <input name='price' onChange={handleInputAdminChangeAlter} placeholder='Preço' type='number' />
 
-                        <input name='imageSrc' onChange={handleInputAdminChangeAlter} placeholder='URL da imagem' />
+                        <input type='file' onChange={uploadImageAltered} accept="image/png, image/jpeg" placeholder='Imagem'/>
 
                         <input name='amountInStock' onChange={handleInputAdminChangeAlter} placeholder='Quantidade em estoque' />
 
