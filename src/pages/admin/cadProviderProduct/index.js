@@ -31,6 +31,7 @@ function ProviderProducts() {
     })
 
     const [selectProduct, setSelectProduct] = useState([])
+    const [selectProductToAlter, setSelectProductToAlter] = useState([])
 
     const [selectProductToDelete, setSelectProductToDelete] = useState('')
     const [selectProviderToDelete, setSelectProviderToDelete] = useState('')
@@ -46,7 +47,8 @@ function ProviderProducts() {
         unity: '',
         imageSrc: '',
         sellPrice: 0,
-        buyPrice: 0
+        buyPrice: 0,
+        qntd: 0
 
     })
 
@@ -249,23 +251,53 @@ function ProviderProducts() {
 
     function handleSelectProduct(event) {
 
+        // console.log(itemsOfProvider[event.target.value])
+
         var position = event.target.value
 
         setSelectProduct(itemsOfProvider[position])
+        setSelectProductToAlter(itemsOfProvider[position].id)
 
     }
 
     function updateProduct() {
 
+        // return(console.log(dataAlterProduct))
+        // return(console.log(dataProvider[selectProvider].products[selectProductToAlter]))
+
         if (wasChangedProduct) {
 
-            firebase.database().ref('providers/' + dataKeysAdm[selectProvider]).child('products/' + dataKeysAdmProduct[selectProduct]).update({
+            var products = dataProvider[selectProvider].products
 
-                product: dataAlterProduct.product != '' ? dataAlterProduct.product : dataProduct[selectProduct].product,
-                imageSrc: dataAlterProduct.imageSrc != '' ? dataAlterProduct.imageSrc : dataProduct[selectProduct].imageSrc,
-                unity: dataAlterProduct.unity != '' ? dataAlterProduct.unity : dataProduct[selectProduct].unity,
-                sellPrice: dataAlterProduct.sellPrice != '' ? dataAlterProduct.sellPrice : dataProduct[selectProduct].sellPrice,
-                buyPrice: dataAlterProduct.buyPrice != '' ? dataAlterProduct.buyPrice : dataProduct[selectProduct].buyPrice,
+            products[selectProductToAlter] = {
+
+                buyPrice: dataAlterProduct.buyPrice != 0 ? dataAlterProduct.buyPrice : products[selectProductToAlter].buyPrice,
+                imageSrc: dataAlterProduct.imageSrc != '' ? dataAlterProduct.imageSrc : products[selectProductToAlter].imageSrc,
+                product: dataAlterProduct.product != '' ? dataAlterProduct.product : products[selectProductToAlter].product,
+                sellPrice: dataAlterProduct.sellPrice != 0 ? dataAlterProduct.sellPrice : products[selectProductToAlter].sellPrice,
+                unity: dataAlterProduct.unity != '' ? dataAlterProduct.unity : products[selectProductToAlter].unity,
+                // qntd: dataAlterProduct.qntd != 0 ? dataAlterProduct.qntd : products[selectProductToAlter].qntd,
+
+            }
+
+            // return(console.log(products))
+
+
+            // .child('products/' + dataKeysAdmProduct[selectProduct])
+            firebase.database()
+            .ref('providers/' + dataKeysAdm[selectProvider])
+            .update({
+
+                city: dataProvider[selectProvider].city,
+                corporateName: dataProvider[selectProvider].corporateName,
+                id: dataProvider[selectProvider].id,
+                email: dataProvider[selectProvider].email,
+                district: dataProvider[selectProvider].district,
+                ownerName: dataProvider[selectProvider].ownerName,
+                phone: dataProvider[selectProvider].phone,
+                street: dataProvider[selectProvider].street,
+                tradeName: dataProvider[selectProvider].tradeName,
+                products: products
 
             })
                 .then(() => alert("Item atualizado com sucesso!"))
