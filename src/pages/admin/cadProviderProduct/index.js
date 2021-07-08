@@ -303,13 +303,19 @@ function ProviderProducts() {
 
     function deleteProduct() {
 
+        // return console.log(dataProvider[selectProvider])
+
         var products = dataProvider[selectProvider].products
-        console.log(products)
-        console.log(products[0])
+
+        var temp = Object.keys(products).map((key) => products[key])
+
+        console.log("produtos:",temp[selectProductToDelete])
+
+        // console.log(products[0])
 
         firebase.database()
-            .ref('providers/')
-            .child('products/' + products[0])
+            .ref('providers/'+ dataProvider[selectProvider].id)
+            .child('products/' + temp[selectProductToDelete].id)
             .remove()
             .then(() => alert("Item removido com sucesso!"))
     }
