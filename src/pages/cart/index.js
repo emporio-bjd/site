@@ -42,9 +42,9 @@ function Cart() {
 
         const verify = await JSON.parse(localStorage.getItem('products'))
 
-        console.log("verify", verify)
+        // console.log(verify)
     
-        if (verify.length > 0 ){
+        if (verify != null ){
 
             var temp = Object.keys(verify).map((key) => verify[key])
             

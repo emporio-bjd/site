@@ -13,35 +13,43 @@ function BuyInfo(props) {
     const { displayProperty, modalData } = props;
     const [dataAdmin, setDataAdmin] = useState([])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (!firebase.apps.length)
-            firebase.initializeApp(firebaseConfig);
+    //     if (!firebase.apps.length)
+    //         firebase.initializeApp(firebaseConfig);
 
-        var firebaseRef = firebase.database().ref('providers-requests/');
+    //     var firebaseRef = firebase.database().ref('providers-requests/');
 
-        firebaseRef.on('value', (snapshot) => {
+    //     firebaseRef.on('value', (snapshot) => {
 
-            if (snapshot.exists()) {
+    //         if (snapshot.exists()) {
 
-                var data = snapshot.val()
-                var temp = Object.keys(data).map((key) => data[key])
-                setDataAdmin(temp)
+    //             var data = snapshot.val()
+    //             var temp = Object.keys(data).map((key) => data[key])
+    //             setDataAdmin(temp)
 
-            }
+    //         }
 
-        })
+    //     })
 
-    }, [])
+    // }, [])
 
     return (
 
         <div style={{ display: displayProperty }} className='modalBuyInfo'>
 
+            {console.log("props:",props)}
+
             <main id='mainBuyInfo' >
 
                 <div className="buyInfoTitle">
                     <h2>Sua lista de produtos adquiridos: {modalData.provider}</h2>
+
+                    {modalData.listItem.map((item)=>{
+
+                        return <p>{item.product}</p>
+
+                    })}
                     
                     <h4>{modalData.listTitle}</h4>
                     <h4>{modalData.orderDate} - {modalData.orderTime}</h4>

@@ -303,15 +303,8 @@ function ProviderProducts() {
 
     function deleteProduct() {
 
-        // return console.log(dataProvider[selectProvider])
-
         var products = dataProvider[selectProvider].products
-
         var temp = Object.keys(products).map((key) => products[key])
-
-        console.log("produtos:",temp[selectProductToDelete])
-
-        // console.log(products[0])
 
         firebase.database()
             .ref('providers/'+ dataProvider[selectProvider].id)
