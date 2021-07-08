@@ -274,7 +274,7 @@ function UserProfile() {
 
                 <h4 className="textAlterInfosProfile" onClick={() => handleDisplayDivPedidos()} >Quer acompanhar seus pedidos? <span>clique aqui</span></h4>
 
-                {/* <div style={{ display: displayDivPedidos }} className="divPedidos" > */}
+                <div style={{ display: displayDivPedidos }} className="divPedidos" >
 
 
                 <div className="divPedidos" >
@@ -288,8 +288,28 @@ function UserProfile() {
                                 item.listItem.map(item => {
 
                                     return (
-
-                                        <h2>{item.title}</h2>
+                                        <div className="acompanhaPedidos">
+                                            <div className="acomPedidosTitle">
+                                                <h3>Nome do item:</h3>
+                                                <h2>{item.title}</h2>
+                                            </div>
+                                            <div className="acomPedidosTitle">
+                                                <h3>Unidade:</h3>
+                                                <h2>{item.unity}</h2>
+                                            </div>
+                                            <div className="acomPedidosTitle">
+                                                <h3>Quantidade:</h3>
+                                                <h2>{item.amount}</h2>
+                                            </div>
+                                            <div className="acomPedidosTitle">
+                                                <h3>Preço:</h3>
+                                                <h2>R$ {item.price}</h2>
+                                            </div>
+                                            <div className="acomPedidosTitle">
+                                                <h3>ID do item</h3>
+                                                <h4>{item.id}</h4>
+                                            </div>
+                                        </div>
 
                                     )
 
@@ -299,6 +319,8 @@ function UserProfile() {
 
                     })}
 
+
+                </div>
 
                 </div>
 
