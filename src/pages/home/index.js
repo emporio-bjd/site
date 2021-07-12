@@ -107,7 +107,6 @@ function Home() {
             var desc = item.desc.toLowerCase()
             var search = searchInput.toLowerCase()
 
-
             // if (title.includes(searchInput) || desc.includes(searchInput))
             if (title.includes(search) )
                 itens.push(item)
