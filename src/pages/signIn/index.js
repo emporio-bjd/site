@@ -125,7 +125,7 @@ function Register() {
                         </div>
 
                         <div className='haveAccount' >
-                            <h5>Ainda não tem uma conta? <Link to='/Cadastro' >cadrastar-se</Link></h5>
+                            <h5>Ainda não tem uma conta? <Link to='/Cadastro' >cadastrar-se</Link></h5>
                         </div>
 
                         <fieldset>
