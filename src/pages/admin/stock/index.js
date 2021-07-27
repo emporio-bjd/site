@@ -179,7 +179,8 @@ function Request() {
                 {
                     items.map(item => (
                         <div>
-                            <h4>{item.title}: {item.amountInStock} ({item.unity})</h4>
+                            <h4>{item.title}: {item.amountInStock}</h4>
+                            <h4><span>({item.unity})</span></h4>
                         </div>
                     ))
                 }

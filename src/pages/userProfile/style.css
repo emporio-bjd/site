@@ -150,34 +150,50 @@
 }
 
 .acompanhaPedidos {
-    display: flex;
+
     width: 100%;
-    justify-content: space-between;
-    margin: 2px;
-    padding: 10px;
-    background-color: #f7ddb5;
-    border-radius: 5px;
-    box-shadow: black;
-}
-
-.acompanhaPedidos h3 {
-    font-size: medium;
-}
-
-.acompanhaPedidos h2 {
-    font-size: x-large;
-}
-
-.acompanhaPedidos h4 {
-    font-size: small;
-}
-
-.acomPedidosTitle {
+    margin: 5px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    
 }
+
+.acompanhaPedidos > div {
+
+    width: 80%;
+    padding: 10px 15px;
+    display: flex;
+    color: #662210;
+    border-radius: 5px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 8px #66231070;
+    background-color: #ffc05c;
+
+}
+
+.acompanhaPedidos > div span {
+
+    font-size: 12px;
+
+}
+
+.acompanhaPedidos > div p {
+
+    font-size: 14pt;
+    margin: 0;
+
+}
+
+.acompanhaPedidos > div h4 {
+
+    text-align: center;
+
+}
+
 
 .divAlterInfos {
 

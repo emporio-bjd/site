@@ -35,7 +35,7 @@ function UserProfile() {
 
     useEffect(() => {
 
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
 
         const userEmail = localStorage.getItem('userEmail')
 
@@ -65,8 +65,6 @@ function UserProfile() {
     }, []);
 
     useEffect(() => {
-
-        // window.scrollTo(0, 0);
 
         const userEmail = localStorage.getItem('userEmail')
 
@@ -161,35 +159,6 @@ function UserProfile() {
 
     }
 
-    // useEffect(() => {
-
-    //     firebase.database().ref('requests').get('/requests')
-    //     .then(function (snapshot) {
-
-    //         if (snapshot.exists()) {
-
-    //             // var phoneNumber = localStorage.getItem('userPhoneNumber')
-
-    //             var data = snapshot.val()
-    //             var temp = Object.keys(data).map((key) => data[key])
-
-    //             var requestDataTemp = []
-
-    //             temp.map((item) => {
-
-    //                 if(item.phoneNumber == '12345678')
-    //                     requestDataTemp.push(item)
-
-    //             })
-    //             setRequestData(requestDataTemp)
-    //         }
-    //         else {
-    //             console.log("No data available");
-    //         }
-    //     })
-
-    // }, []);
-
     return (
 
         <div className="clientProfile">
@@ -219,6 +188,50 @@ function UserProfile() {
                 </ul>
 
             </div>
+
+            <section>
+
+                <h4 className="textAlterInfosProfile" >Acompanhe aqui seus pedidos:</h4>
+
+                <div 
+                    // style={{ display: displayDivPedidos }}
+                    className="divPedidos"
+                >
+
+
+                    <div className="divPedidos" >
+
+                        {requestData.map((item) => {
+
+                            return <>
+                            
+                                {item.listItem != undefined ?
+
+                                    item.listItem.map(item => {
+
+                                        return (
+                                            <div className="acompanhaPedidos">
+
+                                                <div className="acomPedidosTitle">
+
+                                                    <b>{item.title} - <span>{item.amount} ({item.unity})</span></b>
+                                                    <h4><span>R$ {item.price}</span></h4>
+                                                </div>
+                                            </div>
+
+                                        )
+
+                                    })
+                                : <p></p>}
+                            </>
+
+                        })}
+
+                    </div>
+
+                </div>
+
+            </section>
 
             <div>
                 <h4 className="textAlterInfosProfile" onClick={() => handleDisplayDivAlterInfos()} >Deseja alterar alguma informação? <span>clique aqui</span></h4>
@@ -263,74 +276,16 @@ function UserProfile() {
 
                 </div>
 
-                <div className="singnOutButton" >
-                    <a onClick={() => signOut()} className="defaultButtonUserProfile" >SAIR</a>
-                </div>
-
             </div>
 
-
-            <section>
-
-                <h4 className="textAlterInfosProfile" onClick={() => handleDisplayDivPedidos()} >Quer acompanhar seus pedidos? <span>clique aqui</span></h4>
-
-                <div style={{ display: displayDivPedidos }} className="divPedidos" >
-
-
-                <div className="divPedidos" >
-
-                    {requestData.map((item) => {
-
-                        return <>
-                        
-                            {item.listItem != undefined ?
-
-                                item.listItem.map(item => {
-
-                                    return (
-                                        <div className="acompanhaPedidos">
-                                            <div className="acomPedidosTitle">
-                                                <h3>Nome do item:</h3>
-                                                <h2>{item.title}</h2>
-                                            </div>
-                                            <div className="acomPedidosTitle">
-                                                <h3>Unidade:</h3>
-                                                <h2>{item.unity}</h2>
-                                            </div>
-                                            <div className="acomPedidosTitle">
-                                                <h3>Quantidade:</h3>
-                                                <h2>{item.amount}</h2>
-                                            </div>
-                                            <div className="acomPedidosTitle">
-                                                <h3>Preço:</h3>
-                                                <h2>R$ {item.price}</h2>
-                                            </div>
-                                            <div className="acomPedidosTitle">
-                                                <h3>ID do item</h3>
-                                                <h4>{item.id}</h4>
-                                            </div>
-                                        </div>
-
-                                    )
-
-                                })
-                            : <p></p>}
-                        </>
-
-                    })}
-
-
-                </div>
-
-                </div>
-
-            </section>
+            <div className="singnOutButton" >
+                <a onClick={() => signOut()} className="defaultButtonUserProfile" >SAIR</a>
+            </div>
 
             <ReactCircleModal
                 backgroundColor="#434f38"
                 toogleComponent={onClick => (<button className="finishButton" onClick={onClick}> Gostou do seu pedido? Responda esta pesquisa de satisfação! </button>
                 )}
-                // Optional fields and their default values
                 offsetX={0}
                 offsetY={0}
             >

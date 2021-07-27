@@ -91,10 +91,23 @@
     color: white;
     margin: 10px 0;
     border-radius: 10px;
-    break-inside: avoid-column;
+    break-inside: avoid-column ;
     background-color: #ffc05c;
+    font-size: 1vmax;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
 }
+
+.Stock main > div span{
+
+    font-size: 10px;
+
+}
+
 
 .Stock main > div:nth-child(1) {
 
@@ -126,6 +139,12 @@
     
         width: 80vw;
     
+    }
+
+    .Stock main > div {
+
+        font-size: 2vmax;
+
     }
 
 }

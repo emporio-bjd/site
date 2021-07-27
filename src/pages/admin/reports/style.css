@@ -147,10 +147,13 @@
 
 .finishButton {
 
-    color: white;
-    cursor: pointer;
+    width: 300px;
+    border: none;
     padding: 15px;
     margin: 20px 0;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
     border-radius: 10px;
     background-color: #434f38;
 
