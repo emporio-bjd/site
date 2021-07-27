@@ -191,37 +191,41 @@ function UserProfile() {
 
             <section>
 
-                <h4 className="textAlterInfosProfile" >Acompanhe aqui seus pedidos:</h4>
+                <h2 className="textAlterInfosProfile" >Acompanhe aqui seus pedidos:</h2>
 
-                <div 
-                    // style={{ display: displayDivPedidos }}
-                    className="divPedidos"
-                >
+                <div className="divPedidos">
 
+                    <div>
 
-                    <div className="divPedidos" >
-
-                        {requestData.map((item) => {
+                        {requestData.map((request) => {
 
                             return <>
                             
-                                {item.listItem != undefined ?
+                                {request.listItem != undefined ?
 
-                                    item.listItem.map(item => {
+                                    <>
 
-                                        return (
-                                            <div className="acompanhaPedidos">
+                                        <h4> <span>id do pedido: {request.id}</span></h4>
 
-                                                <div className="acomPedidosTitle">
+                                        {request.listItem.map(item => {
 
-                                                    <b>{item.title} - <span>{item.amount} ({item.unity})</span></b>
-                                                    <h4><span>R$ {item.price}</span></h4>
+                                            return (
+                                                <div className="acompanhaPedidos">
+
+                                                    <div className="acomPedidosTitle">
+
+                                                        <b>{item.title} - <span>{item.amount} ({item.unity})</span></b>
+                                                        <h4><span>R$ {item.price}</span></h4>
+
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        )
+                                            )
 
-                                    })
+                                        })}
+
+                                    </>
+
                                 : <p></p>}
                             </>
 
@@ -233,7 +237,7 @@ function UserProfile() {
 
             </section>
 
-            <div>
+            <div className='alterInfosProfileDiv' >
                 <h4 className="textAlterInfosProfile" onClick={() => handleDisplayDivAlterInfos()} >Deseja alterar alguma informação? <span>clique aqui</span></h4>
 
                 <div style={{ display: displayDivAlterInfos }} className="divAlterInfos" >

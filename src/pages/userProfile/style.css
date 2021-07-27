@@ -132,6 +132,12 @@
 
 }
 
+.alterInfosProfileDiv  {
+
+    margin-top: 5vh;
+
+}
+
 .textAlterInfosProfile span{
 
     color: #727f26;
@@ -139,9 +145,26 @@
 
 }
 
+.textAlterInfosProfile {
+
+    text-align: center;
+
+}
+
 .divPedidos {
 
-    width: 100%;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 8vh;
+
+}
+
+.divPedidos > div {
+
+    width: 65%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -294,6 +317,13 @@
 
         width: 100%;
         text-align: center;
+        margin-bottom: 8vh;
+
+    }
+
+    .textAlterInfosProfile h4 {
+
+        margin-bottom: 3vh;
 
     }
 
@@ -303,10 +333,14 @@
 
     }
 
-    .divPedidos fieldset {
+    .divPedidos > div {
 
-        width: 85%;
-
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    
     }
 
     .acompanhaPedidos {
