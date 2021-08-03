@@ -101,7 +101,7 @@ function Admin() {
     }
 
     return (
-        
+
         <div className='ClientListPage'>
 
             <Header />
@@ -155,11 +155,23 @@ function Admin() {
                             </div>
 
                             <div>
+
                                 <p><b>Rua</b>: {item.street}</p>
                                 <p><b>Bairro</b>: {item.district}</p>
                                 <p><b>N°</b>: {item.houseNumber}</p>
+
+                                {item.giveData == true ? 
+                                
+                                    <p><b>Aceita receber informações: </b>Sim</p> 
+                                    
+                                    : 
+                                    
+                                    <p><b>Aceita receber informações: </b>Não</p>
+
+                                }
+
                             </div>
-                            
+
                         </div>
 
                     </div>

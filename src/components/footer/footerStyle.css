@@ -83,10 +83,13 @@ footer {
 
 .socialMedias {
 
-    height: 20vh;
     display: flex;
-    align-items: flex-end;
-    padding-right: 25px;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    max-height: 40vh;
+    margin-bottom: 15px;
+    text-align: center;
 
 }
 

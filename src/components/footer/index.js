@@ -26,9 +26,14 @@ export default function Footer (props) {
                     <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
                 </ul>
 
-                <p> Rua Antonio Costa, 160, casa 2, Vista Alegre, Curitiba- PR</p>
-
                 <p>Whatsapp: (41) 99841-6657</p>
+
+                <div className='socialMedias' >
+
+                <a href='https://www.instagram.com/emporio_bomjardim/'  > <img src={instagramIcon} alt='logoInstagram' /> </a>
+                <a href='https://www.facebook.com/bomjardimemporio'  > <img src={facebookIcon} alt='logoFacebook' /> </a>
+
+            </div>
                 
             </div>
 
@@ -39,15 +44,6 @@ export default function Footer (props) {
                 <a href='https://aureaej.com/' ><img src={logoAurea} alt='logoAurea' /></a>
 
             </div>
-
-            {/* <div className='socialMedias' >
-
-                <a href='https://www.instagram.com/aureaej/'  > <img src={instagramIcon} alt='logoInstagram' /> </a>
-                <a href='https://www.facebook.com/aureaej'  > <img src={facebookIcon} alt='logoFacebook' /> </a>
-                <a href='https://www.linkedin.com/company/aureaej/'  > <img src={linkedinIcon} alt='logoLinkedin' /> </a>
-
-            </div> */}
-
 
         </footer>
 

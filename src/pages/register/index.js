@@ -27,12 +27,14 @@ function Register() {
         cepNumber: '',
         email: '',
         password: '',
+        giveData: '',
 
     })
 
     const [selectedOption, setSelectedOption] = useState('')
     const [userIsLogged, setUserIsLogged] = useState(false);
     const [registerDone, setRegisterDone] = useState(false);
+    const [checked, setChecked] = useState(false);
 
     function makeRegister() {
 
@@ -55,6 +57,7 @@ function Register() {
                     district: registerData.district,
                     cepNumber: registerData.cepNumber,
                     email: registerData.email,
+                    giveData: checked,
                     id: id
 
                 })
@@ -157,24 +160,23 @@ function Register() {
     function makeVerifications() {
 
         var counter = 0
-        
-        registerData.name != '' ? counter = counter + 1 : counter = counter
-        registerData.cepNumber != '' ? counter ++ : counter = counter
-        registerData.complement != '' ? counter ++ : counter = counter
-        registerData.district != '' ? counter ++ : counter = counter
-        registerData.email != '' ? counter ++ : counter = counter
-        registerData.houseNumber != '' ? counter ++ : counter = counter
-        registerData.password != '' ? counter ++ : counter = counter
-        registerData.phoneNumber != '' ? counter ++ : counter = counter
-        registerData.street != '' ? counter ++ : counter = counter
 
-        if(counter == 9)
+        registerData.name != '' ? counter = counter + 1 : counter = counter
+        registerData.cepNumber != '' ? counter++ : counter = counter
+        registerData.complement != '' ? counter++ : counter = counter
+        registerData.district != '' ? counter++ : counter = counter
+        registerData.email != '' ? counter++ : counter = counter
+        registerData.houseNumber != '' ? counter++ : counter = counter
+        registerData.password != '' ? counter++ : counter = counter
+        registerData.phoneNumber != '' ? counter++ : counter = counter
+        registerData.street != '' ? counter++ : counter = counter
+
+        if (counter == 9)
             makeRegister()
         else
             alert('Você precisa preencher todos os campos!')
-        
-    }
 
+    }
 
     if (userIsLogged) {
 
@@ -270,7 +272,19 @@ function Register() {
 
                                 <input name='password' type="password" onChange={handleInputRegisterChange} placeholder='Senha para o site' />
 
+
                             </fieldset>
+
+                                <label>
+                                    <input 
+                                        type="checkbox"
+                                        name="giveData"
+                                        id="giveData"
+                                        defaultChecked={checked}
+                                        onChange={() => setChecked(!checked)}
+                                    />
+                                    Aceito receber informações sobre a Empório por Whatsapp ou e-mail
+                                </label>
 
                             <div className='buttonsFormSignIn' >
 
