@@ -1,4 +1,4 @@
-import React, {useState, createRef} from 'react'
+import React, { useState, createRef } from 'react'
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logoEmporio from '../../img/logoEmporio.png'
@@ -8,21 +8,24 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
-export default function Header (props) {
+export default function Header(props) {
 
-    const [isChecked,setIsChecked] = useState(false)
+    const [isChecked, setIsChecked] = useState(false)
     const [userIsLogged, setUserIsLogged] = useState(false);
+    const [isSeller, setIsSeller] = useState(false);
+    const [dataUsers, setDataUsers] = useState([]);
+    const [dataAccount, setDataAccount] = useState([]);
 
     const menuMobile = createRef()
 
     function onAuthStateChanged(user) {
 
         firebase.auth().onAuthStateChanged((user) => {
-            if (user) 
-              setUserIsLogged(true)
-          });
+            if (user)
+                setUserIsLogged(true)
+        });
 
-        
+
     }
 
     function showMenuMobile() {
@@ -31,14 +34,64 @@ export default function Header (props) {
             menuMobile.current.style.display = 'none'
         else
             menuMobile.current.style.display = 'flex'
-        
+
     }
 
     useEffect(() => {
-        
-        if(!firebase.apps.length)
+
+        if (!firebase.apps.length)
             firebase.initializeApp(firebaseConfig)
         onAuthStateChanged();
+
+    }, []);
+
+    useEffect(() => {
+
+        const userEmail = localStorage.getItem('userEmail')
+
+        firebase.database().ref('users/').get('/users')
+            .then(function (snapshot) {
+
+                if (snapshot.exists()) {
+
+                    var data = snapshot.val()
+                    var temp = Object.keys(data).map((key) => data[key])
+
+                    setDataUsers(temp)
+
+                    temp.map((item) => {
+
+                        if (item.email == userEmail) {
+                            setDataAccount(item)
+                        }
+
+                    })
+
+                } else
+                    console.log("No data available");
+
+            })
+
+        firebase.database().ref('sellers/').get('/sellers')
+            .then(function (snapshot) {
+
+                if (snapshot.exists()) {
+
+                    var data = snapshot.val()
+                    var temp = Object.keys(data).map((key) => data[key])
+
+                    temp.map((item) => {
+
+                        if (item.email == userEmail) {
+                            setIsSeller(true)
+                        }
+
+                    })
+
+                } else
+                    console.log("No data available");
+
+            })
 
     }, []);
 
@@ -56,20 +109,42 @@ export default function Header (props) {
 
                 <div className='menu' >
 
-                    <ul>
+                    {isSeller ?
 
-                        <li> <Link to='/' > Início </Link> </li>
-                        <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
-                        <li> <Link to='/Carrinho'> Carrinho </Link> </li>
-                        <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
+                        <>
+                            <ul>
 
-                    </ul>
-                    
+                                <li> <Link to='/' > Início </Link> </li>
+                                <li> <Link to='/Admin'> Admin </Link> </li>
+                                <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
+                                <li> <Link to='/Carrinho'> Carrinho </Link> </li>
+                                <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
+
+                            </ul>
+
+                        </>
+
+                        :
+
+                        <>
+                            <ul>
+
+                                <li> <Link to='/' > Início </Link> </li>
+                                <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
+                                <li> <Link to='/Carrinho'> Carrinho </Link> </li>
+                                <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
+
+                            </ul>
+
+                        </>
+
+                    }
+
                 </div>
 
                 <div className="sandwich" >
 
-                    <input type="checkbox" id="checkbox" onClick={ () => {
+                    <input type="checkbox" id="checkbox" onClick={() => {
 
                         setIsChecked(!isChecked);
                         showMenuMobile()
@@ -88,7 +163,7 @@ export default function Header (props) {
 
             </header>
 
-            <div className='menu-mobile' ref = {menuMobile} >
+            <div className='menu-mobile' ref={menuMobile} >
 
                 <ul>
 

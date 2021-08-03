@@ -29,6 +29,7 @@ function Register() {
         password: '',
 
     })
+
     const [selectedOption, setSelectedOption] = useState('')
     const [userIsLogged, setUserIsLogged] = useState(false);
     const [registerDone, setRegisterDone] = useState(false);
@@ -158,7 +159,6 @@ function Register() {
         var counter = 0
         
         registerData.name != '' ? counter = counter + 1 : counter = counter
-        registerData.birthDate != '' ? counter ++ : counter = counter
         registerData.cepNumber != '' ? counter ++ : counter = counter
         registerData.complement != '' ? counter ++ : counter = counter
         registerData.district != '' ? counter ++ : counter = counter
@@ -168,12 +168,10 @@ function Register() {
         registerData.phoneNumber != '' ? counter ++ : counter = counter
         registerData.street != '' ? counter ++ : counter = counter
 
-
-        if(counter == 10)
+        if(counter == 9)
             makeRegister()
         else
             alert('Você precisa preencher todos os campos!')
-
         
     }
 
@@ -231,7 +229,7 @@ function Register() {
                                 <input name='birthDate' type='date' onChange={handleInputRegisterChange} placeholder='Data de nascimento' />
 
                                 <select onChange={handleSelect} >
-                                    <option value='0' >Como ficou sabendo de nós?</option>
+                                    <option value='0' >Como ficou sabendo sobre nós?</option>
                                     <option value='1' >Indicação (digite o nome abaixo)</option>
                                     <option value='2' >Recebi contato da empresa: abrir campo lista com nome dos vendedores</option>
                                     <option value='3' >Facebook</option>
