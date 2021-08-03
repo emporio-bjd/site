@@ -275,8 +275,10 @@ function Register() {
 
                             </fieldset>
 
-                                <label>
-                                    <input 
+                            <div className="allowDataUse">
+                                
+                                <label id="giveDataText">
+                                    <input
                                         type="checkbox"
                                         name="giveData"
                                         id="giveData"
@@ -285,6 +287,8 @@ function Register() {
                                     />
                                     Aceito receber informações sobre a Empório por Whatsapp ou e-mail
                                 </label>
+
+                            </div>
 
                             <div className='buttonsFormSignIn' >
 
