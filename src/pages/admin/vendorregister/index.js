@@ -85,9 +85,6 @@ function VendorRegister() {
 
     }, []);
 
-
-    // FALTA FAZER A VALIDAÇÃO. TIPO: VERIFICAR SE OS CAMPOS OBRIGATÓRIOS FORAM PREENCHIDOS E ETC
-
     return (
 
         <div className="SigIn">
@@ -112,17 +109,17 @@ function VendorRegister() {
 
                         <input name='phoneNumber' type='number' onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
 
-                        <input name='birthDate' type='date' onChange={handleInputRegisterChange} placeholder='Data' />
+                        <input name='birthDate' type='date' onChange={handleInputRegisterChange} placeholder='Data de nascimento' />
 
                     </fieldset>
 
                     <fieldset>
 
                         <legend>
-                            <h2>Nome de usuário e senha</h2>
+                            <h2>E-mail e senha</h2>
                         </legend>
 
-                        <input name='email' onChange={handleInputRegisterChange} placeholder='Nome de Usuário' />
+                        <input name='email' onChange={handleInputRegisterChange} placeholder='E-mail' />
 
                         <input name='password' type='password' onChange={handleInputRegisterChange} placeholder='Senha' />
 

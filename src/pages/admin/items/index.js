@@ -53,19 +53,20 @@ function Admin() {
         if (!firebase.apps.length)
             firebase.initializeApp(firebaseConfig);
 
-        firebase.database().ref('items').get('/items')
-            .then(function (snapshot) {
+        var firebaseRef = firebase.database().ref('items/');
 
-                if (snapshot.exists()) {
+        firebaseRef.on('value', (snapshot) => {
+    
+            if (snapshot.exists()) {
 
-                    var data = snapshot.val()
-                    var temp = Object.keys(data).map((key) => data[key])
-                    setDataAdmin(temp)
-                }
-                else {
-                    console.log("No data available");
-                }
-            })
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+                setDataAdmin(temp)
+            }
+            else {
+                console.log("No data available");
+            }
+        })
 
     }, [])
 
@@ -90,11 +91,15 @@ function Admin() {
 
         const { name, value } = event.target
 
+        console.log(name, value)
+
         setNewDataAdmin({
 
             ...newDataAdmin, [name]: value
 
         })
+
+        console.log(newDataAdmin)
 
     }
 
@@ -113,6 +118,7 @@ function Admin() {
     function handleSelectItem(event) {
 
         setSelectItem(event.target.value)
+        console.log(dataAdmin[event.target.value])
 
     }
 
@@ -136,7 +142,7 @@ function Admin() {
             itemAvailability: newDataAdmin.itemAvailability,
             unityPrice: newDataAdmin.unityPrice,
             category: newDataAdmin.category,
-            unity: newDataAdmin.itemUnity,
+            unity: newDataAdmin.unity == '' ? 'Unidade' : newDataAdmin.unity,
             amount: 0
 
         }
@@ -144,6 +150,7 @@ function Admin() {
         firebase.database().ref('items/' + id)
         .set(data)
         .then(err => console.log(err))
+
         setNewDataAdmin({
 
             imageSrc: '',
@@ -250,10 +257,11 @@ function Admin() {
                         
                         <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem'/>
 
-                        <select onChange={handleInputAdminChange} name='itemUnity' >
+                        <select onChange={handleInputAdminChange} name='unity' >
 
                             <option value='unidade' >Unidade</option>
                             <option value='kg' >Kg</option>
+                            <option value='maco' >Maço</option>
 
                         </select>
 
@@ -316,15 +324,15 @@ function Admin() {
 
                         <h6>Preencha o que deseja alterar</h6>
 
-                        <input name='title' onChange={handleInputAdminChangeAlter} placeholder='Nome' />
+                        <input name='title' onChange={handleInputAdminChangeAlter} placeholder='Nome' value={dataAdmin[selectItem]?.title} />
 
-                        <input name='desc' onChange={handleInputAdminChangeAlter} placeholder='Descrição' />
+                        <input name='desc' onChange={handleInputAdminChangeAlter} placeholder='Descrição' value={dataAdmin[selectItem]?.desc} />
 
-                        <input name='price' onChange={handleInputAdminChangeAlter} placeholder='Preço' type='number' />
+                        <input name='price' onChange={handleInputAdminChangeAlter} placeholder='Preço' type='number' value={dataAdmin[selectItem]?.price} />
 
-                        <input type='file' onChange={uploadImageAltered} accept="image/png, image/jpeg" placeholder='Imagem'/>
+                        <input type='file' onChange={uploadImageAltered} accept="image/png, image/jpeg" placeholder='Imagem' />
 
-                        <input name='amountInStock' onChange={handleInputAdminChangeAlter} placeholder='Quantidade em estoque' />
+                        <input name='amountInStock' onChange={handleInputAdminChangeAlter} placeholder='Quantidade em estoque' value={dataAdmin[selectItem]?.amountInStock} />
 
                         <select onChange={handleInputAdminChangeAlter} name='itemAvailability' >
 
@@ -334,11 +342,12 @@ function Admin() {
 
                         </select>
 
-                        <select onChange={handleInputAdminChangeAlter} name='unity' >
+                        <select onChange={handleInputAdminChangeAlter} name='unity' value={dataAdmin[selectItem]?.unity}>
 
                             <option value='' > Selecione a unidade</option>
                             <option value='kg' >Quilograma</option>
                             <option value='Unidade' >Unidade</option>
+                            <option value='maco' >Maço</option>
 
                         </select>
 
