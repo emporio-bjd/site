@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
@@ -11,6 +11,11 @@ import 'firebase/database'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
 import heroImg from '../../img/heroImg3.jpg'
+import aspasImg from '../../img/quote.svg'
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
 
@@ -38,7 +43,7 @@ function Home() {
                 var data = snapshot.val()
                 var temp = Object.keys(data).map((key) => data[key])
 
-                temp.sort((a,b)=> {
+                temp.sort((a, b) => {
 
                     return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0)
 
@@ -108,7 +113,7 @@ function Home() {
             var search = searchInput.toLowerCase()
 
             // if (title.includes(searchInput) || desc.includes(searchInput))
-            if (title.includes(search) )
+            if (title.includes(search))
                 itens.push(item)
 
         })
@@ -158,16 +163,16 @@ function Home() {
 
         var dataTemp = data
 
-        if (dataTemp[index].amount > 0){
+        if (dataTemp[index].amount > 0) {
 
             dataTemp[index].amount = dataTemp[index].amount - 1
             var totalValueTemp = totalValue - Number(dataTemp[index].price)
 
             setData(dataTemp)
             setTotalValue(totalValueTemp)
-            
+
         }
-        
+
     }
 
     let history = useHistory();
@@ -186,16 +191,16 @@ function Home() {
                 newItems.push(item)
 
         })
-        
+
         if (listOfItems != null) {
-            
+
             newListOfItems = {
                 ...listOfItems,
                 ...newItems
             }
-            
+
             localStorage.setItem('products', JSON.stringify({ ...newListOfItems }))
-            
+
             console.log({ ...newListOfItems })
 
         }
@@ -214,6 +219,14 @@ function Home() {
 
     }
 
+    var carouselSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
+
     return (
 
         <div className="App" >
@@ -222,22 +235,55 @@ function Home() {
 
             <section id='heroSection'>
 
-                <div className='introHome' >
+                <div className='heroWrapper' >
 
-                    <img src={heroImg} alt="Imagem inicial" />
+                    <Slider {...carouselSettings}>
 
-                    <div className="heroText">
+                        <div>
+                            <h3>Teste</h3>
+                        </div>
 
-                        <h2>
-                            Alimentos orgânicos: mais saúde na sua mesa!
-                            <br/>Produtos selecionados.
-                        </h2>
+                        <div>
+                            <div className="feedback">
 
-                    </div>
+                                <div className="feedbackWrapper">
+
+                                    <img src={aspasImg} alt="aspas" />
+
+                                    <h2>Fulano de tal</h2>
+
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, illo?</p>
+
+                                </div>
+
+                                <div className="feedbackWrapper">
+
+                                    <img src={aspasImg} alt="aspas" />
+
+                                    <h2>Fulano de tal</h2>
+
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, illo?</p>
+
+                                </div>
+
+                                <div className="feedbackWrapper">
+
+                                    <img src={aspasImg} alt="aspas" />
+
+                                    <h2>Fulano de tal</h2>
+
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, illo?</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </Slider>
 
                 </div>
 
-                <div className="borderImg" />
+                {/* <div className="borderImg" /> */}
 
             </section>
 
@@ -297,7 +343,7 @@ function Home() {
             </section>
 
             <p className="tipHome" >Selecione a quantidade e depois clique para finalizar o pedido</p>
-            
+
             <div className='containerHome' >
 
                 <div className='productsHome'>
@@ -309,12 +355,12 @@ function Home() {
 
                                 if (item.itemAvailability == 'true') {
 
-                                    return(
+                                    return (
 
                                         <div className='boxHome'
 
-                                        // onClick={() => { handleModalInfos(item) }}
-                                        key={index}
+                                            // onClick={() => { handleModalInfos(item) }}
+                                            key={index}
                                         >
 
                                             <div className='infoDivHome' >
@@ -338,11 +384,11 @@ function Home() {
 
                                                         {
                                                             (item.unityPrice) != undefined ?
-                                                            (<p>
-                                                                <b>Unidade R$:  </b>
-                                                                {Number(item.unityPrice).toFixed(2)}
-                                                            </p>)
-                                                            : (<p></p>)
+                                                                (<p>
+                                                                    <b>Unidade R$:  </b>
+                                                                    {Number(item.unityPrice).toFixed(2)}
+                                                                </p>)
+                                                                : (<p></p>)
                                                         }
                                                     </div>
 
