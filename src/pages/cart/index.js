@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom'
 
 import Header from '../../components/header'
@@ -341,10 +342,12 @@ function Cart() {
 
                 {isSeller ? 
                     <div className='checkOut' >
+                        <Link to='/' onClick={()=>sendOrderSeller()} style={{marginRight: '15px'}} >Continuar comprando</Link>
                         <a onClick={()=>sendOrderSeller()} >Finalizar pedido</a>
                     </div>
                 :
                     <div className='checkOut' >
+                        <Link to='/' onClick={()=>sendOrder()} style={{marginRight: '15px'}} >Continuar comprando</Link>
                         <a onClick={()=>sendOrder()} >Finalizar pedido</a>
                     </div>
     

@@ -27,6 +27,8 @@ function ProviderProducts() {
         imageSrc: '',
         buyPrice: '',
         sellPrice: '',
+        amount: 0,
+        id: ''
 
     })
 
@@ -77,19 +79,20 @@ function ProviderProducts() {
         if (!firebase.apps.length)
             firebase.initializeApp(firebaseConfig);
 
-        firebase.database().ref('providers').get('/providers')
-            .then(function (snapshot) {
+        var firebaseRef = firebase.database().ref('providers/');
 
-                if (snapshot.exists()) {
+        firebaseRef.on('value', (snapshot) => {
 
-                    var data = snapshot.val()
-                    var temp = Object.keys(data).map((key) => data[key])
-                    setDataProvider(temp)
+            if (snapshot.exists()) {
 
-                } else {
-                    console.log("No data available");
-                }
-            })
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+                setDataProvider(temp)
+
+            } else {
+                console.log("No data available");
+            }
+        })
 
     }, [])
 
@@ -273,7 +276,8 @@ function ProviderProducts() {
                 product: dataAlterProduct.product != '' ? dataAlterProduct.product : products[selectProductToAlter].product,
                 sellPrice: dataAlterProduct.sellPrice != '' ? dataAlterProduct.sellPrice : products[selectProductToAlter].sellPrice,
                 unity: dataAlterProduct.unity != '' ? dataAlterProduct.unity : products[selectProductToAlter].unity,
-                // qntd: dataAlterProduct.qntd != 0 ? dataAlterProduct.qntd : products[selectProductToAlter].qntd,
+                amount: products[selectProductToAlter].amount,
+                id: products[selectProductToAlter].id
 
             }
 

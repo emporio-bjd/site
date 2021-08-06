@@ -44,7 +44,7 @@ function Register() {
 
                 const id = firebase.database().ref().child('posts').push().key
 
-                firebase.database().ref('users/' + id).set({
+                const data = {
 
                     name: registerData.name,
                     phoneNumber: registerData.phoneNumber,
@@ -60,7 +60,9 @@ function Register() {
                     giveData: checked,
                     id: id
 
-                })
+                }
+
+                firebase.database().ref('users/' + id).set(data)
 
                 localStorage.setItem('id', id)
 
@@ -137,6 +139,14 @@ function Register() {
                         document.getElementById('street').value = (data.logradouro);
                         document.getElementById('district').value = (data.bairro)
 
+                        // setRegisterData({
+                        //     ...registerData, ['district']: data.bairro
+                        // })
+                        // setRegisterData({
+                        //     ...registerData, ['street']: data.logradouro
+                        // })
+                        
+
                     } else {
 
                         window.alert('CEP inválido')
@@ -174,7 +184,7 @@ function Register() {
         if (counter == 9)
             makeRegister()
         else
-            alert('Você precisa preencher todos os campos!')
+            alert('Você precisa preencher todos os campos que possuem *')
 
     }
 
@@ -221,12 +231,12 @@ function Register() {
                             <fieldset>
 
                                 <legend>
-                                    <h2>Informações pessoais</h2>
+                                    <h2>Informações pessoais <span style={{color: '#662210', fontSize: '14px'}} >( * campos obrigatórios )</span></h2>
                                 </legend>
 
-                                <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo' />
+                                <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo *' />
 
-                                <input name='phoneNumber' type='tel' onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
+                                <input name='phoneNumber' type='tel' onChange={handleInputRegisterChange} placeholder='Telefone com DDD *' />
 
                                 <input name='birthDate' type='date' onChange={handleInputRegisterChange} placeholder='Data de nascimento' />
 
@@ -250,15 +260,16 @@ function Register() {
                                     <h2>Endereço</h2>
                                 </legend>
 
-                                <input id='cep' name='cepNumber' type='text' onBlur={searchCepData} onChange={handleInputRegisterChange} placeholder='CEP' />
+                                <input id='cep' name='cepNumber' type='text' onChange={handleInputRegisterChange} placeholder='CEP *' />
+                                {/* onBlur={searchCepData}  */}
 
-                                <input id='street' name='street' type='text' onChange={handleInputRegisterChange} placeholder='Nome da rua' />
+                                <input id='street' name='street' type='text' onChange={handleInputRegisterChange} placeholder='Nome da rua *' value=''/>
 
-                                <input id='district' name='district' type='text' onChange={handleInputRegisterChange} placeholder='Bairro' />
+                                <input id='district' name='district' type='text' onChange={handleInputRegisterChange} placeholder='Bairro *' value=''/>
 
-                                <input name='houseNumber' type='number' onChange={handleInputRegisterChange} placeholder='Número' />
+                                <input name='houseNumber' type='number' onChange={handleInputRegisterChange} placeholder='Número *' />
 
-                                <input name='complement' onChange={handleInputRegisterChange} placeholder='Complemento' />
+                                <input name='complement' onChange={handleInputRegisterChange} placeholder='Complemento *' />
 
                             </fieldset>
 
@@ -268,9 +279,9 @@ function Register() {
                                     <h2>E-mail e senha</h2>
                                 </legend>
 
-                                <input name='email' onChange={handleInputRegisterChange} placeholder='E-mail' />
+                                <input name='email' onChange={handleInputRegisterChange} placeholder='E-mail *' />
 
-                                <input name='password' type="password" onChange={handleInputRegisterChange} placeholder='Senha para o site' />
+                                <input name='password' type="password" onChange={handleInputRegisterChange} placeholder='Senha para o site *' />
 
 
                             </fieldset>
