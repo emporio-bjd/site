@@ -136,6 +136,7 @@ function Admin() {
                         <Link to="/ListaDeClientes" >Listagem de clientes</Link>
                         <Link to="/relatorios" >Relatórios</Link>
                         <Link to="/Estoque" >Estoque</Link>
+                        <Link to="/Banner" >Alterar feedback</Link>
                         
                     </ul>
 

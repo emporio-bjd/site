@@ -22,6 +22,7 @@ import DeliveryList from './pages/admin/deliveryList'
 import CartProvider from './pages/admin/cartProvider'
 import Reports from './pages/admin/reports'
 import Stock from './pages/admin/stock'
+import FeedbackBanner from './pages/admin/banner'
 
 const Routes = () => {
 
@@ -50,6 +51,7 @@ const Routes = () => {
             <Route component={CartProvider} path='/CarrinhoFornecedor' />
             <Route component={Reports} path='/Relatorios' />
             <Route component={Stock} path='/Estoque' />
+            <Route component={FeedbackBanner} path='/Banner' />
         
         </BrowserRouter>
 

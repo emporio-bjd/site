@@ -1,0 +1,104 @@
+.Feedback {
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+#mainFeedback {
+
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 5vh;
+
+}
+
+
+
+.feedbackOptions {
+
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.feedbackOptions ::placeholder {
+
+    color: white;
+
+}
+
+.feedbackOptions fieldset a { 
+
+    color: white;
+    padding: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: #662210;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px rgba(160, 160, 160, 0.35);
+
+}
+
+.feedbackOptions input {
+
+    width: 60%;
+    border: none;
+    padding: 15px;
+    margin: 10px 0;
+    color: white;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #ffc05c;
+    box-shadow: 0px 0px 8px rgba(160, 160, 160, 0.35);
+
+}
+
+.feedbackOptions fieldset select {
+
+    width: 64%;
+    border: none;
+    padding: 15px;
+    margin: 10px 0;
+    color: white;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #ffc05c;
+    box-shadow: 0px 0px 8px rgba(160, 160, 160, 0.35);
+
+}
+
+.feedbackOptions fieldset option {
+
+    padding: 10px;
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .feedbackOptions {
+
+        width: 90%;
+
+    }
+
+    .feedbackOptions input {
+
+        width: 80%;
+
+    }
+
+    .feedbackOptions fieldset select {
+
+        width: 88%;
+    
+    }
+
+}

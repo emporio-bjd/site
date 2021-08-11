@@ -20,6 +20,7 @@ import "slick-carousel/slick/slick-theme.css";
 function Home() {
 
     const [data, setData] = useState([])
+    const [dataFeedback, setDataFeedback] = useState([])
     const [dataBackup, setDataBackup] = useState([])
     const [searchInput, setSearchInput] = useState([])
     const [minProductPrice, setMinProductPrice] = useState(0)
@@ -58,6 +59,28 @@ function Home() {
             }
 
         });
+
+    }, [])
+
+    useEffect(() => {
+
+        if (!firebase.apps.length)
+            firebase.initializeApp(firebaseConfig);
+
+        var firebaseRef = firebase.database().ref('feedback');
+
+        firebaseRef.on('value', (snapshot) => {
+    
+            if (snapshot.exists()) {
+
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+                setDataFeedback(temp)
+            }
+            else {
+                console.log("No data available");
+            }
+        })
 
     }, [])
 
@@ -224,7 +247,9 @@ function Home() {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
     };
 
     return (
@@ -246,37 +271,24 @@ function Home() {
                         <div>
                             <div className="feedback">
 
-                                <div className="feedbackWrapper">
+                                {dataFeedback.map((item, index) => (
 
-                                    <img src={aspasImg} alt="aspas" />
+                                        <div className="feedbackWrapper">
 
-                                    <h2>Fulano de tal</h2>
+                                            <img src={aspasImg} alt="aspas" />
 
-                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, illo?</p>
+                                            <h2>{item.name}</h2>
 
-                                </div>
+                                            <p>"{item.desc}"</p>
 
-                                <div className="feedbackWrapper">
+                                        </div>
 
-                                    <img src={aspasImg} alt="aspas" />
-
-                                    <h2>Fulano de tal</h2>
-
-                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, illo?</p>
-
-                                </div>
-
-                                <div className="feedbackWrapper">
-
-                                    <img src={aspasImg} alt="aspas" />
-
-                                    <h2>Fulano de tal</h2>
-
-                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, illo?</p>
-
-                                </div>
+                                        )
+                                    )
+                                }
 
                             </div>
+                            
                         </div>
 
                     </Slider>
