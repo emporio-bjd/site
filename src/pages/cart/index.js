@@ -39,15 +39,14 @@ function Cart() {
         
     }
 
-    useEffect(async () => {
+    useEffect( () => {
 
-        const verify = await JSON.parse(localStorage.getItem('products'))
-
-        // console.log(verify)
+        const verify = JSON.parse(localStorage.getItem('products'))
     
         if (verify != null ){
 
             var temp = Object.keys(verify).map((key) => verify[key])
+            temp.sort((a,b)=> (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
             
             setData(temp)
             setDataExists(true)
@@ -56,7 +55,7 @@ function Cart() {
 
             var total = 0
 
-            temp.map((item)=>{
+            temp.map((item) => {
 
                 var value = ( Number(item.price) * Number(item.amount) )
                 total = value + total
@@ -96,7 +95,7 @@ function Cart() {
 
                 temp.map((item)=>{ 
 
-                    if(item.email == userEmail){
+                    if(item.email === userEmail){
                         setDataAccount(item)
                     }
 
@@ -135,7 +134,7 @@ function Cart() {
 
         if(userIsLogged){
 
-            if (selectedPayment != '') {
+            if (selectedPayment !== '') {
 
                 const id = firebase.database().ref().child('posts').push().key
                 const now = new Date()

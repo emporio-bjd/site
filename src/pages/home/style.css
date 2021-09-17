@@ -189,12 +189,12 @@
 
 #sectionHome {
 
-    max-width: 80vw;
-    margin: 0 auto;
-    column-count: 3;
     padding-top: 5vh;
     padding-bottom: 5vh;
     border-radius: 10px;
+    width: 100%;
+    display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 
 }
 
@@ -207,9 +207,8 @@
     break-inside: avoid-column;
     padding: 15px;
     border-radius: 10px;
-    margin: 10px 0px;
+    margin: 10px;
     color: rgb(0, 0, 0);
-    /* cursor: pointer; */
     box-shadow: -2px 5px 8px #92929255;
 }
 

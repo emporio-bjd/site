@@ -38,11 +38,7 @@ function Home() {
                 var data = snapshot.val()
                 var temp = Object.keys(data).map((key) => data[key])
 
-                temp.sort((a,b)=> {
-
-                    return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0)
-
-                })
+                temp.sort((a,b)=> (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
 
                 setData(temp)
                 setDataBackup(temp)
@@ -169,11 +165,10 @@ function Home() {
 
     function addToCart() {
 
-        const listOfItems = JSON.parse(localStorage.getItem('products'))
+        const temp = JSON.parse(localStorage.getItem('products'))
+        var listOfItems = temp !== null ? Object.keys(temp).map((key) => temp[key]) : []
 
         const newItems = []
-
-        var newListOfItems = {}
 
         data.map((item) => {
 
@@ -181,27 +176,20 @@ function Home() {
                 newItems.push(item)
 
         })
-        
-        if (listOfItems != null) {
+
+        if (listOfItems.length > 0) {
+
+            newItems.map(item=>listOfItems.push(item))
+
+            console.log('listOfItems',listOfItems)
             
-            newListOfItems = {
-                ...listOfItems,
-                ...newItems
-            }
-            
-            localStorage.setItem('products', JSON.stringify({ ...newListOfItems }))
-            
-            console.log({ ...newListOfItems })
+            localStorage.setItem('products', JSON.stringify(listOfItems))
 
         }
         else {
 
-            newListOfItems = {
-                ...newItems
-            }
-
-            localStorage.setItem('products', JSON.stringify({ ...newListOfItems }))
-            console.log({ ...newListOfItems })
+            newItems.map(item=>listOfItems.push(item))
+            localStorage.setItem('products', JSON.stringify(listOfItems))
 
         }
 
@@ -302,7 +290,7 @@ function Home() {
                         {
                             data.map((item, index) => {
 
-                                if (item.itemAvailability == 'true') {
+                                if (item.itemAvailability === 'true') {
 
                                     return(
 
@@ -332,12 +320,12 @@ function Home() {
                                                         <p><b>Categoria: </b>{item.category}</p>
 
                                                         {
-                                                            (item.unityPrice) != undefined ?
-                                                            (<p>
+                                                            item.unityPrice > 0 ?
+                                                            <p>
                                                                 <b>Unidade R$:  </b>
                                                                 {Number(item.unityPrice).toFixed(2)}
-                                                            </p>)
-                                                            : (<p></p>)
+                                                            </p>
+                                                            : null
                                                         }
                                                     </div>
 

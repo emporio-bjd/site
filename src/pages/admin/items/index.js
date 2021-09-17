@@ -61,6 +61,12 @@ function Admin() {
 
                 var data = snapshot.val()
                 var temp = Object.keys(data).map((key) => data[key])
+                temp.sort((a,b)=> {
+
+                    return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0)
+
+                })
+                console.log(temp)
                 setDataAdmin(temp)
             }
             else {
@@ -72,35 +78,24 @@ function Admin() {
 
     useEffect(() => {
 
-        if (!firebase.apps.length)
-            firebase.initializeApp(firebaseConfig);
+        if(dataAdmin) {
 
-        var ref = firebase.database().ref("items");
+            var keys = []
+            dataAdmin.map((item) => keys.push(item.id))
+            setDataKeysAdm(keys)
+        }
 
-        var keys = []
-
-        ref.orderByKey().on("child_added", function (snapshot) {
-            keys.push(snapshot.key);
-        });
-
-        setDataKeysAdm(keys)
-
-    }, []);
+    }, [dataAdmin]);
 
     function handleInputAdminChange(event) {
 
         const { name, value } = event.target
-
-        console.log(name, value)
 
         setNewDataAdmin({
 
             ...newDataAdmin, [name]: value
 
         })
-
-        console.log(newDataAdmin)
-
     }
 
     function handleInputAdminChangeAlter(event) {
@@ -119,6 +114,8 @@ function Admin() {
 
         setSelectItem(event.target.value)
         console.log(dataAdmin[event.target.value])
+        console.log('dataAdmin',dataAdmin)
+        console.log(dataKeysAdm[event.target.value])
 
     }
 
