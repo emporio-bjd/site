@@ -318,7 +318,7 @@ function Home() {
                                                     <div>
 
                                                         <p><b>Categoria: </b>{item.category}</p>
-
+{/* 
                                                         {
                                                             item.unityPrice > 0 ?
                                                             <p>
@@ -326,7 +326,7 @@ function Home() {
                                                                 {Number(item.unityPrice).toFixed(2)}
                                                             </p>
                                                             : null
-                                                        }
+                                                        } */}
                                                     </div>
 
                                                 </div>

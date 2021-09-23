@@ -21,7 +21,7 @@ function Admin() {
         desc: '',
         price: '',
         itemAvailability: 0,
-        unityPrice: '',
+        // unityPrice: '',
         category: '',
         unity: '',
         amount:''
@@ -40,7 +40,7 @@ function Admin() {
         desc: '',
         price: '',
         itemAvailability: 0,
-        unityPrice: '',
+        // unityPrice: '',
         category: '',
         unity: '',
         amount: ''
@@ -133,7 +133,7 @@ function Admin() {
             price: newDataAdmin.price,
             id: id,
             itemAvailability: newDataAdmin.itemAvailability,
-            unityPrice: newDataAdmin.unityPrice,
+            // unityPrice: newDataAdmin.unityPrice,
             category: newDataAdmin.category,
             unity: newDataAdmin.unity == '' ? 'Unidade' : newDataAdmin.unity,
             amount: 0
@@ -151,7 +151,7 @@ function Admin() {
             desc: '',
             price: '',
             itemAvailability: 0,
-            unityPrice: '',
+            // unityPrice: '',
             category: '',
             unity: ''
     
@@ -238,9 +238,9 @@ function Admin() {
 
                         <input name='desc' onChange={handleInputAdminChange} placeholder='Descrição' value={newDataAdmin.desc} />
 
-                        <input name='price' onChange={handleInputAdminChange} placeholder='Preço por Kg' type='number' value={newDataAdmin.price} />
+                        <input name='price' onChange={handleInputAdminChange} placeholder='Preço' type='number' value={newDataAdmin.price} />
 
-                        <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' value={newDataAdmin.unityPrice} />
+                        {/* <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' value={newDataAdmin.unityPrice} /> */}
 
                         <input name='amount' onChange={handleInputAdminChange} placeholder='Quantidade em estoque' type='number' value={newDataAdmin.amount} />
                         
