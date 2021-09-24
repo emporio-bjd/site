@@ -1,14 +1,17 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import { Link, Redirect } from "react-router-dom";
+
 import Header from '../../components/header'
 import Footer from '../../components/footer'
+
 import './style.css'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
-import { Link, Redirect } from "react-router-dom";
+import InputMask from 'react-input-mask';
 
 import logoEmporio2 from '../../img/logoEmporio2.png'
 
@@ -20,6 +23,7 @@ function Register() {
         phoneNumber: '',
         birthDate: '',
         personWhoIndicated: '',
+        city: '',
         street: '',
         houseNumber: '',
         complement: '',
@@ -34,7 +38,39 @@ function Register() {
     const [selectedOption, setSelectedOption] = useState('')
     const [userIsLogged, setUserIsLogged] = useState(false);
     const [registerDone, setRegisterDone] = useState(false);
+    const [dataSellers, setDataSellers] = useState([]);
     const [checked, setChecked] = useState(false);
+    const [displayInputWhoIndicated, setDisplayInputWhoIndicated] = useState('none');
+    const [displaySelectWhoIndicated, setDisplaySelectWhoIndicated] = useState('none');
+
+    useEffect(() => {
+
+        if (!firebase.apps.length)
+            firebase.initializeApp(firebaseConfig);
+
+        var firebaseRef = firebase.database().ref('sellers/');
+
+        firebaseRef.on('value', (snapshot) => {
+
+            if (snapshot.exists()) {
+
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+
+                temp.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
+
+                setDataSellers(temp)
+            }
+
+            else {
+
+                console.log("No data available");
+
+            }
+
+        });
+
+    }, [])
 
     function makeRegister() {
 
@@ -51,6 +87,7 @@ function Register() {
                     birthDate: registerData.birthDate,
                     personWhoIndicated: registerData.personWhoIndicated,
                     whoIndicated: selectedOption,
+                    city: registerData.city,
                     street: registerData.street,
                     houseNumber: registerData.houseNumber,
                     complement: registerData.complement,
@@ -97,6 +134,28 @@ function Register() {
 
         setSelectedOption(value)
 
+        if (value == 1 || value == 6) {
+
+            setDisplayInputWhoIndicated('block')
+            setDisplaySelectWhoIndicated('none')
+
+        }
+
+        else if (value == 2) {
+
+            setDisplaySelectWhoIndicated('block')
+            setDisplayInputWhoIndicated('none')
+
+
+        }
+
+        else {
+
+            setDisplayInputWhoIndicated('none')
+            setDisplaySelectWhoIndicated('none')
+
+        }
+
     }
 
     function onAuthStateChanged(user) {
@@ -105,7 +164,6 @@ function Register() {
             if (user)
                 setUserIsLogged(true)
         });
-
 
     }
 
@@ -145,7 +203,7 @@ function Register() {
                         // setRegisterData({
                         //     ...registerData, ['street']: data.logradouro
                         // })
-                        
+
 
                     } else {
 
@@ -180,8 +238,9 @@ function Register() {
         registerData.password != '' ? counter++ : counter = counter
         registerData.phoneNumber != '' ? counter++ : counter = counter
         registerData.street != '' ? counter++ : counter = counter
+        registerData.city != '' ? counter++ : counter = counter
 
-        if (counter == 9)
+        if (counter == 10)
             makeRegister()
         else
             alert('Você precisa preencher todos os campos que possuem *')
@@ -231,26 +290,43 @@ function Register() {
                             <fieldset>
 
                                 <legend>
-                                    <h2>Informações pessoais <span style={{color: '#662210', fontSize: '14px'}} >( * campos obrigatórios )</span></h2>
+                                    <h2>Informações pessoais <span style={{ color: '#662210', fontSize: '14px' }} >( * campos obrigatórios )</span></h2>
                                 </legend>
 
                                 <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo *' />
 
-                                <input name='phoneNumber' type='tel' onChange={handleInputRegisterChange} placeholder='Telefone com DDD *' />
+                                <InputMask name='phoneNumber' type='tel' mask="(99) 99999-9999" maskChar=" " onChange={handleInputRegisterChange} placeholder='Telefone com DDD *' />
 
                                 <input name='birthDate' type='date' onChange={handleInputRegisterChange} placeholder='Data de nascimento' />
 
                                 <select onChange={handleSelect} >
                                     <option value='0' >Como ficou sabendo sobre nós?</option>
-                                    <option value='1' >Indicação (digite o nome abaixo)</option>
-                                    <option value='2' >Recebi contato da empresa: abrir campo lista com nome dos vendedores</option>
+                                    <option value='1' >Indicação</option>
+                                    <option value='2' >Recebi contato da empresa</option>
                                     <option value='3' >Facebook</option>
                                     <option value='4' >Instagram</option>
                                     <option value='5' >Pesquisa no Google</option>
+                                    <option value='6' >Outros</option>
                                 </select>
 
                                 {/* fazer depois esse campo só aparecer se a pessoa selecionar o item 2 do select */}
-                                <input name='personWhoIndicated' onChange={handleInputRegisterChange} placeholder='Quem indicou?' />
+                                <input name='personWhoIndicated' style={{ display: displayInputWhoIndicated }} onChange={handleInputRegisterChange} placeholder='Quem indicou?' />
+
+                                <select name='personWhoIndicated' style={{ display: displaySelectWhoIndicated }} onChange={handleInputRegisterChange} placeholder='Quem indicou?'>
+
+                                    <option selected disabled>Selecione o vendedor que indicou</option>
+
+                                    {dataSellers.map((item, index) => {
+
+                                        return (
+
+                                            <option value={item.name} key={index}>{item.name}</option>
+
+                                        )
+
+                                    })}
+
+                                </select>
 
                             </fieldset>
 
@@ -263,11 +339,13 @@ function Register() {
                                 <input id='cep' name='cepNumber' type='text' onChange={handleInputRegisterChange} placeholder='CEP *' />
                                 {/* onBlur={searchCepData}  */}
 
-                                <input id='street' name='street' type='text' onChange={handleInputRegisterChange} placeholder='Nome da rua *' value=''/>
+                                <input id='city' name='city' type='text' onChange={handleInputRegisterChange} placeholder='Município *' />
 
-                                <input id='district' name='district' type='text' onChange={handleInputRegisterChange} placeholder='Bairro *' value=''/>
+                                <input id='street' name='street' type='text' onChange={handleInputRegisterChange} placeholder='Nome da rua *' />
 
                                 <input name='houseNumber' type='number' onChange={handleInputRegisterChange} placeholder='Número *' />
+
+                                <input id='district' name='district' type='text' onChange={handleInputRegisterChange} placeholder='Bairro *' />
 
                                 <input name='complement' onChange={handleInputRegisterChange} placeholder='Complemento *' />
 
@@ -283,11 +361,10 @@ function Register() {
 
                                 <input name='password' type="password" onChange={handleInputRegisterChange} placeholder='Senha para o site *' />
 
-
                             </fieldset>
 
                             <div className="allowDataUse">
-                                
+
                                 <label id="giveDataText">
                                     <input
                                         type="checkbox"

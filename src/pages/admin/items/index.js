@@ -24,7 +24,8 @@ function Admin() {
         // unityPrice: '',
         category: '',
         unity: '',
-        amount:''
+        amount: '',
+        amountInStock: ''
         
     })
 
@@ -43,7 +44,8 @@ function Admin() {
         // unityPrice: '',
         category: '',
         unity: '',
-        amount: ''
+        amount: '',
+        amountInStock: ''
 
     })
 
@@ -136,7 +138,8 @@ function Admin() {
             // unityPrice: newDataAdmin.unityPrice,
             category: newDataAdmin.category,
             unity: newDataAdmin.unity == '' ? 'Unidade' : newDataAdmin.unity,
-            amount: 0
+            amount: 0,
+            amountInStock: newDataAdmin.amountInStock
 
         }
 
@@ -153,7 +156,8 @@ function Admin() {
             itemAvailability: 0,
             // unityPrice: '',
             category: '',
-            unity: ''
+            unity: '',
+            amountInStock: ''
     
         })
         alert("Item inserido com sucesso!.")
@@ -170,7 +174,8 @@ function Admin() {
         price: dataAlterItem.price !== 0 ? dataAlterItem.price : dataAdmin[selectItem].price,
         itemAvailability: dataAlterItem.itemAvailability !== 0 ? dataAlterItem.itemAvailability : dataAdmin[selectItem].itemAvailability,
         unity: dataAlterItem.unity !== 0 ? dataAlterItem.unity : dataAdmin[selectItem].unity,
-        amount: dataAlterItem.amount !== 0 ? dataAlterItem.amount : dataAdmin[selectItem].amount
+        amount: dataAlterItem.amount !== 0 ? dataAlterItem.amount : dataAdmin[selectItem].amount,
+        amountInStock: dataAlterItem.amountInStock !== 0 ? dataAlterItem.amountInStock : dataAdmin[selectItem].amountInStock
       }
       firebase.database()
       .ref('items/' + dataKeysAdm[selectItem])
@@ -242,7 +247,7 @@ function Admin() {
 
                         {/* <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' value={newDataAdmin.unityPrice} /> */}
 
-                        <input name='amount' onChange={handleInputAdminChange} placeholder='Quantidade em estoque' type='number' value={newDataAdmin.amount} />
+                        <input name='amountInStock' onChange={handleInputAdminChange} placeholder='Quantidade em estoque' type='number' value={newDataAdmin.amountInStock} />
                         
                         <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem'/>
 
@@ -343,10 +348,10 @@ function Admin() {
                         />
 
                         <input
-                          name='amount'
+                          name='amountInStock'
                           onChange={handleInputAdminChangeAlter}
                           placeholder='Quantidade em estoque'
-                          value={dataAlterItem.amount}
+                          value={dataAlterItem.amountInStock}
                         />
 
                         <select onChange={handleInputAdminChangeAlter} name='itemAvailability' >

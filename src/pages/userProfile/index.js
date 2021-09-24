@@ -24,10 +24,12 @@ function UserProfile() {
         name: '',
         phoneNumber: '',
         street: '',
+        city: '',
         houseNumber: '',
         complement: '',
         district: '',
         cepNumber: '',
+        city: '',
 
     })
 
@@ -54,6 +56,7 @@ function UserProfile() {
 
                         if (item.email == userEmail)
                             setDataAccount(item)
+                            setRegisterData(item)
 
                     })
 
@@ -100,6 +103,7 @@ function UserProfile() {
         firebase.auth().signOut()
         localStorage.setItem('userEmail','')
         history.push('/')
+        alert('Você desconectou da sua conta com sucesso!')
 
     }
 
@@ -135,30 +139,36 @@ function UserProfile() {
 
     function updateRegister() {
 
-        firebase.database().ref('users/' + dataAccount.id).update({
+            const newData = {
 
-            name: registerData.name != '' ? registerData.name : dataAccount.name,
-            phoneNumber: registerData.phoneNumber != '' ? registerData.phoneNumber : dataAccount.phoneNumber,
-            personWhoIndicated: dataAccount.personWhoIndicated,
-            whoIndicated: dataAccount.whoIndicated,
-            street: registerData.street != '' ? registerData.street : dataAccount.street,
-            houseNumber: registerData.houseNumber != '' ? registerData.houseNumber : dataAccount.houseNumber,
-            complement: registerData.complement != '' ? registerData.complement : dataAccount.complement,
-            district: registerData.district != '' ? registerData.district : dataAccount.district,
-            cepNumber: registerData.cepNumber != '' ? registerData.cepNumber : dataAccount.cepNumber,
-            email: dataAccount.email,
-            id: dataAccount.id
+                name: registerData.name !== '' ? registerData.name : dataAccount.name,
+                phoneNumber: registerData.phoneNumber !== '' ? registerData.phoneNumber : dataAccount.phoneNumber,
+                personWhoIndicated: dataAccount.personWhoIndicated,
+                whoIndicated: dataAccount.whoIndicated,
+                street: registerData.street !== '' ? registerData.street : dataAccount.street,
+                city: registerData.city !== '' ? registerData.city : dataAccount.city,
+                houseNumber: registerData.houseNumber !== '' ? registerData.houseNumber : dataAccount.houseNumber,
+                complement: registerData.complement !== '' ? registerData.complement : dataAccount.complement,
+                district: registerData.district !== '' ? registerData.district : dataAccount.district,
+                cepNumber: registerData.cepNumber !== '' ? registerData.cepNumber : dataAccount.cepNumber,
+                city: registerData.city !== '' ? registerData.city : dataAccount.city,
+                email: dataAccount.email,
+                id: dataAccount.id
 
-        })
-            .then(() => alert("Cadastro atualizado com sucesso!"))
+            }
+            firebase.database()
+            .ref('users/' + dataAccount.id)
+            .update(newData)
+            .then(() => alert("Dados atualizados com sucesso!"))
+            window.location.reload()
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 console.log(errorMessage)
             });
-
+            
     }
-
+            
     return (
 
         <div className="clientProfile">
@@ -183,7 +193,7 @@ function UserProfile() {
                     </li>
                     <li>
                         <p>Endereço:</p>
-                        <p>{dataAccount.street}, {dataAccount.district} - {dataAccount.houseNumber}</p>
+                        <p>{dataAccount.city}: {dataAccount.street} - {dataAccount.houseNumber}, {dataAccount.district} ({dataAccount.complement})</p>
                     </li>
                 </ul>
 
@@ -252,9 +262,20 @@ function UserProfile() {
                             <h2>Informações pessoais</h2>
                         </legend>
 
-                        <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo' />
+                        <input 
+                            name='name' 
+                            onChange={handleInputRegisterChange} 
+                            placeholder='Nome completo'
+                            value={registerData.name}
+                        />
 
-                        <input name='phoneNumber' type='tel' onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
+                        <input 
+                            name='phoneNumber' 
+                            type='tel' 
+                            onChange={handleInputRegisterChange} 
+                            placeholder='Telefone com DDD' 
+                            value={registerData.phoneNumber}
+                        />
 
                     </fieldset>
 
@@ -264,15 +285,48 @@ function UserProfile() {
                             <h2>Endereço</h2>
                         </legend>
 
-                        <input name='street' onChange={handleInputRegisterChange} placeholder='Nome da rua' />
+                        <input 
+                            name='city' 
+                            onChange={handleInputRegisterChange} 
+                            placeholder='Cidade'
+                            value={registerData.city}
+                        />
 
-                        <input name='houseNumber' type='number' onChange={handleInputRegisterChange} placeholder='N° da casa/apto' />
+                        <input 
+                            name='street' 
+                            onChange={handleInputRegisterChange} 
+                            placeholder='Nome da rua'
+                            value={registerData.street}
+                        />
 
-                        <input name='complement' onChange={handleInputRegisterChange} placeholder='Complemento' />
+                        <input 
+                            name='houseNumber' 
+                            type='number' 
+                            onChange={handleInputRegisterChange} 
+                            placeholder='N° da casa/apto'
+                            value={registerData.houseNumber}
+                        />
 
-                        <input name='district' onChange={handleInputRegisterChange} placeholder='Bairro' />
+                        <input 
+                            name='complement' 
+                            onChange={handleInputRegisterChange} 
+                            placeholder='Complemento'
+                            value={registerData.complement}
+                        />
 
-                        <input name='cepNumber' onChange={handleInputRegisterChange} placeholder='CEP' />
+                        <input 
+                            name='district' 
+                            onChange={handleInputRegisterChange} 
+                            placeholder='Bairro'
+                            value={registerData.district}
+                        />
+
+                        <input 
+                            name='cepNumber' 
+                            onChange={handleInputRegisterChange} 
+                            placeholder='CEP'
+                            value={registerData.cepNumber}
+                        />
 
                     </fieldset>
 

@@ -52,7 +52,6 @@ function Home() {
 
     }, [])
 
-
     function handleSearchInput(event) {
 
         if (event.key == 'Enter') {
@@ -135,7 +134,9 @@ function Home() {
     function add(index) {
 
         var dataTemp = data
-        dataTemp[index].amount = dataTemp[index].amount + 1
+        dataTemp[index].amount = Number (dataTemp[index].amount + 1)
+
+        console.log(typeof dataTemp[index].amount )
 
         var totalValueTemp = Number(dataTemp[index].price) + totalValue
 
