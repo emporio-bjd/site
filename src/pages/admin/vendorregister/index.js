@@ -4,6 +4,8 @@ import Header from '../../../components/header'
 import Footer from '../../../components/footer'
 import './style.css'
 
+import InputMask from 'react-input-mask';
+
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import firebaseConfig from '../../../FIREBASECONFIG.js'
@@ -16,17 +18,11 @@ function VendorRegister() {
 
         name: '',
         phoneNumber: '',
-        birthDate: '',
-        personWhoIndicated: '',
-        street: '',
-        houseNumber: '',
-        complement: '',
-        district: '',
-        cepNumber: '',
         email: '',
         password: '',
 
     })
+
     const [selectedOption, setSelectedOption] = useState('')
 
     function makeRegister () {
@@ -49,12 +45,11 @@ function VendorRegister() {
 
             name: registerData.name,
             phoneNumber: registerData.phoneNumber,
-            birthDate: registerData.birthDate,
             email: registerData.email,
             id: id
 
         }).then(()=>alert('Cadastro realizado com sucesso'))
-        
+
     }
 
     function handleInputRegisterChange(event) {
@@ -96,7 +91,7 @@ function VendorRegister() {
                 <div className='formsSignIn'>
 
                     <div className='titleSignIn' >
-                        <h1>Cadrastar vendedor</h1>
+                        <h1>Cadastrar vendedor</h1>
                     </div>
                     
                     <fieldset>
@@ -107,9 +102,7 @@ function VendorRegister() {
 
                         <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo' />
 
-                        <input name='phoneNumber' type='number' onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
-
-                        <input name='birthDate' type='date' onChange={handleInputRegisterChange} placeholder='Data de nascimento' />
+                        <InputMask name='phoneNumber' type='tel' mask="(99) 99999-9999" maskChar=" " onChange={handleInputRegisterChange} placeholder='Telefone com DDD' />
 
                     </fieldset>
 

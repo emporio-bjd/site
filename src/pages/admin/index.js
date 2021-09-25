@@ -129,11 +129,12 @@ function Admin() {
 
                         <Link to="/Pedidos" >Pedidos em andamento</Link>
                         <Link to="/AdminItems" >Cadastro/alteração de itens</Link>
-                        <Link to="/AdminVendedor" >Cadastro/alteração de vendedores</Link>
+                        <Link to="/AdminVendedor" >Cadastro de vendedores</Link>
                         <Link to="/AdminFornecedor" >Cadastro/alteração de fornecedores </Link>
                         <Link to='/AdminProdutoFornecedor' >Cadastro/alteração de produtos dos fornecedores</Link>
                         <Link to='/PedidoFornecedor' >Realizar pedido do fornecedor</Link>
                         <Link to="/ListaDeClientes" >Listagem de clientes</Link>
+                        <Link to="/ListaDeVendedores" >Listagem de vendedores</Link>
                         <Link to="/relatorios" >Relatórios</Link>
                         <Link to="/Estoque" >Estoque</Link>
                         <Link to="/Banner" >Alterar feedback</Link>
@@ -145,6 +146,7 @@ function Admin() {
             </main>
 
             <Footer />
+            
         </div>
 
         )

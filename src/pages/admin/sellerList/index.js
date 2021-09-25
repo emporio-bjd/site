@@ -3,37 +3,32 @@ import Header from '../../../components/header'
 import Footer from '../../../components/footer'
 import './style.css'
 
-import ModalUsers from '../../../components/modalUsers'
-
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 import firebaseConfig from '../../../FIREBASECONFIG.js'
 
-function Admin() {
+function SellerList() {
 
-    const [dataUsers, setDataUsers] = useState([]);
-    const [searchInput, setSearchInput] = useState([]);
     const [data, setData] = useState([]);
     const [displaySearchResult, setDisplaySearchResult] = useState('none');
     const [dataBackup, setDataBackup] = useState([]);
-
-    const [displayModal, setDisplayModal] = useState("none");
-    const [modalDataUsers, setModalDataUsers] = useState({});
+    const [dataSellers, setDataSellers] = useState([]);
+    const [searchInput, setSearchInput] = useState([]);
 
     useEffect(() => {
 
         if (!firebase.apps.length)
             firebase.initializeApp(firebaseConfig);
 
-        firebase.database().ref('users').get('/users')
+        firebase.database().ref('sellers').get('/sellers')
             .then(function (snapshot) {
 
                 if (snapshot.exists()) {
 
                     var data = snapshot.val()
                     var temp = Object.keys(data).map((key) => data[key])
-                    setDataUsers(temp)
+                    setDataSellers(temp)
                     setData(temp)
                     setDataBackup(temp)
                 }
@@ -70,7 +65,7 @@ function Admin() {
 
         })
 
-        setDataUsers(name)
+        setDataSellers(name)
         setDisplaySearchResult('flex')
 
     }
@@ -78,25 +73,7 @@ function Admin() {
     function clearSearchName() {
 
         setDisplaySearchResult('none')
-        setDataUsers(dataBackup)
-
-    }
-
-    function handleModalInfos(item) {
-
-        setModalDataUsers(item)
-        window.scrollTo(0, 0);
-        displayModal == "none" ? setDisplayModal("flex") : setDisplayModal("none")
-
-    }
-
-    function closeModal() {
-
-        if (displayModal == "none")
-            setDisplayModal("flex")
-        else {
-            setDisplayModal("none");
-        }
+        setDataSellers(dataBackup)
 
     }
 
@@ -105,13 +82,6 @@ function Admin() {
         <div className='ClientListPage'>
 
             <Header />
-
-            <div style={{ display: displayModal }} role="dialog" className='divModalUser' >
-
-                <span onClick={closeModal}>X</span>
-                <ModalUsers displayProperty={displayModal} modalDataUsers={modalDataUsers} />
-
-            </div>
 
             <main id="mainClientList" >
 
@@ -141,9 +111,9 @@ function Admin() {
 
                 </section>
 
-                {dataUsers.map((item) => (
+                {dataSellers.map((item) => (
 
-                    <div onClick={() => { handleModalInfos(item) }} className="boxClientList" >
+                    <div className="boxClientList">
 
                         <h3>{item.name}</h3>
 
@@ -152,24 +122,6 @@ function Admin() {
                             <div>
                                 <p><b>Telefone</b>: {item.phoneNumber}</p>
                                 <p><b>E-mail</b>: {item.email}</p>
-                            </div>
-
-                            <div>
-
-                                <p><b>Rua</b>: {item.street}</p>
-                                <p><b>Bairro</b>: {item.district}</p>
-                                <p><b>N°</b>: {item.houseNumber}</p>
-
-                                {item.giveData == true ?
-
-                                    <p><b>Aceita receber informações: </b>Sim</p>
-
-                                    :
-
-                                    <p><b>Aceita receber informações: </b>Não</p>
-
-                                }
-
                             </div>
 
                         </div>
@@ -187,4 +139,4 @@ function Admin() {
 
 }
 
-export default Admin
+export default SellerList

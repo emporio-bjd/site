@@ -79,39 +79,38 @@ function ProviderProducts() {
         if (!firebase.apps.length)
             firebase.initializeApp(firebaseConfig);
 
-        var firebaseRef = firebase.database().ref('providers/');
+            var firebaseRef = firebase.database().ref('providers/');
 
-        firebaseRef.on('value', (snapshot) => {
-
-            if (snapshot.exists()) {
-
-                var data = snapshot.val()
-                var temp = Object.keys(data).map((key) => data[key])
-                setDataProvider(temp)
-
-            } else {
-                console.log("No data available");
-            }
-        })
+            firebaseRef.on('value', (snapshot) => {
+    
+                if (snapshot.exists()) {
+    
+                    var data = snapshot.val()
+                    var temp = Object.keys(data).map((key) => data[key])
+                    setDataProvider(temp.sort((a,b)=> {
+    
+                      return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0)
+    
+                    }))
+                }
+                else {
+                  console.log("No data available");
+                }
+            })
 
     }, [])
 
     useEffect(() => {
 
-        if (!firebase.apps.length)
-            firebase.initializeApp(firebaseConfig);
+        if(dataProvider) {
 
-        var ref = firebase.database().ref("providers");
+            var keys = []
+            dataProvider.map((item) => keys.push(item.id))
+            setDataKeysAdm(keys)
 
-        var keys = []
+        }
 
-        ref.orderByKey().on("child_added", function (snapshot) {
-            keys.push(snapshot.key);
-        });
-
-        setDataKeysAdm(keys)
-
-    }, []);
+    }, [dataProvider]);
 
     useEffect(() => {
 
