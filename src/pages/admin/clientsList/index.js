@@ -149,7 +149,7 @@ function Admin() {
 
                         <div>
 
-                            <div>
+                            <div style={{marginRight: '5rem'}}>
                                 <p><b>Telefone</b>: {item.phoneNumber}</p>
                                 <p><b>E-mail</b>: {item.email}</p>
                             </div>
@@ -159,6 +159,16 @@ function Admin() {
                                 <p><b>Rua</b>: {item.street}</p>
                                 <p><b>Bairro</b>: {item.district}</p>
                                 <p><b>N°</b>: {item.houseNumber}</p>
+
+                                {item.personWhoIndicated !== '' ?
+
+                                    <p><b>Quem indicou: </b>{item.personWhoIndicated}</p>
+
+                                    :
+
+                                    <p></p>
+
+                                }
 
                                 {item.giveData == true ?
 

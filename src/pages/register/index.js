@@ -86,7 +86,6 @@ function Register() {
                     phoneNumber: registerData.phoneNumber,
                     birthDate: registerData.birthDate,
                     personWhoIndicated: registerData.personWhoIndicated,
-                    whoIndicated: selectedOption,
                     city: registerData.city,
                     street: registerData.street,
                     houseNumber: registerData.houseNumber,
@@ -132,7 +131,7 @@ function Register() {
 
         const { name, value } = event.target
 
-        setSelectedOption(value)
+        setSelectedOption(name)
 
         if (value == 1 || value == 6) {
 

@@ -85,8 +85,7 @@ function SellerList() {
 
             <main id="mainClientList" >
 
-                <h1>Informações dos usuários</h1>
-                <span>Clique em um cartão para alterar os dados dos usuários</span>
+                <h1>Informações dos vendedores</h1>
 
                 <div className='filterName' >
 

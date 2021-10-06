@@ -52,6 +52,18 @@
 
 }
 
+.formsRegister fieldset span {
+
+    margin-top: 1rem;
+
+}
+
+.formsRegister fieldset a {
+
+    text-decoration: none;
+
+}
+
 .buttonsFormRegister {
 
     width: 80%;

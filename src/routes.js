@@ -24,6 +24,7 @@ import CartProvider from './pages/admin/cartProvider'
 import Reports from './pages/admin/reports'
 import Stock from './pages/admin/stock'
 import FeedbackBanner from './pages/admin/banner'
+import ForgotPassword from './pages/forgotPassword'
 
 const Routes = () => {
 
@@ -54,6 +55,7 @@ const Routes = () => {
             <Route component={Reports} path='/Relatorios' />
             <Route component={Stock} path='/Estoque' />
             <Route component={FeedbackBanner} path='/Banner' />
+            <Route component={ForgotPassword} path='/RecuperarSenha' />
         
         </BrowserRouter>
 
