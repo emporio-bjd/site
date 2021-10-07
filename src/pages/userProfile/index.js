@@ -15,7 +15,6 @@ import { Link, useHistory } from "react-router-dom";
 function UserProfile() {
 
     const [dataAccount, setDataAccount] = useState([]);
-    // const [dataAccount, setDataAccount] = useState([]);
     const [displayDivAlterInfos, setDisplayDivAlterInfos] = useState("none");
     const [displayDivPedidos, setDisplayDivPedidos] = useState("none");
     const [seller, setSeller] = useState([]);
@@ -61,9 +60,13 @@ function UserProfile() {
 
                     temp.map((item) => {
 
-                        if (item.email == userEmail)
+                        if (item.email == userEmail) {
+
                             setDataAccount(item)
                             setRegisterData(item)
+                            console.log(registerData)
+                        }
+
                     })
 
                 } else {

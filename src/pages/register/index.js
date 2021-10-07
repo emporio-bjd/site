@@ -230,7 +230,6 @@ function Register() {
 
         registerData.name != '' ? counter = counter + 1 : counter = counter
         registerData.cepNumber != '' ? counter++ : counter = counter
-        registerData.complement != '' ? counter++ : counter = counter
         registerData.district != '' ? counter++ : counter = counter
         registerData.email != '' ? counter++ : counter = counter
         registerData.houseNumber != '' ? counter++ : counter = counter
@@ -239,10 +238,10 @@ function Register() {
         registerData.street != '' ? counter++ : counter = counter
         registerData.city != '' ? counter++ : counter = counter
 
-        if (counter == 10)
+        if (counter == 9)
             makeRegister()
         else
-            alert('Você precisa preencher todos os campos que possuem *')
+            alert('Você precisa preencher todos os campos obrigatórios')
 
     }
 
@@ -289,12 +288,12 @@ function Register() {
                             <fieldset>
 
                                 <legend>
-                                    <h2>Informações pessoais <span style={{ color: '#662210', fontSize: '14px' }} >( * campos obrigatórios )</span></h2>
+                                    <h2>Informações pessoais</h2>
                                 </legend>
 
-                                <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo *' />
+                                <input name='name' onChange={handleInputRegisterChange} placeholder='Nome completo (obrigatório)' />
 
-                                <InputMask name='phoneNumber' type='tel' mask="(99) 99999-9999" maskChar=" " onChange={handleInputRegisterChange} placeholder='Telefone com DDD *' />
+                                <InputMask name='phoneNumber' type='tel' mask="(99) 99999-9999" maskChar=" " onChange={handleInputRegisterChange} placeholder='Telefone com DDD (obrigatório)' />
 
                                 <input name='birthDate' type='date' onChange={handleInputRegisterChange} placeholder='Data de nascimento' />
 
@@ -335,18 +334,19 @@ function Register() {
                                     <h2>Endereço</h2>
                                 </legend>
 
-                                <input id='cep' name='cepNumber' type='text' onChange={handleInputRegisterChange} placeholder='CEP *' />
+                                {/* <input id='cep' name='cepNumber' type='text' onChange={handleInputRegisterChange} placeholder='CEP *' /> */}
                                 {/* onBlur={searchCepData}  */}
+                                <InputMask id='cep' name='cepNumber' type='text' mask="99999-999" maskChar=" " onChange={handleInputRegisterChange} placeholder='CEP (obrigatório)' />
 
-                                <input id='city' name='city' type='text' onChange={handleInputRegisterChange} placeholder='Município *' />
+                                <input id='city' name='city' type='text' onChange={handleInputRegisterChange} placeholder='Município (obrigatório)' />
 
-                                <input id='street' name='street' type='text' onChange={handleInputRegisterChange} placeholder='Nome da rua *' />
+                                <input id='street' name='street' type='text' onChange={handleInputRegisterChange} placeholder='Nome da rua (obrigatório)' />
 
-                                <input name='houseNumber' type='number' onChange={handleInputRegisterChange} placeholder='Número *' />
+                                <input name='houseNumber' type='number' onChange={handleInputRegisterChange} placeholder='Número (obrigatório)' />
 
-                                <input id='district' name='district' type='text' onChange={handleInputRegisterChange} placeholder='Bairro *' />
+                                <input name='complement' onChange={handleInputRegisterChange} placeholder='Complemento' />
 
-                                <input name='complement' onChange={handleInputRegisterChange} placeholder='Complemento *' />
+                                <input id='district' name='district' type='text' onChange={handleInputRegisterChange} placeholder='Bairro (obrigatório)' />
 
                             </fieldset>
 
@@ -356,9 +356,9 @@ function Register() {
                                     <h2>E-mail e senha</h2>
                                 </legend>
 
-                                <input name='email' onChange={handleInputRegisterChange} placeholder='E-mail *' />
+                                <input name='email' onChange={handleInputRegisterChange} placeholder='E-mail (obrigatório)' />
 
-                                <input name='password' type="password" onChange={handleInputRegisterChange} placeholder='Senha para o site *' />
+                                <input name='password' type="password" onChange={handleInputRegisterChange} placeholder='Senha para o site (obrigatório)' />
 
                             </fieldset>
 
