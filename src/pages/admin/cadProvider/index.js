@@ -21,11 +21,14 @@ function Provider() {
         tradeName: '',
         ownerName: '',
         email: '',
-        street: '',
+        address: '',
         district: '',
         city: '',
+        state: '',
         phone: '',
-        products: [],
+        cellphone: '',
+        whatsapp: '',
+        products: []
 
     })
 
@@ -41,10 +44,13 @@ function Provider() {
         tradeName: '',
         ownerName: '',
         email: '',
-        street: '',
+        address: '',
         district: '',
         city: '',
+        state: '',
         phone: '',
+        cellphone: '',
+        whatsapp: '',
         products: []
 
     })
@@ -129,30 +135,42 @@ function Provider() {
 
         const id = firebase.database().ref().child('posts').push().key
 
-        firebase.database().ref('providers/' + id).set({
-
+        const data = {
+            
             corporateName: newDataProvider.corporateName,
             tradeName: newDataProvider.tradeName,
             ownerName: newDataProvider.ownerName,
             email: newDataProvider.email,
-            street: newDataProvider.street,
+            address: newDataProvider.address,
             district: newDataProvider.district,
             city: newDataProvider.city,
+            state: newDataProvider.state,
             phone: newDataProvider.phone,
+            cellphone: newDataProvider.cellphone,
+            whatsapp: newDataProvider.whatsapp,
             id: id,
             products: [{}]
 
-        }).then(err => console.log(err))
+        }
+
+        firebase.database().ref('providers/' + id)
+        .set(data)
+        .then(err => console.log(err))
+
         setNewDataProvider({
 
             corporateName: '',
             tradeName: '',
             ownerName: '',
             email: '',
-            street: '',
+            address: '',
             district: '',
             city: '',
+            state: '',
             phone: '',
+            cellphone: '',
+            whatsapp: '',
+            products: []
 
         })
 
@@ -169,17 +187,22 @@ function Provider() {
             tradeName: dataAlterProvider.tradeName != '' ? dataAlterProvider.tradeName : dataProvider[selectProvider].tradeName,
             ownerName: dataAlterProvider.ownerName != '' ? dataAlterProvider.ownerName : dataProvider[selectProvider].ownerName,
             email: dataAlterProvider.email != '' ? dataAlterProvider.email : dataProvider[selectProvider].email,
-            street: dataAlterProvider.street != '' ? dataAlterProvider.street : dataProvider[selectProvider].street,
+            address: dataAlterProvider.address != '' ? dataAlterProvider.address : dataProvider[selectProvider].address,
             district: dataAlterProvider.district != '' ? dataAlterProvider.district : dataProvider[selectProvider].district,
             city: dataAlterProvider.city != '' ? dataAlterProvider.city : dataProvider[selectProvider].city,
+            state: dataAlterProvider.state != '' ? dataAlterProvider.state : dataProvider[selectProvider].state,
             phone: dataAlterProvider.phone != '' ? dataAlterProvider.phone : dataProvider[selectProvider].phone,
+            cellphone: dataAlterProvider.cellphone != '' ? dataAlterProvider.cellphone : dataProvider[selectProvider].cellphone,
+            whatsapp: dataAlterProvider.whatsapp != '' ? dataAlterProvider.whatsapp : dataProvider[selectProvider].whatsapp,
 
         }
+
         firebase.database()
         .ref('providers/' + dataKeysAdm[selectProvider])
         .update(newProvider)
         .then(() => alert("Informação atualizada com sucesso!"))
         window.location.reload()
+
     }
 
     function deleteProvider() {
@@ -188,7 +211,8 @@ function Provider() {
             .ref('providers/' + dataKeysAdm[selectProviderToDelete])
             .remove()
             .then(() => alert("Fornecedor removido com sucesso!"))
-
+            window.location.reload()
+            
     }
 
     const [displayHistory, setDisplayHistory] = useState("none");
@@ -263,22 +287,44 @@ function Provider() {
 
                         <input name='ownerName' onChange={handleInputProviderChange} placeholder='Pessoa responsável' value={newDataProvider.ownerName} />
 
-                        <input name='city' onChange={handleInputProviderChange} placeholder='Município' value={newDataProvider.city}/>
+                        <input name='email' onChange={handleInputProviderChange} placeholder='E-mail' value={newDataProvider.email} />
+
+                        <input name='address' onChange={handleInputProviderChange} placeholder='Endereço' value={newDataProvider.address} />
 
                         <input name='district' onChange={handleInputProviderChange} placeholder='Bairro' value={newDataProvider.district} />
 
-                        <input name='street' onChange={handleInputProviderChange} placeholder='Rua' value={newDataProvider.street} />
+                        <input name='city' onChange={handleInputProviderChange} placeholder='Município' value={newDataProvider.city}/>
 
-                        <input name='email' onChange={handleInputProviderChange} placeholder='E-mail' value={newDataProvider.email} />
+                        <input name='state' onChange={handleInputProviderChange} placeholder='Estado' value={newDataProvider.state}/>
 
                         <InputMask 
                             name='phone' 
                             type='tel' 
-                            mask="(99) 99999-9999" 
+                            mask="(99) 9999-9999" 
                             maskChar=" " 
                             onChange={handleInputProviderChange} 
                             value={newDataProvider.phone} 
-                            placeholder='Telefone com DDD' 
+                            placeholder='Telefone fixo' 
+                        />
+
+                        <InputMask 
+                            name='cellphone' 
+                            type='tel' 
+                            mask="(99) 99999-9999" 
+                            maskChar=" " 
+                            onChange={handleInputProviderChange} 
+                            value={newDataProvider.cellphone} 
+                            placeholder='Celular' 
+                        />
+
+                        <InputMask 
+                            name='whatsapp' 
+                            type='tel' 
+                            mask="(99) 99999-9999" 
+                            maskChar=" " 
+                            onChange={handleInputProviderChange} 
+                            value={newDataProvider.whatsapp} 
+                            placeholder='Whatsapp' 
                         />
 
                         <a onClick={() => { insertNewProvider() }} >Cadastrar</a>
@@ -331,10 +377,17 @@ function Provider() {
                         />
 
                         <input 
-                            name='city' 
+                            name='email' 
                             onChange={handleInputProviderChangeAlter} 
-                            placeholder='Município'
-                            value={dataAlterProvider.city}
+                            placeholder='E-mail'
+                            value={dataAlterProvider.email}
+                        />
+
+                        <input 
+                            name='address' 
+                            onChange={handleInputProviderChangeAlter} 
+                            placeholder='Endereço'
+                            value={dataAlterProvider.address}
                         />
 
                         <input 
@@ -345,26 +398,44 @@ function Provider() {
                         />
 
                         <input 
-                            name='street' 
+                            name='city' 
                             onChange={handleInputProviderChangeAlter} 
-                            placeholder='Rua'
-                            value={dataAlterProvider.street}
+                            placeholder='Município'
+                            value={dataAlterProvider.city}
                         />
 
                         <input 
-                            name='email' 
+                            name='state' 
                             onChange={handleInputProviderChangeAlter} 
-                            placeholder='E-mail'
-                            value={dataAlterProvider.email}
+                            placeholder='Estado'
+                            value={dataAlterProvider.state}
                         />
 
                         <InputMask 
                             name='phone' 
+                            type='tel' mask="(99) 9999-9999" 
+                            maskChar=" " 
+                            onChange={handleInputProviderChangeAlter} 
+                            placeholder='Telefone fixo'
+                            value={dataAlterProvider.phone}
+                        />
+
+                        <InputMask 
+                            name='cellphone' 
                             type='tel' mask="(99) 99999-9999" 
                             maskChar=" " 
                             onChange={handleInputProviderChangeAlter} 
-                            placeholder='Telefone com DDD'
-                            value={dataAlterProvider.phone}
+                            placeholder='Celular'
+                            value={dataAlterProvider.cellphone}
+                        />
+
+                        <InputMask 
+                            name='whatsapp' 
+                            type='tel' mask="(99) 99999-9999" 
+                            maskChar=" " 
+                            onChange={handleInputProviderChangeAlter} 
+                            placeholder='Whatsapp'
+                            value={dataAlterProvider.whatsapp}
                         />
 
                         <a onClick={() => {updateProvider(); }} >Alterar</a>

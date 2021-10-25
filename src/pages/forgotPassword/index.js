@@ -40,8 +40,8 @@ function ForgotPassword() {
         })
         .catch((error) => {
 
-            var errorCode = error.code
-            var errorMessage = error.message
+            // var errorCode = error.code
+            // var errorMessage = error.message
 
             window.alert('Não foi possível solicitar a recuperação de senha. Certifique-se que o e-mail inserido está cadastrado ou está escrito de forma correta. Caso o erro persista, tente novamente mais tarde.')
 

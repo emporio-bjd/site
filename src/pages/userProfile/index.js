@@ -386,7 +386,7 @@ function UserProfile() {
                         </li>
                         <li>
                             <p>Endereço:</p>
-                            <p>{dataAccount.city}: {dataAccount.street} - {dataAccount.houseNumber}, {dataAccount.district} ({dataAccount.complement})</p>
+                            <p>{dataAccount.street}, {dataAccount.houseNumber}, {dataAccount.complement} - {dataAccount.district} - {dataAccount.city}</p>
                         </li>
                     </ul>
     

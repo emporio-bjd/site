@@ -105,3 +105,13 @@
     color: #2f3cb3;
 
 }
+
+@media screen and (max-width: 768px) {
+
+    .passwordRecoveryWrapper {
+
+        width: 90%;
+    
+    }
+
+}

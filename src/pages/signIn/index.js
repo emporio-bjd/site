@@ -24,6 +24,8 @@ function Register() {
 
     function makeLogin() {
 
+        // firebase.auth().languageCode = 'pt';
+
         firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
             .then((userCredential) => {
                 var user = userCredential.user;
@@ -31,9 +33,10 @@ function Register() {
 
             })
             .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                alert(errorMessage)
+                // var errorCode = error.code;
+                // var errorMessage = error.message;
+                // alert(errorMessage)
+                alert('E-mail ou senha incorretos. Tente novamente')
             });
 
     }
