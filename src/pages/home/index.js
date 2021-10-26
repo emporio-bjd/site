@@ -52,7 +52,6 @@ function Home() {
 
     }, [])
 
-
     function handleSearchInput(event) {
 
         if (event.key == 'Enter') {
@@ -135,7 +134,9 @@ function Home() {
     function add(index) {
 
         var dataTemp = data
-        dataTemp[index].amount = dataTemp[index].amount + 1
+        dataTemp[index].amount = Number (dataTemp[index].amount + 1)
+
+        console.log(typeof dataTemp[index].amount )
 
         var totalValueTemp = Number(dataTemp[index].price) + totalValue
 
@@ -318,7 +319,7 @@ function Home() {
                                                     <div>
 
                                                         <p><b>Categoria: </b>{item.category}</p>
-
+{/* 
                                                         {
                                                             item.unityPrice > 0 ?
                                                             <p>
@@ -326,7 +327,7 @@ function Home() {
                                                                 {Number(item.unityPrice).toFixed(2)}
                                                             </p>
                                                             : null
-                                                        }
+                                                        } */}
                                                     </div>
 
                                                 </div>

@@ -147,7 +147,7 @@ function Request() {
                         <option value='' >Selecionar produto</option>
                         {
                             items.map((item, index) => (
-                                <option value={item.id}>{item.title} ({item.amountInStock} {item.unity})</option>
+                                <option value={item.id}>{item.title}: {item.amountInStock} ({item.unity})</option>
                             ))
                         }
 

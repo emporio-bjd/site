@@ -27,12 +27,11 @@ function Admin() {
         desc: '',
         price: '',
         itemAvailability: 0,
-        unityPrice: '',
+        // unityPrice: '',
         category: '',
         unity: '',
-        amount:'',
-        providerId: '',
-        buyPrice: ''
+        amount: '',
+        amountInStock: ''
         
     })
     const [newDataAdmin, setNewDataAdmin] = useState({
@@ -42,12 +41,11 @@ function Admin() {
         desc: '',
         price: '',
         itemAvailability: 0,
-        unityPrice: '',
+        // unityPrice: '',
         category: '',
         unity: '',
         amount: '',
-        providerId: '',
-        buyPrice: ''
+        amountInStock: ''
 
     })
 
@@ -150,12 +148,11 @@ function Admin() {
             price: newDataAdmin.price,
             id: id,
             itemAvailability: newDataAdmin.itemAvailability,
-            unityPrice: newDataAdmin.unityPrice,
+            // unityPrice: newDataAdmin.unityPrice,
             category: newDataAdmin.category,
-            unity: newDataAdmin.unity === '' ? 'Unidade' : newDataAdmin.unity,
+            unity: newDataAdmin.unity == '' ? 'Unidade' : newDataAdmin.unity,
             amount: 0,
-            providerId: newDataAdmin.providerId,
-            buyPrice: newDataAdmin.buyPrice
+            amountInStock: newDataAdmin.amountInStock
 
         }
 
@@ -179,10 +176,10 @@ function Admin() {
             desc: '',
             price: '',
             itemAvailability: 0,
-            unityPrice: '',
+            // unityPrice: '',
             category: '',
             unity: '',
-            providerId: ''
+            amountInStock: ''
     
         })
         alert("Item inserido com sucesso!.")
@@ -200,8 +197,7 @@ function Admin() {
         itemAvailability: dataAlterItem.itemAvailability !== 0 ? dataAlterItem.itemAvailability : dataAdmin[selectItem].itemAvailability,
         unity: dataAlterItem.unity !== 0 ? dataAlterItem.unity : dataAdmin[selectItem].unity,
         amount: dataAlterItem.amount !== 0 ? dataAlterItem.amount : dataAdmin[selectItem].amount,
-        providerId: dataAlterItem.providerId !== '' ? dataAlterItem.providerId : dataAdmin[selectItem].providerId,
-        buyPrice: dataAlterItem.buyPrice !== 0 ? dataAlterItem.buyPrice : dataAdmin[selectItem].buyPrice
+        amountInStock: dataAlterItem.amountInStock !== 0 ? dataAlterItem.amountInStock : dataAdmin[selectItem].amountInStock
       }
       firebase.database()
       .ref('items/' + dataKeysAdm[selectItem])
@@ -269,13 +265,11 @@ function Admin() {
 
                         <input name='desc' onChange={handleInputAdminChange} placeholder='Descrição' value={newDataAdmin.desc} />
 
-                        <input name='price' onChange={handleInputAdminChange} placeholder='Preço por Kg' type='number' value={newDataAdmin.price} />
+                        <input name='price' onChange={handleInputAdminChange} placeholder='Preço' type='number' value={newDataAdmin.price} />
 
-                        <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' value={newDataAdmin.unityPrice} />
+                        {/* <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' value={newDataAdmin.unityPrice} /> */}
 
-                        <input name='amount' onChange={handleInputAdminChange} placeholder='Quantidade em estoque' type='number' value={newDataAdmin.amount} />
-
-                        <input name='buyPrice' onChange={handleInputAdminChange} placeholder='Preço de compra' type='number' value={newDataAdmin.buyPrice} />
+                        <input name='amountInStock' onChange={handleInputAdminChange} placeholder='Quantidade em estoque' type='number' value={newDataAdmin.amountInStock} />
                         
                         <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem'/>
 
@@ -370,10 +364,10 @@ function Admin() {
                           placeholder='Imagem'
                         />
                         <input
-                          name='amount'
+                          name='amountInStock'
                           onChange={handleInputAdminChangeAlter}
                           placeholder='Quantidade em estoque'
-                          value={dataAlterItem.amount}
+                          value={dataAlterItem.amountInStock}
                         />
                         <input
                             name='buyPrice'

@@ -12,7 +12,7 @@ import { Link, Redirect } from "react-router-dom";
 
 function Register() {
 
-    const [loginData,setLoginData] = useState({
+    const [loginData, setLoginData] = useState({
 
         email: '',
         password: ''
@@ -22,80 +22,83 @@ function Register() {
     const [userIsLogged, setUserIsLogged] = useState(false);
     const [requestData, setRequestData] = useState([{}]);
 
-    function makeLogin () {
+    function makeLogin() {
+
+        // firebase.auth().languageCode = 'pt';
 
         firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
-        .then((userCredential) => {
-            var user = userCredential.user;
-            localStorage.setItem('userEmail',loginData.email)
+            .then((userCredential) => {
+                var user = userCredential.user;
+                localStorage.setItem('userEmail', loginData.email)
 
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert(errorMessage)
-        }); 
-        
+            })
+            .catch((error) => {
+                // var errorCode = error.code;
+                // var errorMessage = error.message;
+                // alert(errorMessage)
+                alert('E-mail ou senha incorretos. Tente novamente')
+            });
+
     }
 
     function handleInputLoginChange(event) {
 
-        const {name, value} = event.target
+        const { name, value } = event.target
 
-        setLoginData ({
+        setLoginData({
 
             ...loginData, [name]: value
 
         })
-        
+
     }
 
     function onAuthStateChanged(user) {
 
         firebase.auth().onAuthStateChanged((user) => {
-            if (user) 
-              setUserIsLogged(true)
-          });
+            if (user)
+                setUserIsLogged(true)
+        });
 
-        
+
     }
-    
+
     useEffect(() => {
-        
+
         window.scrollTo(0, 0);
 
-        if(!firebase.apps.length)
+        if (!firebase.apps.length)
             firebase.initializeApp(firebaseConfig)
         onAuthStateChanged();
 
     }, []);
-    
+
     useEffect(() => {
-        
+
         firebase.database().ref('requests').get('/requests')
-        .then(function (snapshot) {
+            .then(function (snapshot) {
 
-            if (snapshot.exists()) {
+                if (snapshot.exists()) {
 
-                // var phoneNumber = localStorage.getItem('userPhoneNumber')
+                    // var phoneNumber = localStorage.getItem('userPhoneNumber')
 
-                var data = snapshot.val()
-                var temp = Object.keys(data).map((key) => data[key])
+                    var data = snapshot.val()
+                    var temp = Object.keys(data).map((key) => data[key])
 
-                var requestDataTemp = []
+                    var requestDataTemp = []
 
-                temp.map((item) => {
+                    temp.map((item) => {
 
-                    if(item.phoneNumber == '12345678')
-                        requestDataTemp.push(item)
+                        if (item.phoneNumber == '12345678')
+                            requestDataTemp.push(item)
 
-                })
-                setRequestData(requestDataTemp)
-            }
-            else {
-                console.log("No data available");
-            }
-        })
+                    })
+                    setRequestData(requestDataTemp)
+                }
+                else {
+                    console.log("No data available");
+                }
+            })
 
     }, []);
 
@@ -106,8 +109,9 @@ function Register() {
             <Redirect to='/Perfil' />
 
         )
-        
+
     }
+
     else {
 
         return (
@@ -116,7 +120,7 @@ function Register() {
 
                 <Header />
 
-                <main id='mainRegister'> 
+                <main id='mainRegister'>
 
                     <div className='formsRegister'>
 
@@ -137,6 +141,8 @@ function Register() {
                             <input name='email' onChange={handleInputLoginChange} placeholder='E-mail' />
 
                             <input name='password' type='password' onChange={handleInputLoginChange} placeholder='Senha' />
+
+                            <span>Esqueceu sua senha? <Link to='/RecuperarSenha'>Recuperar senha </Link></span>
 
                         </fieldset>
 
