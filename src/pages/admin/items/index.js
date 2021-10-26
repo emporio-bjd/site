@@ -8,12 +8,18 @@ import 'firebase/auth'
 // import 'firebase/database'
 import 'firebase/storage'
 import firebaseConfig from '../../../FIREBASECONFIG.js'
+import ProviderProducts from '../cadProviderProduct'
 
 
 function Admin() {
 
     const [imageUrl, setImageUrl] = useState('')
+    const [dataAdmin, setDataAdmin] = useState([])
+    const [selectItem, setSelectItem] = useState('')
+    const [dataKeysAdm, setDataKeysAdm] = useState([])
+    const [dataProvider, setDataProvider] = useState([])
     const [alteredImageUrl, setAlteredImageUrl] = useState('')
+    const [selectItemToDelete, setSelectItemToDelete] = useState('')
     const [dataAlterItem, setDataAlterItem] = useState({
 
         imageSrc: '',
@@ -28,12 +34,6 @@ function Admin() {
         amountInStock: ''
         
     })
-
-    const [selectItem, setSelectItem] = useState('')
-    const [selectItemToDelete, setSelectItemToDelete] = useState('')
-
-    const [dataAdmin, setDataAdmin] = useState([])
-    const [dataKeysAdm, setDataKeysAdm] = useState([])
     const [newDataAdmin, setNewDataAdmin] = useState({
 
         imageSrc: '',
@@ -56,10 +56,8 @@ function Admin() {
 
         var firebaseRef = firebase.database().ref('items/');
 
-        firebaseRef.on('value', (snapshot) => {
-    
+        firebaseRef.on('value', (snapshot) => {    
             if (snapshot.exists()) {
-
                 var data = snapshot.val()
                 var temp = Object.keys(data).map((key) => data[key])
                 setDataAdmin(temp.sort((a,b)=> {
@@ -70,6 +68,24 @@ function Admin() {
             }
             else {
               console.log("No data available");
+            }
+        })
+    }, [])
+
+    useEffect(() => {
+
+        if (!firebase.apps.length)
+            firebase.initializeApp(firebaseConfig);
+
+        var firebaseRef = firebase.database().ref('providers/');
+
+        firebaseRef.on('value', (snapshot) => {
+            if (snapshot.exists()) {
+                var data = snapshot.val()
+                var temp = Object.keys(data).map((key) => data[key])
+                setDataProvider(temp)
+            } else {
+                console.log("No data available");
             }
         })
 
@@ -90,11 +106,8 @@ function Admin() {
 
         const { name, value } = event.target
 
-        setNewDataAdmin({
-
-            ...newDataAdmin, [name]: value
-
-        })
+        setNewDataAdmin({...newDataAdmin, [name]: value})
+        console.log({...newDataAdmin, [name]: value})
     }
 
     function handleInputAdminChangeAlter(event) {
@@ -146,6 +159,15 @@ function Admin() {
         firebase.database().ref('items/' + id)
         .set(data)
         .then(err => console.log(err))
+
+        if (data.providerId !== '') {
+
+            firebase.database()
+            .ref('providers/' + data.providerId)
+            .child('products/' + id)
+            .set(data)
+            .then(err => console.log(err))
+        }
 
         setNewDataAdmin({
 
@@ -290,6 +312,13 @@ function Admin() {
 
                         </select>
 
+                        <select onChange={handleInputAdminChange} name='providerId' value={dataAdmin[selectItem]?.unity}>
+                            <option value='' >Selecione o fornecedor (opcional)</option>
+                            {dataProvider.map(provider => (
+                                <option value={provider.id} key={provider.id} >{provider.corporateName}</option>
+                            ))}
+                        </select>
+
                         <a onClick={()=>{insertNewItem()}} >Inserir</a>
 
                     </fieldset>
@@ -300,20 +329,11 @@ function Admin() {
                             <h2>Alterar item</h2>
                         </legend>
 
-                        <select onChange={(e)=>handleSelectItem(e)} >
-
+                        <select onChange={(e)=>handleSelectItem(e)}>
                             <option>Selecione o item</option>
-
-                            {dataAdmin.map((item, index) => {
-
-                                return (
-
-                                    <option value={index} key={index}>{item.title}</option>
-
-                                )
-
-                            })}
-
+                            {dataAdmin.map((item, index) => (
+                               <option value={index} key={index}>{item.title}</option>
+                            ))}
                         </select>
 
                         <h6>Preencha o que deseja alterar</h6>
@@ -324,14 +344,12 @@ function Admin() {
                           placeholder='Nome'
                           value={dataAlterItem.title}
                         />
-
                         <input
                           name='desc'
                           onChange={handleInputAdminChangeAlter}
                           placeholder='Descrição'
                           value={dataAlterItem.desc}
                         />
-
                         <input
                           name='price'
                           type='number'
@@ -339,20 +357,27 @@ function Admin() {
                           value={dataAlterItem.price}
                           onChange={handleInputAdminChangeAlter}
                         />
-
                         <input 
                           type='file'
                           onChange={uploadImageAltered}
                           accept="image/png, image/jpeg"
                           placeholder='Imagem'
                         />
-
                         <input
                           name='amountInStock'
                           onChange={handleInputAdminChangeAlter}
                           placeholder='Quantidade em estoque'
                           value={dataAlterItem.amountInStock}
                         />
+                        <input
+                            name='buyPrice'
+                            onChange={handleInputAdminChangeAlter}
+                            placeholder='Preço de compra'
+                            type='number'
+                            value={dataAlterItem.buyPrice}
+                        />
+
+
 
                         <select onChange={handleInputAdminChangeAlter} name='itemAvailability' >
                           <option value={0} >Disponibilidade</option>
@@ -361,12 +386,17 @@ function Admin() {
                         </select>
 
                         <select onChange={handleInputAdminChangeAlter} name='unity' value={dataAdmin[selectItem]?.unity}>
-
                             <option value='' > Selecione a unidade</option>
                             <option value='kg' >Quilograma</option>
                             <option value='Unidade' >Unidade</option>
                             <option value='maco' >Maço</option>
+                        </select>
 
+                        <select onChange={handleInputAdminChangeAlter} name='unity' value={dataAdmin[selectItem]?.unity}>
+                            <option value='' > Selecione o fornecedor (opcional)</option>
+                            {dataProvider.map(provider => (
+                                <option value={provider.id} key={provider.id} >{provider.corporateName}</option>
+                            ))}
                         </select>
 
                         <a onClick={() => updateItem()} >Alterar</a>
@@ -379,20 +409,11 @@ function Admin() {
                             <h2>Apagar item</h2>
                         </legend>
 
-                        <select onChange={handleSelectItemToDelete} >
-
+                        <select onChange={handleSelectItemToDelete}>
                             <option>Selecione o item</option>
-
-                            {dataAdmin.map((item, index) => {
-
-                                return (
-
-                                    <option value={index} key={index}>{item.title}</option>
-
-                                )
-
-                            })}
-
+                            {dataAdmin.map((item, index) => (
+                                <option value={index} key={index}>{item.title}</option>
+                            ))}
                         </select>
 
                         <a onClick={() => { deleteItem() }} >Apagar</a>

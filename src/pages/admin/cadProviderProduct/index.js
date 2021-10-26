@@ -12,15 +12,17 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
 function ProviderProducts() {
 
-    const [wasChangedProduct, setWasChangedProduct] = useState(false)
-
-    const [selectProvider, setSelectProvider] = useState('')
-
-    const [selectedUnity, setSelectedUnity] = useState('')
-
     const [imageUrl, setImageUrl] = useState('')
-    const [dataAlterProduct, setDataAlterProduct] = useState({
+    const [dataKeysAdm, setDataKeysAdm] = useState([])
+    const [dataProvider, setDataProvider] = useState([])
+    const [selectedUnity, setSelectedUnity] = useState('')
+    const [selectProvider, setSelectProvider] = useState('')
+    const [itemsOfProvider, setItemsOfProvider] = useState([])
+    const [wasChangedProduct, setWasChangedProduct] = useState(false)
+    const [selectProductToAlter, setSelectProductToAlter] = useState([])
+    const [selectProductToDelete, setSelectProductToDelete] = useState('')
 
+    const [dataAlterProduct, setDataAlterProduct] = useState({
         product: '',
         qntd: '',
         unity: '',
@@ -29,16 +31,20 @@ function ProviderProducts() {
         sellPrice: '',
         amount: 0,
         id: ''
+    })
+    const [newDataAdmin, setNewDataAdmin] = useState({
+
+        imageSrc: '',
+        title: '',
+        desc: '',
+        price: '',
+        itemAvailability: 0,
+        unityPrice: '',
+        category: '',
+        unity: '',
+        amount: ''
 
     })
-
-    const [selectProductToAlter, setSelectProductToAlter] = useState([])
-
-    const [selectProductToDelete, setSelectProductToDelete] = useState('')
-
-    const [dataKeysAdm, setDataKeysAdm] = useState([])
-    const [dataProvider, setDataProvider] = useState([])
-
     const [newDataProduct, setNewDataProduct] = useState({
 
         product: '',
@@ -157,13 +163,6 @@ function ProviderProducts() {
 
     }, [])
 
-    // function handleSelectProviderToDelete(event) {
-
-    //     setSelectProviderToDelete(event.target.value)
-    //     console.log(event.target.value)
-
-    // }
-
     function handleSelectedUnity(event) {
 
         setSelectedUnity(event.target.value)
@@ -199,10 +198,17 @@ function ProviderProducts() {
 
         }
 
-        firebase.database().ref('providers/' + dataKeysAdm[selectProvider])
-            .child('products/' + id)
-            .set(data)
-            .then(err => console.log(err))
+        firebase.database()
+        .ref('providers/' + dataKeysAdm[selectProvider])
+        .child('products/' + id)
+        .set(data)
+        .then(err => console.log(err))
+        
+        firebase.database()
+        .ref('items/' + id)
+        .set(data)
+        .then(err => console.log(err))
+        
         setNewDataProduct({
 
             product: '',
@@ -214,11 +220,22 @@ function ProviderProducts() {
 
         })
 
+        setNewDataAdmin({
+
+            imageSrc: '',
+            title: '',
+            desc: '',
+            price: '',
+            itemAvailability: 0,
+            unityPrice: '',
+            category: '',
+            unity: ''
+    
+        })
+
         alert("Produto cadastrado com sucesso!")
 
     }
-
-    const [itemsOfProvider, setItemsOfProvider] = useState([])
 
     function handleSelectProviderProducts(event) {
 
@@ -332,6 +349,11 @@ function ProviderProducts() {
 
     }
 
+    function handleInputAdminChange(event) {
+        const { name, value } = event.target
+        setNewDataAdmin({...newDataAdmin, [name]: value })
+    }
+
     return (
 
         <div className='ProviderProducts'>
@@ -359,6 +381,74 @@ function ProviderProducts() {
                 </div>
 
                 <div className='providerProductsOptions' >
+
+                <fieldset>
+
+                    <legend>
+                        <h2>Inserir novo item</h2>
+                    </legend>
+
+                    <select onChange={handleSelectProvider} >
+                        <option>Selecione o fornecedor</option>
+                        {dataProvider.map((providers, index) => (
+                            <option value={index} key={index}>{providers.tradeName}</option>
+                        ))}
+                    </select>
+
+                    <input name='title' onChange={handleInputAdminChange} placeholder='Nome' value={newDataAdmin.title}/>
+
+                    <input name='desc' onChange={handleInputAdminChange} placeholder='Descrição' value={newDataAdmin.desc} />
+
+                    <input name='price' onChange={handleInputAdminChange} placeholder='Preço por Kg' type='number' value={newDataAdmin.price} />
+
+                    <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' value={newDataAdmin.unityPrice} />
+
+                    <input name='amount' onChange={handleInputAdminChange} placeholder='Quantidade em estoque' type='number' value={newDataAdmin.amount} />
+
+                    <input type='file' onChange={uploadImage} accept="image/png, image/jpeg" placeholder='Imagem'/>
+
+                    <select onChange={handleInputAdminChange} name='unity' >
+
+                        <option value='unidade' >Unidade</option>
+                        <option value='kg' >Kg</option>
+                        <option value='maco' >Maço</option>
+
+                    </select>
+
+                    <select onChange={handleInputAdminChange} name='itemAvailability' >
+
+                        <option value={0} >Disponibilidade</option>
+                        <option value={true} >Disponível</option>
+                        <option value={false} >Indisponível</option>
+
+                    </select>
+
+                    <select onChange={handleInputAdminChange} name='category' value={newDataAdmin.category}>
+
+                        <option value={0} >Categoria</option>
+                        <option value="Diversos" >Diversos</option>
+                        <option value="Panificação" >Panificação</option>
+                        <option value="Processados" >Processados orgânicos</option>
+                        <option value="Hortaliças orgânicas" >Hortaliças orgânicas</option>
+                        <option value="Palmito pupunha congelado" >Palmito pupunha congelado</option>
+                        <option value="Laticínios e tofu" >Laticínios e tofu</option>
+                        <option value="Brotos e germinados" >Brotos e germinados</option>
+                        <option value="Geleias sem edição de açúcar" >Geleias sem edição de açúcar</option>
+                        <option value="Kombucha" >Kombucha</option>
+                        <option value="Cogumelos orgânicos" >Cogumelos orgânicos</option>
+                        <option value="Frutas congeladas" >Frutas congeladas</option>
+                        <option value="Frutas orgânicas" >Frutas orgânicas</option>
+                        <option value="Temperos desidratados orgânicos" >Temperos desidratados orgânicos</option>
+                        <option value="Temperos orgânicos in natura" >Temperos orgânicos in natura</option>
+                        <option value="Farinhas e cereais orgânicos" >Farinhas e cereais orgânicos</option>
+                        <option value="Alimentos prontos congelados" >Alimentos prontos congelados</option>
+                        <option value="Artesanato" >Artesanato</option>
+
+                    </select>
+
+                    <a onClick={insertNewProduct} >Inserir</a>
+
+                    </fieldset>
 
                     <fieldset className='greenBackGround' >
 

@@ -76,11 +76,13 @@ function ProviderRequests() {
     }
 
     function add(index) {
-
+        
         var dataTemp = itemsOfProvider
         dataTemp[index].amount = dataTemp[index].amount + 1
 
-        var totalValueTemp = Number(dataTemp[index].buyPrice) + totalValue
+        // return console.log(Number(dataTemp[index].buyPrice.replace(',','.')) )
+
+        var totalValueTemp = Number(dataTemp[index].buyPrice.replace(',','.')) + totalValue
 
         setData(dataTemp)
         setTotalValue(totalValueTemp)
@@ -95,7 +97,7 @@ function ProviderRequests() {
         if (dataTemp[index].amount > 0) {
 
             dataTemp[index].amount = dataTemp[index].amount - 1
-            var totalValueTemp = totalValue - Number(dataTemp[index].buyPrice)
+            var totalValueTemp = totalValue - Number(dataTemp[index].buyPrice.replace(',','.'))
 
             setData(dataTemp)
             setTotalValue(totalValueTemp)
@@ -109,7 +111,7 @@ function ProviderRequests() {
         var dataTemp = itemsOfProvider
         dataTemp[index].amount = dataTemp[index].amount + 10
 
-        var totalValueTemp = Number(dataTemp[index].buyPrice * 10) + totalValue
+        var totalValueTemp = (Number(dataTemp[index].buyPrice.replace(',','.')) * 10) + totalValue
 
         setData(dataTemp)
         setTotalValue(totalValueTemp)
@@ -124,7 +126,7 @@ function ProviderRequests() {
         if (dataTemp[index].amount - 9 > 0) {
 
             dataTemp[index].amount = dataTemp[index].amount - 10
-            var totalValueTemp = totalValue - Number(dataTemp[index].buyPrice * 10)
+            var totalValueTemp = totalValue - (Number(dataTemp[index].buyPrice.replace(',','.')) * 10)
 
             setData(dataTemp)
             setTotalValue(totalValueTemp)
@@ -231,10 +233,10 @@ function ProviderRequests() {
 
                                                     <div className="productInfo">
 
-                                                        <h4>{item.product} ({item.unity})</h4>
+                                                        <h4>{item.title} ({item.unity})</h4>
 
                                                         <p>Preço de compra: R$ <b>{item.buyPrice}</b> </p>
-                                                        <p>Preço de venda: R$ <b>{item.sellPrice}</b></p>
+                                                        <p>Preço de venda: R$ <b>{item.price}</b></p>
 
                                                     </div>
 
