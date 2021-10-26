@@ -10,12 +10,14 @@ import 'firebase/database'
 import firebaseConfig from '../../../FIREBASECONFIG.js'
 
 import closeIcon from '../../../img/removeIcon.png'
+import { useHistory } from 'react-router'
 
 function CartProvider() {
 
     const [data, setData] = useState([]);
     const [totalValue, setTotalValue] = useState(0);
     const [dataExists, setDataExists] = useState(false);
+    const history = useHistory()
 
     useEffect(async () => {
 
@@ -32,7 +34,7 @@ function CartProvider() {
 
             temp.map((item) => {
 
-                var value = (Number(item.buyPrice) * Number(item.amount))
+                var value = (Number(item.buyPrice.replace(',','.')) * Number(item.amount))
                 total = value + total
 
                 setTotalValue(total)
@@ -128,8 +130,8 @@ function CartProvider() {
 
                                     <div className='lineBoxCardProduct flexDisplayCart infoProductInCart'>
 
-                                        <h4>R$ {((item.buyPrice) * item.amount).toFixed(2)}</h4>
-                                        <h5>Quantidade.:{item.amount}</h5>
+                                        <h4>R$ {((Number(item.buyPrice.replace(',','.'))) * item.amount).toFixed(2)}</h4>
+                                        <h5>Quantidade:{item.amount}</h5>
                                         <h5>({item.unity})</h5>
 
                                     </div>
@@ -150,8 +152,14 @@ function CartProvider() {
 
                     <h3>Valor total: R$ {totalValue.toFixed(2)}</h3>
 
-                    <div className='checkOut' >
-                        <a onClick={()=>sendOrder()} >Finalizar pedido</a>
+                    <div style={{ display: 'flex', width: '100%' }} >
+                        <div className='checkOut' >
+                            <a onClick={()=>history.goBack()} >Voltar</a>
+                        </div>
+
+                        <div className='checkOut' >
+                            <a onClick={()=>sendOrder()} >Finalizar pedido</a>
+                        </div>
                     </div>
 
                 </section>
