@@ -12,61 +12,50 @@ import firebaseConfig from '../../../FIREBASECONFIG.js'
 
 function ProviderProducts() {
 
-    const [imageUrl, setImageUrl] = useState('')
+    // const [imageUrl, setImageUrl] = useState('')
     const [dataKeysAdm, setDataKeysAdm] = useState([])
     const [dataProvider, setDataProvider] = useState([])
-    const [selectedUnity, setSelectedUnity] = useState('')
+    // const [selectedUnity, setSelectedUnity] = useState('')
     const [selectProvider, setSelectProvider] = useState('')
+    const [alteredImageUrl, setAlteredImageUrl] = useState('')
     const [itemsOfProvider, setItemsOfProvider] = useState([])
     const [wasChangedProduct, setWasChangedProduct] = useState(false)
     const [selectProductToAlter, setSelectProductToAlter] = useState([])
+    
     const [selectProductToDelete, setSelectProductToDelete] = useState('')
 
     const [dataAlterProduct, setDataAlterProduct] = useState({
-        product: '',
+        title: '',
         qntd: '',
-        unity: '',
+        unity: 0,
         imageSrc: '',
         buyPrice: '',
-        sellPrice: '',
+        amountInStock: '',
         amount: 0,
         id: ''
     })
-    const [newDataAdmin, setNewDataAdmin] = useState({
+    // const [newDataProduct, setNewDataProduct] = useState({
 
-        imageSrc: '',
-        title: '',
-        desc: '',
-        price: '',
-        itemAvailability: 0,
-        unityPrice: '',
-        category: '',
-        unity: '',
-        amount: ''
+    //     product: '',
+    //     unity: '',
+    //     imageSrc: '',
+    //     sellPrice: '',
+    //     buyPrice: '',
+    //     qntd: ''
 
-    })
-    const [newDataProduct, setNewDataProduct] = useState({
+    // })
 
-        product: '',
-        unity: '',
-        imageSrc: '',
-        sellPrice: '',
-        buyPrice: '',
-        qntd: ''
+    // function handleInputProductChange(event) {
 
-    })
+    //     const { name, value } = event.target
 
-    function handleInputProductChange(event) {
+    //     setNewDataProduct({
 
-        const { name, value } = event.target
+    //         ...newDataProduct, [name]: value
 
-        setNewDataProduct({
+    //     })
 
-            ...newDataProduct, [name]: value
-
-        })
-
-    }
+    // }
 
     function handleInputProductChangeAlter(event) {
 
@@ -163,11 +152,11 @@ function ProviderProducts() {
 
     }, [])
 
-    function handleSelectedUnity(event) {
+    // function handleSelectedUnity(event) {
 
-        setSelectedUnity(event.target.value)
+    //     setSelectedUnity(event.target.value)
 
-    }
+    // }
 
     function handleSelectProductToDelete(event) {
 
@@ -182,60 +171,60 @@ function ProviderProducts() {
 
     }
 
-    function insertNewProduct() {
+    // function insertNewProduct() {
 
-        const id = firebase.database().ref().child('posts').push().key
+    //     const id = firebase.database().ref().child('posts').push().key
 
-        const data = {
+    //     const data = {
 
-            id: id,
-            product: newDataProduct.product,
-            imageSrc: imageUrl,
-            unity: selectedUnity,
-            sellPrice: newDataProduct.sellPrice,
-            buyPrice: newDataProduct.buyPrice,
-            amount: 0
+    //         id: id,
+    //         product: newDataProduct.product,
+    //         imageSrc: imageUrl,
+    //         unity: selectedUnity,
+    //         sellPrice: newDataProduct.sellPrice,
+    //         buyPrice: newDataProduct.buyPrice,
+    //         amount: 0
 
-        }
+    //     }
 
-        firebase.database()
-        .ref('providers/' + dataKeysAdm[selectProvider])
-        .child('products/' + id)
-        .set(data)
-        .then(err => console.log(err))
+    //     firebase.database()
+    //     .ref('providers/' + dataKeysAdm[selectProvider])
+    //     .child('products/' + id)
+    //     .set(data)
+    //     .then(err => console.log(err))
         
-        firebase.database()
-        .ref('items/' + id)
-        .set(data)
-        .then(err => console.log(err))
+    //     firebase.database()
+    //     .ref('items/' + id)
+    //     .set(data)
+    //     .then(err => console.log(err))
         
-        setNewDataProduct({
+    //     setNewDataProduct({
 
-            product: '',
-            unity: '',
-            imageSrc: '',
-            sellPrice: '',
-            buyPrice: '',
-            qntd: ''
+    //         product: '',
+    //         unity: '',
+    //         imageSrc: '',
+    //         sellPrice: '',
+    //         buyPrice: '',
+    //         qntd: ''
 
-        })
+    //     })
 
-        setNewDataAdmin({
+    //     setNewDataAdmin({
 
-            imageSrc: '',
-            title: '',
-            desc: '',
-            price: '',
-            itemAvailability: 0,
-            unityPrice: '',
-            category: '',
-            unity: ''
+    //         imageSrc: '',
+    //         title: '',
+    //         desc: '',
+    //         price: '',
+    //         itemAvailability: 0,
+    //         unityPrice: '',
+    //         category: '',
+    //         unity: ''
     
-        })
+    //     })
 
-        alert("Produto cadastrado com sucesso!")
+    //     alert("Produto cadastrado com sucesso!")
 
-    }
+    // }
 
     function handleSelectProviderProducts(event) {
 
@@ -272,7 +261,7 @@ function ProviderProducts() {
         var position = event.target.value
 
         setSelectProductToAlter(itemsOfProvider[position].id)
-        console.log(itemsOfProvider[position].product)
+        console.log(itemsOfProvider[position])
 
     }
 
@@ -287,12 +276,14 @@ function ProviderProducts() {
 
             products[selectProductToAlter] = {
 
+                title: dataAlterProduct.title != '' ? dataAlterProduct.title : products[selectProductToAlter].title,
+                desc: dataAlterProduct.desc != '' ? dataAlterProduct.desc : products[selectProductToAlter].desc,
                 buyPrice: dataAlterProduct.buyPrice != '' ? dataAlterProduct.buyPrice : products[selectProductToAlter].buyPrice,
                 imageSrc: dataAlterProduct.imageSrc != '' ? dataAlterProduct.imageSrc : products[selectProductToAlter].imageSrc,
-                product: dataAlterProduct.product != '' ? dataAlterProduct.product : products[selectProductToAlter].product,
-                sellPrice: dataAlterProduct.sellPrice != '' ? dataAlterProduct.sellPrice : products[selectProductToAlter].sellPrice,
-                unity: dataAlterProduct.unity != '' ? dataAlterProduct.unity : products[selectProductToAlter].unity,
+                unity: dataAlterProduct.unity !== 0 ? dataAlterProduct.unity : products[selectProductToAlter].unity,
+                amountInStock: dataAlterProduct.amountInStock != '' ? dataAlterProduct.amountInStock : products[selectProductToAlter].amountInStock,
                 amount: products[selectProductToAlter].amount,
+                imageSrc: alteredImageUrl !== '' ? alteredImageUrl : products[selectProductToAlter].imageSrc,
                 id: products[selectProductToAlter].id
 
             }
@@ -312,12 +303,16 @@ function ProviderProducts() {
                     district: dataProvider[selectProvider].district,
                     ownerName: dataProvider[selectProvider].ownerName,
                     phone: dataProvider[selectProvider].phone,
-                    street: dataProvider[selectProvider].street,
+                    cellphone: dataProvider[selectProvider].cellphone,
+                    whatsapp: dataProvider[selectProvider].whatsapp,
+                    address: dataProvider[selectProvider].address,
                     tradeName: dataProvider[selectProvider].tradeName,
                     products: products
 
                 })
                 .then(() => alert("Item atualizado com sucesso!"))
+                window.location.reload()
+
         }
 
     }
@@ -332,9 +327,30 @@ function ProviderProducts() {
             .child('products/' + temp[selectProductToDelete].id)
             .remove()
             .then(() => alert("Item removido com sucesso!"))
+            window.location.reload()
     }
 
-    function uploadImage(event) {
+    // function uploadImage(event) {
+
+    //     const file = event.target.files[0]
+
+    //     var storageRef = firebase.storage().ref();
+
+    //     storageRef.child('images/' + file.name.trim())
+    //         .put(file)
+    //         .then(snapshot => {
+    //             snapshot.ref.getDownloadURL()
+    //                 .then(url => setImageUrl(url))
+    //         });
+
+    // }
+
+    // function handleInputAdminChange(event) {
+    //     const { name, value } = event.target
+    //     setNewDataAdmin({...newDataAdmin, [name]: value })
+    // }
+
+    function uploadImageAltered(event) {
 
         const file = event.target.files[0]
 
@@ -344,14 +360,9 @@ function ProviderProducts() {
             .put(file)
             .then(snapshot => {
                 snapshot.ref.getDownloadURL()
-                    .then(url => setImageUrl(url))
+                    .then(url => setAlteredImageUrl(url))
             });
 
-    }
-
-    function handleInputAdminChange(event) {
-        const { name, value } = event.target
-        setNewDataAdmin({...newDataAdmin, [name]: value })
     }
 
     return (
@@ -364,13 +375,13 @@ function ProviderProducts() {
 
                 <div className='titleProviderProducts' >
 
-                    <h1>Painel de cadastro de produto dos fornecedores</h1>
+                    <h1>Painel de controle de produto dos fornecedores</h1>
 
                     <div className="optionProvider">
 
                         <ul>
 
-                            <Link to='/AdminFornecedor' >Voltar para painel de cadastro de fornecedores</Link>
+                            <Link to='/AdminFornecedor' >Voltar para painel de controle de fornecedores</Link>
                             <Link to='/PedidoFornecedor' >Realizar pedido do fornecedor</Link>
                             <Link to='/AdminHistorico' >Histórico de pedidos</Link>
 
@@ -382,7 +393,7 @@ function ProviderProducts() {
 
                 <div className='providerProductsOptions' >
 
-                <fieldset>
+                {/* <fieldset>
 
                     <legend>
                         <h2>Inserir novo item</h2>
@@ -448,9 +459,9 @@ function ProviderProducts() {
 
                     <a onClick={insertNewProduct} >Inserir</a>
 
-                    </fieldset>
+                    </fieldset> */}
 
-                    <fieldset className='greenBackGround' >
+                    {/* <fieldset className='greenBackGround' >
 
                         <legend>
                             <h2>Cadastrar produto</h2>
@@ -495,7 +506,7 @@ function ProviderProducts() {
 
                         <a onClick={() => { insertNewProduct() }} >Inserir</a>
 
-                    </fieldset>
+                    </fieldset> */}
 
                     <fieldset>
 
@@ -525,7 +536,7 @@ function ProviderProducts() {
 
                             {itemsOfProvider.map((products, index) => (
 
-                                <option value={index} key={index}>{products.product}</option>
+                                <option value={index} key={index}>{products.title}</option>
 
                             ))}
 
@@ -533,21 +544,44 @@ function ProviderProducts() {
 
                         <h6>Preencha o que deseja alterar</h6>
 
-                        <input name='product' onChange={handleInputProductChangeAlter} placeholder='Produto' />
+                        <input
+                          name='title'
+                          onChange={handleInputProductChangeAlter}
+                          placeholder='Nome'
+                          value={selectProductToAlter.title}
+                        />
+                        <input
+                          name='desc'
+                          onChange={handleInputProductChangeAlter}
+                          placeholder='Descrição'
+                          value={itemsOfProvider.desc}
+                        />
+                        <input
+                          name='buyPrice'
+                          type='number'
+                          placeholder='Preço de compra'
+                          value={itemsOfProvider.buyPrice}
+                          onChange={handleInputProductChangeAlter}
+                        />
+                        <input
+                          name='amountInStock'
+                          onChange={handleInputProductChangeAlter}
+                          placeholder='Quantidade em estoque'
+                          value={itemsOfProvider.amountInStock}
+                        />
+                        <input 
+                          type='file'
+                          onChange={uploadImageAltered}
+                          accept="image/png, image/jpeg"
+                          placeholder='Imagem'
+                        />
 
-                        <input name='imageSrc' onChange={handleInputProductChangeAlter} placeholder='Imagem' />
-
-                        <select name='unity' onChange={handleInputProductChangeAlter} >
-
-                            <option value='' >Unidade de medida</option>
-                            <option value='Quilograma' >Quilograma</option>
+                        <select onChange={handleInputProductChangeAlter} name='unity' value={itemsOfProvider.unity}>
+                            <option value='' > Unidade</option>
+                            <option value='kg' >Quilograma</option>
                             <option value='Unidade' >Unidade</option>
-
+                            <option value='maco' >Maço</option>
                         </select>
-
-                        <input name='sellPrice' onChange={handleInputProductChangeAlter} placeholder='Valor de venda' />
-
-                        <input name='buyPrice' onChange={handleInputProductChangeAlter} placeholder='Valor de compra' />
 
                         <a onClick={() => { setWasChangedProduct(true); updateProduct(); }} >Alterar</a>
 
@@ -581,7 +615,7 @@ function ProviderProducts() {
 
                             {itemsOfProvider.map((products, index) => (
 
-                                <option value={index} key={index}>{products.product}</option>
+                                <option value={index} key={index}>{products.title}</option>
 
                             ))}
 

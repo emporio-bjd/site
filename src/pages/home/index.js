@@ -291,7 +291,7 @@ function Home() {
                         {
                             data.map((item, index) => {
 
-                                if (item.itemAvailability === 'true') {
+                                if (item.itemAvailability === 'true' && item.showItem === 'true') {
 
                                     return(
 

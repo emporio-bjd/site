@@ -39,30 +39,31 @@ function ProviderInfo() {
     
                 {dataAdmin.map((provider)=> (
 
-                    <div className="providerInfo">
-
                         <div className="providerCard" >
 
-                            <div className="providerTitle">
+                            <div className="providerNames">
 
                                 <h2>{provider.tradeName}</h2>
                                 <h4>{provider.corporateName}</h4>
                                 
                             </div>
-                                
-                            <p>Nome do contato: </p>
-                            <b>{provider.name}</b>
-                                
-                            <p>E-mail:</p>
-                            <b>{provider.email}</b>
-                                
-                            <p>Telefone:</p>
-                            <b>{provider.phone}</b>
 
+                            <div className="providerData">
+
+                                <p><strong>Pessoa responsável:</strong> {provider.ownerName}</p>
+                                <p><strong>Endereço:</strong> {provider.street}, {provider.district} - {provider.city}, {provider.state}</p>
+
+                                <h3>Informações de contato</h3>
+
+                                <p><strong>E-mail:</strong> {provider.email}</p>
+                                <p><strong>Whatsapp:</strong> {provider.whatsapp}</p>
+                                <p><strong>Telefone celular:</strong> {provider.cellphone}</p>
+                                <p><strong>Telefone fixo:</strong> {provider.phone}</p>
+
+                            </div>
+                                
                         </div>
                         
-                    </div>
-
                 ))}
 
             </main>

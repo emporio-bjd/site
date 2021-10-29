@@ -19,7 +19,7 @@ function BuyInfo(props) {
             <main id='mainBuyInfo' >
 
                 <div className="buyInfoTitle">
-                    <h2>Sua lista de produtos adquiridos: <br/>{modalData.listTitle}</h2>
+                    <h2>Sua lista de produtos adquiridos <br/>{modalData.listTitle}</h2>
 
                     <h3>{modalData.provider}</h3>
                     <h4>{modalData.orderDate} - {modalData.orderTime}</h4>
@@ -31,7 +31,7 @@ function BuyInfo(props) {
 
                                 <div className="productList">
 
-                                    <p>{item.product} ({item.amount} {item.unity}) : <strong>R$ {item.buyPrice * item.amount}</strong></p>
+                                    <p>{item.title} ({item.amount} {item.unity}) : <strong>R$ {item.buyPrice * item.amount}</strong></p>
 
                                 </div>
 

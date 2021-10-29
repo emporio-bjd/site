@@ -10,7 +10,6 @@ import 'firebase/storage'
 import firebaseConfig from '../../../FIREBASECONFIG.js'
 import ProviderProducts from '../cadProviderProduct'
 
-
 function Admin() {
 
     const [imageUrl, setImageUrl] = useState('')
@@ -20,18 +19,22 @@ function Admin() {
     const [dataProvider, setDataProvider] = useState([])
     const [alteredImageUrl, setAlteredImageUrl] = useState('')
     const [selectItemToDelete, setSelectItemToDelete] = useState('')
+    const [providerId, setProviderId] = useState('')
     const [dataAlterItem, setDataAlterItem] = useState({
 
         imageSrc: '',
         title: '',
         desc: '',
         price: '',
+        buyPrice: '',
         itemAvailability: 0,
+        showItem: 0,
         // unityPrice: '',
         category: '',
         unity: '',
         amount: '',
-        amountInStock: ''
+        amountInStock: '',
+        productProviderId: ''
         
     })
     const [newDataAdmin, setNewDataAdmin] = useState({
@@ -40,12 +43,15 @@ function Admin() {
         title: '',
         desc: '',
         price: '',
+        buyPrice: '',
         itemAvailability: 0,
+        showItem: 0,
         // unityPrice: '',
         category: '',
         unity: '',
         amount: '',
-        amountInStock: ''
+        amountInStock: '',
+        productProviderId: ''
 
     })
 
@@ -130,6 +136,12 @@ function Admin() {
 
     }
 
+    function handleSelectProviderId(event) {
+
+        setProviderId(event.target.value)
+
+    }
+
     function handleSelectItemToDelete(event) {
 
         setSelectItemToDelete(event.target.value)
@@ -146,8 +158,10 @@ function Admin() {
             title: newDataAdmin.title,
             desc: newDataAdmin.desc,
             price: newDataAdmin.price,
+            buyPrice: newDataAdmin.buyPrice,
             id: id,
             itemAvailability: newDataAdmin.itemAvailability,
+            showItem: newDataAdmin.showItem,
             // unityPrice: newDataAdmin.unityPrice,
             category: newDataAdmin.category,
             unity: newDataAdmin.unity == '' ? 'Unidade' : newDataAdmin.unity,
@@ -160,10 +174,10 @@ function Admin() {
         .set(data)
         .then(err => console.log(err))
 
-        if (data.providerId !== '') {
+        if (providerId !== '') {
 
             firebase.database()
-            .ref('providers/' + data.providerId)
+            .ref('providers/' + providerId)
             .child('products/' + id)
             .set(data)
             .then(err => console.log(err))
@@ -175,7 +189,9 @@ function Admin() {
             title: '',
             desc: '',
             price: '',
+            buyPrice: '',
             itemAvailability: 0,
+            showItem: 0,
             // unityPrice: '',
             category: '',
             unity: '',
@@ -194,10 +210,22 @@ function Admin() {
         title: dataAlterItem.title !== '' ? dataAlterItem.title : dataAdmin[selectItem].title,
         desc: dataAlterItem.desc !== '' ? dataAlterItem.desc : dataAdmin[selectItem].desc,
         price: dataAlterItem.price !== 0 ? dataAlterItem.price : dataAdmin[selectItem].price,
+        buyPrice: dataAlterItem.buyPrice !== 0 ? dataAlterItem.buyPrice : dataAdmin[selectItem].buyPrice,
         itemAvailability: dataAlterItem.itemAvailability !== 0 ? dataAlterItem.itemAvailability : dataAdmin[selectItem].itemAvailability,
+        showItem: dataAlterItem.showItem !== 0 ? dataAlterItem.showItem : dataAdmin[selectItem].showItem,
         unity: dataAlterItem.unity !== 0 ? dataAlterItem.unity : dataAdmin[selectItem].unity,
         amount: dataAlterItem.amount !== 0 ? dataAlterItem.amount : dataAdmin[selectItem].amount,
         amountInStock: dataAlterItem.amountInStock !== 0 ? dataAlterItem.amountInStock : dataAdmin[selectItem].amountInStock
+      }
+
+      if (providerId !== '') {
+
+        firebase.database()
+        .ref('providers/' + providerId)
+        .child('products/' + dataKeysAdm[selectItem])
+        .update(newItem)
+        .then(err => console.log(err))
+
       }
       firebase.database()
       .ref('items/' + dataKeysAdm[selectItem])
@@ -212,6 +240,7 @@ function Admin() {
             .ref('items/' + dataKeysAdm[selectItemToDelete])
             .remove()
             .then(() => alert("Item removido com sucesso!"))
+            window.location.reload()
 
     }
 
@@ -265,7 +294,9 @@ function Admin() {
 
                         <input name='desc' onChange={handleInputAdminChange} placeholder='Descrição' value={newDataAdmin.desc} />
 
-                        <input name='price' onChange={handleInputAdminChange} placeholder='Preço' type='number' value={newDataAdmin.price} />
+                        <input name='buyPrice' onChange={handleInputAdminChange} placeholder='Preço de compra' type='number' value={newDataAdmin.buyPrice} />
+
+                        <input name='price' onChange={handleInputAdminChange} placeholder='Preço de venda' type='number' value={newDataAdmin.price} />
 
                         {/* <input name='unityPrice' onChange={handleInputAdminChange} placeholder='Preço unitário' type='number' value={newDataAdmin.unityPrice} /> */}
 
@@ -278,14 +309,6 @@ function Admin() {
                             <option value='unidade' >Unidade</option>
                             <option value='kg' >Kg</option>
                             <option value='maco' >Maço</option>
-
-                        </select>
-
-                        <select onChange={handleInputAdminChange} name='itemAvailability' >
-
-                            <option value={0} >Disponibilidade</option>
-                            <option value={true} >Disponível</option>
-                            <option value={false} >Indisponível</option>
 
                         </select>
 
@@ -312,7 +335,23 @@ function Admin() {
 
                         </select>
 
-                        <select onChange={handleInputAdminChange} name='providerId' value={dataAdmin[selectItem]?.unity}>
+                        <select onChange={handleInputAdminChange} name='itemAvailability' >
+
+                            <option value={0} >Disponibilidade</option>
+                            <option value={true} >Disponível</option>
+                            <option value={false} >Indisponível</option>
+
+                        </select>
+
+                        <select onChange={handleInputAdminChange} name='showItem' >
+
+                            <option value={0} >Visível aos compradores?</option>
+                            <option value={true} >Sim</option>
+                            <option value={false} >Não</option>
+
+                        </select>
+
+                        <select onChange={handleSelectProviderId} name='providerId' value={dataAdmin[selectItem]?.unity}>
                             <option value='' >Selecione o fornecedor (opcional)</option>
                             {dataProvider.map(provider => (
                                 <option value={provider.id} key={provider.id} >{provider.corporateName}</option>
@@ -338,6 +377,13 @@ function Admin() {
 
                         <h6>Preencha o que deseja alterar</h6>
 
+                        <select onChange={handleInputAdminChangeAlter} name='providerId' value={dataAdmin[selectItem]?.unity}>
+                            <option value='' > Selecione o fornecedor (opcional)</option>
+                            {dataProvider.map(provider => (
+                                <option value={provider.id} key={provider.id} >{provider.corporateName}</option>
+                            ))}
+                        </select>
+
                         <input
                           name='title'
                           onChange={handleInputAdminChangeAlter}
@@ -351,17 +397,18 @@ function Admin() {
                           value={dataAlterItem.desc}
                         />
                         <input
-                          name='price'
+                          name='buyPrice'
                           type='number'
-                          placeholder='Preço'
-                          value={dataAlterItem.price}
+                          placeholder='Preço de compra'
+                          value={dataAlterItem.buyPrice}
                           onChange={handleInputAdminChangeAlter}
                         />
-                        <input 
-                          type='file'
-                          onChange={uploadImageAltered}
-                          accept="image/png, image/jpeg"
-                          placeholder='Imagem'
+                        <input
+                          name='price'
+                          type='number'
+                          placeholder='Preço de venda'
+                          value={dataAlterItem.price}
+                          onChange={handleInputAdminChangeAlter}
                         />
                         <input
                           name='amountInStock'
@@ -369,34 +416,55 @@ function Admin() {
                           placeholder='Quantidade em estoque'
                           value={dataAlterItem.amountInStock}
                         />
-                        <input
-                            name='buyPrice'
-                            onChange={handleInputAdminChangeAlter}
-                            placeholder='Preço de compra'
-                            type='number'
-                            value={dataAlterItem.buyPrice}
+                        <input 
+                          type='file'
+                          onChange={uploadImageAltered}
+                          accept="image/png, image/jpeg"
+                          placeholder='Imagem'
                         />
 
-
-
-                        <select onChange={handleInputAdminChangeAlter} name='itemAvailability' >
-                          <option value={0} >Disponibilidade</option>
-                          <option value={true} >Disponível</option>
-                          <option value={false} >Indisponível</option>
-                        </select>
-
                         <select onChange={handleInputAdminChangeAlter} name='unity' value={dataAdmin[selectItem]?.unity}>
-                            <option value='' > Selecione a unidade</option>
+                            <option value='' > Unidade</option>
                             <option value='kg' >Quilograma</option>
                             <option value='Unidade' >Unidade</option>
                             <option value='maco' >Maço</option>
                         </select>
 
-                        <select onChange={handleInputAdminChangeAlter} name='unity' value={dataAdmin[selectItem]?.unity}>
-                            <option value='' > Selecione o fornecedor (opcional)</option>
-                            {dataProvider.map(provider => (
-                                <option value={provider.id} key={provider.id} >{provider.corporateName}</option>
-                            ))}
+                        <select onChange={handleInputAdminChange} name='category' value={dataAdmin[selectItem]?.category} >
+
+                            <option value={0} >Categoria</option>
+                            <option value="Diversos" >Diversos</option>
+                            <option value="Panificação" >Panificação</option>
+                            <option value="Processados" >Processados orgânicos</option>
+                            <option value="Hortaliças orgânicas" >Hortaliças orgânicas</option>
+                            <option value="Palmito pupunha congelado" >Palmito pupunha congelado</option>
+                            <option value="Laticínios e tofu" >Laticínios e tofu</option>
+                            <option value="Brotos e germinados" >Brotos e germinados</option>
+                            <option value="Geleias sem edição de açúcar" >Geleias sem edição de açúcar</option>
+                            <option value="Kombucha" >Kombucha</option>
+                            <option value="Cogumelos orgânicos" >Cogumelos orgânicos</option>
+                            <option value="Frutas congeladas" >Frutas congeladas</option>
+                            <option value="Frutas orgânicas" >Frutas orgânicas</option>
+                            <option value="Temperos desidratados orgânicos" >Temperos desidratados orgânicos</option>
+                            <option value="Temperos orgânicos in natura" >Temperos orgânicos in natura</option>
+                            <option value="Farinhas e cereais orgânicos" >Farinhas e cereais orgânicos</option>
+                            <option value="Alimentos prontos congelados" >Alimentos prontos congelados</option>
+                            <option value="Artesanato" >Artesanato</option>
+
+                        </select>
+
+                        <select onChange={handleInputAdminChangeAlter} name='itemAvailability' value={dataAdmin[selectItem]?.itemAvailability}>
+                          <option value={0} >Disponibilidade</option>
+                          <option value={true} >Disponível</option>
+                          <option value={false} >Indisponível</option>
+                        </select>
+
+                        <select onChange={handleInputAdminChange} name='showItem' value={dataAdmin[selectItem]?.showItem}>
+
+                            <option value={0} >Visível aos compradores?</option>
+                            <option value={true} >Sim</option>
+                            <option value={false} >Não</option>
+
                         </select>
 
                         <a onClick={() => updateItem()} >Alterar</a>

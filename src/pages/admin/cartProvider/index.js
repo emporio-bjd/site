@@ -80,6 +80,7 @@ function CartProvider() {
             localStorage.setItem('provider-products', '{}')
             localStorage.setItem('provider', '')
             alert("Pedido finalizado com sucesso!")
+            history.push("/AdminHistorico")
         })
 
         return 0;

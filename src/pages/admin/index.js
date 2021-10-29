@@ -126,18 +126,24 @@ function Admin() {
                 <div className='optionAdminPage' >
 
                     <ul>
-
+                        
+                        <h4>Controle de vendas e usuários</h4>
                         <Link to="/Pedidos" >Pedidos em andamento</Link>
-                        <Link to="/AdminItems" >Cadastro/alteração de itens</Link>
-                        <Link to="/AdminVendedor" >Cadastro de vendedores</Link>
-                        <Link to="/AdminFornecedor" >Cadastro/alteração de fornecedores </Link>
-                        <Link to='/AdminProdutoFornecedor' >Cadastro/alteração de produtos dos fornecedores</Link>
-                        <Link to='/PedidoFornecedor' >Realizar pedido do fornecedor</Link>
                         <Link to="/ListaDeClientes" >Listagem de clientes</Link>
+                        <Link to="/AdminVendedor" >Cadastro de vendedores</Link>
                         <Link to="/ListaDeVendedores" >Listagem de vendedores</Link>
+
+                        <h4>Cadastro de produtos</h4>
+                        <Link to="/AdminItems" >Cadastro/alteração de itens</Link>
+                        <Link to="/AdminFornecedor" >Controle de fornecedores</Link>
+                        <Link to='/AdminProdutoFornecedor' >Alteração de produtos dos fornecedores</Link>
+                        <Link to='/PedidoFornecedor' >Realizar pedido do fornecedor</Link>
+
+                        <h4>Informações</h4>
+                        <Link to="/AdminHistorico" >Histórico de pedidos do fornecedor</Link>
                         <Link to="/relatorios" >Relatórios</Link>
                         <Link to="/Estoque" >Estoque</Link>
-                        <Link to="/Banner" >Alterar feedback</Link>
+                        {/* <Link to="/Banner" >Alterar feedback</Link> */}
                         
                     </ul>
 

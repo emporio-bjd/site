@@ -255,14 +255,14 @@ function Provider() {
 
                 <div className='titleProvider' >
 
-                    <h1>Painel de cadastrado de fornecedores</h1>
+                    <h1>Painel de controle de fornecedores</h1>
 
                     <div className="optionProvider">
 
                         <ul>
 
                             <span onClick={() => { handleHistoryInfos() }}>Informação dos fornecedores</span>
-                            <Link to='/AdminProdutoFornecedor' >Cadastrar produtos dos fornecedores</Link>
+                            {/* <Link to='/AdminProdutoFornecedor' >Cadastrar produtos dos fornecedores</Link> */}
                             <Link to='/PedidoFornecedor' >Realizar pedido do fornecedor</Link>
                             <Link to='/AdminHistorico' >Histórico de pedidos</Link>
 
