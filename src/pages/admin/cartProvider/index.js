@@ -16,6 +16,7 @@ function CartProvider() {
 
     const [data, setData] = useState([]);
     const [totalValue, setTotalValue] = useState(0);
+    const [newAmount, setNewAmount] = useState(0);
     const [dataExists, setDataExists] = useState(false);
     const history = useHistory()
 
@@ -101,6 +102,61 @@ function CartProvider() {
 
     }
 
+    // function increaseProduct(index) {
+
+    //     var data = window.localStorage.getItem('provider-products');
+
+    //     if (data != null) {
+
+    //         let cart= JSON.parse(data);
+    //         cart[index].amount = cart[index].amount + 1;
+    //         window.localStorage.setItem('provider-products', JSON.stringify(cart));
+    //         window.location.reload()
+
+    //     } 
+
+    // }
+
+    // function decreaseProduct(index) {
+
+    //     var data = window.localStorage.getItem('provider-products');
+
+    //     if (data != null) {
+
+    //         let cart= JSON.parse(data);
+    //         cart[index].amount = cart[index].amount - 1;
+    //         window.localStorage.setItem('provider-products', JSON.stringify(cart));
+    //         window.location.reload()
+
+    //     } 
+
+    // }
+
+    function handleInputAdminChangeAlter(event) {
+
+        const value = event.target.value
+
+        setNewAmount(value)
+
+        console.log(value)
+
+    }
+
+    function updateItem(index) {
+
+        var data = window.localStorage.getItem('provider-products');
+
+        if (data != null) {
+
+            let cart= JSON.parse(data);
+            cart[index].amount = newAmount;
+            window.localStorage.setItem('provider-products', JSON.stringify(cart));
+            window.location.reload()
+
+        } 
+
+    }
+
     if (dataExists) {
 
         return (
@@ -132,8 +188,15 @@ function CartProvider() {
                                     <div className='lineBoxCardProduct flexDisplayCart infoProductInCart'>
 
                                         <h4>R$ {((Number(item.buyPrice.replace(',','.'))) * item.amount).toFixed(2)}</h4>
-                                        <h5>Quantidade:{item.amount}</h5>
-                                        <h5>({item.unity})</h5>
+                                        <h5>Quantidade: {item.amount} ({item.unity})
+                                            <input 
+                                                onChange={handleInputAdminChangeAlter} 
+                                                placeholder="Alterar"
+                                            />
+                                        </h5>
+                                        <button onClick={() => updateItem(index)}>Alterar</button>
+                                        {/* <button onClick={() => {increaseProduct(index) }}>+</button> */}
+                                        {/* <button onClick={() => {decreaseProduct(index) }}>-</button> */}
 
                                     </div>
 
