@@ -248,9 +248,50 @@ function Cart() {
         
     }
 
+        function increaseProduct(index) {
+
+        var data = window.localStorage.getItem('products');
+
+        if (data != null) {
+
+            let cart= JSON.parse(data);
+            cart[index].amount = cart[index].amount + 1;
+            window.localStorage.setItem('products', JSON.stringify(cart));
+            window.location.reload()
+
+        } 
+
+    }
+
+    function decreaseProduct(index) {
+
+        var data = window.localStorage.getItem('products');
+
+        if (data != null) {
+
+            let cart= JSON.parse(data);
+            cart[index].amount = cart[index].amount - 1;
+
+            if (cart[index].amount < 1) {
+
+                removeItemInCart()
+
+            } else {
+
+                window.localStorage.setItem('products', JSON.stringify(cart));
+                window.location.reload()
+
+            }
+
+        } 
+
+    }
+
+
     if (dataExists) {
 
         return (
+            
             <div className="CartPage">
 
                 <Header />
@@ -279,7 +320,15 @@ function Cart() {
                                     <div className='lineBoxCardProduct flexDisplayCart infoProductInCart'>
 
                                         <h4>R$ {((item.price) * item.amount).toFixed(2)}</h4>
-                                        <h5>qnt.:{item.amount}</h5>
+
+                                        <div className="quantityDiv">
+
+                                            <button onClick={() => decreaseProduct(index)}>-</button>
+                                            <h5>qnt.:{item.amount}</h5>
+                                            <button onClick={() => increaseProduct(index)}>+</button>
+
+                                        </div>
+
                                         <h5>({item.unity})</h5>
 
                                     </div>
@@ -293,6 +342,7 @@ function Cart() {
                                     />
 
                                 </div>
+
                             )
 
                         })
