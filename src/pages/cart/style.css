@@ -50,19 +50,45 @@
 .lineBoxCardProduct h4 {
 
     color: #434f38;
+    margin-left: 4rem;
 
 }
 
 .lineBoxCardProduct h5 {
 
     color: rgb(175, 175, 175);
+    padding: 0 .5rem;
 
 }
 
+.quantityDiv {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.quantityDiv button {
+
+    margin: 0;
+    padding: 0 !important;
+    width: 30px;
+    height: 30px;
+
+}
 
 .nameProductInCart {
 
     width: 23vw;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.nameProductInCart h3 {
+
+    text-align: center;
 
 }
 
@@ -209,20 +235,30 @@
 
     .lineBoxCardProduct h4{
 
-        font-size: 10pt;
-        padding: 0px 15px 0px 0px;
+        font-size: 8pt !important;
+        padding: 0 .2rem !important;
+        margin: 0;
+        text-align: center;
     
     }
 
     .lineBoxCardProduct h5{
 
         font-size: 7pt;
+        margin: 0;
     
     }
 
     .lineBoxCardProduct {
         display: flex;
         flex-wrap: nowrap;
+    }
+
+    .quantityDiv button {
+
+        width: 25px;
+        height: 25px;
+
     }
 
     .imgProductCart {
