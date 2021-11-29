@@ -1,7 +1,9 @@
 import React, { useState, createRef } from 'react'
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import logoEmporio from '../../img/logoEmporio.png'
+import logoEmporio from '../../img/visualChanges/logoBranca.png'
+import HeaderTop from '../../img/visualChanges/Barra_up.png'
+import HeaderSwirls from '../../img/visualChanges/Barra_swirls up.png'
 import './headerStyle.css'
 
 import firebase from 'firebase/app'
@@ -13,20 +15,8 @@ export default function Header(props) {
     const [isChecked, setIsChecked] = useState(false)
     const [userIsLogged, setUserIsLogged] = useState(false);
     const [isSeller, setIsSeller] = useState(false);
-    const [dataUsers, setDataUsers] = useState([]);
-    const [dataAccount, setDataAccount] = useState([]);
 
     const menuMobile = createRef()
-
-    function onAuthStateChanged(user) {
-
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user)
-                setUserIsLogged(true)
-        });
-
-
-    }
 
     function showMenuMobile() {
 
@@ -37,77 +27,31 @@ export default function Header(props) {
 
     }
 
-    useEffect(() => {
-
-        if (!firebase.apps.length)
-            firebase.initializeApp(firebaseConfig)
-        onAuthStateChanged();
-
-    }, []);
-
-    useEffect(() => {
-
-        const userEmail = localStorage.getItem('userEmail')
-
-        firebase.database().ref('users/').get('/users')
-            .then(function (snapshot) {
-
-                if (snapshot.exists()) {
-
-                    var data = snapshot.val()
-                    var temp = Object.keys(data).map((key) => data[key])
-
-                    setDataUsers(temp)
-
-                    temp.map((item) => {
-
-                        if (item.email == userEmail) {
-                            setDataAccount(item)
-                        }
-
-                    })
-
-                } else
-                    console.log("No data available");
-
-            })
-
-        firebase.database().ref('sellers/').get('/sellers')
-            .then(function (snapshot) {
-
-                if (snapshot.exists()) {
-
-                    var data = snapshot.val()
-                    var temp = Object.keys(data).map((key) => data[key])
-
-                    temp.map((item) => {
-
-                        if (item.email == userEmail) {
-                            setIsSeller(true)
-                        }
-
-                    })
-
-                } else
-                    console.log("No data available");
-
-            })
-
-    }, []);
-
     return (
 
         <div>
 
             <header>
 
-                <div className='logo' >
+               <div className="headerWrapper">
 
-                    <Link to='/'> <img src={logoEmporio} alt="logo Emporio Bom Jardim" /> </Link>
+                    <div className="topHeader">
 
-                </div>
+                        <img src={HeaderTop} alt="" />
 
-                <div className='menu' >
+                        <div className="logoWrapper">
+
+                            <img src={logoEmporio} alt="" />
+
+                        </div>
+
+                    </div>
+
+                    <img className="bottomHeader" src={HeaderSwirls} alt="" />
+
+               </div>
+
+                {/* <div className='menu' >
 
                     {isSeller ?
 
@@ -159,7 +103,7 @@ export default function Header(props) {
 
                     </label>
 
-                </div>
+                </div> */}
 
             </header>
 

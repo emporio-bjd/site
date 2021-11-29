@@ -1,9 +1,13 @@
 import React from 'react'
-import { useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import './style.css'
+
+import logoEmporio from '../../img/visualChanges/logoBranca.png'
+import HeaderTop from '../../img/visualChanges/Barra_up.png'
+import HeaderSwirls from '../../img/visualChanges/Barra_swirls up.png'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -38,7 +42,7 @@ function Home() {
                 var data = snapshot.val()
                 var temp = Object.keys(data).map((key) => data[key])
 
-                temp.sort((a,b)=> (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
+                temp.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
 
                 setData(temp)
                 setDataBackup(temp)
@@ -98,7 +102,7 @@ function Home() {
             var search = searchInput.toLowerCase()
 
             // if (title.includes(searchInput) || desc.includes(searchInput))
-            if (title.includes(search) )
+            if (title.includes(search))
                 itens.push(item)
 
         })
@@ -134,9 +138,9 @@ function Home() {
     function add(index) {
 
         var dataTemp = data
-        dataTemp[index].amount = Number (dataTemp[index].amount + 1)
+        dataTemp[index].amount = Number(dataTemp[index].amount + 1)
 
-        console.log(typeof dataTemp[index].amount )
+        console.log(typeof dataTemp[index].amount)
 
         var totalValueTemp = Number(dataTemp[index].price) + totalValue
 
@@ -150,16 +154,16 @@ function Home() {
 
         var dataTemp = data
 
-        if (dataTemp[index].amount > 0){
+        if (dataTemp[index].amount > 0) {
 
             dataTemp[index].amount = dataTemp[index].amount - 1
             var totalValueTemp = totalValue - Number(dataTemp[index].price)
 
             setData(dataTemp)
             setTotalValue(totalValueTemp)
-            
+
         }
-        
+
     }
 
     let history = useHistory();
@@ -180,16 +184,16 @@ function Home() {
 
         if (listOfItems.length > 0) {
 
-            newItems.map(item=>listOfItems.push(item))
+            newItems.map(item => listOfItems.push(item))
 
-            console.log('listOfItems',listOfItems)
-            
+            console.log('listOfItems', listOfItems)
+
             localStorage.setItem('products', JSON.stringify(listOfItems))
 
         }
         else {
 
-            newItems.map(item=>listOfItems.push(item))
+            newItems.map(item => listOfItems.push(item))
             localStorage.setItem('products', JSON.stringify(listOfItems))
 
         }
@@ -202,7 +206,48 @@ function Home() {
 
         <div className="App" >
 
-            <Header />
+            {/* <Header /> */}
+
+            <section id="HeroHeader">
+
+                <div className="headerWrapper">
+
+                    <div className="topHeader">
+
+                        <div className="navigationLinks">
+
+                            <ul>
+
+                                <li>Início</li>
+                                <li>Quem somos</li>
+                                <li>Contato</li>
+
+                            </ul>
+
+                        </div>
+
+                        <img src={HeaderTop} alt="" />
+
+                        <div className="logoWrapper">
+
+                            <img src={logoEmporio} alt="" />
+
+                            <div className="textHeaderHero">
+
+                                <p>Alimentos orgânicos: mais saúde na sua mesa!</p>
+                                <p>Produtos selecionados.</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <img className="bottomHeader" src={HeaderSwirls} alt="" />
+
+                </div>
+
+            </section>
 
             <section id='heroSection'>
 
@@ -214,7 +259,7 @@ function Home() {
 
                         <h2>
                             Alimentos orgânicos: mais saúde na sua mesa!
-                            <br/>Produtos selecionados.
+                            <br />Produtos selecionados.
                         </h2>
 
                     </div>
@@ -281,7 +326,7 @@ function Home() {
             </section>
 
             <p className="tipHome" >Selecione a quantidade e depois clique para finalizar o pedido</p>
-            
+
             <div className='containerHome' >
 
                 <div className='productsHome'>
@@ -293,12 +338,12 @@ function Home() {
 
                                 if (item.itemAvailability === 'true' && item.showItem === 'true') {
 
-                                    return(
+                                    return (
 
                                         <div className='boxHome'
 
-                                        // onClick={() => { handleModalInfos(item) }}
-                                        key={index}
+                                            // onClick={() => { handleModalInfos(item) }}
+                                            key={index}
                                         >
 
                                             <div className='infoDivHome' >
@@ -319,7 +364,7 @@ function Home() {
                                                     <div>
 
                                                         <p><b>Categoria: </b>{item.category}</p>
-{/* 
+                                                        {/* 
                                                         {
                                                             item.unityPrice > 0 ?
                                                             <p>

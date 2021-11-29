@@ -36,6 +36,91 @@
     src: url('../../fonts/Gilroy-ExtraBold.otf');
   }
 
+  #HeroHeader {
+
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.headerWrapper {
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.headerWrapper img {
+
+    display: flex;
+    max-width: 100%;
+
+}
+
+.navigationLinks {
+
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    left: 44%;
+
+}
+
+.navigationLinks ul{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 1rem 0;
+
+}
+
+.navigationLinks li {
+
+    list-style: none;
+    margin: 0 1rem;
+    color: #fff;
+
+}
+
+.topHeader {
+
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+
+}
+
+.logoWrapper {
+
+    display: flex;
+    position: absolute;
+
+}
+
+.logoWrapper img {
+
+    max-width: 900px;
+
+}
+
+.logoWrapper .textHeaderHero {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+
+}
+
 .divModal {
 
     width: 100vw;

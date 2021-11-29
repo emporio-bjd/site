@@ -1,14 +1,48 @@
 
 header {
 
-    height: 10vh;
     width: 100vw;
-    background-color: #ffc05c;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
+
+}
+
+.headerWrapper {
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.headerWrapper img {
+
+    display: flex;
+    max-width: 100%;
+
+}
+
+.topHeader {
+
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+
+}
+
+.logoWrapper {
+
+    display: flex;
+    position: absolute;
+
+}
+
+.logoWrapper img {
+
+    max-width: 900px;
 
 }
 

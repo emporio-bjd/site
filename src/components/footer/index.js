@@ -6,8 +6,8 @@ import './footerStyle.css'
 import instagramIcon from '../../img/instagramIcon.png'
 import facebookIcon from '../../img/facebookIcon.png'
 import whatsappIcon from '../../img/whatsappIcon.png'
-import logoAurea from '../../img/logoAurea.png'
-import logoEmporio from '../../img/logoEmporio3.png'
+import logoAurea from '../../img/logoAurea2.png'
+import logoEmporio from '../../img/visualChanges/logoBranca.png'
 
 export default function Footer (props) {
 
@@ -18,29 +18,29 @@ export default function Footer (props) {
             <div className='address' >
 
                 <img src={logoEmporio} alt='logoEmporio' />
+                <div className="collumnItens">
+                    <ul>
+                        <li> <Link to='/' > Início </Link> </li>
+                        <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
+                        <li> <Link to='/Carrinho'> Carrinho </Link> </li>
+                        <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
+                    </ul>
 
-                <ul>
-                    <li> <Link to='/' > Início </Link> </li>
-                    <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
-                    <li> <Link to='/Carrinho'> Carrinho </Link> </li>
-                    <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
-                </ul>
+                    <div className='copyright' >
+                        
+                        <p>Desenvolvido por :</p>
 
-                <div className='socialMedias' >
+                        <a href='https://aureaej.com/' ><img src={logoAurea} alt='logoAurea' /></a>
 
-                <a href='https://www.instagram.com/emporio_bomjardim/'  > <img src={instagramIcon} alt='logoInstagram' /> </a>
-                <a href='https://www.facebook.com/bomjardimemporio'  > <img src={facebookIcon} alt='logoFacebook' /> </a>
-                <a href='https://api.whatsapp.com/send?phone=5541998416657&text=Ol%C3%A1!%20como%20podemos%20te%20ajudar%3F' target='_blank' > <img src={whatsappIcon} alt='whatsapp Logo' /> </a>
+                    </div>
 
+                </div>
             </div>
-                
-            </div>
 
-            <div className='copyright' >
-                
-                <p>Desenvolvido por :</p>
+            <div className='socialMedias' >
 
-                <a href='https://aureaej.com/' ><img src={logoAurea} alt='logoAurea' /></a>
+                <a href='https://www.instagram.com/emporio_bomjardim/'  > <p>fb.com/bomjardimemporio</p> <img src={instagramIcon} alt='logoInstagram' /> </a>
+                <a href='https://www.facebook.com/bomjardimemporio'  > <p>@emporio_bomjardim</p> <img src={facebookIcon} alt='logoFacebook' /> </a>
 
             </div>
 
