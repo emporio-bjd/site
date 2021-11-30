@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import logoEmporio from '../../img/visualChanges/logoBranca.png'
 import HeaderTop from '../../img/visualChanges/Barra_up.png'
 import HeaderSwirls from '../../img/visualChanges/Barra_swirls up.png'
-import './headerStyle.scss'
+import './bigHeaderStyle.scss'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import firebaseConfig from '../../FIREBASECONFIG.js'
 
-export default function Header(props) {
+export default function BigHeader(props) {
 
     const [isChecked, setIsChecked] = useState(false)
     const [userIsLogged, setUserIsLogged] = useState(false);
@@ -33,11 +33,17 @@ export default function Header(props) {
 
             <header>
 
-                <div className="headerDiv">
+                <div className="bigheaderDiv">
 
-                    <div className="logoDiv">
+                    <div className="logoDiv1">
 
                         <img src={logoEmporio} alt="" />
+                        <article>
+
+                            <h1>Alimentos orgânicos: mais saúde na sua mesa!</h1>
+                            <h1>Produtos selecionados.</h1>
+
+                        </article>
 
                     </div>
 
@@ -63,6 +69,7 @@ export default function Header(props) {
                 <ul>
 
                     <li> <Link to='/' > Início </Link> </li>
+                    <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
                     <li> <Link to='/Carrinho'> Carrinho </Link> </li>
                     <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
 

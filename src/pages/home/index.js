@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import Header from '../../components/header'
+import BigHeader from '../../components/bigheader'
 import Footer from '../../components/footer'
 import './style.css'
 
@@ -206,9 +206,9 @@ function Home() {
 
         <div className="App" >
 
-            {/* <Header /> */}
+            <BigHeader />
 
-            <section id="HeroHeader">
+{/*             <section id="HeroHeader">
 
                 <div className="headerWrapper">
 
@@ -247,7 +247,7 @@ function Home() {
 
                 </div>
 
-            </section>
+            </section> */}
 
             <section id='heroSection'>
 

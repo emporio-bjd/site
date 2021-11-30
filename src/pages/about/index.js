@@ -1,9 +1,9 @@
 import React from 'react'
-import './style.css'
+import './style.scss'
 
 import logoEmporio2 from '../../img/logoEmporio2.png'
 
-import Header from '../../components/header'
+import BigHeader from '../../components/bigheader'
 import Footer from '../../components/footer'
 
 function About() {
@@ -11,7 +11,7 @@ function About() {
 
         <div className="App">
 
-            <Header />
+            <BigHeader />
 
             <div className="about-section">
                 <div className="about-container">

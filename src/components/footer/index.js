@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-import './footerStyle.css'
+import './footerStyle.scss'
 
 import instagramIcon from '../../img/instagramIcon.png'
 import facebookIcon from '../../img/facebookIcon.png'

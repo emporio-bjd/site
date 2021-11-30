@@ -1,0 +1,280 @@
+@import "https://fonts.googleapis.com/css2?family=Roboto&display=swap";
+:root {
+	font-family: 'Roboto', sans-serif;
+}
+video {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: -1;
+}
+.about-container {
+	margin: auto;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	text-align: center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	object-fit: contain;
+    position: absolute;
+    top: 30%;
+	h1 {
+		text-transform: uppercase;
+		display: flex;
+		align-items: center;
+		position: absolute;
+		justify-content: center;
+		font-size: 3rem;
+		color: #fff;
+		font-size: 6.25rem;
+		top: 60%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		cursor: default;
+		width: 100%;
+		user-select: none;
+	}
+}
+.bar {
+	margin: 0;
+	padding: none;
+	width: 100%;
+	display: block;
+	border-top: solid 10px #727f26;
+}
+.about-text {
+
+    margin-top: 400px;
+
+	h2 {
+		text-transform: uppercase;
+		font-size: 3rem;
+		text-align: center;
+	}
+	p {
+		font-size: 1.2rem;
+		padding: 0rem 5rem;
+		text-align: justify;
+		line-height: 140%;
+		text-indent: 4rem;
+	}
+}
+.logo-2 {
+	width: 10rem;
+	display: flex;
+	margin: 0 auto;
+	img {
+		width: 100%;
+		height: 100%;
+		cursor: default;
+	}
+}
+.cards-section {
+	h1 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+.cards {
+	margin: auto;
+	display: flex;
+	cursor: default;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem 6rem;
+	width: 80%;
+}
+.card-item {
+	position: relative;
+	width: 250px;
+	height: 200px;
+	background: rgb(175, 175, 175);
+	padding: 100px 40px 60px;
+	box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+	margin-bottom: 2rem;
+	&:nth-child(2) {
+		margin-left: 1rem;
+	}
+	&:nth-child(3) {
+		margin-left: 1rem;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: #727f26;
+		transform: scaleY(0);
+		transform-origin: top;
+		transition: transform 0.5s;
+	}
+	&:hover {
+		&:before {
+			transform: scaleY(1);
+			transform-origin: bottom;
+			transition: transform 0.5s;
+		}
+		h2 {
+			opacity: 1;
+			color: #fff;
+			transform: translateY(-40px);
+		}
+		h3 {
+			position: relative;
+			font-size: 1.5rem;
+			z-index: 2;
+			color: #333;
+			transition: 0.5s;
+			color: #fff;
+		}
+		p {
+			color: #fff;
+		}
+	}
+	h2 {
+		position: absolute;
+		left: 40px;
+		top: 45px;
+		font-size: 3.5rem;
+		font-weight: 800;
+		opacity: 0.1;
+		transition: 0.5s;
+	}
+	h3 {
+		position: relative;
+		font-size: 1.5rem;
+		z-index: 2;
+		color: #333;
+		transition: 0.5s;
+	}
+	p {
+		position: relative;
+		z-index: 2;
+		color: #555;
+		transition: 0.5s;
+	}
+}
+.process-section {
+	margin-top: 2rem;
+	display: flex;
+	justify-content: space-between;
+}
+.process-wrapper {
+	position: relative;
+	right: 12rem;
+	width: 40%;
+}
+.process-text {
+	justify-content: center;
+	margin-left: 6rem;
+	width: 29%;
+	text-align: justify;
+	p {
+		margin-top: 1rem;
+		font-size: 1.2rem;
+		line-height: 140%;
+	}
+}
+.card-process {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	background-color: #727f26;
+	height: 10rem;
+	margin-bottom: 2rem;
+	box-shadow: 3px 2px 4px 0px rgba(0,0,0,0.40);
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px;
+	h2 {
+		font-weight: 500;
+	}
+}
+@media only screen and (max-width: 940px) {
+	.cards {
+		display: flex;
+		flex-direction: column;
+		width: 80%;
+		padding: 0;
+	}
+	.card-item {
+		width: 80%;
+		padding: 100px 30px 60px;
+		margin-left: 0;
+		&:nth-child(2) {
+			margin-left: 0;
+		}
+		&:nth-child(3) {
+			margin-left: 0;
+		}
+	}
+	.about-container {
+		h1 {
+			font-size: 3rem;
+			margin-top: 8rem;
+			font-size: 5rem;
+		}
+	}
+	.about-text {
+		p {
+			padding: 0rem 2rem;
+		}
+		h2 {
+			font-size: 2rem;
+		}
+	}
+	.process-wrapper {
+		right: 0;
+		justify-content: center;
+		align-items: center;
+		margin: auto;
+		position: relative;
+		right: 0rem;
+		width: 80%;
+	}
+	.process-text {
+		width: 80vw;
+		margin-left: 2.2rem;
+		p {
+			max-width: 90vw;
+			margin-bottom: 4rem;
+			font-size: 1.2rem;
+		}
+	}
+	.process-section {
+		display: block;
+	}
+	.card-process {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: none;
+		align-items: center;
+		justify-content: center;
+	}
+}
+@media screen and (max-width: 768px) {
+	video {
+		width: 100vw;
+	}
+	.about-container {
+		h1 {
+			font-size: 3rem;
+		}
+	}
+	.process-text {
+		h1 {
+			text-align: center;
+		}
+	}
+	.card-process {
+		height: 250px;
+		padding: 0 1rem;
+	}
+}
