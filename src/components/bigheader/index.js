@@ -52,8 +52,8 @@ export default function BigHeader(props) {
                         <ul>
 
                             <li> <Link to='/' > Início </Link> </li>
-                            <li> <Link to='/Carrinho'> Carrinho </Link> </li>
-                            <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
+                            <li> <Link to='/contato'> Contato </Link> </li>
+                            <li> <Link to='/Quem-somos-nos'> Sobre nós </Link> </li>
 
                         </ul>
 
@@ -63,19 +63,6 @@ export default function BigHeader(props) {
                 </div>
 
             </header>
-
-            <div className='menu-mobile' ref={menuMobile} >
-
-                <ul>
-
-                    <li> <Link to='/' > Início </Link> </li>
-                    <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
-                    <li> <Link to='/Carrinho'> Carrinho </Link> </li>
-                    <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
-
-                </ul>
-
-            </div>
 
         </div>
 

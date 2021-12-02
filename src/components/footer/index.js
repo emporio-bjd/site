@@ -5,7 +5,6 @@ import './footerStyle.scss'
 
 import instagramIcon from '../../img/instagramIcon.png'
 import facebookIcon from '../../img/facebookIcon.png'
-import whatsappIcon from '../../img/whatsappIcon.png'
 import logoAurea from '../../img/logoAurea2.png'
 import logoEmporio from '../../img/visualChanges/logoBranca.png'
 
@@ -22,8 +21,7 @@ export default function Footer (props) {
                     <ul>
                         <li> <Link to='/' > Início </Link> </li>
                         <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
-                        <li> <Link to='/Carrinho'> Carrinho </Link> </li>
-                        <li> <Link to='/Entrar'> Login/Perfil </Link> </li>
+                        <li> <Link to='/contato'> Contato </Link> </li>
                     </ul>
 
                     <div className='copyright' >
