@@ -1,12 +1,39 @@
 import React from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 import BigHeader from '../../components/bigheader'
 import Footer from '../../components/footer'
-import './style.css'
+import './style.scss'
+
+import arrow from '../../img/arrow.svg'
 
 import 'firebase/auth'
 import 'firebase/database'
 
 function Home() {
+
+    const [isOpened, setIsOpened] = useState(false);
+    const [displayText, setDisplayText] = useState(false);
+    const [arrowRotation, setArrowRotation] = useState('0deg');
+
+    function openCard() {
+
+        if (isOpened) {
+
+            setDisplayText('none')
+            setIsOpened(false)
+            setArrowRotation('180deg')
+
+        } else {
+
+            setDisplayText('flex')
+            setIsOpened(true)
+            setArrowRotation('0deg')
+
+        }
+
+    }
 
     return (
 
@@ -14,7 +41,33 @@ function Home() {
 
             <BigHeader />
 
-                <h1>HOME?</h1>
+            <section id="ShopCall">
+
+                <h1>Produtos orgânicos e selecionados <br />para mais saúde na sua vida e de sua família!</h1>
+                <p>Acesse nossa loja e confira todas as nossas variedades de produtos disponíveis para seu gosto</p>
+
+                <div className="buttonsWrapper">
+
+                    <button className="btnRedirect">Ir para loja</button>
+                    <Link to="/Quem-somos-nos" className="btnAboutUs" >Saiba mais</Link>
+
+                </div>
+
+            </section>
+
+            <section id="CardWrapperHome">
+
+                <div onClick={() => openCard()} className="cardHome">
+
+                    <h2>Conheça nossa história</h2>
+
+                    <p style={{ display: displayText }} >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, ex nam. Nisi corporis ullam similique labore, quaerat perspiciatis dignissimos aut, doloribus sunt voluptatum, dolorem natus! Ad, optio voluptatem maiores officiis sunt repudiandae illum, delectus accusantium facilis odit assumenda ipsum vitae! Voluptatum aut sapiente saepe repudiandae provident eum reiciendis recusandae! Non!</p>
+
+                    <img style={{transform: [{rotate: arrowRotation}]}} src={arrow} alt="saiba mais" />
+
+                </div>
+
+            </section>
 
             <Footer />
 
