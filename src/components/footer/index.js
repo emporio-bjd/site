@@ -28,7 +28,7 @@ export default function Footer (props) {
 
                     <div className='copyright' >
                         
-                        <p>Desenvolvido por :</p>
+                        <p>Desenvolvido por:</p>
 
                         <a href='https://aureaej.com/' ><img src={logoAurea} alt='logoAurea' /></a>
 
@@ -40,8 +40,8 @@ export default function Footer (props) {
 
             <div className='socialMedias' >
 
-                <a href='https://www.instagram.com/emporio_bomjardim/'  > <p>fb.com/bomjardimemporio</p> <img src={instagramIcon} alt='logoInstagram' /> </a>
-                <a href='https://www.facebook.com/bomjardimemporio'  > <p>@emporio_bomjardim</p> <img src={facebookIcon} alt='logoFacebook' /> </a>
+                <a href='https://www.instagram.com/emporio_bomjardim/'  > <p>@emporio_bomjardim</p> <img src={instagramIcon} alt='logoInstagram' /> </a>
+                <a href='https://www.facebook.com/bomjardimemporio'  > <p>/bomjardimemporio</p> <img src={facebookIcon} alt='logoFacebook' /> </a>
 
             </div>
 

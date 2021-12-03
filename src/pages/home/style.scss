@@ -11,7 +11,8 @@
 }
 
 .App {
-
+    
+    background: rgb(240, 240, 240);
     width: 100vw;
     display: flex;
     align-items: center;
@@ -105,7 +106,7 @@
             display: flex;
             flex-direction: column;
             width: 50%;
-            background-color: rgb(172, 118, 185);
+            background-color: #ffc05c;
             align-items: center;
             justify-content: space-around;
             border-radius: 4px;
@@ -117,7 +118,13 @@
 
             }
 
-            img {
+            .logo {
+
+                width: 150px;
+
+            }
+
+            .arrow {
 
                 width: 30px;
                 

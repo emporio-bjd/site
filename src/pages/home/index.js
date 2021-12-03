@@ -7,6 +7,7 @@ import Footer from '../../components/footer'
 import './style.scss'
 
 import arrow from '../../img/arrow.svg'
+import logo from '../../img/logoEmporio2.png'
 
 import 'firebase/auth'
 import 'firebase/database'
@@ -61,9 +62,11 @@ function Home() {
 
                     <h2>Conheça nossa história</h2>
 
-                    <p style={{ display: displayText }} >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, ex nam. Nisi corporis ullam similique labore, quaerat perspiciatis dignissimos aut, doloribus sunt voluptatum, dolorem natus! Ad, optio voluptatem maiores officiis sunt repudiandae illum, delectus accusantium facilis odit assumenda ipsum vitae! Voluptatum aut sapiente saepe repudiandae provident eum reiciendis recusandae! Non!</p>
+                    <img className="logo" style={{ display: displayText }} src={logo} alt="" />
 
-                    <img style={{transform: [{rotate: arrowRotation}]}} src={arrow} alt="saiba mais" />
+                    <p style={{ display: displayText }}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, ex nam. Nisi corporis ullam similique labore, quaerat perspiciatis dignissimos aut, doloribus sunt voluptatum, dolorem natus! Ad, optio voluptatem maiores officiis sunt repudiandae illum, delectus accusantium facilis odit assumenda ipsum vitae! Voluptatum aut sapiente saepe repudiandae provident eum reiciendis recusandae! Non!</p>
+
+                    <img className="arrow" style={{transform: {rotate: arrowRotation}}} src={arrow} alt="saiba mais" />
 
                 </div>
 

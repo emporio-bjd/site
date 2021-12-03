@@ -17,7 +17,6 @@ function About() {
                 <div className="about-container">
                     <video src='/videos/video-2.mp4' autoPlay loop muted />
                     <h1>Delivery de orgânicos</h1>
-                    <div className="bar" />
                 </div>
 
                 <div className="about-text">

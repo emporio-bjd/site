@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 .App {
     display: flex;
     flex-direction: column;
@@ -40,6 +41,7 @@ form input {
     border: none;
     color: #FFF;
     background-color: black;
+    outline: none;
     margin-top: 20px;
 }
 
@@ -100,6 +102,7 @@ fieldset input {
     width: 100%;
     background-color: #ffc05c;
     border: none;
+    outline: none;
     margin: 3px 0px 50px 0px;
     padding: 16px 24px;
     font-size: 14px;
@@ -139,6 +142,8 @@ fieldset #message {
     background-color: #ffc05c;
     color: #ffffff;
     padding: 15px;
+    border: none;
+    outline: none;
 }
 
 .whatsappContact {
