@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
@@ -78,7 +78,7 @@ const Contact = () => {
 
         const mail = document.querySelector('#mail')
 
-        if(formData.phone != '' && formData.name != '' && formData.message != ''){
+        if(formData.phone !== '' && formData.name !== '' && formData.message !== ''){
     
             mail.href = `mailto:comercialaureaej@gmail.com?subject=${formData.subject}&body=Oi%20,%20meu%20nome%20é%20${formData.name}.%20sou%20de%20${selectedUf},%20-%20${selectedCity},%20minhas%20informações%20para%20contato:%20${formData.phone}%20${formData.contact}%20.%0D${formData.message}`
     
@@ -98,7 +98,7 @@ const Contact = () => {
     useEffect(() => {
 
         setCities();
-        
+        // eslint-disable-next-line
     }, [selectedUf])
 
     useEffect(() => {
@@ -258,7 +258,7 @@ const Contact = () => {
 
                     <div className='sendButton' >
 
-                        <a onClick={sendMail()} href='' id='mail'>Enviar</a>                    
+                        <a onClick={sendMail()} href='/contato' id='mail'>Enviar</a>                    
 
                     </div>
 

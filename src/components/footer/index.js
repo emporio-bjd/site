@@ -23,6 +23,8 @@ export default function Footer (props) {
                         <li> <Link to='/Quem-somos-nos'> Quem Somos </Link> </li>
                         <li> <Link to='/contato'> Contato </Link> </li>
                     </ul>
+                    
+                    <p>WhatsApp: (41) 99841-6657</p>
 
                     <div className='copyright' >
                         
@@ -31,6 +33,7 @@ export default function Footer (props) {
                         <a href='https://aureaej.com/' ><img src={logoAurea} alt='logoAurea' /></a>
 
                     </div>
+
 
                 </div>
             </div>
