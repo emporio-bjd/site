@@ -15,7 +15,7 @@ import 'firebase/database'
 function Home() {
 
     const [isOpened, setIsOpened] = useState(false);
-    const [displayText, setDisplayText] = useState(false);
+    const [displayText, setDisplayText] = useState('none');
     const [arrowRotation, setArrowRotation] = useState('0deg');
 
     function openCard() {
@@ -64,7 +64,11 @@ function Home() {
 
                     <img className="logo" style={{ display: displayText }} src={logo} alt="" />
 
-                    <p style={{ display: displayText }}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, ex nam. Nisi corporis ullam similique labore, quaerat perspiciatis dignissimos aut, doloribus sunt voluptatum, dolorem natus! Ad, optio voluptatem maiores officiis sunt repudiandae illum, delectus accusantium facilis odit assumenda ipsum vitae! Voluptatum aut sapiente saepe repudiandae provident eum reiciendis recusandae! Non!</p>
+                    <p style={{ display: displayText }}>"Nossa história começa em 2018 com uma chácara herdada na região metropolitana de Curitiba. Eu, Lucimara, e meu marido Norberto resolvemos reativar a chácara que era do meu pai e que estava abandonada desde 2011. Queríamos tornar a chácara rentável, já que meu marido havia sido demitido da empresa em que trabalhava por causa da crise da época. Nossa ideia era criar galinhas para comercializar ovos orgânicos.</p>
+
+                    <p style={{ display: displayText }}>Enquanto arrumávamos o imóvel, eu fazia vários cursos sobre criação de galinhas e cultivo orgânico, e fui gostando cada vez mais desse mundo orgânico: alimentação mais saudável, menos agressão ao meio ambiente e valorização do pequeno produtor. Ao mesmo tempo, já que íamos toda semana para a chácara, começamos a comercializar morangos sem agrotóxicos de um vizinho. E a clientela foi aumentando..."</p>
+
+                    <span style={{ display: displayText }}>Quer saber mais? <Link to="/Quem-somos-nos"> Clique aqui</Link></span>
 
                     <img className="arrow" style={{transform: {rotate: arrowRotation}}} src={arrow} alt="saiba mais" />
 
