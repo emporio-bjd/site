@@ -20,7 +20,7 @@ function About() {
                 </div>
 
                 <div className="about-text">
-                    <h2>Sobre a Empório</h2>
+                    <h2>Sobre o Empório</h2>
 
                       <p>
                         Nossa história começa em 2018 com uma chácara herdada na região
