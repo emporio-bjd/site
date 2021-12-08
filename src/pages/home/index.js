@@ -45,6 +45,8 @@ function Home() {
             <section id="ShopCall">
 
                 <h1>Produtos orgânicos e selecionados <br />para mais saúde na sua vida e de sua família!</h1>
+                <h3>Entregas em Curitiba e região</h3>
+
                 <p>Acesse nossa loja e confira todas as nossas variedades de produtos disponíveis para seu gosto</p>
 
                 <div className="buttonsWrapper">

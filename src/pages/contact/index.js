@@ -80,7 +80,7 @@ const Contact = () => {
 
         if(formData.phone !== '' && formData.name !== '' && formData.message !== ''){
     
-            mail.href = `mailto:comercialaureaej@gmail.com?subject=${formData.subject}&body=Oi%20,%20meu%20nome%20é%20${formData.name}.%20sou%20de%20${selectedUf},%20-%20${selectedCity},%20minhas%20informações%20para%20contato:%20${formData.phone}%20${formData.contact}%20.%0D${formData.message}`
+            mail.href = `mailto:emporio.site@gmail.com?subject=${formData.subject}&body=Oi%20,%20meu%20nome%20é%20${formData.name}.%20sou%20de%20${selectedUf},%20-%20${selectedCity},%20minhas%20informações%20para%20contato:%20${formData.phone}%20${formData.contact}%20.%0D${formData.message}`
     
             // alert(`Obrigado pelo contato, ${formData.name}! Seu app de e-mail abrirá agora e basta clicar em enviar que em pouco tempo te retornarei e espero que consiga te ajudar!.`)
         
@@ -127,6 +127,9 @@ const Contact = () => {
                             </div>
 
                             <h2> Entre em contato conosco! </h2>
+                            <h4>(41) 99841-6657</h4>
+
+                            <h5>Ou por e-mail, caso prefira:</h5>
 
                         </div>
 
