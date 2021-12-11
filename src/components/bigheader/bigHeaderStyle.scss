@@ -26,6 +26,7 @@ header {
             img {
                 height: 45vh;
             }
+
 			article {
 
 				display: flex;
@@ -146,5 +147,68 @@ header {
 			}
 		}
 	}
+}
+
+@media screen and (max-width: 850px) and (orientation: landscape) {
+
+	header {
+
+		.bigheaderDiv {
+	
+			.logoDiv1 {
+			
+				img {
+					height: 40vh;
+				}
+				
+				article {
+	
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					height: 25vh;
+	
+					h1 {
+						font-size: 1.2em;
+						color: #FFF;
+						text-align: center;
+					}
+				}
+			}
+	
+			.menu {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				margin: 0 0 0 0;
+	
+				ul {
+					display: flex;
+					flex-direction: row;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					padding: 0;
+	
+					li {
+						list-style: none;
+						margin: 0 1vh;
+						width: 100%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+	
+						a {
+							text-decoration: none;
+							color: #FFF;
+						}
+					}
+				}
+			}
+		}
+	}
+
 }
 	

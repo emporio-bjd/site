@@ -60,7 +60,7 @@
             align-items: center;
             justify-content: center;
 
-            button, a {
+            a {
 
                 margin: 0 1rem;
                 outline: none;
@@ -71,6 +71,7 @@
                 font-family: 'Poppins', sans-serif;
                 font-weight: 600;
                 text-decoration: none;
+                color: #000;
 
             }
 
@@ -91,7 +92,6 @@
             .btnAboutUs {
 
                 background-color: #e1e1e1;
-                color: #000;
                 font-size: 14px;
 
             }
@@ -207,6 +207,38 @@
             .cardHome {
     
                 width: 80%;
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 850px) and (orientation: landscape) {
+
+    .App {
+
+        #ShopCall {
+
+            h1 {
+
+                font-size: 1.8rem;
+
+            }
+
+            p {
+
+                width: 60%;
+
+            }
+
+        }
+
+        #CardWrapperHome {
+
+            .cardHome {
+    
+                width: 80%;
+                margin-bottom: 2rem;
 
             }
         }

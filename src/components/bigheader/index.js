@@ -19,6 +19,7 @@ export default function BigHeader(props) {
                     <div className="logoDiv1">
 
                         <img src={logoEmporio} alt="" />
+                        
                         <article>
 
                             <h1>Alimentos orgânicos: mais saúde na sua mesa!</h1>
