@@ -51,7 +51,7 @@ function Home() {
 
                 <div className="buttonsWrapper">
 
-                    <a target="_blank" rel="noreferrer" href="https://www.emporiobomjardim.com" className="btnRedirect">Ir para loja</a>
+                    <a target="_blank" rel="noreferrer" href="https://form.jotform.com/213092293869667" className="btnRedirect">Ir para loja</a>
                     <Link to="/Quem-somos-nos" className="btnAboutUs" >Saiba mais</Link>
 
                 </div>
